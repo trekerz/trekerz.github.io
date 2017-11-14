@@ -3,18 +3,18 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Haojen # your blog title name
+title: Trekerz # your blog title name
 subtitle:  
-author: Haojen Ma # 作者
+author: Zhuang Jiafeng # 作者
 language: 
 timezone: 
 
 # custom Site settings
 # more detail check out docs
-SEOTitle: Haojen's blog 
+SEOTitle: Trekerz's blog 
 header-img: //o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg
-email: HaojenMa@gmail.com
-description: "马浩珍在 Github 上的个人博客"
+email: zjf007@qq.com
+description: "庄嘉峰在 Github 上的个人博客"
 keyword: # seo key words
 
 favicon: # your favicon png
@@ -22,17 +22,17 @@ favicon: # your favicon png
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://haojen.github.io
+url: http://trekerz.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
 # SNS settings
 # RSS:
-weibo_username: haojen
-zhihu_username: megahertz
-github_username: haojen
-twitter_username: ehazon
+weibo_username: zjfjz
+zhihu_username: trekerz
+github_username: trekerz
+twitter_username: zjfjz
 facebook_username:  
 linkedin_username:  
 
@@ -59,8 +59,8 @@ ga_track_id:             # Format: UA-xxxxxx-xx
 ga_domain:
 
 # Sidebar settings
-sidebar-about-description: # 个人描述
-sidebar-avatar:     # use absolute URL
+sidebar-about-description: "一个追寻简洁之道的FEer"
+sidebar-avatar: avator.jpg
 
 
 # Featured Tags
@@ -68,7 +68,16 @@ featured-tags: true                     # whether or not using Feature-Tags
 featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
 
 # friends
-friends:  # 友链
+friends: [
+    {
+        title: "掘金",
+        href: "https://juejin.im"
+    },
+    {
+        title: "开源中国",
+        href: "https://www.oschina.net/project/lang/28/javascript"
+    }
+]
 
 # Directory
 source_dir: source
@@ -146,8 +155,8 @@ clip-avatar: "?imageView2/2/w/300/h/300/interlace/1/q/90"
 clip-home-post-bg: "?imageView2/1/w/800/h/300/interlace/1/q/70"
 
 # post default images
-post-default-img: #博文默认的图片
-post-default-img-mobile: #移动端显示的图片
+post-default-img: default_img.png
+post-default-img-mobile: default_img.png
 
 # search api , set your custom key
 swiftype_key: 
