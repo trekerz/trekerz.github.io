@@ -5,7 +5,7 @@
 # Site
 title: Trekerz # your blog title name
 subtitle:  
-author: Zhuang Jiafeng # 作者
+author: Trekerz # 作者
 language: 
 timezone: 
 
@@ -59,7 +59,7 @@ ga_track_id:             # Format: UA-xxxxxx-xx
 ga_domain:
 
 # Sidebar settings
-sidebar-about-description: "一个追寻简洁之道的FEer"
+sidebar-about-description: "求知若饥  虚心若愚"
 sidebar-avatar: avator.jpg
 
 
