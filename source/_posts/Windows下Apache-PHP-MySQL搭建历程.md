@@ -197,25 +197,15 @@ php本身就是一个资源库，要让php做某件事，只要开启相应的�
 
 ```
 ;extension=php_curl.dll
-
 ;extension=php_gd2.dll
-
 ;extension=php_mbstring.dll
-
 ;extension=php_exif.dll
-
 ;extension=php_mysql.dll
-
 ;extension=php_mysqli.dll
-
 ;extension=php_pdo_mysql.dll
-
 ;extension=php_pdo_odbc.dll
-
 ;extension=php_sockets.dll
-
 ;extension=php_xmlrpc.dll
-
 ;extension=php_xsl.dll
 ```
 
