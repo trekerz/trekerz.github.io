@@ -76,6 +76,10 @@ friends: [
     {
         title: "开源中国",
         href: "https://www.oschina.net/project/lang/28/javascript"
+    },
+    {
+        title: "简书",
+        href: "http://www.jianshu.com/"
     }
 ]
 
@@ -155,8 +159,8 @@ clip-avatar: "?imageView2/2/w/300/h/300/interlace/1/q/90"
 clip-home-post-bg: "?imageView2/1/w/800/h/300/interlace/1/q/70"
 
 # post default images
-post-default-img: default_img.png
-post-default-img-mobile: default_img.png
+post-default-img: 
+post-default-img-mobile: 
 
 # search api , set your custom key
 swiftype_key: 
@@ -164,5 +168,5 @@ swiftype_key:
 
 # archive page title 
 archive:
-    title: archives
+    title: ARCHIVE
     description: 可以根据归档日期检索所有文件
