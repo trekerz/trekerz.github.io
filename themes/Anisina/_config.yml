@@ -155,8 +155,8 @@ clip-avatar: "?imageView2/2/w/300/h/300/interlace/1/q/90"
 clip-home-post-bg: "?imageView2/1/w/800/h/300/interlace/1/q/70"
 
 # post default images
-post-default-img: default_img.png
-post-default-img-mobile: default_img.png
+post-default-img: default-img.jpg
+post-default-img-mobile: default-img.jpg
 
 # search api , set your custom key
 swiftype_key: 
