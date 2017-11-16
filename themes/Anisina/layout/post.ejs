@@ -46,7 +46,7 @@ layout: layout
                     </span>
                     <div class="tags text-center">
                         <% page.tags.forEach(function(tag){ %>
-                        <a class="tag" href="<%= config.root %>tags/#<%= tag.name %>"
+                        <a class="tag" href="<%= config.root %>TAGS/#<%= tag.name %>"
                            title="<%= tag.name %>"><%= tag.name %></a>
                         <% }) %>
                     </div>
@@ -175,11 +175,11 @@ layout: layout
                 <section>
                     <!-- no hr -->
                     <h5 class="text-center">
-                        <a href="<%= config.root %>tags/">标签</a>
+                        <a href="<%= config.root %>TAGS/">标签</a>
                     </h5>
                     <div class="tags">
                         <% page.tags.forEach(function(tag){ %>
-                        <a class="tag" href="<%= config.root %>tags/#<%= tag.name %>"
+                        <a class="tag" href="<%= config.root %>TAGS/#<%= tag.name %>"
                            title="<%= tag.name %>"><%= tag.name %></a>
                         <% }) %>
                     </div>
