@@ -81,6 +81,13 @@ layout: layout
         color: #0e2231;
     }
 
+
+    .post-preview:nth-of-type(1) {
+        box-shadow: 0px 0px 20px #AAAAAA;
+        border-radius: 10px;
+    }
+
+
     @media (max-width: 768px) {
         .custom-haojen-container .post-preview:nth-child(1) {
             height: 240px;
@@ -254,7 +261,7 @@ layout: layout
                 <div class="tags">
                     <% site.tags.map(function(tag){ %>
                     <% if(tag.length > config['featured-condition-size']) { %>
-                    <a href="<%= config.root %>tags/#<%= tag.name %>" title="<%= tag.name %>"
+                    <a href="<%= config.root %>TAGS/#<%= tag.name %>" title="<%= tag.name %>"
                        rel="<%= tag.length %>"><%= tag.name %></a>
                     <% } %>
                     <% }) %>
