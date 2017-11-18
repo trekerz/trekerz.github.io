@@ -92,15 +92,15 @@ insertBefore()：接收2个参数：节点、参照节点。返回该插入的�
 
 ##### **(1) <font color='#C1A622'>documentElement</font>**
 
-始终指向页面中的\<html\>元素。
+始终指向页面中的`<html>`元素。
 
 ##### **(2) <font color='#C1A622'>body、title（可设置）</font>**
 
-指向页面中的\<body\>元素、\<title\>元素，修改title属性可以改变title元素里的内容。
+指向页面中的`<body>`元素、`<title>`元素，修改title属性可以改变title元素里的内容。
 
 ##### **(3) <font color='#C1A622'>doctype</font>**
 
-指向<!DOCTYPE>。（浏览器对doctype的支持差别很大）
+指向`<!DOCTYPE>`。（浏览器对doctype的支持差别很大）
 
 ##### **(4) <font color='#0B9216'>URL、domain（可设置）、referrer</font>**
 
@@ -120,13 +120,13 @@ insertBefore()：接收2个参数：节点、参照节点。返回该插入的�
 
 ##### **(7) <font color='#0B9216'>特殊集合</font>**
 
-|                  |                     |
-| ---------------- | ------------------- |
-| document.anchors | 文档中所有带name特性的\<a>元素 |
-| document.applets | 文档中所有\<applet>元素    |
-| document.forms   | 文档中所有\<form>元素      |
-| document.images  | 文档中所有\<img>元素       |
-| document.links   | 文档中所有带href特性的\<a>元素 |
+|                  |                      |
+| ---------------- | -------------------- |
+| document.anchors | 文档中所有带name特性的`<a>`元素 |
+| document.applets | 文档中所有`<applet>`元素    |
+| document.forms   | 文档中所有`<form>`元素      |
+| document.images  | 文档中所有`<img>`元素       |
+| document.links   | 文档中所有带href特性的`<a>`元素 |
 
 ##### **(8)<font color='#C1A622'> document.implementation.hasFeature()</font>**
 
@@ -190,7 +190,7 @@ attributes属性中包含一系列节点，每个节点的nodeName属性就是�
 
 文本节点由Text类型表示，包含的是可以照字面理解的纯文本内容。
 
-注意1：<u>如果标签中没有内容，则不存在文本节点</u>，比如\<div>\</div>。
+注意1：<u>如果标签中没有内容，则不存在文本节点</u>，比如`<div></div>`。
 
 注意2：被修改的文本节点会<u>立即反映</u>在页面上。
 
@@ -358,7 +358,7 @@ DocumentFragment继承了Node的所有方法，可以用于暂时存放想要插
 
 #### **3. 操作表格**
 
-可以使用\<table>元素的属性和方法，通过DOM技术向页面中插入表格。
+可以使用`<table>`元素的属性和方法，通过DOM技术向页面中插入表格。
 
 #### **4. 使用NodeList**
 

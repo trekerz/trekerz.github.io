@@ -53,7 +53,7 @@ use_livere:
 
 # Analytics settings
 # Baidu Analytics
-ba_track_id:
+ba_track_id: e3e6f83e945518142f014116fc5aacc7
 # Google Analytics
 ga_track_id:             # Format: UA-xxxxxx-xx
 ga_domain:
