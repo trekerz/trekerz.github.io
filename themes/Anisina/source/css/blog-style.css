@@ -1250,3 +1250,10 @@ img::-moz-selection {
     width:0;
 }
 
+
+/*
+    171118trekerz新增
+ */
+.img-trekerz {
+    cursor: pointer !important;
+}

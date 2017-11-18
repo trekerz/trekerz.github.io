@@ -168,7 +168,7 @@ layout: layout
                 <div class="short-about">
                     <!--侧边栏头像-->
                     <% if(config['sidebar-avatar']) { %>
-                    <img src="<%= config['sidebar-avatar'] %>"/>
+                    <a href="<%= config.root %>ABOUT/"><img class="img-trekerz" src="<%= config['sidebar-avatar'] %>"/></a>
                     <% } %>
                     <h5><a href="<%= config.root %>ABOUT/"><%= config.author %></a></h5>
                     <% if(config['sidebar-about-description']) { %>
