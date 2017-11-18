@@ -34,7 +34,7 @@ ECMA只支持**实现继承**，不支持**接口继承**。
 
 ![img](2.png)
 
-#### **(4) <font color='orange'>isPrototypeOf()</font>**
+#### **(4) <font color='#F1BE4D'>isPrototypeOf()</font>**
 
 ![img](3.png)
 
@@ -103,7 +103,7 @@ ECMA只支持**实现继承**，不支持**接口继承**。
 
 新对象将person作为原型，其中包含一个基本类型属性name和一个引用类型属性friends，其中friends会被两个新对象所共享。
 
-#### **(2) ES5中的实现——<font color='orange'>Object.create()</font>**
+#### **(2) ES5中的实现——<font color='#F1BE4D'>Object.create()</font>**
 
 接收2个参数：作为新对象的原型的对象、新对象额外属性组成的对象（可选）。
 
@@ -161,3 +161,5 @@ ECMA只支持**实现继承**，不支持**接口继承**。
 <br/>
 
 <center>-&nbsp;*end*&nbsp;-</center>
+
+<br/>

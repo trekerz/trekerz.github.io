@@ -32,3 +32,7 @@ header-img: "170721.jpg"
 5、对命名空间的支持。DTD无法利用XML的命名空间，Schema很好满足命名空间。并且，Schema还提供了include和import两种引用命名空间的方法。
 
 <br/>
+
+<center>-&nbsp;*end*&nbsp;-</center>
+
+<br/>

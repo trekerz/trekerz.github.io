@@ -76,31 +76,31 @@ header-img: "171031.jpg"
 
 ### **6. 栈方法**
 
-**(1) push()（改变原数组）**
+**(1) <font color='#F3A167'>push()</font>（<font color='#F36767'>改变原数组</font>）**
 
 接受任意数量参数，逐个加到末尾，返回新数组长度。
 
-**(2) pop()（改变原数组）**
+**(2) <font color='#6799F3'>pop()</font>（<font color='#F36767'>改变原数组</font>）**
 
 移除最后一项，减少数组length值，返回移除的项。
 
 ### **7.队列方法**
 
-**(1) shift()（改变原数组）**
+**(1) <font color='#F3A167'>shift()</font>（<font color='#F36767'>改变原数组</font>）**
 
 移除第一项，减少数组length值，返回移除的项。
 
-**(2) unshift()（改变原数组）**
+**(2) <font color='#6799F3'>unshift()</font>（<font color='#F36767'>改变原数组</font>）**
 
 在数组前端添加任意个项，返回新数组长度。
 
 ### **8. 重排序方法**
 
-**(1) reverse()（改变原数组）**
+**(1) reverse()（<font color='#F36767'>改变原数组</font>）**
 
 返回翻转后的数组。
 
-**(2) sort()（改变原数组）**
+**(2) sort()（<font color='#F36767'>改变原数组</font>）**
 
 用法a：对数组中每一项调用toString()方法，获得其字符串表示，再按字符串排序；
 
@@ -122,7 +122,7 @@ header-img: "171031.jpg"
 
 注意：如果接收的是负数，则用数组长度加上该数。
 
-**(3) splice()（改变原数组）**
+**(3) splice()（<font color='#F36767'>改变原数组</font>）**
 
 向数组中部插入项。
 
@@ -334,31 +334,31 @@ RegExp的每个实例都有下列属性：
 
 ### **4.函数的属性和方法**
 
-**(1) length属性**
+**(1) <font color='#6799F3'>length属性</font>**
 
 表示函数希望接收的命名参数个数。
 
-**(2) prototype属性**
+**(2) <font color='#F3A167'>prototype属性</font>**
 
 保存所有的实例方法。
 
-**(3) toString()（继承的）**
+**(3) <font color='#6799F3'>toString()</font>（继承的）**
 
-**(4) toLocaleString() (继承的)**
+**(4) <font color='#6799F3'>toLocaleString() </font>(继承的)**
 
-**(5) valueOf() (继承的)**
+**(5) <font color='#6799F3'>valueOf() </font>(继承的)**
 
-**(6) apply()**
+**(6) <font color='#F3A167'>apply()</font>**
 
 在特定作用域中调用函数，相当于设置this对象的值。
 
 接收2个参数：作用域、参数数组。
 
-**(7) call()**
+**(7) <font color='#F3A167'>call()</font>**
 
 作用同apply()，区别在于call()接收参数是一个个列出来。
 
-**(8) bind()**
+**(8) <font color='#F3A167'>bind()</font>**
 
 会创建并返回一个函数实例，其this值会被绑定到传入的值。
 
@@ -378,7 +378,7 @@ Boolean、Number、String。
 
 建议永远不要使用Boolean对象。
 
-**(1) valueOf()（重写的，返回布尔值）**
+**(1) valueOf()（重写的，返回<font color='#F36767'>布尔值</font>）**
 
 **(2) toString()（重写的）**
 
@@ -386,101 +386,101 @@ Boolean、Number、String。
 
 ### **3.Number类型**
 
-**(1) valueOf()（重写的，返回数值）**
+**(1) <font color='#F3A167'>valueOf()</font>（重写的，返回<font color='#F36767'>数值</font>）**
 
-**(2) toString()（重写的）**
+**(2) <font color='#F3A167'>toString()</font>（重写的）**
 
-**(3) toLocaleString()（重写的）**
+**(3) <font color='#F3A167'>toLocaleString()</font>（重写的）**
 
-**(4) toFixed()**
+**(4) <font color='#6799F3'>toFixed()</font>**
 
 接收1个参数：小数位数。按照指定小数位返回数值的字符串表示。
 
-**(5) toExponential()**
+**(5) <font color='#6799F3'>toExponential()</font>**
 
 接收1个参数：小数位数。返回以指数表示的数值的字符串形式。
 
-**(6) toPrecision()**
+**(6) <font color='#6799F3'>toPrecision()</font>**
 
 接收1个参数：小数位数。数值所有数字的位数（不包含指数），会根据数值自动返回最合适的形式。
 
 ### **4.String类型**
 
-**(1) valueOf()（继承的，返回字符串）**
+**(1) <font color='#6799F3'>valueOf()</font>（继承的，返回<font color='#F36767'>字符串</font>）**
 
-**(2) toString()（继承的）**
+**(2) <font color='#6799F3'>toString()</font>（继承的）**
 
-**(3) toLocaleString()（继承的）**
+**(3) <font color='#6799F3'>toLocaleString()</font>（继承的）**
 
-**(4) length属性**
+**(4) <font color='#F3A167'>length属性</font>**
 
 注意：双字节字符也算作一个字符
 
-**(5) charAt()**
+**(5) <font color='#6799F3'>charAt()</font>**
 
 接收1个参数：字符索引。返回单字符的字符串形式。
 
 注意：在某些浏览器中用[]语法可以等价这个方法。
 
-**(6) charCodeAt()**
+**(6) <font color='#6799F3'>charCodeAt()</font>**
 
 接收1个参数：字符索引。返回单字符的字符编码。
 
-**(7) concat()**
+**(7) <font color='#F3A167'>concat()</font>**
 
 接收任意个参数，拼接一个或多个字符串，返回新字符串。
 
-**(8) slice()**
+**(8) <font color='#F3A167'>slice()</font>**
 
 接收1或2个参数：开始索引、结束索引（可选，不包含结束位置）。返回子字符串。
 
 注意：对于负值，把负值与字符长度相加。
 
-**(9) substring()**
+**(9) <font color='#F3A167'>substring()</font>**
 
 接收1或2个参数：开始索引、结束索引（可选，不包含结束位置）。返回子字符串。
 
 注意：对于负值，都转换为0。
 
-**(10) substr()**
+**(10)<font color='#F3A167'> substr()</font>**
 
 接收1或2个参数：开始索引、截取长度（可选）。返回子字符串。
 
 注意：对于负值，第一个参数则与字符长度相加，第二个参数则转换为0。
 
-**(11) indexOf()**
+**(11) <font color='#6799F3'>indexOf()</font>**
 
 从一个字符串中搜索给定的子字符串，返回-1或子字符串第一次出现的位置索引。
 
-**(12) lastIndexOf()**
+**(12) <font color='#6799F3'>lastIndexOf()</font>**
 
 从后往前。
 
-**(13) trim()**
+**(13)<font color='#F3A167'> trim()</font>**
 
 创建一个字符串副本，删除前置及后缀的所有空格，返回新字符串。
 
 注意：chrome还支持trimLeft()和trimRight()
 
-**(14) toLowerCase()**
+**(14) <font color='#6799F3'>toLowerCase()</font>**
 
 不改变原字符串，返回的是新字符串。
 
-**(15) toLocaleLowerCase()**
+**(15) <font color='#6799F3'>toLocaleLowerCase()</font>**
 
-**(16) toUpperCase()**
+**(16) <font color='#6799F3'>toUpperCase()</font>**
 
-**(17) toLocaleUpperCase()**
+**(17) <font color='#6799F3'>toLocaleUpperCase()</font>**
 
-**(18) match()**
+**(18) <font color='#F3A167'>match()</font>**
 
 接收1个参数：正则表示式或RegExp对象。返回一个数组。与exec()方法正好执行和被执行对象相反。
 
-**(19) search()**
+**(19) <font color='#F3A167'>search()</font>**
 
 接收1个参数：正则表示式或RegExp对象。返回-1或字符串中第一个匹配项的索引。
 
-**(20) replace()**
+**(20)<font color='#F3A167'> replace()</font>**
 
 接收2个参数：正则表示式或RegExp对象或一个字符串、一个字符串或一个函数。返回替换后的新字符串，但不改变原字符串。
 
@@ -490,21 +490,21 @@ Boolean、Number、String。
 
 注意：若第二个参数是函数，则函数的参数为：模式的匹配项、第一捕获组的匹配项（若有）、第二捕获组的匹配项（若有）、……、模式匹配项在字符串中的位置、原始字符串。
 
-**(21) split()**
+**(21) <font color='#6799F3'>split()</font>**
 
 接收1或2个参数：指定的分隔符、返回的数组的大小。返回分隔后组成的数组。
 
-**(22) localeCompare()**
+**(22)<font color='#F3A167'> localeCompare()</font>**
 
 比较两个字符串，如果字符串在字母表中应该排在字符串参数之前，则返回-1，相等则返回0，应排在之后则返回1。
 
 注意：该方法会按照地区来决定是否考虑大小写。
 
-**(23) fromCharCode()**
+**(23) <font color='#6799F3'>fromCharCode()</font>**
 
 接收任意个参数：字符编码。返回字符编码组成的字符串。
 
-**(24) HTML方法**
+**(24) <font color='#F3A167'>HTML方法</font>**
 
 就是用方法来创建html标签并以字符串形式返回。尽量不要使用。
 
@@ -518,19 +518,19 @@ Boolean、Number、String。
 
 所有在全局作用域中定义的属性和函数都是Global对象的属性。例如isNaN()、isFinite()、parseInt()、parseFloat()。
 
-**(1) encodeURI()**
+**(1)<font color='#F3A167'> encodeURI()</font>**
 
 对URI进行编码，替换掉空格，从而让浏览器能够理解。
 
-**(2) encodeURIComponent()**
+**(2) <font color='#F3A167'>encodeURIComponent()</font>**
 
 替换掉所有非字母数字字符（包括空格）。
 
-**(4) decodeURI()**
+**(4) <font color='#F3A167'>decodeURI()</font>**
 
-**(5) decodeURIComponent()**
+**(5) <font color='#F3A167'>decodeURIComponent()</font>**
 
-**(6) eval()**
+**(6) <font color='#6799F3'>eval()</font>**
 
 接收1个参数：要执行的ECMAScript字符串。
 
@@ -538,7 +538,7 @@ Boolean、Number、String。
 
 注意：严格模式下，外部访问不到eval()中创建的任何变量或函数。
 
-**(7) Global对象的属性**
+**(7) <font color='#F3A167'>Global对象的属性</font>**
 
 undefined、NaN、Infinity以及各种构造函数（包括上面的几个引用类型）都是Global对象的属性。
 
@@ -546,37 +546,37 @@ undefined、NaN、Infinity以及各种构造函数（包括上面的几个引用
 
 ### **2.Math对象**
 
-**(1) Math对象的属性**
+**(1) <font color='#F3A167'>Math对象的属性</font>**
 
 | Math.E      | Math.LN10 | Math.LN2     | Math.LOG2E |
 | ----------- | --------- | ------------ | ---------- |
 | Math.LOG10E | Math.PI   | Math.SQRT1_2 | Math.SQRT2 |
 
-**(2) Math.min()、Math.max()**
+**(2) <font color='#6799F3'>Math.min()、Math.max()</font>**
 
 接收任意个参数。
 
 数组技巧：var values = [1,2,3,4,5,6]; var max =Math.max.apply(Math,values);
 
-**(3) Math.ceil()**
+**(3) <font color='#F3A167'>Math.ceil()</font>**
 
 向上舍入。
 
-**(4) Math.floor()**
+**(4)<font color='#F3A167'> Math.floor()</font>**
 
 向下舍入。
 
-**(5) Math.round()**
+**(5) <font color='#F3A167'>Math.round()</font>**
 
 四舍五入。
 
-**(6) Math.random()**
+**(6) <font color='#6799F3'>Math.random()</font>**
 
 返回 **[0,1)**之间的一个随机数。
 
 技巧：值 = Math.floor( Math.random * 可能值的总数+ 第一个可能的值 );
 
-**(7) 其它方法**
+**(7) <font color='#F3A167'>其它方法</font>**
 
 | Math.abs(num)   | Math.exp(num) | Math.log(num) | Math.pow(num,power) |
 | --------------- | ------------- | ------------- | ------------------- |
@@ -584,5 +584,9 @@ undefined、NaN、Infinity以及各种构造函数（包括上面的几个引用
 | Math.atan2(y,x) | Math.cos(x)   | Math.sin(x)   | Math.tan(x)         |
 
 注意：在不同实现中精度可能会有不同。
+
+<br/>
+
+<center>-&nbsp;*end*&nbsp;-</center>
 
 <br/>

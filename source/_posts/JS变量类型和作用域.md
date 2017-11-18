@@ -62,3 +62,7 @@ ECMAScript中所有函数的参数都是 **按值传递** 的：
 > **with语句**：会将指定的对象添加到作用域链中。
 
 <br/>
+
+<center>-&nbsp;*end*&nbsp;-</center>
+
+<br/>

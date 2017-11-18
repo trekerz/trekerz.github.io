@@ -69,13 +69,13 @@ Object构造函数或对象字面量都是使用同一个接口创建很多对�
 
 ![img](3.png)
 
-#### **(1) <font color='orange'>isPrototypeOf()</font>**
+#### **(1) <font color='#F1BE4D'>isPrototypeOf()</font>**
 
 确定一个实例的[[Prototype]]是否指向某个原型。
 
 ![img](4.png)
 
-#### **(2) <font color='orange'>Object.getPrototypeOf()（ES5新增）**
+#### **(2) <font color='#F1BE4D'>Object.getPrototypeOf()（ES5新增）**
 
 获取实例的[[Prototype]]属性。
 
@@ -87,7 +87,7 @@ Object构造函数或对象字面量都是使用同一个接口创建很多对�
 
 注意：通过对象实例定义的同名属性是属于实例本身的，不能重写原型中的值，但访问这个属性时会优先访问实例中的，相当于屏蔽了原型中的。
 
-#### **(4) <font color='orange'>hasOwnProperty()</font>**
+#### **(4) <font color='#F1BE4D'>hasOwnProperty()</font>**
 
 检测一个属性是否存在于对象实例中。
 
@@ -103,11 +103,11 @@ in操作符在单独使用时可以用来判断能否通过对象访问一个属
 
 枚举可枚举的属性（既包括实例中的也包括原型中的）。
 
-#### **(7) <font color='orange'>Object.keys()</font>**
+#### **(7) <font color='#F1BE4D'>Object.keys()</font>**
 
 接收1个参数：对象。返回一个包含所有可枚举属性的字符串数组。
 
-#### **(8) <font color='orange'>Object.getOwnPropertyNames()</font>**
+#### **(8) <font color='#F1BE4D'>Object.getOwnPropertyNames()</font>**
 
 接收1个参数：对象。返回一个包含所有实例属性（无论是否可枚举）的字符串数组。
 
@@ -192,3 +192,5 @@ function部分像工厂模式，定义新对象部分则用new。
 <br/>
 
 <center>-&nbsp;*end*&nbsp;-</center>
+
+<br/>

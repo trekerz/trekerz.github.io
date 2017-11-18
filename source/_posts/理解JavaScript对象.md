@@ -18,19 +18,19 @@ ECMAScript有两种属性类型：**数据属性**、**访问器属性**。
 
 ## **1.数据属性**
 
-#### **(1) <font color='blue'>[[Configurable\]]</font>**
+#### **(1) <font color='#7485FF'>[[Configurable\]]</font>**
 
 能否用delete删除属性、修改属性特性以及修改为访问器属性，默认true；
 
-#### **(2) <font color='blue'>[[Enumerable\]]</font>**
+#### **(2) <font color='#7485FF'>[[Enumerable\]]</font>**
 
 能否通过for-in循环返回属性，默认true；
 
-#### **(3) <font color='blue'>[[Writable\]]</font>**
+#### **(3) <font color='#7485FF'>[[Writable\]]</font>**
 
 能否修改属性值，默认true；
 
-#### **(4) <font color='blue'>[[Value\]]</font>**
+#### **(4) <font color='#7485FF'>[[Value\]]</font>**
 
 包含这个属性的值，默认undefined。
 
@@ -44,19 +44,19 @@ ECMAScript有两种属性类型：**数据属性**、**访问器属性**。
 
 不包含数据值，读取时会调用getter函数，写入时会调用setter函数。
 
-#### **(1) <font color='blue'>[[Configurable\]]</font>**
+#### **(1) <font color='#7485FF'>[[Configurable\]]</font>**
 
 能否用delete删除属性、修改属性特性以及修改为访问器属性，默认true；
 
-#### **(2) <font color='blue'>[[Enumerable\]]</font>**
+#### **(2) <font color='#7485FF'>[[Enumerable\]]</font>**
 
 能否通过for-in循环返回属性，默认true；
 
-#### **(3) <font color='blue'>[[Get]]</font>**
+#### **(3) <font color='#7485FF'>[[Get]]</font>**
 
 读取时调用的函数，默认undefined；
 
-#### **(4) <font color='blue'>[[Set\]]</font>**
+#### **(4) <font color='#7485FF'>[[Set\]]</font>**
 
 写入时调用的函数，默认undefined；
 
@@ -66,13 +66,13 @@ ECMAScript有两种属性类型：**数据属性**、**访问器属性**。
 
 ## **3.同时定义多个属性**
 
-#### **(1) <font color='orange'>Object.defineProperty()</font>**
+#### **(1) <font color='#F1BE4D'>Object.defineProperty()</font>**
 
 接收3个参数：属性所在对象、属性名字（可以是包含多个属性的一个对象）、一个描述符对象（可包含多个描述符名值对）。可以一次定义多个属性里的多个特性值。
 
 ## **4.读取属性的特性**
 
-#### **(1) <font color='orange'>Object.getOwnPropertyDescriptor()</font>**
+#### **(1) <font color='#F1BE4D'>Object.getOwnPropertyDescriptor()</font>**
 
 接收2个参数：属性所在对象、属性名称。返回的是一个包含所有属性特性名值对的对象。
 
@@ -81,3 +81,5 @@ ECMAScript有两种属性类型：**数据属性**、**访问器属性**。
 <br/>
 
 <center>-&nbsp;*end*&nbsp;-</center>
+
+<br/>
