@@ -1,5 +1,5 @@
 ---
-title: 图解HTML、XHTML、SGML、XML的区别
+title: 图解HTML、XHTML、SGML、XML的关系
 subtitle: "【笔记】html的细节"
 date: 2017-07-27 09:54:40
 tags: 

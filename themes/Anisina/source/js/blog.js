@@ -118,7 +118,7 @@ $('.post-preview:first').on('mousemove', function(e){
         var percentX = deltaX / centerX
         var percentY = deltaY / centerY
 
-        var deg = 3
+        var deg = 2
 
         $('.post-preview:first').css({
             transform: 'perspective(1000px) rotateX('+ deg*-percentY + 'deg)'+

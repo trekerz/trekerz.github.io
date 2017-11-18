@@ -1,10 +1,10 @@
 ---
 title: JS引用类型总结
-subtitle: "Javascript细节"
+subtitle: "JavaScript细节"
 date: 2017-10-31 21:11:46
 tags: 
 	- 前端基础
-	- Javascript
+	- JavaScript
 layout: post
 author: "Trekerz"
 header-img: "171031.jpg"
@@ -256,7 +256,7 @@ header-img: "171031.jpg"
 
 ## 四、RegExp类型
 
-### 1.创建方式
+### **1.创建方式**
 
 **(1)new操作符+RegExp(“pattern”,”flags”)**
 
@@ -270,7 +270,7 @@ var expression = /pattern/flags;
 
 ES3中两种创建方式的区别：构造函数创建的每一个实例都是一个新实例，而字面量则共享一个实例。
 
-### 2.RegExp实例属性
+### **2.RegExp实例属性**
 
 RegExp的每个实例都有下列属性：
 
