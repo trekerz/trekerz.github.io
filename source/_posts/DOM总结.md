@@ -178,7 +178,7 @@ attributes属性包含一个NamedNodeMap，与NodeList相似，也是动态集�
 
 ##### **(5)<font color='#C1A622'> getNamedItem(name)、removeNamedItem(name)、setNamedItem(node)、item(pos)</font>**
 
-attributes属性中包含一系列节点，每个节点的nodeName属性就是特性名称、nodeValues就是特性的值。以上这些方法主要用来获得、删除、设置元素的属性，也可以用来遍历（返回的顺序不同浏览器不同）。
+attributes属性中包含一系列节点，每个节点的nodeName属性就是特性名称、nodeValue就是特性的值。以上这些方法主要用来获得、删除、设置元素的属性，也可以用来遍历（返回的顺序因浏览器而不同）。
 
 注意：一般这几个方法没有(3)中的方法好用。
 
@@ -194,7 +194,7 @@ attributes属性中包含一系列节点，每个节点的nodeName属性就是�
 
 注意2：被修改的文本节点会<u>立即反映</u>在页面上。
 
-注意3：向文本节点中添加的文本会被自动转化为HTML编码（&lt;等）。
+注意3：向文本节点中添加的文本会被自动转化为HTML编码（例如`<`会被转化为`&lt;`）。
 
 | 特点                   |
 | -------------------- |
@@ -208,7 +208,7 @@ attributes属性中包含一系列节点，每个节点的nodeName属性就是�
 
 将text添加到节点的末尾。
 
-##### **(2)<font color='#0B9216'> deleteData(offset, count)、insertData(offset, count)、replaceData(offset, count, text)</font>**
+##### **(2)<font color='#0B9216'> deleteData(offset, count)、insertData(offset, text)、replaceData(offset, count, text)</font>**
 
 从offset位置开始删除/插入/替换count个字符。
 

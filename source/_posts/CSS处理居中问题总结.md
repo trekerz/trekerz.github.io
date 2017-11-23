@@ -218,7 +218,7 @@ header-img: "171121.jpg"
 }
 .inner {
     border: 1px solid #000;
-    display: table-cell; /* 这里子div的宽高是无法设置的 */
+    display: table-cell; /* 这里如果只有一个子div的话，其宽度是无法设置的，只能跟父元素一样 */
     text-align: center;
     vertical-align: middle;
 }
@@ -234,7 +234,7 @@ header-img: "171121.jpg"
 
 ##### **(4) 适用性**
 
-是个好方法，但也有局限性，即无论是table版还是div版，子元素都无法设置宽高。<u>该方法完美兼容各大浏览器，**＞IE6**</u>。
+是个好方法，但也有局限性。<u>该方法完美兼容各大浏览器，**＞IE6**</u>。
 
 ### **4.不固定宽高div的水平垂直居中——方法3（CSS3-translate()）**
 
