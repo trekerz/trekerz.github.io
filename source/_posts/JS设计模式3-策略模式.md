@@ -7,7 +7,7 @@ tags:
 	- JavaScript
 layout: post
 author: "Trekerz"
-header-img: "170825.jpg"
+header-img: "/blog/bg-img/null170825.jpg"
 ---
 
 # **策略模式**

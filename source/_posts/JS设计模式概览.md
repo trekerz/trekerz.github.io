@@ -7,7 +7,7 @@ tags:
 	- JavaScript
 layout: post
 author: "Trekerz"
-header-img: "170816.jpg"
+header-img: "/blog/bg-img/null170816.jpg"
 ---
 
 本系列是在学习、总结常用JS设计模式时的笔记。其中这一篇文章是对几种常见设计模式的总括，必要时可供查阅。

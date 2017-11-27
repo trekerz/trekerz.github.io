@@ -150,7 +150,7 @@ deploy:
 
 
 # img CDN path
-cdn-url:  # 你的CDN地址
+cdn-url:  http://ozehuspmv.bkt.clouddn.com
 
 # Qiniu imageView2 API
 # More info http://developer.qiniu.com/code/v6/api/kodo-api/image/imageview2.html

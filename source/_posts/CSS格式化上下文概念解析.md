@@ -7,7 +7,7 @@ tags:
 	- CSS
 layout: post
 author: "Trekerz"
-header-img: "171122.jpg"
+header-img: "/blog/bg-img/null171122.jpg"
 ---
 
 

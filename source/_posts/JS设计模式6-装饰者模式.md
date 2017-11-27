@@ -7,7 +7,7 @@ tags:
 	- JavaScript
 layout: post
 author: "Trekerz"
-header-img: "170902.jpg"
+header-img: "/blog/bg-img/null170902.jpg"
 ---
 
 # **装饰者模式**

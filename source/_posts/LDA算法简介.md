@@ -8,7 +8,7 @@ tags:
 	- 推荐系统
 layout: post
 author: "Trekerz"
-header-img: "170105.jpg"
+header-img: "/blog/bg-img/null170105.jpg"
 ---
 
 

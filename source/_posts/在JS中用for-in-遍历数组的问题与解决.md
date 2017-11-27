@@ -7,7 +7,7 @@ tags:
 	- 问题与解决
 layout: post
 author: "Trekerz"
-header-img: "171127.jpg"
+header-img: "/blog/bg-img/null171127.jpg"
 ---
 
 

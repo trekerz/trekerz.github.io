@@ -7,7 +7,7 @@ tags:
 	- JavaScript
 layout: post
 author: "Trekerz"
-header-img: "170829.jpg"
+header-img: "/blog/bg-img/null170829.jpg"
 ---
 
 # **代理模式**

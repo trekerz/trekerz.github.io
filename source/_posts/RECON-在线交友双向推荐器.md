@@ -8,7 +8,7 @@ tags:
 	- 推荐系统
 layout: post
 author: "Trekerz"
-header-img: "161207.jpg"
+header-img: "/blog/bg-img/null161207.jpg"
 ---
 
 <center>查看论文：[RECON- a reciprocal recommender for online dating](http://web.it.usyd.edu.au/~irena/RecSys2010-final.pdf)</center>

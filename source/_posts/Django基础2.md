@@ -9,7 +9,7 @@ tags:
 	- 前端基础
 layout: post
 author: "Trekerz"
-header-img: "170316.jpg"
+header-img: "/blog/bg-img/null170316.jpg"
 ---
 
 

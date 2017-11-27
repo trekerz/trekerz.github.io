@@ -8,7 +8,7 @@ tags:
 	- 数据库
 layout: post
 author: "Trekerz"
-header-img: "170228.jpg"
+header-img: "/blog/bg-img/null170228.jpg"
 ---
 
 

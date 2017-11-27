@@ -8,7 +8,7 @@ tags:
 	- 网络技术
 layout: post
 author: "Trekerz"
-header-img: "170227.jpg"
+header-img: "/blog/bg-img/null170227.jpg"
 ---
 
 

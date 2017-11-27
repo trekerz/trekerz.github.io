@@ -8,7 +8,7 @@ tags:
 	- node
 layout: post
 author: "Trekerz"
-header-img: "170128.jpg"
+header-img: "/blog/bg-img/null170128.jpg"
 ---
 
 

@@ -7,7 +7,7 @@ tags:
 	- JavaScript
 layout: post
 author: "Trekerz"
-header-img: "171112.jpg"
+header-img: "/blog/bg-img/null171112.jpg"
 ---
 
 

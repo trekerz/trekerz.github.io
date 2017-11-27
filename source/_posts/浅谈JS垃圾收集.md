@@ -7,7 +7,7 @@ tags:
 	- JavaScript
 layout: post
 author: "Trekerz"
-header-img: "170806.jpg"
+header-img: "/blog/bg-img/null170806.jpg"
 ---
 
 JavaScript具有自动垃圾收集机制，开发人员不用再关心内存使用问题，所需内存的分配以及无用内存的回收完全实现了自动管理。

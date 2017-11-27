@@ -7,7 +7,7 @@ tags:
 	- JavaScript
 layout: post
 author: "Trekerz"
-header-img: "170910.jpg"
+header-img: "/blog/bg-img/null170910.jpg"
 ---
 
 # **发布-订阅模式（观察者模式）**

@@ -7,7 +7,7 @@ tags:
 	- JavaScript
 layout: post
 author: "Trekerz"
-header-img: "170911.jpg"
+header-img: "/blog/bg-img/null170911.jpg"
 ---
 
 # **适配器模式介绍**

@@ -8,7 +8,7 @@ tags:
 	- 社交挖掘
 layout: post
 author: "Trekerz"
-header-img: "170302.jpg"
+header-img: "/blog/bg-img/null170302.jpg"
 ---
 
 

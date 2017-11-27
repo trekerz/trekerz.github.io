@@ -8,7 +8,7 @@ tags:
 	- Windows
 layout: post
 author: "Trekerz"
-header-img: "160929.jpg"
+header-img: "/blog/bg-img/null160929.jpg"
 ---
 
 # 一、需求来源

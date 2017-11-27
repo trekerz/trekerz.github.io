@@ -8,7 +8,7 @@ tags:
 	- HTML
 layout: post
 author: "Trekerz"
-header-img: "170727.jpg"
+header-img: "/blog/bg-img/null170727.jpg"
 ---
 
 ![img](1.png)
