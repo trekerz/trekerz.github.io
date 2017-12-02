@@ -17,7 +17,7 @@ email: zjf007@qq.com
 description: "庄嘉峰在 Github 上的个人博客"
 keyword: # seo key words
 
-favicon: favicon.png
+favicon: http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png
 # custom end
 
 # URL
@@ -60,7 +60,7 @@ ga_domain:
 
 # Sidebar settings
 sidebar-about-description: "求知若饥 虚心若愚"
-sidebar-avatar: avator.jpg
+sidebar-avatar: http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg
 
 
 # Featured Tags
