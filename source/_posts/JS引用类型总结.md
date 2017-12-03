@@ -72,6 +72,14 @@ header-img: "/blog/bg-img/null171031.jpg"
 
 返回每个值以逗号分隔的字符串。
 
+**注意**：这里的toString()虽然是继承自Object的，但被Array重写过了。这也就能解释为何数组对象直接调用toString跟调用Object的toString会输出不同的结果了：
+
+```js
+var arr = [2,3,5];
+arr.toString();  // 2,3,5
+Object.prototype.toString.call(arr);  // [object Array]
+```
+
 **(3) toLocaleString()**
 
 ### **6. 栈方法**
