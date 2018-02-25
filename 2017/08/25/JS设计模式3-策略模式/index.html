@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        JS设计模式3-策略模式｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/08/25/JS设计模式3-策略模式/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170825.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170825.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>JS设计模式3-策略模式</h1>
+                    
+                    <h2 class="subheading">表单的多重验证</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-08-25
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                        <a class="tag" href="/TAGS/#JS设计模式"
+                           title="JS设计模式">JS设计模式</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            JS设计模式3-策略模式
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a><strong>策略模式</strong></h1><p><strong>定义</strong>：定义一系列的算法，把它们一个个封装起来，并且使它们可以相互替换。</p>
+<p><strong>举例</strong>：表单效验（是否为空、长度、手机号、邮箱等等）    </p>
+<p>计算年终奖（工资、效绩）下面以年终将做说明：比如公司的年终奖是根据员工的工资和绩效来考核的，绩效为A的人，年终奖为工资的4倍，绩效为B的人，年终奖为工资的3倍，绩效为C的人，年终奖为工资的2倍；</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 一组策略类封装具体的算法</span></span><br><span class="line"><span class="keyword">const</span> Bouns = &#123;</span><br><span class="line">	A (salary)&#123;</span><br><span class="line">		<span class="keyword">return</span> salary * <span class="number">4</span>;</span><br><span class="line">	&#125;,</span><br><span class="line">	B (salary)&#123;</span><br><span class="line">		<span class="keyword">return</span> salary * <span class="number">3</span>;</span><br><span class="line">	&#125;,</span><br><span class="line">	C (salary)&#123;</span><br><span class="line">		<span class="keyword">return</span> salary * <span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">Object</span>.freeze(Bouns);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 计算年终奖 环境类Context</span></span><br><span class="line"><span class="comment">* @param &#123;String&#125; A 效绩等级</span></span><br><span class="line"><span class="comment">* @param &#123;Number&#125; 10000 每月工资</span></span><br><span class="line"><span class="comment">* @returns &#123;Number&#125; 40000 年终奖</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">const</span> calculateBouns = <span class="function"><span class="keyword">function</span> (<span class="params">type, salary</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> Bouns[type](salary);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试年终奖计算方式</span></span><br><span class="line"><span class="keyword">const</span> demo1 = calculateBouns(<span class="string">'A'</span>, <span class="number">10000</span>);</span><br><span class="line"><span class="keyword">const</span> demo2 = calculateBouns(<span class="string">'B'</span>, <span class="number">80000</span>);</span><br><span class="line"><span class="built_in">console</span>.log(demo1, demo2); <span class="comment">// 40000, 240000</span></span><br></pre></td></tr></table></figure>
+<p><strong>说明</strong>：<br>策略模式指的是 定义一系列的算法，把它们一个个封装起来，将不变的部分和变化的部分隔开，<br>实际就是将算法的使用和实现分离出来；算法的使用方式是不变的，都是根据某个算法取得计算后的奖金数，<br>而算法的实现是根据绩效对应不同的绩效规则；<br>一个基于策略模式的程序至少由2部分组成，第一个部分是一组<strong>策略类</strong>，策略类封装了具体的算法，<br>并负责具体的计算过程。第二个部分是<strong>环境类</strong>Context，该Context接收客户端的请求，<br>随后把请求委托给某一个策略类。<br>复合开放-封闭原则，可变的部分为策略类（一组算法），不变的部分为执行具体算法的方式。</p>
+<h1 id="表单验证"><a href="#表单验证" class="headerlink" title="表单验证"></a><strong>表单验证</strong></h1><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>test<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">        </span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">'registerForm'</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>用户名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"userName"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="comment">// 策略类</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> stragtegys = &#123;</span></span><br><span class="line"><span class="undefined">            isNotEmpty (value,errorMsg)&#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span> (value === <span class="string">''</span>)&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">return</span> errorMsg;</span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined">            &#125;,</span></span><br><span class="line"><span class="undefined">            minLength (value,length,errorMsg)&#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span> (value.length &lt; length)&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">return</span> errorMsg;</span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">        &#125;;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">Object</span>.freeze(stragtegys);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="comment">// 保存校验规则</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> Validator = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">this</span>.cache = [];</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="comment">// 添加策略功能</span></span></span><br><span class="line"><span class="javascript">        Validator.prototype.add = <span class="function"><span class="keyword">function</span> (<span class="params">dom,rules</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> self = <span class="keyword">this</span>;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; rules.length; i++) &#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">var</span> rule = rules[i];</span></span><br><span class="line"><span class="javascript">                (<span class="function"><span class="keyword">function</span> (<span class="params">rule</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">var</span> stragtegyAry = rule.stragtegy.split(<span class="string">":"</span>);</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">var</span> errorMsg = rule.errorMsg;</span></span><br><span class="line"><span class="javascript">                    self.cache.push(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                        <span class="keyword">var</span> stragtegy = stragtegyAry.shift();</span></span><br><span class="line"><span class="undefined">                        stragtegyAry.unshift(dom.value);</span></span><br><span class="line"><span class="undefined">                        stragtegyAry.push(errorMsg);</span></span><br><span class="line"><span class="javascript">                        <span class="keyword">return</span> stragtegys[stragtegy].apply(dom,stragtegyAry);</span></span><br><span class="line"><span class="undefined">                    &#125;);</span></span><br><span class="line"><span class="undefined">                &#125;)(rule);</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">        &#125;;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="comment">// 校验开始功能</span></span></span><br><span class="line"><span class="javascript">        Validator.prototype.start = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">for</span>(<span class="keyword">var</span> i =<span class="number">0</span>; i &lt; <span class="keyword">this</span>.cache.length; i++)&#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">var</span> validatorFunc = <span class="keyword">this</span>.cache[i];</span></span><br><span class="line"><span class="javascript">                <span class="keyword">var</span> msg = validatorFunc(); <span class="comment">//开始校验</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span>(msg)&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">return</span> msg; <span class="comment">/* 只要遇到一个规则不通过就返回，如果需要返回所有不通过的msg，则需在这里用数组把它们存放起来。 */</span></span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">        &#125;;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="comment">// 执行</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> registerForm = <span class="built_in">document</span>.getElementById(<span class="string">'registerForm'</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> validateFunc = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> validator = <span class="keyword">new</span> Validator();</span></span><br><span class="line"><span class="undefined">            validator.add(registerForm.userName,[</span></span><br><span class="line"><span class="javascript">                &#123;<span class="attr">stragtegy</span>:<span class="string">'isNotEmpty'</span>,<span class="attr">errorMsg</span>:<span class="string">'用户名不能为空'</span>&#125;,</span></span><br><span class="line"><span class="javascript">                &#123;<span class="attr">stragtegy</span>:<span class="string">'minLength:6'</span>,<span class="attr">errorMsg</span>:<span class="string">'用户名长度不能小于6'</span>&#125;</span></span><br><span class="line"><span class="undefined">                ]</span></span><br><span class="line"><span class="undefined">            );</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> errorMsg = validator.start();</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> errorMsg;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        registerForm.onsubmit = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> errorMsg = validateFunc();</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span>(errorMsg)&#123;</span></span><br><span class="line"><span class="undefined">                alert(errorMsg);</span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span> <span class="literal">false</span>;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>说明</strong>：此处代码来源于–腾讯.曾探的《javascript设计模式》，这能很好的说明策略模式的用途。</p>
+<blockquote>
+<p>参考文档：<br><a href="http://www.cnblogs.com/tugenhua0707/p/4722696.html" target="_blank" rel="external">理解javascript中的策略模式</a></p>
+</blockquote>
+<p><br></p>
+<center>-&nbsp;<em>end</em>&nbsp;-</center>
+
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/08/29/JS设计模式4-代理模式/" data-toggle="tooltip" data-placement="top"
+                           title="JS设计模式4-代理模式">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/08/24/JS设计模式2-单例模式/" data-toggle="tooltip" data-placement="top"
+                           title="JS设计模式2-单例模式">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#策略模式"><span class="toc-text">策略模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#表单验证"><span class="toc-text">表单验证</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                        <a class="tag" href="/TAGS/#JS设计模式"
+                           title="JS设计模式">JS设计模式</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

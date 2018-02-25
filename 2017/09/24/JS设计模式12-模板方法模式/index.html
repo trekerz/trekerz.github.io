@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        JS设计模式12-模板方法模式｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/09/24/JS设计模式12-模板方法模式/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170924.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170924.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>JS设计模式12-模板方法模式</h1>
+                    
+                    <h2 class="subheading">IT公司面试例子</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-09-24
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                        <a class="tag" href="/TAGS/#JS设计模式"
+                           title="JS设计模式">JS设计模式</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            JS设计模式12-模板方法模式
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="模版方法模式"><a href="#模版方法模式" class="headerlink" title="模版方法模式"></a><strong>模版方法模式</strong></h1><p><strong>定义</strong>：模板方法模式由二部分组成，第一部分是抽象父类，第二部分是具体实现的子类，一般的情况下是抽象父类封装了子类的算法框架，包括实现一些公共方法及封装子类中所有方法的执行顺序，子类可以继承这个父类，并且可以在子类中重写父类的方法，从而实现自己的业务逻辑。</p>
+<p><strong>使用场景</strong>：</p>
+<ol>
+<li>泡饮品（茶 和 coffee）</li>
+<li>公司面试（百度面试 和 阿里面试）</li>
+</ol>
+<h1 id="IT公司面试"><a href="#IT公司面试" class="headerlink" title="IT公司面试"></a><strong>IT公司面试</strong></h1><p>下面就以IT公司面试作为父类，百度面试作为子类来实现面试流程模版方法。<br>（1.笔试 &gt;&gt; 2.技术面试 &gt;&gt; 3.领导面试 &gt;&gt; 4.等offer）</p>
+<h2 id="定义父类"><a href="#定义父类" class="headerlink" title="定义父类"></a><strong>定义父类</strong></h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> ITInterview = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="笔试"><a href="#笔试" class="headerlink" title="笔试"></a><strong>笔试</strong></h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 笔试</span></span><br><span class="line">ITInterview.prototype.writtenTest = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"某公司笔试测试"</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="技术面试"><a href="#技术面试" class="headerlink" title="技术面试"></a><strong>技术面试</strong></h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 技术面试</span></span><br><span class="line">ITInterview.prototype.technicalInterview = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"某公司技术面试测试"</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="领导面试"><a href="#领导面试" class="headerlink" title="领导面试"></a><strong>领导面试</strong></h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 领导面试</span></span><br><span class="line">ITInterview.prototype.leader = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"某公司leader来面试了"</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="等offer"><a href="#等offer" class="headerlink" title="等offer"></a><strong>等offer</strong></h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 等通知</span></span><br><span class="line">ITInterview.prototype.waitNotice = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"某公司的offer到了"</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="定义模版方法"><a href="#定义模版方法" class="headerlink" title="定义模版方法"></a><strong>定义模版方法</strong></h3><p><strong>作用</strong>：封装了子类的算法框架，包括实现一些公共方法及封装子类中所有方法的执行顺序。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">ITInterview.init = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.writtenTest();</span><br><span class="line">	<span class="keyword">this</span>.technicalInterview();</span><br><span class="line">	<span class="keyword">this</span>.leader();</span><br><span class="line">	<span class="keyword">this</span>.waitNotice();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="定义子类（百度面试）"><a href="#定义子类（百度面试）" class="headerlink" title="定义子类（百度面试）"></a><strong>定义子类（百度面试）</strong></h2><p>首先子类需要重父类哪里继承所有的方法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> BaiDuInterview = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">BaiDuInterview.prototype = <span class="keyword">new</span> ITInterview();</span><br></pre></td></tr></table></figure>
+<h3 id="百度笔试"><a href="#百度笔试" class="headerlink" title="百度笔试"></a><strong>百度笔试</strong></h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 笔试</span></span><br><span class="line">BaiDuInterview.prototype.writtenTest = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"百度公司笔试测试"</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="百度技术面试"><a href="#百度技术面试" class="headerlink" title="百度技术面试"></a><strong>百度技术面试</strong></h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 技术面试</span></span><br><span class="line">BaiDuInterview.prototype.technicalInterview = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"百度公司技术面试测试"</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="百度领导面试"><a href="#百度领导面试" class="headerlink" title="百度领导面试"></a><strong>百度领导面试</strong></h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 领导面试</span></span><br><span class="line">BaiDuInterview.prototype.leader = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"百度公司leader来面试了"</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="等offer-1"><a href="#等offer-1" class="headerlink" title="等offer"></a><strong>等offer</strong></h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 等通知</span></span><br><span class="line">BaiDuInterview.prototype.waitNotice = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"百度公司的offer到了"</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="测试执行"><a href="#测试执行" class="headerlink" title="测试执行"></a><strong>测试执行</strong></h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> baiduInterview = <span class="keyword">new</span> BaiDuInterview();</span><br><span class="line">baiduInterview.init();</span><br></pre></td></tr></table></figure>
+<p>依次输出：<br>​    百度公司笔试测试<br>​    百度公司技术面试测试<br>​    百度公司leader来面试了<br>​    百度公司的offer到了</p>
+<blockquote>
+<p>参考文档：<br><a href="http://blog.csdn.net/xu_ya_fei/article/details/51628310" target="_blank" rel="external">JS设计模式之模板方法</a><br><a href="https://www.2cto.com/kf/201507/420128.html" target="_blank" rel="external">JavaScript：设计模式之模板方法</a><br><a href="http://www.cnblogs.com/tugenhua0707/p/4780227.html" target="_blank" rel="external">javascript模板方法模式</a></p>
+</blockquote>
+<p><br></p>
+<center>-&nbsp;<em>end</em>&nbsp;-</center>
+
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/09/25/JS设计模式13-组合模式/" data-toggle="tooltip" data-placement="top"
+                           title="JS设计模式13-组合模式">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/09/21/JS设计模式11-访问者模式/" data-toggle="tooltip" data-placement="top"
+                           title="JS设计模式11-访问者模式">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#模版方法模式"><span class="toc-text">模版方法模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IT公司面试"><span class="toc-text">IT公司面试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义父类"><span class="toc-text">定义父类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#笔试"><span class="toc-text">笔试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#技术面试"><span class="toc-text">技术面试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#领导面试"><span class="toc-text">领导面试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#等offer"><span class="toc-text">等offer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义模版方法"><span class="toc-text">定义模版方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定义子类（百度面试）"><span class="toc-text">定义子类（百度面试）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#百度笔试"><span class="toc-text">百度笔试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#百度技术面试"><span class="toc-text">百度技术面试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#百度领导面试"><span class="toc-text">百度领导面试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#等offer-1"><span class="toc-text">等offer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试执行"><span class="toc-text">测试执行</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                        <a class="tag" href="/TAGS/#JS设计模式"
+                           title="JS设计模式">JS设计模式</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

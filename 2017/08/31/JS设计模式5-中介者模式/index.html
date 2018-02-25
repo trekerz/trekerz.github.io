@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        JS设计模式5-中介者模式｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/08/31/JS设计模式5-中介者模式/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170831.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170831.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>JS设计模式5-中介者模式</h1>
+                    
+                    <h2 class="subheading">手机购买按钮</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-08-31
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                        <a class="tag" href="/TAGS/#JS设计模式"
+                           title="JS设计模式">JS设计模式</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            JS设计模式5-中介者模式
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="中介者模式"><a href="#中介者模式" class="headerlink" title="中介者模式"></a><strong>中介者模式</strong></h1><p><strong>定义</strong>：中介者模式的作用就是解除对象与对象之间的紧耦合关系。增加一个中介者对象后，<br>所有的相关对象都通过中介者对象来通信，而不是互相引用，所以当一个对象发生改变时，<br>只需要通知中介者对象即可。中介者使各对象之间耦合松散，而且可以独立地改变它们之间的交互。<br>中介者模式使网状的多对多关系变成了相对简单的一对多关系。<br><strong>举例</strong>：<br>​    手机购买页面（颜色、数量、内存、价格）<br>​    MVC模式（控制层便是位于表现层与模型层之间的中介者。）</p>
+<h1 id="MVC-模式"><a href="#MVC-模式" class="headerlink" title="MVC 模式"></a><strong>MVC 模式</strong></h1><p>我们应该很熟悉 MVC 三层模型实体模型（Model）、视图表现层（View）还有控制层（Control/Mediator）。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/** 模拟 Model, View, Controller */</span></span><br><span class="line"><span class="keyword">var</span> M = &#123;&#125;, V = &#123;&#125;, C = &#123;&#125;;</span><br><span class="line"><span class="comment">/** Model 负责存放资料 */</span></span><br><span class="line">M.data = <span class="string">"hello world"</span>;</span><br><span class="line"><span class="comment">/** View 负责显示 */</span></span><br><span class="line">V.render = <span class="function">(<span class="params">M</span>) =&gt;</span> &#123; alert(M.data); &#125;</span><br><span class="line"><span class="comment">/** Controller 作为一个M和V的桥梁 */</span></span><br><span class="line">C.handleOnload = <span class="function"><span class="params">()</span> =&gt;</span> &#123; V.render(M); &#125;</span><br><span class="line"><span class="comment">/** 在网页读取时调用 Controller */</span></span><br><span class="line"><span class="built_in">window</span>.onload = C.handleOnload;</span><br></pre></td></tr></table></figure>
+<p>MVC 模式中的Control/Mediator 层，就是本设计模式的中介者 (它必须拿到 View 和 Model 的引用)。</p>
+<h1 id="手机购买页面"><a href="#手机购买页面" class="headerlink" title="手机购买页面"></a><strong>手机购买页面</strong></h1><h3 id="HTML-部分"><a href="#HTML-部分" class="headerlink" title="HTML 部分"></a><strong>HTML 部分</strong></h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	选择颜色: </span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"colorSelect"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span>请选择<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"red"</span>&gt;</span>红色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"blue"</span>&gt;</span>蓝色<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	选择内存: </span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"memorySelect"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span>请选择<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"32G"</span>&gt;</span>32G<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"16G"</span>&gt;</span>16G<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	输入购买数量: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"numberInput"</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--输入部分结束--&gt;</span></span><br><span class="line">	</span><br><span class="line">	您选择了颜色: <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"colorInfo"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">	您选择了内存: <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"memoryInfo"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">	您输入了数量: <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"numberInfo"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"nextBtn"</span> <span class="attr">disabled</span>=<span class="string">"true"</span>&gt;</span>请选择手机颜色和购买数量<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="JS部分"><a href="#JS部分" class="headerlink" title="JS部分"></a><strong>JS部分</strong></h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 各种手机库存（通常来自于后端，这里前端进行模拟）</span></span><br><span class="line"><span class="keyword">var</span> goods = &#123; </span><br><span class="line">	<span class="string">"red|32G"</span>: <span class="number">3</span>,</span><br><span class="line">	<span class="string">"red|16G"</span>: <span class="number">0</span>,</span><br><span class="line">	<span class="string">"blue|32G"</span>: <span class="number">1</span>,</span><br><span class="line">	<span class="string">"blue|16G"</span>: <span class="number">6</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 中介者</span></span><br><span class="line"><span class="keyword">var</span> mediator = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">// 获得所有节点的引用，以便对其进行操作（中介者必许获得对其他对象的引用）</span></span><br><span class="line">	<span class="keyword">var</span> colorSelect = <span class="built_in">document</span>.getElementById( <span class="string">'colorSelect'</span> ),</span><br><span class="line">		memorySelect = <span class="built_in">document</span>.getElementById( <span class="string">'memorySelect'</span> ),</span><br><span class="line">		numberInput = <span class="built_in">document</span>.getElementById( <span class="string">'numberInput'</span> ),</span><br><span class="line">		colorInfo = <span class="built_in">document</span>.getElementById( <span class="string">'colorInfo'</span> ),</span><br><span class="line">		memoryInfo = <span class="built_in">document</span>.getElementById( <span class="string">'memoryInfo'</span> ),</span><br><span class="line">		numberInfo = <span class="built_in">document</span>.getElementById( <span class="string">'numberInfo'</span> ),</span><br><span class="line">		nextBtn = <span class="built_in">document</span>.getElementById( <span class="string">'nextBtn'</span> );</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		changed( obj )&#123;</span><br><span class="line">			<span class="keyword">var</span> color = colorSelect.value, <span class="comment">// 颜色</span></span><br><span class="line">				memory = memorySelect.value,<span class="comment">// 内存</span></span><br><span class="line">				number = numberInput.value, <span class="comment">// 数量</span></span><br><span class="line">				stock = goods[ color + <span class="string">'|'</span> + memory ]; <span class="comment">// 颜色和内存对应的手机库存数量</span></span><br><span class="line">			<span class="keyword">if</span> ( obj === colorSelect )&#123; <span class="comment">// 如果改变的是选择颜色下拉框</span></span><br><span class="line">				colorInfo.innerHTML = color;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span> ( obj === memorySelect )&#123;</span><br><span class="line">				memoryInfo.innerHTML = memory;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span> ( obj === numberInput )&#123;</span><br><span class="line">				numberInfo.innerHTML = number;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> ( !color )&#123;</span><br><span class="line">				nextBtn.disabled = <span class="literal">true</span>;</span><br><span class="line">				nextBtn.innerHTML = <span class="string">'请选择手机颜色'</span>;</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> ( !memory )&#123;</span><br><span class="line">				nextBtn.disabled = <span class="literal">true</span>;</span><br><span class="line">				nextBtn.innerHTML = <span class="string">'请选择内存大小'</span>;</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> ( ( ( number - <span class="number">0</span> ) | <span class="number">0</span> ) !== number - <span class="number">0</span> )&#123; <span class="comment">// 输入购买数量是否为正整数</span></span><br><span class="line">				nextBtn.disabled = <span class="literal">true</span>;</span><br><span class="line">				nextBtn.innerHTML = <span class="string">'请输入正确的购买数量'</span>;</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			nextBtn.disabled = <span class="literal">false</span>;</span><br><span class="line">			nextBtn.innerHTML = <span class="string">'放入购物车'</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 与中介者联系起来，事件函数</span></span><br><span class="line">colorSelect.onchange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	mediator.changed( <span class="keyword">this</span> );</span><br><span class="line">&#125;;</span><br><span class="line">memorySelect.onchange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	mediator.changed( <span class="keyword">this</span> );</span><br><span class="line">&#125;;</span><br><span class="line">numberInput.oninput = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	mediator.changed( <span class="keyword">this</span> );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>注意：代码来源于–腾讯.曾探《JavaScript设计模式与开发实践》，但能很好的说明中介者模式在js实际项目中的应用。</p>
+<p>说明：这里共有手机颜色、手机内存、手机数量的选择和展示共6个对象，和一个中介者对象。中介者必须获得这6个对象的应用，当每个对象发生变化时都需要通知中介者，中介者再来执行具体操作。</p>
+<blockquote>
+<p>参考文档：<br><a href="http://blog.csdn.net/linhongyong/article/details/53439723" target="_blank" rel="external">js之中介模式</a><br><a href="https://zh.wikipedia.org/wiki/MVC" target="_blank" rel="external">wiki-MVC</a></p>
+</blockquote>
+<p><br></p>
+<center>-&nbsp;<em>end</em>&nbsp;-</center>
+
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/09/02/JS设计模式6-装饰者模式/" data-toggle="tooltip" data-placement="top"
+                           title="JS设计模式6-装饰者模式">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/08/29/JS设计模式4-代理模式/" data-toggle="tooltip" data-placement="top"
+                           title="JS设计模式4-代理模式">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#中介者模式"><span class="toc-text">中介者模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MVC-模式"><span class="toc-text">MVC 模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#手机购买页面"><span class="toc-text">手机购买页面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML-部分"><span class="toc-text">HTML 部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS部分"><span class="toc-text">JS部分</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                        <a class="tag" href="/TAGS/#JS设计模式"
+                           title="JS设计模式">JS设计模式</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        JS设计模式9-迭代器模式｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/09/15/JS设计模式9-迭代器模式/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170915.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170915.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>JS设计模式9-迭代器模式</h1>
+                    
+                    <h2 class="subheading">不同浏览器中的上传方法</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-09-15
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                        <a class="tag" href="/TAGS/#JS设计模式"
+                           title="JS设计模式">JS设计模式</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            JS设计模式9-迭代器模式
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="迭代器模式介绍"><a href="#迭代器模式介绍" class="headerlink" title="迭代器模式介绍"></a><strong>迭代器模式介绍</strong></h1><p><strong>定义</strong>：迭代器模式是指提供一种方法顺序访问一个聚合对象中的各个元素，而又不需要暴露该对象的内部表示。</p>
+<p><strong>使用的好处</strong>：迭代器模式可以把迭代的过程从业务逻辑中分离出来，在使用迭代器模式之后，即使不关心对象的内部构造，也可以按顺序访问其中的每个元素。</p>
+<p>先看一个 jquery 迭代器：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">$.each(array, <span class="function"><span class="keyword">function</span> (<span class="params">i, n</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">`当前为第<span class="subst">$&#123;i&#125;</span>项，值为<span class="subst">$&#123;n&#125;</span>`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="封装迭代器"><a href="#封装迭代器" class="headerlink" title="封装迭代器"></a><strong>封装迭代器</strong></h1><h2 id="内部迭代器"><a href="#内部迭代器" class="headerlink" title="内部迭代器"></a><strong>内部迭代器</strong></h2><p><strong>定义</strong>：迭代函数内部已经定义好了迭代原则，它完全接手整个迭代过程，外部只需要一次初始调用。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> each = <span class="function"><span class="keyword">function</span>(<span class="params">array, callback</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, len = array.length; i &lt; len; i++) &#123;</span><br><span class="line">		callback.call(array[i], array[i], i); </span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 注意：这里设计each函数时参考了[].forEach函数，callback第一个参数为 value，第二个参数为 index。</span></span><br></pre></td></tr></table></figure>
+<p><strong>使用内部迭代器</strong>：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">each([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>], <span class="function"><span class="keyword">function</span> (<span class="params">val, ind</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log( val + <span class="string">" - "</span> + ind ); <span class="comment">// 输出数组值和下标</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>说明</strong>：现在 ES5 已经实现了内部迭代器 <code>[].foreEach(callback(currentValue, index, array)[, this]);</code>详细的使用说明请参考<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach" target="_blank" rel="external">MDN-Array.prototype.forEach()</a></p>
+<h2 id="外部迭代器"><a href="#外部迭代器" class="headerlink" title="外部迭代器"></a><strong>外部迭代器</strong></h2><p><strong>定义</strong>：外部迭代器必须显式地请求迭代下一个元素，外部迭代器增加了一些调用的复杂度，但相对的也增强了迭代器的灵活性，我们可以手工控制迭代的过程或者顺序。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Iterator = <span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> current = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">var</span> next = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		current += <span class="number">1</span>;</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="keyword">var</span> isDone = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> current &gt;= obj.length;</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="keyword">var</span> getCurrItem = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> obj[ current ];</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		next: next,</span><br><span class="line">		isDone: isDone,</span><br><span class="line">		getCurrItem: getCurrItem</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>使用</strong>：判断两个数组是不是相等：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> compare = <span class="function"><span class="keyword">function</span>(<span class="params"> iterator1, iterator2 </span>)</span>&#123;</span><br><span class="line">	<span class="keyword">while</span>( iterator1.isDone() &amp;&amp; iterator2.isDone() )&#123;</span><br><span class="line">		<span class="keyword">if</span>( iterator1.getCurrItem() !== iterator2.getCurrItem() )&#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>( <span class="string">"iterator1 和 iterator2不相等"</span> );</span><br><span class="line">		&#125;</span><br><span class="line">		iterator1.next();</span><br><span class="line">		iterator2.next();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">console</span>.log( <span class="string">"iterator1 和 iterator2相等"</span> );</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> iterator1 = Iterator( [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>] );</span><br><span class="line"><span class="keyword">var</span> iterator2 = Iterator( [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>] );</span><br><span class="line">compare(iterator1,iterator2);</span><br></pre></td></tr></table></figure>
+<h2 id="中止迭代器"><a href="#中止迭代器" class="headerlink" title="中止迭代器"></a><strong>中止迭代器</strong></h2><p><strong>定义</strong>：在迭代过程，通过判断是否退出迭代器。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> each = <span class="function"><span class="keyword">function</span>(<span class="params"> arry, callback </span>)</span>&#123;</span><br><span class="line">	<span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, l = arry.length; i &lt; l; i++ )&#123;</span><br><span class="line">		<span class="comment">// callback 的执行结果返回false，提前中止迭代</span></span><br><span class="line">		<span class="keyword">if</span>( callback( arry[i], i ) === <span class="literal">false</span> )&#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>使用：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">each( [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>], <span class="function"><span class="keyword">function</span> (<span class="params"> n, i </span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>( n&gt;<span class="number">3</span> )&#123; <span class="comment">// n 大于3的时候中止循环</span></span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">console</span>.log(n); <span class="comment">// 输出 1 2 3</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="迭代器应用示例"><a href="#迭代器应用示例" class="headerlink" title="迭代器应用示例"></a>迭代器应用示例</h1><p><strong>需求</strong>：根据不同的浏览器获取相应的上传组件对象，将不同的上传对象封装到各自的函数里; </p>
+<p>如果函数可用，则返回该对象，否则返回false，提示迭代器继续向下迭代。</p>
+<p><strong>定义上传组件方法</strong>：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 将不同的上传对象封装到各自的函数里; 如果函数可用，则返回该对象，否则返回false，提示迭代器继续</span></span><br><span class="line"><span class="keyword">var</span> getActiveUploadObj = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">try</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> ActiceXObject( <span class="string">"TXFTNActiveX.FTNUpload"</span> ); <span class="comment">// IE 上传控件</span></span><br><span class="line">	&#125;<span class="keyword">catch</span>(e)&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> getFlashUploadObj = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>( supportFlash() )&#123;</span><br><span class="line">		<span class="keyword">var</span> str = <span class="string">"&lt;object type='application/x-shockwave-flash'&gt;&lt;/object&gt;"</span>;</span><br><span class="line">		<span class="keyword">return</span> $( str).appendTo( $(<span class="string">"body"</span>) );</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> getFormUpl0adObj = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> str = <span class="string">"&lt;input type='file' type='file' class='ui-file' /&gt;"</span>; <span class="comment">// 表单上传</span></span><br><span class="line">	<span class="keyword">return</span> $( str).appendTo( $(<span class="string">"body"</span>) );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>实现迭代器</strong>：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//迭代器代码</span></span><br><span class="line"><span class="keyword">var</span> iteratorUploadObj = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, fn; fn = <span class="built_in">arguments</span>[ i++ ]; )&#123;</span><br><span class="line">		<span class="keyword">var</span> uploadObj = fn();</span><br><span class="line">		<span class="keyword">if</span>( uploadObj !== <span class="literal">false</span> )&#123;</span><br><span class="line">			<span class="keyword">return</span> uploadObj;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> uploadObj = iteratorUploadObj( getActiveUploadObj, getFlashUploadObj, getFormUpl0adObj );</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考文档：<br><a href="http://www.alloyteam.com/2012/10/commonly-javascript-design-patterns-iterator-mode/" target="_blank" rel="external">【Javascript设计模式12】-迭代器模式</a><br><a href="http://www.cnblogs.com/Medeor/p/5017879.html" target="_blank" rel="external">JavaScript设计模式 - 迭代器模式</a></p>
+</blockquote>
+<p><br></p>
+<center>-&nbsp;<em>end</em>&nbsp;-</center>
+
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/09/19/JS设计模式10-外观模式/" data-toggle="tooltip" data-placement="top"
+                           title="JS设计模式10-外观模式">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/09/11/JS设计模式8-适配器模式/" data-toggle="tooltip" data-placement="top"
+                           title="JS设计模式8-适配器模式">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#迭代器模式介绍"><span class="toc-text">迭代器模式介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#封装迭代器"><span class="toc-text">封装迭代器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#内部迭代器"><span class="toc-text">内部迭代器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#外部迭代器"><span class="toc-text">外部迭代器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中止迭代器"><span class="toc-text">中止迭代器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#迭代器应用示例"><span class="toc-text">迭代器应用示例</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                        <a class="tag" href="/TAGS/#JS设计模式"
+                           title="JS设计模式">JS设计模式</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

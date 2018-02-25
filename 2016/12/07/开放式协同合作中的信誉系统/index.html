@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        开放式协同合作中的信誉系统｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2016/12/07/开放式协同合作中的信誉系统/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null161207.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null161207.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>开放式协同合作中的信誉系统</h1>
+                    
+                    <h2 class="subheading">【论文笔记】浅析WikiTrust和Crowdsensus</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2016-12-07
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#论文笔记"
+                           title="论文笔记">论文笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#信誉系统"
+                           title="信誉系统">信誉系统</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            开放式协同合作中的信誉系统
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <center>查看论文：<a href="https://users.soe.ucsc.edu/~luca/papers/11/cacm2010.pdf" target="_blank" rel="external">Reputation Systems for Open Collaboration</a></center>
+
+<h3 id="0-概述"><a href="#0-概述" class="headerlink" title="0.   概述"></a><strong>0.   概述</strong></h3><p>(1)  通过“开放式协同合作”来创作的内容（creation）常常难以保证质量的高低。（例如某条百度词条的可靠度）</p>
+<p>(2)  本文讨论的<strong><u>基于内容的（content-driven）</u>信誉系统</strong>可以有效地评估内容的可靠度。</p>
+<p>(3)  本文最后还讨论了开放式协作中的信誉系统和日常行为法规的关系。</p>
+<h3 id="1-简介"><a href="#1-简介" class="headerlink" title="1.   简介"></a><strong>1.   简介</strong></h3><p>(1)  简单介绍了开放式协作形式的发展（从文字到音频到文档到绘图和地图）。</p>
+<p>(2)  在开放式协作系统中建立一个信誉系统，目的是在于鼓励和推动内容的高质量和规范生产（content creation）以及受众对于内容的信任度（contentconsumption）。</p>
+<p>(3)  本文用到Wikipedia和Google Maps来说明(2)中的问题。</p>
+<p>(4)  介绍了Content-driven和User-driven两种信誉评估方式的区别：</p>
+<p>Content-driven：基于内容的分析；较公平准确，更具抗篡改性；而且建立之后立即见效；</p>
+<p>User-driven：基于用户反馈和评级；会碍于用户心情、素质等原因影响准确度；建立之后需要几年时间来培养可靠的反馈（用户总体素质）。</p>
+<p>(5)  拓展知识：在网页信誉评级方面，基于内容的信誉系统有PageRank和HITS（可借用的算法）。</p>
+<h3 id="2-WikiTrust（针对维基内容和小编的信誉系统，附在每条维基词条上）"><a href="#2-WikiTrust（针对维基内容和小编的信誉系统，附在每条维基词条上）" class="headerlink" title="2.   WikiTrust（针对维基内容和小编的信誉系统，附在每条维基词条上）"></a><strong>2.   WikiTrust（针对维基内容和小编的信誉系统，附在每条维基词条上）</strong></h3><p>(1)  三个目标：</p>
+<p>​    a.    以奖励机制<u>激励</u>用户作出持续贡献；</p>
+<p>​    b.    帮助用户和小编<u>提高</u>内容质量、<u>发现</u>破坏行为（低素质用户）。</p>
+<p>​    c.    把高质量内容<u>指引</u>给用户。</p>
+<p>(2)  两个系统：</p>
+<p>​    1)    用户信誉系统（The User ReputationSystem）：</p>
+<p>​        加信誉值：所编辑的内容在往后的编辑中留了下来；</p>
+<p>​        减信誉值：有部分或全部编辑工作未完成。</p>
+<p>​    2)    内容信誉系统（The Content ReputationSystem）：</p>
+<p>​        加信誉值：被高信誉值用户所编辑；</p>
+<p>​        减信誉值：编辑被打断。</p>
+<p>(3)  用户信誉系统（The User ReputationSystem）</p>
+<p>​    用户的信誉取决于<u>贡献的质量和数量</u>。</p>
+<p>​    1)    基于的假设：</p>
+<p>​        a.    内容是按照修订的顺序来组织的，且每次修订都是由单一用户完成的；</p>
+<p>​        b.    两次修订之间可以比较出不同来；</p>
+<p>​        c.    可以跟踪到每次修订中未修改的部分。</p>
+<p>​    2)    <strong><u>贡献质量</u></strong>：取决于贡献在接下来的编辑中是否被保留下来。</p>
+<p>​        a.    <u>版本间距离</u>：从版本r到r’的距离，即修改的程度。通过单词的删除数、增加数、替换数来计算。</p>
+<p><img src="1.png" alt="img"></p>
+<p>​        b.    <u>版本质量</u>：某个版本的质量跟它的前一版本和后一版本有关。</p>
+<p><img src="2.png" alt="版本质量"></p>
+<p><img src="3.png" alt="版本质量"></p>
+<p>根据三角不等式法则，-1≤q≤1。当q=-1时，a=c，b版本的修改被完全删除；当q=1时，b版本的修改被完全保留。</p>
+<center><strong><u>注：这个方法不适用于最新的版本（没有后续版本的版本）。</u></strong></center>
+
+<p>要使名誉系统更加可靠，可以在版本质量的计算中多往前和往后延伸相关用户，使包含的前向用户中至少有两个具有高用户名誉值和高内容名誉值，而后向用户用来判断该版本的贡献质量。</p>
+<p>​    3)    <strong><u>从“贡献质量”到“用户信誉”</u></strong></p>
+<p>​        a.    二者关系：在利用相关用户对本用户进行贡献质量计算的时候，<u>每个相关用户对本用户的影响跟该相关用户的信誉的对数成正比</u>。（高信誉用户对新用户会有压倒性评估作用（“独大系统”），所以不用线性而用对数。况且线性评估会使系统变成一个“平等系统”。）</p>
+<p>​        b.    影响途径：用户之间是通过<strong>版本更新</strong>来相互影响信誉的，后来者影响前者，环环相扣，信誉值时刻动态变化。</p>
+<p>​        c.    防诈措施：为防止某些用户通过刷编辑来增加信誉（SybilAttacks），系统每隔几天就会对用户时间线进行巡视检查。（这个问题不会在内容信誉系统出现）</p>
+<p>​    4)    <strong><u>预测质量</u></strong></p>
+<p>​        a.    能预测贡献质量对用户名誉的影响程度是名誉系统一个很重要特点。名誉值本身也可以用来预测该用户在将来的表现。</p>
+<p>​        b.    质量预测结果由准确率和召回率来评估。</p>
+<p><img src="4.png" alt="预测质量"></p>
+<p>​        对于低信誉用户：低准确率代表这些用户是新手，他们信誉低但贡献质量高；高召回率代表高信誉用户几乎不可能被修订。</p>
+<p>(4)  从用户信誉到内容信誉（Content Reputation）</p>
+<p>​    1)    三点设计要求：</p>
+<p>​        a.    Informative。内容的信誉应该对内容质量有很好的代表性；</p>
+<p>​        b.    Robust。应能抵御恶意用户的刷信誉行为；</p>
+<p>​        c.    Explainable。内容信誉的影响因素应对用户透明。</p>
+<p>​    2)    修订的内容的信誉分配：</p>
+<p><img src="5.png" alt="img"></p>
+<p>​    3)    一些恶意行为的处理</p>
+<p><img src="6.png" alt="img"></p>
+<h3 id="3-WikiTrust的创意空间："><a href="#3-WikiTrust的创意空间：" class="headerlink" title="3.   WikiTrust的创意空间："></a><strong>3.   WikiTrust的创意空间：</strong></h3><p><img src="7.png" alt="img"></p>
+<h3 id="4-Crowdsensus（谷歌地图上的一个商区标记信誉系统）"><a href="#4-Crowdsensus（谷歌地图上的一个商区标记信誉系统）" class="headerlink" title="4.   Crowdsensus（谷歌地图上的一个商区标记信誉系统）"></a><strong>4.   Crowdsensus（谷歌地图上的一个商区标记信誉系统）</strong></h3><p>(1)  作用：评估用户提供的商区信息的准确度，帮助建立地图商区信息。</p>
+<p>(2)  区别（与WikiTrust系统）：</p>
+<p>​    1） 有一个“绝对正确”的标准可供评估对比；</p>
+<p>​    2） 用户不需要知道信誉系统的存在；</p>
+<p>​    3） 身份的概念在这里更强烈了；</p>
+<p>​    4） 充足的计算资源使我们可以考虑使用全局信誉系统（而不是时序信誉系统）。</p>
+<p>(3)   策略：每个用户有一个trustfulness value(q<sub>u</sub>)，刚开始使用先验值，往后迭代更新。</p>
+<p><img src="8.png" alt="img"></p>
+<h3 id="5-后续工作"><a href="#5-后续工作" class="headerlink" title="5.   后续工作"></a><strong>5.   后续工作</strong></h3><p>(1)  信誉系统要如何起到激励用户、形成良性社区的作用？</p>
+<p>(2)  如何平衡新手和老用户的信誉差异？</p>
+<p>(3)  如何对作出重大贡献的用户或贡献质量有问题的用户作出立即的、合适的反应？</p>
+<p><br></p>
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/12/09/常见推荐算法解析/" data-toggle="tooltip" data-placement="top"
+                           title="常见推荐算法解析">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/12/07/RECON-在线交友双向推荐器/" data-toggle="tooltip" data-placement="top"
+                           title="RECON-在线交友双向推荐器">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-概述"><span class="toc-text">0.   概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-简介"><span class="toc-text">1.   简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-WikiTrust（针对维基内容和小编的信誉系统，附在每条维基词条上）"><span class="toc-text">2.   WikiTrust（针对维基内容和小编的信誉系统，附在每条维基词条上）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-WikiTrust的创意空间："><span class="toc-text">3.   WikiTrust的创意空间：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Crowdsensus（谷歌地图上的一个商区标记信誉系统）"><span class="toc-text">4.   Crowdsensus（谷歌地图上的一个商区标记信誉系统）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-后续工作"><span class="toc-text">5.   后续工作</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#论文笔记"
+                           title="论文笔记">论文笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#信誉系统"
+                           title="信誉系统">信誉系统</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

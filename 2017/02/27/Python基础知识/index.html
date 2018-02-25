@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Python基础知识｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/02/27/Python基础知识/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170227.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170227.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Python基础知识</h1>
+                    
+                    <h2 class="subheading">【笔记】Python基础</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-02-27
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#Python"
+                           title="Python">Python</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            Python基础知识
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h3 id="一、-Python综述"><a href="#一、-Python综述" class="headerlink" title="一、 Python综述"></a><strong>一、 Python综述</strong></h3><p><strong>1.    </strong>Python2.x相比于3.x版本的优点：优化成熟、兼容库多。</p>
+<p><strong>2.    </strong>Python的安装以及Eclipse中的PyDev插件。</p>
+<p><strong>3.    </strong>Python实现斐波那契数列的演示。</p>
+<h3 id="二、-数据类型"><a href="#二、-数据类型" class="headerlink" title="二、 数据类型"></a><strong>二、 数据类型</strong></h3><p>Python的数据类型是在变量赋值的时候自动确定的。</p>
+<h4 id="1-Number类型"><a href="#1-Number类型" class="headerlink" title="1.    Number类型"></a><strong>1.    Number类型</strong></h4><p>用于存储数字。包括Integer、Long Integer、Boolean、Double-precision float、Complex number。</p>
+<p>Integer：在不同位的机器上取值范围不同。</p>
+<p>Long Integer：以1或L结尾，没有限制数值大小。</p>
+<p>Complex number：复数。</p>
+<p>​    <strong>(1)  操作符</strong>：算术操作符、比特操作符。</p>
+<p>​    <strong>(2)  内置函数</strong>：用于操作数值进行运算或转化的函数。</p>
+<h4 id="2-Sequence类型簇"><a href="#2-Sequence类型簇" class="headerlink" title="2.    Sequence类型簇"></a><strong>2.    Sequence类型簇</strong></h4><p>序列类型簇包括字符串（String）、元组（Tuple）、列表（List）。</p>
+<p>String：由字符组成的序列类型。</p>
+<p>Tuple：由任意对象组成的不可修改的序列类型。</p>
+<p>List：由任意对象组成的可修改的序列类型。</p>
+<p>​    <strong>(1)  操作符</strong></p>
+<p>​        可用于元素提取、序列链接等操作。</p>
+<p>​    <strong>(2)  内置函数</strong></p>
+<p>​        可用于求长度、类型转换、排序等操作。</p>
+<h4 id="3-String类型（序列类型的操作都适用）"><a href="#3-String类型（序列类型的操作都适用）" class="headerlink" title="3.    String类型（序列类型的操作都适用）"></a><strong>3.    String类型（序列类型的操作都适用）</strong></h4><p>由0个或多个字符组成的有限序列。通常以整体作为操作对象。</p>
+<p>​    <strong>(1)  分类</strong>：普通字符串、Unicode字符串（字符串前面加u）。</p>
+<p>​    <strong>(2)  字符串格式化</strong>：按指定规则吧字符转化为新的格式，同时可以选择新的展示形式。</p>
+<p>​    <strong>(3)  内置函数</strong>：用于String类型的各种操作。</p>
+<h4 id="4-Tuple类型"><a href="#4-Tuple类型" class="headerlink" title="4.    Tuple类型"></a><strong>4.    Tuple类型</strong></h4><p>用圆括号表示，不同元素之间以逗号隔开。其大小和其中的元素在初始化后不能修改。唯一的用处就是被读取</p>
+<p>​    <strong>(1)  特点</strong>：操作Tuple的速度比操作List要快。</p>
+<h4 id="5-List类型"><a href="#5-List类型" class="headerlink" title="5.    List类型"></a><strong>5.    List类型</strong></h4><p>用中括号表示，不同元素之间以逗号隔开。其大小和其中的元素在初始化后可以再次被修改。可用于增、删、改等操作。</p>
+<p>​    <strong>(1)  基本操作</strong>：序列类型的操作在此都通用。</p>
+<p>​    <strong>(2)  内置函数</strong>：用于各种操作List中的元素。</p>
+<h4 id="6-Set类型"><a href="#6-Set类型" class="headerlink" title="6.    Set类型"></a><strong>6.    Set类型</strong></h4><p>即集合。表示相互之间无序的一组对象。包括普通集合set和不可变集合frozenset。有交集、并集、补集等运算。</p>
+<p>​    <strong>(1)  内置函数</strong>：用于集合中元素的操作。</p>
+<h4 id="7-Dictionary类型"><a href="#7-Dictionary类型" class="headerlink" title="7.    Dictionary类型"></a><strong>7.    Dictionary类型</strong></h4><p>即字典。代表一个键值存储库。是Python中唯一表示映射关系的类。可以由键搜索到对应的值。</p>
+<p>​    <strong>(1)  内置函数</strong>：用于字典中键值对的操作。</p>
+<h3 id="三、-流程控制"><a href="#三、-流程控制" class="headerlink" title="三、 流程控制"></a><strong>三、 流程控制</strong></h3><p>用于实现对程序流程的选择、循环、和返回等控制。主要有if、for、break、continue等。</p>
+<h4 id="1-程序块与作用域"><a href="#1-程序块与作用域" class="headerlink" title="1.    程序块与作用域"></a><strong>1.    程序块与作用域</strong></h4><p>程序块：用冒号“：”来标记，同一个冒号下的语句要有相同的缩进。</p>
+<p>作用域：按变量或函数的可见性定义的程序子集。同一个程序块就是同一个作用域。</p>
+<h4 id="2-判断语句"><a href="#2-判断语句" class="headerlink" title="2.    判断语句"></a><strong>2.    判断语句</strong></h4><p>三种语法形式的if。</p>
+<h4 id="3-循环语句"><a href="#3-循环语句" class="headerlink" title="3.    循环语句"></a><strong>3.    循环语句</strong></h4><p>​    (1)  while</p>
+<p>​    (2)  for</p>
+<p>​    (3)  break和continue</p>
+<h4 id="4-语句嵌套"><a href="#4-语句嵌套" class="headerlink" title="4.    语句嵌套"></a><strong>4.    语句嵌套</strong></h4><p>Python允许用if、while、for等语句的嵌套。</p>
+<h3 id="四、-函数"><a href="#四、-函数" class="headerlink" title="四、 函数"></a><strong>四、 函数</strong></h3><h4 id="1-定义与使用"><a href="#1-定义与使用" class="headerlink" title="1.    定义与使用"></a><strong>1.    定义与使用</strong></h4><p>​    <strong>(1)  关键字</strong>：def。</p>
+<p>​    <strong>(2)  返回值</strong>：可以0个或多个。</p>
+<h4 id="2-变长参数"><a href="#2-变长参数" class="headerlink" title="2.    变长参数"></a><strong>2.    变长参数</strong></h4><p>函数参数的个数、类型不定。Python支持Tuple变长参数和Dictionary变长参数。</p>
+<p>​    <strong>(1)  Tuple变长参数</strong>：未知参数的数量不固定，但在函数使用这些参数时无需知道这些参数的名字。用*标记。</p>
+<p>​    <strong>(2)  Dictionary变长参数</strong>：未知参数的数量不固定，在函数使用这些参数时需要知道这些参数的名字。用**标记。</p>
+<h4 id="3-匿名函数"><a href="#3-匿名函数" class="headerlink" title="3.    匿名函数"></a><strong>3.    匿名函数</strong></h4><p>无需定义标识符（函数名）的函数或子程序，用于只引用一次函数的场合。Python中一般用lambda语法定义匿名函数。</p>
+<h3 id="五、-异常"><a href="#五、-异常" class="headerlink" title="五、 异常"></a><strong>五、 异常</strong></h3><p>异常处理功能分离了接收和处理错误代码两个步骤。</p>
+<h4 id="1-处理异常"><a href="#1-处理异常" class="headerlink" title="1.    处理异常"></a><strong>1.    处理异常</strong></h4><p>try、expect、else（可选）、finally（可选）。</p>
+<h4 id="2-自定义异常"><a href="#2-自定义异常" class="headerlink" title="2.    自定义异常"></a><strong>2.    自定义异常</strong></h4><p>除了系统自定义的异常外，自己还可以定义异常的类型。自定义异常可以是自己定义的一个类。</p>
+<h3 id="六、-面向对象编程"><a href="#六、-面向对象编程" class="headerlink" title="六、 面向对象编程"></a><strong>六、 面向对象编程</strong></h3><p>类、对象、继承、封装性、多态性。</p>
+<h4 id="1-类和对象"><a href="#1-类和对象" class="headerlink" title="1.     类和对象"></a><strong>1.     类和对象</strong></h4><p>关键字：class</p>
+<p>​    <strong>(1)  构造函数</strong>：用于初始化类的对象。不能有返回值。</p>
+<p>​    <strong>(2)  析构函数</strong>：销毁对象时调用。清理和善后。</p>
+<p>​    <strong>(3)  实例成员变量</strong>：用于表示实例（对象）中的变量，用self。</p>
+<p>​    <strong>(4)  静态函数和类函数</strong>：可以不通过构建对象而是直接访问类。静态函数使用装饰器@staticmethod来定义，类函数使用@classmethod来定义。它们都定义在类里面，调用的时候直接“类.函数”即可。</p>
+<p>​    <strong>(5)  私有成员</strong>：封装性的体现。类里面不想让外部看到的变量定义为私有成员，用双下划线开始来命名。</p>
+<h4 id="2-继承"><a href="#2-继承" class="headerlink" title="2.     继承"></a><strong>2.     继承</strong></h4><p>定义类时可以在小括号中指定基类。</p>
+<p>​    (1)  在子类成员函数中用super关键字可以访问父类成员。</p>
+<p>​    (2)  在子类析构函数中调用基类的析构函数是一种最佳实践，不这样做可能导致父类资源不能如期释放。</p>
+<p>​    (3)  Python允许一个子类可以有多个基类。</p>
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/02/27/Web编程之网络基础/" data-toggle="tooltip" data-placement="top"
+                           title="Web编程之网络基础">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/01/28/同步io、异步io、阻塞和非阻塞之间的关系/" data-toggle="tooltip" data-placement="top"
+                           title="同步io、异步io、阻塞和非阻塞之间的关系">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、-Python综述"><span class="toc-text">一、 Python综述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、-数据类型"><span class="toc-text">二、 数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Number类型"><span class="toc-text">1.    Number类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Sequence类型簇"><span class="toc-text">2.    Sequence类型簇</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-String类型（序列类型的操作都适用）"><span class="toc-text">3.    String类型（序列类型的操作都适用）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Tuple类型"><span class="toc-text">4.    Tuple类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-List类型"><span class="toc-text">5.    List类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-Set类型"><span class="toc-text">6.    Set类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-Dictionary类型"><span class="toc-text">7.    Dictionary类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、-流程控制"><span class="toc-text">三、 流程控制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-程序块与作用域"><span class="toc-text">1.    程序块与作用域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-判断语句"><span class="toc-text">2.    判断语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-循环语句"><span class="toc-text">3.    循环语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-语句嵌套"><span class="toc-text">4.    语句嵌套</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、-函数"><span class="toc-text">四、 函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-定义与使用"><span class="toc-text">1.    定义与使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-变长参数"><span class="toc-text">2.    变长参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-匿名函数"><span class="toc-text">3.    匿名函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、-异常"><span class="toc-text">五、 异常</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-处理异常"><span class="toc-text">1.    处理异常</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-自定义异常"><span class="toc-text">2.    自定义异常</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、-面向对象编程"><span class="toc-text">六、 面向对象编程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-类和对象"><span class="toc-text">1.     类和对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-继承"><span class="toc-text">2.     继承</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#Python"
+                           title="Python">Python</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

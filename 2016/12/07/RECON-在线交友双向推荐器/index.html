@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        RECON-在线交友双向推荐器｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2016/12/07/RECON-在线交友双向推荐器/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null161207.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null161207.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>RECON-在线交友双向推荐器</h1>
+                    
+                    <h2 class="subheading">【论文笔记】一个澳洲交友网站的推荐系统实践</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2016-12-07
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#推荐系统"
+                           title="推荐系统">推荐系统</a>
+                        
+                        <a class="tag" href="/TAGS/#论文笔记"
+                           title="论文笔记">论文笔记</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            RECON-在线交友双向推荐器
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <center>查看论文：<a href="http://web.it.usyd.edu.au/~irena/RecSys2010-final.pdf" target="_blank" rel="external">RECON- a reciprocal recommender for online dating</a></center>
+
+<h3 id="0-概述"><a href="#0-概述" class="headerlink" title="0.   概述"></a><strong>0.   概述</strong></h3><p><strong>1)</strong>    “双向推荐器”用在双方互为主体和客体的推荐中（职位推荐、导师学生推荐等）。</p>
+<p><strong>2)</strong>    作者的工作：认识和定义“双向推荐”的性质。</p>
+<p><strong>3)</strong>    作者使用澳洲一个大交友网站来测试RECON的预测能力，发现RECON把“top ten”的成功率从23%提高到42%；同时也改善了冷启动的问题（新用户的“top ten”成功率达到26%）。</p>
+<p><strong>4)</strong>    作者还讨论了这些测试结果的意义。</p>
+<h3 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.   介绍"></a><strong>1.   介绍</strong></h3><p><strong>1)</strong>    存在很多双向推荐的场景。</p>
+<p><strong>2)</strong>    用一个表格来反应传统推荐和双向推荐的区别：</p>
+<p><img src="1.png" alt="img"></p>
+<p><strong>3)</strong>    匹配标准包括直接用户信息explicit profiles（用户提供的自身信息和喜好）和间接用户信息implicit profiles（系统通过监测用户行为得到的信息）。</p>
+<p><strong>4)</strong>    有可能一种坏的可能：用户在得到好的推荐后就隐退了，这对推荐器会造成不好的影响。（不同于电影推荐器，推荐器越强回访量越大）</p>
+<p><strong>5)</strong>    需要解决Implicit profiles冷启动的问题。</p>
+<p><strong>6)</strong>    还要解决负载增大的问题，以及单用户推荐量的问题（单个用户受到太多推荐的话会同时影响该用户与相关联用户的体验）。</p>
+<p><strong>7)</strong>    “主动用户”会给推荐器带来正面影响，“被动用户”太多则会带来不良影响。</p>
+<p><strong>8)</strong>    作者的工作：a.设计对照组实验来比较双向推荐和非双向推荐，以探索和找到建立双向推荐器的方法。b.设计对照组实验，通过对比来评估双向推荐的能力。</p>
+<p><strong>9)</strong>    RECON的算法步骤：a.找出用户喜好;b.计算评估分数;c.产生评级列表。</p>
+<h3 id="2-相关工作"><a href="#2-相关工作" class="headerlink" title="2.   相关工作"></a><strong>2.   相关工作</strong></h3><p><strong>1)</strong>    Beehive社交项目用基于内容和基于协同过滤两种算法来做实验，发现基于内容的推荐在双方之前并不认识的情况下效果最好，而基于协同过滤的推荐在双方之前就已经认识的情况下效果良好。</p>
+<p><strong>2)</strong>    遇到的问题：用户信息中存在的不可靠性。报告显示用户通常不愿提供直接用户信息而更倾向于享受间接用户信息带来的反馈。</p>
+<p><strong>3)</strong>    冷启动问题的处理可惠及两类人：新加入的人和被动的人。</p>
+<p><strong>4)</strong>    人口统计学信息是另一个可以衡量人与人之间相似性的工具。</p>
+<h3 id="3-RECON的算法"><a href="#3-RECON的算法" class="headerlink" title="3.   RECON的算法"></a><strong>3.   RECON的算法</strong></h3><p><strong>1)</strong>    作者认为积极对话的用户之间的对话内容中包含了有关用户喜好的重要信息。通过分析这些信息的特征来找出用户的喜好偏向（间接用户信息）。</p>
+<p><strong>2)</strong>    第一步：找出用户x的喜好</p>
+<p>U<sub>x</sub>：用户x（提出的）属性的值的集合。（单个属性用a来表示，单个属性值用v<sub>a</sub>来表示）</p>
+<p>M<sub>x</sub>：收到过用户x的消息的用户的集合。（单个用户用m来表示）</p>
+<p>p<sub>x,a</sub>：一个通过“属性a的每个取值(或取值范围)v及其在M<sub>x</sub>用户群中出现的次数n，即(v,n)”来衡量用户x对该值v的喜好程度的参数。</p>
+<p>P<sub>x</sub>：用户x所有p<sub>x,a</sub>的集合，即用户x（提出的）所有属性a的p<sub>x,a</sub>值的集合。</p>
+<p><img src="2.png" alt="img"></p>
+<p><strong>3)</strong>    第二步：计算匹配值</p>
+<p>原理就是用一个用户x的P<sub>x</sub>去匹配另一个用户y得到匹配值Compat(P<sub>x</sub>,Y)。</p>
+<p><img src="3.png" alt="img"></p>
+<p><img src="4.png" alt="img"></p>
+<p><strong>4)</strong>    第三步：画出双向推荐表</p>
+<p>主要就是用户x对于用户y的匹配值和用户y对于用户x的匹配值，还有reciprocalscore，这三者对top-N的决策作用。</p>
+<p><img src="5.png" alt="img"></p>
+<p><img src="6.png" alt="img"></p>
+<p><strong>5)</strong>    RECON的实现</p>
+<p>RECON的实现稍微有别于上述两个算法。</p>
+<p>a.    实际环境下数据量巨大，作者通过给属性值设置范围的方法来筛选用户，此时势必会过不小心滤掉一些可能匹配的用户，但作者证明这种“失误”造成影响远小于它在运算速度上带来的好处。</p>
+<p>b.    冷启动问题。在用户x交流次数为0的情况下，RECON会用各个用户y去匹配x，即Compat(P<sub>y</sub>,X)，去了解“谁会喜欢x”这个问题，进而推荐给x。</p>
+<p>另外，在这种冷启动问题处理方式中，同样也采取了a中的措施。但这就需要x有一定的喜好信息，作者是这样处理的：利用另外一个与x性别或年龄大致相同的用户w的喜好信息。（作者把年龄相近的x与w划分到了同一个“组”中，因为作者认为这两人应该会有相近的喜好）</p>
+<p>c.    如果还要进一步筛选数据，作者的办法是去掉一些不重要的属性。</p>
+<p>但是要如何选择要保留的属性呢？作者的办法是统计与该用户交流过的用户中共性最强的属性。</p>
+<h3 id="4-评估"><a href="#4-评估" class="headerlink" title="4.   评估"></a><strong>4.   评估</strong></h3><p><strong>1)</strong>    评估了两点：双向性的概念发挥的作用、冷启动问题。</p>
+<p><strong>2)</strong>    定义了两个参数：</p>
+<p>Success(x,R)：推荐表中，给用户x回信且同意交流的用户数占给用户x回信的用户数（作者在这里没有明说，但字里行间默认了“所有交流都会有回复，只是存在同意交流还是不同意交流的区别”）的比例。</p>
+<p>Recall(x,R)：给用户x回信且同意交流的这些用户中，存在于推荐表里的数目占总数目（即在推荐表里的+不在推荐表里的）的比例。</p>
+<p><strong>3)</strong>    设置了对照组，对比了双向推荐系统、非双向推荐系统和无推荐系统的Success值和Recall值。</p>
+<p><img src="7.png" alt="img"></p>
+<p><strong>4)</strong>    作者发现的仍存在的问题：新加入的用户在成功率上还是会稍微比老用户低。（对比上下两图的两条蓝线）</p>
+<p><img src="8.png" alt="img"></p>
+<p><strong>5)</strong>    测试硬件配置：</p>
+<p>双核2GRAM（计算了9万个用户的140万条信息）</p>
+<p>步骤二用时10min；步骤三用时2hr（平均每个用户收到了550个推荐）。</p>
+<h3 id="5-结论总结"><a href="#5-结论总结" class="headerlink" title="5.   结论总结"></a><strong>5.   结论总结</strong></h3><p><strong>1)</strong>    双向推荐系统当前受关注程度不大。</p>
+<p><strong>2)</strong>    RECON是基于在线交友网站建立的一个双向推荐系统。</p>
+<p><strong>3)</strong>    RECON的测试使用了大量交友数据，作者评估了它的推荐效果并与非双向推荐器和无推荐对照组作了对比，对比结果显示了双向推荐拥有巨大优势。</p>
+<p><strong>4)</strong>    RECON还处理了双向推荐中冷启动的问题。</p>
+<p><strong>5)</strong>    RECON在top5的推荐中比已有推荐系统提高了2.6倍的成功率。</p>
+<p><strong>6)</strong>    RECON也存在问题，它使用的是历史信息，下一步作者希望能进行实时推荐。</p>
+<p><strong>7)</strong>    作者也希望在控制计算量过载的前提下，保证被推荐的用户会很好的响应（利用好）这种推荐，以使推荐器良好地运转。（因为在这种推荐器下，受欢迎的人会越来越受欢迎）</p>
+<p><strong>8)</strong>    RECON的这种推荐系统并不完全适用于其它领域，例如导师-学生推荐、雇员-雇主推荐甚至于社交网络中朋友的发现。因为这些场景下角色的对称程度就不那么高了，例如有些系统中是雇员找雇主，而有些则是雇主找雇员。这些多样化的情景下的推荐还需要先进一步完善推荐系统。</p>
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/12/07/开放式协同合作中的信誉系统/" data-toggle="tooltip" data-placement="top"
+                           title="开放式协同合作中的信誉系统">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/09/29/Windows下Apache-PHP-MySQL搭建历程/" data-toggle="tooltip" data-placement="top"
+                           title="Windows下Apache+PHP+MySQL搭建历程">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-概述"><span class="toc-text">0.   概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-介绍"><span class="toc-text">1.   介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-相关工作"><span class="toc-text">2.   相关工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-RECON的算法"><span class="toc-text">3.   RECON的算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-评估"><span class="toc-text">4.   评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-结论总结"><span class="toc-text">5.   结论总结</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#推荐系统"
+                           title="推荐系统">推荐系统</a>
+                        
+                        <a class="tag" href="/TAGS/#论文笔记"
+                           title="论文笔记">论文笔记</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

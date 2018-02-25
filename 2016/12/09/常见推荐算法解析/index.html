@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        常见推荐算法解析｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2016/12/09/常见推荐算法解析/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null161209.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null161209.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>常见推荐算法解析</h1>
+                    
+                    <h2 class="subheading">【转载】推荐算法</h2>
+                    
+                    <span class="meta">
+                         作者 佚名
+                        <span>
+                          日期 2016-12-09
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#算法"
+                           title="算法">算法</a>
+                        
+                        <a class="tag" href="/TAGS/#推荐系统"
+                           title="推荐系统">推荐系统</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            常见推荐算法解析
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h3 id="一、-个性化推荐算法"><a href="#一、-个性化推荐算法" class="headerlink" title="一、 个性化推荐算法"></a>一、 个性化推荐算法</h3><ul>
+<li><h4 id="基于人口统计学的推荐"><a href="#基于人口统计学的推荐" class="headerlink" title="基于人口统计学的推荐"></a><strong>基于人口统计学的推荐</strong></h4></li>
+</ul>
+<p><strong>定义</strong>：根据用户的基本信息发现用户的相关程度，将相似用户喜爱的物品推荐给当前用户。</p>
+<p><strong>优点</strong>：</p>
+<p>​        没有“冷启动”的问题；</p>
+<p>​        不依赖“物品”本身的数据，即这个方法在不同物品的领域都可以使用，它是领域独立的（domain-independent）。</p>
+<p><strong>缺点</strong>：</p>
+<p>​        方法过于粗糙，在对品味要求比较高的领域（图书、电影、音乐）效果不好；</p>
+<p>​        部分个人信息涉及隐私。</p>
+<ul>
+<li><h4 id="基于内容的推荐（常用于咨询）"><a href="#基于内容的推荐（常用于咨询）" class="headerlink" title="基于内容的推荐（常用于咨询）"></a><strong>基于内容的推荐（常用于咨询）</strong></h4></li>
+</ul>
+<p><strong>定义</strong>：根据推荐物品或内容的元数据，发现物品或者内容的相关性，然后基于用户以往的喜好记录，推荐给用户相似的物品。（抽取文章中的tag作为关键词）</p>
+<p><strong>优点</strong>：</p>
+<p>​        易于实现，不需要用户数据因此不存在稀疏性和冷启动问题。</p>
+<p>​        基于物品本身特征推荐，因此不存在过度推荐热门的问题。</p>
+<p><strong>缺点</strong>：</p>
+<p>​        抽取的特征既要保证准确性又要具有一定的实际意义，否则很难保证推荐结果的相关性。（豆瓣采用人工维护tag的策略，依靠用户去维护内容的tag的准确性。）</p>
+<ul>
+<li><h4 id="基于关联规则的推荐（常用于电子商务系统）"><a href="#基于关联规则的推荐（常用于电子商务系统）" class="headerlink" title="基于关联规则的推荐（常用于电子商务系统）"></a><strong>基于关联规则的推荐（常用于电子商务系统）</strong></h4></li>
+</ul>
+<p>定义：购买了一些物品的用户更倾向于购买另一些物品。目前关联规则挖掘算法主要从Apriori和FP-Growth两个算法发展演变而来。</p>
+<p><strong>优点</strong>：</p>
+<p>​        转化率比较高。</p>
+<p><strong>缺点</strong>：</p>
+<p>​        计算量大，但可以离线计算；</p>
+<p>​        由于采用用户数据，存在冷启动和稀疏性问题。</p>
+<p>​        存在热门项目容易被过度推荐的问题。</p>
+<ul>
+<li><h4 id="基于协同过滤的推荐（用户、物品）"><a href="#基于协同过滤的推荐（用户、物品）" class="headerlink" title="基于协同过滤的推荐（用户、物品）"></a><strong>基于协同过滤的推荐（用户、物品）</strong></h4></li>
+</ul>
+<p><strong>定义</strong>：基于一个“物以类聚，人以群分”的假设，喜欢相同物品的用户更有可能具有相同的兴趣。基于协同过滤的推荐系统一般应用于有用户评分的系统之中，通过分数去刻画用户对于物品的喜好。协同过滤被视为利用集体智慧的典范，不需要对项目进行特殊处理，而是通过用户建立物品与物品之间的联系。</p>
+<p><strong>分类</strong>：</p>
+<p>​        基于用户的推荐：根据所有用户对物品或者信息的偏好（评分），发现与当前用户口味和偏好相似的“邻居”用户群，在一般的应用中是采用计算“K-Nearest Neighboor”的算法；然后，基于这 K 个邻居的历史偏好信息，为当前用户进行推荐。</p>
+<p>​        基于物品的推荐：使用所有用户对物品或者信息的偏好（评分），发现物品和物品之间的相似度，然后根据用户的历史偏好信息，将类似的物品推荐给用户。基于物品的协同过滤可以看作是关联规则推荐的一种退化，但由于协同过滤更多考虑了用户的实际评分，并且只是计算相似度而非寻找频繁集，因此可以认为基于物品的协同过滤准确率较高并且覆盖率更高。</p>
+<p><strong>各自优点：</strong></p>
+<p>​        基于用户的推荐：推荐物品之间在内容上可能完全不相关，因此可以发现用户的潜在兴趣，并且针对每个用户生成其个性化的推荐结果。</p>
+<p>​        基于物品的推荐：应用更为广泛，扩展性和算法性能更好。由于项目的增长速度一般较为平缓，因此性能变化不大。</p>
+<p><strong>各自缺点：</strong></p>
+<p>​         基于用户的推荐：一般的Web系统中，用户的增长速度都远远大于物品的增长速度，因此其计算量的增长巨大，系统性能容易成为瓶颈。因此在业界中单纯的使用基于用户的协同过滤系统较少。</p>
+<p>​         基于物品的推荐：无法提供个性化的推荐结果。</p>
+<p><strong>区别：</strong></p>
+<p>​        其实基于物品的协同过滤推荐机制是 Amazon 在基于用户的机制上改良的一种策略，因为在大部分的 Web 站点中，物品的个数是远远小于用户的数量的，而且物品的个数和相似度相对比较稳定；同时基于物品的机制比基于用户的实时性更好。但也不是所有的场景都是这样的情况，在一些新闻推荐系统中，也许物品，也就是新闻的个数可能大于用户的个数，而且新闻的更新程度也有很快，所以它的相似度依然不稳定。所以，推荐策略的选择其实也和具体的应用场景有很大的关系。</p>
+<h3 id="二、-业界个性化推荐系统"><a href="#二、-业界个性化推荐系统" class="headerlink" title="二、 业界个性化推荐系统"></a>二、 业界个性化推荐系统</h3><ul>
+<li>Yahoo！Resarch - Web-ScaleRecommendation Systems</li>
+<li>淘宝推荐系统</li>
+<li>豆瓣猜</li>
+<li>Hulu的个性化推荐</li>
+</ul>
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/01/05/LDA算法简介/" data-toggle="tooltip" data-placement="top"
+                           title="LDA算法简介">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/12/07/开放式协同合作中的信誉系统/" data-toggle="tooltip" data-placement="top"
+                           title="开放式协同合作中的信誉系统">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、-个性化推荐算法"><span class="toc-text">一、 个性化推荐算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基于人口统计学的推荐"><span class="toc-text">基于人口统计学的推荐</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基于内容的推荐（常用于咨询）"><span class="toc-text">基于内容的推荐（常用于咨询）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基于关联规则的推荐（常用于电子商务系统）"><span class="toc-text">基于关联规则的推荐（常用于电子商务系统）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基于协同过滤的推荐（用户、物品）"><span class="toc-text">基于协同过滤的推荐（用户、物品）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、-业界个性化推荐系统"><span class="toc-text">二、 业界个性化推荐系统</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#算法"
+                           title="算法">算法</a>
+                        
+                        <a class="tag" href="/TAGS/#推荐系统"
+                           title="推荐系统">推荐系统</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

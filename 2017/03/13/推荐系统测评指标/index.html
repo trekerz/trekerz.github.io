@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        推荐系统测评指标｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/03/13/推荐系统测评指标/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170313.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170313.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>推荐系统测评指标</h1>
+                    
+                    <h2 class="subheading">【笔记】如题</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-03-13
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#推荐系统"
+                           title="推荐系统">推荐系统</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            推荐系统测评指标
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p><strong>a.</strong>    推荐系统涉及到三方利益：用户、物品提供者、推荐系统。</p>
+<p><strong>b.</strong>    好的推荐系统不仅仅能够准确预测用户的行为，而且能够扩展用户的视野，帮助用户发现那些他们可能会感兴趣，但却不那么容易发现的东西，即长尾商品。</p>
+<p><strong>c.</strong>    为了全面测评推荐系统对三方利益的影响，测评指标将会有：准确度、覆盖度、新颖度、惊喜度、信任度、透明度等。这些指标中，有些可以离线计算，有些只有在线才能计算，有些只能通过用户问卷获得。</p>
+<h4 id="1-推荐系统的实验方法"><a href="#1-推荐系统的实验方法" class="headerlink" title="1.    推荐系统的实验方法"></a><strong>1.    推荐系统的实验方法</strong></h4><p>一个新算法的最终上线，需要完成3个实验：</p>
+<p>​    a.    通过离线实验证明它在很多离线指标上优于现有的算法</p>
+<p>​    b.    通过用户调查证明它的用户满意度不低于现有的算法</p>
+<p>​    c.    通过在线的AB测试确定它在我们关心的指标上优于现有算法</p>
+<h6 id="1-离线实验"><a href="#1-离线实验" class="headerlink" title="(1)  离线实验"></a><strong>(1)  离线实验</strong></h6><p>步骤：</p>
+<p>​    a.    通过日志系统获得用户行为数据，并按照一定格式生成一个标准的数据集</p>
+<p>​    b.    将数据集按照一定的额规则分成训练集和测试集</p>
+<p>​    c.    在训练集上训练用户兴趣模型，在测试集上进行测试</p>
+<p>​    d.    通过事先定义的离线指标评测算法在测试集上的预测结果</p>
+<p>优缺点：</p>
+<p>​    a.    都是在数据集上完成的，不需要一个实际的系统来供它实验，而只要有一个从实际系统日志中提取的数据集即可</p>
+<p>​    b.    无法获得很多商业上关注的指标，如点击率、转化率等</p>
+<h6 id="2-用户调查"><a href="#2-用户调查" class="headerlink" title="(2)  用户调查"></a><strong>(2)  用户调查</strong></h6><p>离线实验的指标和实际的商业指标存在差距，比如预测准确率和用户满意度之间就存在很大差距，高预测准确率不等于高用户满意度。因此，如果要准确测评一个算法，需要对比真是的环境，最好的方法就是将算法直接上线测试，上线测试之前先要做好用户调查，尽量降低风险。</p>
+<h6 id="3-在线实验"><a href="#3-在线实验" class="headerlink" title="(3)  在线实验"></a><strong>(3)  在线实验</strong></h6><p>完成离线实验和必要的用户调查后，可以将推荐系统上线做AB测试。</p>
+<p>优缺点：</p>
+<p>​    a.    可以公平获得不同算法实际在线时的性能指标，包括商业上关注的指标。</p>
+<p>​    b.    缺点是周期比较长，必须进行长期的实验才能得到可靠的结果。（因此一般只用它来测试在离线实验和用户调查中表现比较好的算法。</p>
+<p>注意：</p>
+<p>​          AB测试中应该注意分层测试，不同层之间有可能会相互影响，此时就应在AB测试时进行切分流量。</p>
+<p>​          具体：用户进入网站后会被预先定制的规则打上标签，确定用户是属于哪种AB测试的；在后台，实验人员的工作首先是配置流量分配系统，决定满足什么条件的用户参加什么样的测试。</p>
+<h4 id="2-测评指标"><a href="#2-测评指标" class="headerlink" title="2.    测评指标"></a><strong>2.    测评指标</strong></h4><h6 id="1-用户满意度"><a href="#1-用户满意度" class="headerlink" title="(1)  用户满意度"></a><strong>(1)  用户满意度</strong></h6><p>（用户调查、在线实验）</p>
+<p>​          用户调查：不是简单地询问用户对结果是否满意，而是从不同的侧面询问用户对结果的不同感受。</p>
+<p>​          在线实验：主要通过一些对用户行为的统计得到。</p>
+<h6 id="2-预测准确度"><a href="#2-预测准确度" class="headerlink" title="(2)  预测准确度"></a><strong>(2)  预测准确度</strong></h6><p>（离线实验）</p>
+<p>​          离线实验：计算该指标时需要有一个离线数据集，其包含用户的历史行为记录，然后将该数据集分为训练集和测试集。在训练集上建立用户的行为和兴趣模型预测用户在测试集上的行为，并计算预测行为和测试集上实际行为的重合度作为预测准确度。</p>
+<h6 id="例子1：评分预测"><a href="#例子1：评分预测" class="headerlink" title="例子1：评分预测"></a><strong>例子1：评分预测</strong></h6><p>a.    定义：预测用户对物品会评多少分的行为</p>
+<p>b.    评分预测的预测准确度一般通过均方根误差（RMSE）和平均绝对误差（MAE）计算</p>
+<p>c.    均方根误差RMSE：</p>
+<p><img src="1.png" alt="img"></p>
+<p>​    平均绝对误差MAE：</p>
+<p><img src="2.png" alt="img"></p>
+<p>​    对于测试集中的一个用户u和物品i，令r<sub>ui</sub>是用户u对物品i的实际评分，r^<sub>ui</sub>而是推荐算法给出的预测评分。</p>
+<p>d.    RMSE和MAE的优缺点：</p>
+<p>​    RMSE加大了对预测不准的用户物品评分的乘法（平方项的惩罚），因而对系统的评测更加苛刻。</p>
+<p>研究表明，如果评分系统是基于整数建立的（即用户的评分都是整数），那么对预测结果取整会降低MAE的误差。</p>
+<h6 id="例子2：topN推荐"><a href="#例子2：topN推荐" class="headerlink" title="例子2：topN推荐"></a><strong>例子2：topN推荐</strong></h6><p>a.    定义：网站在提供推荐服务时给用户一个个性化的推荐列表</p>
+<p>b.    TopN推荐的预测准确率一般通过准确率/召回率度量</p>
+<p>c.    召回率：</p>
+<p><img src="3.png" alt="img"></p>
+<p>​    准确率：</p>
+<p><img src="4.png" alt="img"></p>
+<p>​    令R(u)是根据用户在训练集上的行为给用户作出的推荐列表，而T(u)是用户在测试集上的行为列表。</p>
+<h6 id="3-覆盖率"><a href="#3-覆盖率" class="headerlink" title="(3)  覆盖率"></a><strong>(3)  覆盖率</strong></h6><p>描述一个推荐系统对物品长尾的发掘能力（这是一个内容提供商会关心的指标）。有不同的定义方法。</p>
+<p>最简单的定义为：推荐系统能够推荐出来的物品占总物品集合的比例。</p>
+<p><img src="5.png" alt="img"></p>
+<p>令用户集合为U，推荐系统给每个用户推荐的一个长度为N的物品列表R(u)。</p>
+<p>缺点：只是总体上讨论了覆盖程度，但缺乏更细致的长尾发掘能力。</p>
+<p>改进型定义：在计算覆盖率时要统计推荐列表中不同物品出现次数的分布。（消除马太效应）</p>
+<p>例子：信息论中信息熵的定义、经济学中基尼系数的定义。</p>
+<h6 id="4-多样性"><a href="#4-多样性" class="headerlink" title="(4)  多样性"></a><strong>(4)  多样性</strong></h6><p>描述推荐列表中物品两两之间的不相似性。因此与相似性是相对的。</p>
+<p>定义：</p>
+<p><img src="6.png" alt="img"></p>
+<p>s(i,j)∈[0,1]定义了物品i和j之间的相似度，R(u)为推荐列表。</p>
+<p>推荐系统的整体多样性可以定义为所有用户推荐列表多样性的平均值：</p>
+<p><img src="7.png" alt="img"></p>
+<h6 id="5-新颖性"><a href="#5-新颖性" class="headerlink" title="(5)  新颖性"></a><strong>(5)  新颖性</strong></h6><p>给用户推荐那些他们以前没有听说过的物品。</p>
+<p>最简单的方法就是把那些用户之前在网站中有过行为的物品过滤掉。</p>
+<p>当前业界挑战：如何在不牺牲精度的情况下提高多样性和新颖性？</p>
+<h6 id="6-惊喜度"><a href="#6-惊喜度" class="headerlink" title="(6)  惊喜度"></a><strong>(6)  惊喜度</strong></h6><p>如果推荐结果和用户的历史兴趣不相似，但却让用户觉得满意，那么就可以说推荐结果的惊喜度很高。</p>
+<p>要区分新颖性和精细度的区别，不能单纯从中文字面意义来区分。</p>
+<h6 id="7-信任度"><a href="#7-信任度" class="headerlink" title="(7)  信任度"></a><strong>(7)  信任度</strong></h6><p>让用户对推荐结果产生信任。</p>
+<p>方式：</p>
+<p>​    a.    增加推荐系统的透明度</p>
+<p>​    b.    考虑用户的社交网络信息</p>
+<h6 id="8-实时性"><a href="#8-实时性" class="headerlink" title="(8)  实时性"></a><strong>(8)  实时性</strong></h6><p>​    a.    推荐系统需要实时地更新推荐列表来满足用户新的行为变化</p>
+<p>​    b.    推荐系统需要能够将新加入系统的物品推荐给用户</p>
+<h6 id="9-健壮性"><a href="#9-健壮性" class="headerlink" title="(9)  健壮性"></a><strong>(9)  健壮性</strong></h6><p>一个推荐系统抗击作弊的能力。（例如：行为注入攻击，即制造众多用户行为去让自己的物品获得高排位）</p>
+<p>健壮性的测试主要运用：模拟攻击。</p>
+<p>提高健壮性的方法：</p>
+<p>​    a.    设计推荐系统时尽量使用代价比较高的用户行为，例如在选择浏览行为还是购买行为的问题上选择购买行为。</p>
+<p>​    b.    在使用数据前，进行攻击检测，从而对数据进行清理。</p>
+<h6 id="10-商业目标"><a href="#10-商业目标" class="headerlink" title="(10) 商业目标"></a><strong>(10) 商业目标</strong></h6><p>推荐系统的测评也看中网站的商业目标是否达成。</p>
+<h4 id="3-评测维度"><a href="#3-评测维度" class="headerlink" title="3.    评测维度"></a><strong>3.    评测维度</strong></h4><p>  一个算法在虽然可能在某个方面性能不好，但在其他特定方面可能会有不错的性能。评测维度就是要知道一个算法在什么情况下性能最好。</p>
+<p>评测维度有3种：</p>
+<p>​    a.    用户维度：人口统计学信息、活跃度、是不是新用户等</p>
+<p>​    b.    物品维度：物品的属性信息、流行度、平均分记忆是不是新加入的物品等</p>
+<p>​    c.    时间维度：季节、是工作日还是周末，是白天还是晚上等</p>
+<p><br></p>
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/03/13/用户行为数据的利用/" data-toggle="tooltip" data-placement="top"
+                           title="用户行为数据的利用">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/03/11/社交网络数据的利用2/" data-toggle="tooltip" data-placement="top"
+                           title="社交网络数据的利用2">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-推荐系统的实验方法"><span class="toc-text">1.    推荐系统的实验方法</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-离线实验"><span class="toc-text">(1)  离线实验</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-用户调查"><span class="toc-text">(2)  用户调查</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-在线实验"><span class="toc-text">(3)  在线实验</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-测评指标"><span class="toc-text">2.    测评指标</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-用户满意度"><span class="toc-text">(1)  用户满意度</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-预测准确度"><span class="toc-text">(2)  预测准确度</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#例子1：评分预测"><span class="toc-text">例子1：评分预测</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#例子2：topN推荐"><span class="toc-text">例子2：topN推荐</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-覆盖率"><span class="toc-text">(3)  覆盖率</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4-多样性"><span class="toc-text">(4)  多样性</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#5-新颖性"><span class="toc-text">(5)  新颖性</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#6-惊喜度"><span class="toc-text">(6)  惊喜度</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#7-信任度"><span class="toc-text">(7)  信任度</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#8-实时性"><span class="toc-text">(8)  实时性</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#9-健壮性"><span class="toc-text">(9)  健壮性</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#10-商业目标"><span class="toc-text">(10) 商业目标</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-评测维度"><span class="toc-text">3.    评测维度</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#推荐系统"
+                           title="推荐系统">推荐系统</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

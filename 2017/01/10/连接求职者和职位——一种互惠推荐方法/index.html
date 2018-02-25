@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        连接求职者和职位——一种互惠推荐方法｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/01/10/连接求职者和职位——一种互惠推荐方法/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170110.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170110.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>连接求职者和职位——一种互惠推荐方法</h1>
+                    
+                    <h2 class="subheading">【论文笔记】经典职场互惠推荐问题</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-01-10
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#推荐系统"
+                           title="推荐系统">推荐系统</a>
+                        
+                        <a class="tag" href="/TAGS/#论文笔记"
+                           title="论文笔记">论文笔记</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            连接求职者和职位——一种互惠推荐方法
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <center>查看论文：<a href="https://static.aminer.org/pdf/PDF/000/246/566/matching_people_and_jobs_a_bilateral_recommendation_approach.pdf" target="_blank" rel="external">Matching People and Jobs-A Bilateral Recommendation Approach</a></center>
+
+<h3 id="0-概要"><a href="#0-概要" class="headerlink" title="0.   概要"></a><strong>0.   概要</strong></h3><p>本文给出了一个新的person-jobs fit（P-J）推荐方法，这个新方法融合了两个不同的推荐系统。</p>
+<p>本文还根据一个学生实验的数据来测试了这个新推荐方法。</p>
+<h3 id="1-简介"><a href="#1-简介" class="headerlink" title="1.   简介"></a><strong>1.   简介</strong></h3><p>(1)  一些研究者致力于融合了基于内容推荐和基于协同过滤推荐，以同时获得两者的优点和克服稀疏性问题；还有研究者致力于降低协同过滤中“用户-物品矩阵”的维度。</p>
+<p>(2)  本文的研究是基于已有理论和之前的研究结果，并以具体求职环境为出发点。</p>
+<h3 id="2-当前求职环境的情况（2003-2004）"><a href="#2-当前求职环境的情况（2003-2004）" class="headerlink" title="2.   当前求职环境的情况（2003-2004）"></a><strong>2.   当前求职环境的情况（2003-2004）</strong></h3><p><img src="1.png" alt="img"></p>
+<p>从上图可发现存在的问题是：职位的发布和寻找存在差额，求职市场的信息具有不对称的情况。</p>
+<h3 id="3-从个人出发的个性化职位搜寻"><a href="#3-从个人出发的个性化职位搜寻" class="headerlink" title="3.   从个人出发的个性化职位搜寻"></a><strong>3.   从个人出发的个性化职位搜寻</strong></h3><h4 id="3-1-推荐一个人所需要掌握的信息"><a href="#3-1-推荐一个人所需要掌握的信息" class="headerlink" title="3.1. 推荐一个人所需要掌握的信息"></a><strong>3.1. 推荐一个人所需要掌握的信息</strong></h4><p>​    求职者&amp;他的能力所能完成的任务的匹配；</p>
+<p>​    求职者&amp;能与他成功合作的人的匹配。</p>
+<h6 id="1-P-E-fit理论及其基石——Lewin的理论"><a href="#1-P-E-fit理论及其基石——Lewin的理论" class="headerlink" title="(1)  P-E fit理论及其基石——Lewin的理论"></a><strong>(1)  P-E fit理论及其基石——Lewin的理论</strong></h6><table>
+<thead>
+<tr>
+<th style="text-align:center">缩写</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">P-J fit</td>
+<td style="text-align:center">person-jobs</td>
+</tr>
+<tr>
+<td style="text-align:center">P-E fit</td>
+<td style="text-align:center">person-environment</td>
+</tr>
+<tr>
+<td style="text-align:center">P-O fit</td>
+<td style="text-align:center">person-organization</td>
+</tr>
+<tr>
+<td style="text-align:center">P-V fit</td>
+<td style="text-align:center">person-vocation</td>
+</tr>
+<tr>
+<td style="text-align:center">P-G fit</td>
+<td style="text-align:center">person-group</td>
+</tr>
+</tbody>
+</table>
+<p>​    <strong>1)</strong>    很多职业心理学、招聘、选举研究和管理研究都研究过P-E fit框架。P-E fit在所有fit中居首要地位，其框架内的理论成果可应用于其它的fit。</p>
+<p><strong>    2)</strong>    Lewin的理论：行为就是人的功能属性，也是人所处的环境。</p>
+<p>​    由此可知：<u>行为或态度之间的差异并不是人或环境决定的，而是个性（characteristics）间的互动决定的</u>。</p>
+<p>​    所以，P-E fit框架就定义了个人的个性和环境的个性的一致性程度，这个程度值一般都设为一个很大的值，即一致性很强。</p>
+<h6 id="2-P-E-fit概念的三种理解"><a href="#2-P-E-fit概念的三种理解" class="headerlink" title="(2)  P-E fit概念的三种理解"></a><strong>(2)  P-E fit概念的三种理解</strong></h6><p><strong>​    a.    Supplementary fit和Complementary fit</strong></p>
+<p>​        前者是某个环境中存在同等地位的相似的个人个性；</p>
+<p>​        后者是某个环境只由一个人的个性来影响。</p>
+<p>​    这两者分别对应两种不同定义的“环境”：一种是基于栖息于该环境中的人的定义，另一种是把环境则当作人的一部分。</p>
+<p><strong>​    b.    Needs-supplies和Demands-abilities</strong></p>
+<p>​        前者包含了对个人需求、喜好和环境的供应之间的fit；</p>
+<p>​        后者则包含个人能力、环境的需求之间的fit。</p>
+<p>​    <strong>c.    Perceived fit（subjective）和Actual fit（objective）</strong></p>
+<p>​        前者是指通过主观感觉的fit；</p>
+<p>​        后者是指通过客观计算的fit。</p>
+<p>​    目前的研究表明P-E fit的理解应该结合以上三种理解层次，而不应该分开单独理解（这样会导致理解片面，如下图）。</p>
+<p><img src="2.png" alt="img"></p>
+<h6 id="3-依样画葫芦的P-J-fit"><a href="#3-依样画葫芦的P-J-fit" class="headerlink" title="(3)  依样画葫芦的P-J fit"></a>(3)  依样画葫芦的P-J fit</h6><p>​    接下来就是本论文提出的理论——P-Jfit。P-J fit是根据P-E fit框架的定义方式来定义的。</p>
+<p>​    <strong>1)    P-J fit包含了person和jobs fit的两种层次的理解</strong></p>
+<p>​        a.    Employee’s desires和Job supplies</p>
+<p>​        b.    Job demands和employee’s abilities</p>
+<p>​    <strong>2)    P-J fit最大的特点就是互惠性，它不是一个单边选择</strong>。所以本论文的P-J fit框架基于以下两个基础：</p>
+<p>​        a.    职位推荐是一个互惠双边过程，必须同时考虑双方的标准。</p>
+<p>​        b.    每个求职者只会被推荐一次，这个推荐会基于一个评级系统，择最优而推荐。</p>
+<h4 id="3-2-求职者-职位匹配"><a href="#3-2-求职者-职位匹配" class="headerlink" title="3.2. 求职者-职位匹配"></a><strong>3.2. 求职者-职位匹配</strong></h4><p>对于职位双向推荐系统，本文把它拆分成了两个子系统模型：CV-recommender和Job-recommender，二者都式Probabilistic Latent Aspect Model。</p>
+<h6 id="1-CV-recommender模型"><a href="#1-CV-recommender模型" class="headerlink" title="(1)  CV-recommender模型"></a><strong>(1)  CV-recommender模型</strong></h6><p><img src="3.png" alt="img"></p>
+<p>​    X：招聘者和职位描述</p>
+<p>​    Z：属性值的潜在影响因素（latent aspect）</p>
+<p>​    V={“qualified”,”notqualified”}</p>
+<p>​    a：一个四元的集合，元素就是求职者资料中的项目。</p>
+<p>使用ExpectationMaximization algorithm（EM算法：最大期望算法）就可以得出求职者y对于职位x的合适概率（用v来衡量）。</p>
+<h6 id="2-Job-recommender模型"><a href="#2-Job-recommender模型" class="headerlink" title="(2)  Job-recommender模型"></a><strong>(2)  Job-recommender模型</strong></h6><p><img src="4.png" alt="img"></p>
+<p>​    y：求职者</p>
+<p>​    z：属性值的潜在影响因素（latent aspect）</p>
+<p>​    v={“fits to mypreferences”|”does not fit to my preferences”}</p>
+<p>​    x：目标职位描述</p>
+<p>使用ExpectationMaximization algorithm（EM算法：最大期望算法）就可以得出职位x对于求职者y的合适概率（用v来衡量）。</p>
+<h3 id="4-实验与结果"><a href="#4-实验与结果" class="headerlink" title="4.   实验与结果"></a><strong>4.   实验与结果</strong></h3><p><strong>实验形式</strong>：分两个阶段。</p>
+<p><strong>实验对象</strong>：32名来自两所德国大学的学生组成的一个研讨会组，专业从经济工管专业到经济学教育专业，所有学生都是距毕业一年。</p>
+<p><strong>实验步骤</strong>：</p>
+<p>​    a.    第一阶段。收集所有学生的简历。</p>
+<p>​    b.    把简历数据筛选、整理成一种结构化的数字格式。并设计一个网络接口，使这些数据可以以web端表格的形式被访问或完善。（筛选出来的数据项模仿主流求职网站的数据模式）</p>
+<p>​    c.    第二阶段。研究人员从德国求职门户网找了100个真实职位给这些学生（为了职位多样性，这100个职位涵盖了经管学里的11个子领域，并且这些职位都是随机选取的，条件只有两个：全职、在德国境内）。</p>
+<p>​    d.    研究人员要求学生们给这些职位打分，分值从1到5。评分要求是：不要考虑职位描述中的应聘标准，只看其中有没有提到有关求职者中长期职业生涯的东西。最终的评分会被用在Job-recommender中。</p>
+<table>
+<thead>
+<tr>
+<th><strong>需要的数据</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>人口学数据</td>
+</tr>
+<tr>
+<td>教育数据</td>
+</tr>
+<tr>
+<td>工作经验</td>
+</tr>
+<tr>
+<td>语言能力</td>
+</tr>
+<tr>
+<td>IT能力</td>
+</tr>
+<tr>
+<td>奖励、学位或论文发表等</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4-1-“学生实验”的结果"><a href="#4-1-“学生实验”的结果" class="headerlink" title="4.1. “学生实验”的结果"></a><strong>4.1. “学生实验”的结果</strong></h4><h6 id="1-预测结果评估手段：Mean-Absolute-Error（MAE，平均绝对误差）或Root-Mean-Squared-Error（RMSE）"><a href="#1-预测结果评估手段：Mean-Absolute-Error（MAE，平均绝对误差）或Root-Mean-Squared-Error（RMSE）" class="headerlink" title="(1)  预测结果评估手段：Mean Absolute Error（MAE，平均绝对误差）或Root Mean Squared Error（RMSE）"></a><strong>(1)  预测结果评估手段：Mean Absolute Error（MAE，平均绝对误差）或Root Mean Squared Error（RMSE）</strong></h6><p>本论文采用MAE预测结果进行评估。</p>
+<h6 id=""><a href="#" class="headerlink" title=""></a><img src="5.png" alt="img"></h6><p>​    P<sub>a</sub>：预测值集合。</p>
+<p>​    p<sub>a,j</sub>：j的预测值。</p>
+<p>​    v<sub>a,j</sub>：j的真实值。</p>
+<p>​    m<sub>a</sub>：总的评估次数。</p>
+<h6 id="2-CV-recommender系统的实验结果"><a href="#2-CV-recommender系统的实验结果" class="headerlink" title="(2)  CV-recommender系统的实验结果"></a><strong>(2)  CV-recommender系统的实验结果</strong></h6><p><img src="6.png" alt="img"></p>
+<p>CV-recommender模型在001~005号职位中随机选取10位学生（共50个评分）用于预测结果的评估，其余职位的评分用于模型训练。</p>
+<p>如上图列表，job001~005中列出了训练后的模型对001~005给出的top10推荐（每个职位推荐前10名最佳求职者）。对于每个求职者，若他给出的评分为4或5，则在后面画“+”，若为1或2或3，则在后面画“-”。</p>
+<p>可以看出，job1、2、4的推荐顺序是符合事实的，job4、5则稍有偏差，但也非常接近事实。</p>
+<p>使用MAE来评估模型的预测结果：</p>
+<p><img src="7.png" alt="img"></p>
+<p>由上图可知，MAE能很好地反映稀疏程度（MAE越低，稀疏程度越低，预测结果越准确）。</p>
+<h6 id="3-Job-recommender系统的实验结果"><a href="#3-Job-recommender系统的实验结果" class="headerlink" title="(3)  Job-recommender系统的实验结果"></a><strong>(3)  Job-recommender系统的实验结果</strong></h6><p><img src="8.png" alt="img"></p>
+<p>使用MAE来平均模型的预测结果：</p>
+<p><img src="9.png" alt="img"></p>
+<p>此实验步骤与结果与CV-recommender模型相似，不再赘述。</p>
+<h4 id="4-2-把两个子系统合二为一的尝试"><a href="#4-2-把两个子系统合二为一的尝试" class="headerlink" title="4.2. 把两个子系统合二为一的尝试"></a><strong>4.2. 把两个子系统合二为一的尝试</strong></h4><p>互惠推荐的重点在于：只用一个独立的系统，在两个集合中，同时考虑到两方的情况，从而为其中一个集合中的一个元素推荐另一个集合中最合适的一个元素。</p>
+<p>对此，本文作者提出了三种可能的办法：</p>
+<p>​    <strong>a.</strong>    把互惠推荐模型当成一个社会福利最大化问题模型来处理。</p>
+<p>​    <strong>b.</strong>    降低互惠推荐模型的责任，把它假定为对单个对象的最大化，这样就忽略了其它对象潜在的可能性。这个办法最终产生的结果几乎不可靠。</p>
+<p>​    <strong>c.</strong>    用离散的观点去近似模拟帕累托最优问题（pareto-optimal）。</p>
+<p>作者表示会更进一步探索结合两个子系统的问题。</p>
+<h3 id="5-结语"><a href="#5-结语" class="headerlink" title="5.   结语"></a><strong>5.   结语</strong></h3><p>在这篇文章中：</p>
+<p>a.    作者为互惠推荐提出了两个子系统，并开展实验验证了这两个子系统的可靠性；</p>
+<p>b.    然后，作者阐明了他为整合两个子系统作出的三种尝试，并表示未来开展更多的测试实验和验证项目；</p>
+<p>c.    此外作者还希望能把系统拓展到人际推荐领域。</p>
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/01/12/论文阅读中遇到的相关概念解析/" data-toggle="tooltip" data-placement="top"
+                           title="论文阅读中遇到的算法概念解析">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/01/08/基于多匹配子组的人际推荐/" data-toggle="tooltip" data-placement="top"
+                           title="基于多匹配子组的人际推荐">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-概要"><span class="toc-text">0.   概要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-简介"><span class="toc-text">1.   简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-当前求职环境的情况（2003-2004）"><span class="toc-text">2.   当前求职环境的情况（2003-2004）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-从个人出发的个性化职位搜寻"><span class="toc-text">3.   从个人出发的个性化职位搜寻</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-推荐一个人所需要掌握的信息"><span class="toc-text">3.1. 推荐一个人所需要掌握的信息</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-P-E-fit理论及其基石——Lewin的理论"><span class="toc-text">(1)  P-E fit理论及其基石——Lewin的理论</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-P-E-fit概念的三种理解"><span class="toc-text">(2)  P-E fit概念的三种理解</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-依样画葫芦的P-J-fit"><span class="toc-text">(3)  依样画葫芦的P-J fit</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-求职者-职位匹配"><span class="toc-text">3.2. 求职者-职位匹配</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-CV-recommender模型"><span class="toc-text">(1)  CV-recommender模型</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-Job-recommender模型"><span class="toc-text">(2)  Job-recommender模型</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-实验与结果"><span class="toc-text">4.   实验与结果</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-“学生实验”的结果"><span class="toc-text">4.1. “学生实验”的结果</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-预测结果评估手段：Mean-Absolute-Error（MAE，平均绝对误差）或Root-Mean-Squared-Error（RMSE）"><span class="toc-text">(1)  预测结果评估手段：Mean Absolute Error（MAE，平均绝对误差）或Root Mean Squared Error（RMSE）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#"><span class="toc-text"></span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-CV-recommender系统的实验结果"><span class="toc-text">(2)  CV-recommender系统的实验结果</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-Job-recommender系统的实验结果"><span class="toc-text">(3)  Job-recommender系统的实验结果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-把两个子系统合二为一的尝试"><span class="toc-text">4.2. 把两个子系统合二为一的尝试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-结语"><span class="toc-text">5.   结语</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#推荐系统"
+                           title="推荐系统">推荐系统</a>
+                        
+                        <a class="tag" href="/TAGS/#论文笔记"
+                           title="论文笔记">论文笔记</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

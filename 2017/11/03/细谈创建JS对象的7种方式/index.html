@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        细谈创建JS对象的7种方式｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/11/03/细谈创建JS对象的7种方式/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null171103.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null171103.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>细谈创建JS对象的7种方式</h1>
+                    
+                    <h2 class="subheading">JS对象的创建</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-11-03
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#前端基础"
+                           title="前端基础">前端基础</a>
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            细谈创建JS对象的7种方式
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>Object构造函数或对象字面量都是使用同一个接口创建很多对象，会产生大量重复代码。</p>
+<h2 id="1-工厂模式"><a href="#1-工厂模式" class="headerlink" title="1. 工厂模式"></a><strong>1. 工厂模式</strong></h2><p><img src="1.png" alt="img"></p>
+<h4 id="1-优点"><a href="#1-优点" class="headerlink" title="(1) 优点"></a><strong>(1) 优点</strong></h4><p>能够根据接收的参数来构建一个对象，可以无数次地调用这个函数。</p>
+<h4 id="2-缺点"><a href="#2-缺点" class="headerlink" title="(2) 缺点"></a><strong>(2) 缺点</strong></h4><p>没有解决对象识别的问题（即怎样知道一个对象的类型）。</p>
+<h2 id="2-构造函数模式"><a href="#2-构造函数模式" class="headerlink" title="2. 构造函数模式"></a><strong>2. 构造函数模式</strong></h2><p><img src="2.png" alt="img"></p>
+<h4 id="1-较工厂模式的优势"><a href="#1-较工厂模式的优势" class="headerlink" title="(1) 较工厂模式的优势"></a><strong>(1) 较工厂模式的优势</strong></h4><ul>
+<li>没有显式地创建对象；</li>
+<li>直接将属性和方法赋给了this对象；</li>
+<li>没有return语句。</li>
+</ul>
+<h4 id="2-实例创建步骤"><a href="#2-实例创建步骤" class="headerlink" title="(2) 实例创建步骤"></a><strong>(2) 实例创建步骤</strong></h4><ul>
+<li>创建一个新对象；</li>
+</ul>
+<ul>
+<li>将构造函数的作用域赋给新对象；</li>
+<li>执行构造函数中的代码；</li>
+<li>返回新对象。</li>
+</ul>
+<h4 id="3-用法"><a href="#3-用法" class="headerlink" title="(3) 用法"></a><strong>(3) 用法</strong></h4><p>上图中person1和person2都有一个constructor属性，指向Person。</p>
+<ul>
+<li>当做构造函数使用；</li>
+<li>作为普通函数调用（则this指向window）；</li>
+<li>在另一个对象作用域中使用（例如使用call）。</li>
+</ul>
+<h4 id="4-缺点"><a href="#4-缺点" class="headerlink" title="(4) 缺点"></a><strong>(4) 缺点</strong></h4><p>每个方法都要在每个实例上重新创建一次，导致各个实例中的同名方法不是同一个实例。</p>
+<p>不完美解决办法：把构造函数中的方法写成另一个函数。（这样就缺少了封装性）</p>
+<h2 id="3-原型模式"><a href="#3-原型模式" class="headerlink" title="3. 原型模式"></a><strong>3. 原型模式</strong></h2><p><u>原型对象</u>：每个原型对象都默认创建一个constructor属性，也是一个指针，指向prototype所在的函数。</p>
+<p><u>构造函数</u>：每个函数都默认创建一个prototype属性，它是一个指针，指向原型对象。</p>
+<p>实例：每个实例都有一个<strong>proto</strong>属性（ES5中称为[[Prototype]]），它是一个指针，指向原型对象。</p>
+<p><img src="3.png" alt="img"></p>
+<h4 id="1-isPrototypeOf"><a href="#1-isPrototypeOf" class="headerlink" title="(1) isPrototypeOf()"></a><strong>(1) <font color="#F1BE4D">isPrototypeOf()</font></strong></h4><p>确定一个实例的[[Prototype]]是否指向某个原型。</p>
+<p><img src="4.png" alt="img"></p>
+<h4 id="2-Object-getPrototypeOf-（ES5新增）"><a href="#2-Object-getPrototypeOf-（ES5新增）" class="headerlink" title="(2) Object.getPrototypeOf()（ES5新增）"></a><strong>(2) <font color="#F1BE4D">Object.getPrototypeOf()（ES5新增）</font></strong></h4><p>获取实例的[[Prototype]]属性。</p>
+<p><img src="5.png" alt="img"></p>
+<h4 id="3-访问优先级"><a href="#3-访问优先级" class="headerlink" title="(3) 访问优先级"></a><strong>(3) 访问优先级</strong></h4><p>访问实例属性时先从实例中搜索，找不到再到原型中搜索。</p>
+<p>注意：通过对象实例定义的同名属性是属于实例本身的，不能重写原型中的值，但访问这个属性时会优先访问实例中的，相当于屏蔽了原型中的。</p>
+<h4 id="4-hasOwnProperty"><a href="#4-hasOwnProperty" class="headerlink" title="(4) hasOwnProperty()"></a><strong>(4) <font color="#F1BE4D">hasOwnProperty()</font></strong></h4><p>检测一个属性是否存在于对象实例中。</p>
+<p><img src="6.png" alt="img"></p>
+<h4 id="5-in操作符"><a href="#5-in操作符" class="headerlink" title="(5) in操作符"></a><strong>(5) in操作符</strong></h4><p>in操作符在单独使用时可以用来判断能否通过对象访问一个属性（无论属性是存在于实例中还是原型中）。</p>
+<p><img src="7.png" alt="img"></p>
+<h4 id="6-for-in枚举"><a href="#6-for-in枚举" class="headerlink" title="(6) for-in枚举"></a><strong>(6) for-in枚举</strong></h4><p>枚举可枚举的属性（既包括实例中的也包括原型中的）。</p>
+<h4 id="7-Object-keys"><a href="#7-Object-keys" class="headerlink" title="(7) Object.keys()"></a><strong>(7) <font color="#F1BE4D">Object.keys()</font></strong></h4><p>接收1个参数：对象。返回一个包含所有可枚举属性的字符串数组。</p>
+<h4 id="8-Object-getOwnPropertyNames"><a href="#8-Object-getOwnPropertyNames" class="headerlink" title="(8) Object.getOwnPropertyNames()"></a><strong>(8) <font color="#F1BE4D">Object.getOwnPropertyNames()</font></strong></h4><p>接收1个参数：对象。返回一个包含所有实例属性（无论是否可枚举）的字符串数组。</p>
+<h4 id="9-更简便的原型语法"><a href="#9-更简便的原型语法" class="headerlink" title="(9) 更简便的原型语法"></a><strong>(9) 更简便的原型语法</strong></h4><p>用这种写法时，由于prototype是用{ }创建，故constructor会指向Object，所以得手动指回来（但用instanceof测试时则仍然是Person而不是Object，因为instanceof测试依据是new）。</p>
+<p><img src="8.png" alt="img"></p>
+<p>注意：constructor被这样指回来后，其[[Enumerable]]特性会被设为true（原本这个属性是不可枚举的）。可以用Object.defineProperty()改回来。</p>
+<h4 id="10-原型的动态性"><a href="#10-原型的动态性" class="headerlink" title="(10) 原型的动态性"></a><strong>(10) 原型的动态性</strong></h4><p>由于实例与原型之间是由指针连接的，所以原型上的任何属性修改都回来实例上立马反映出来。</p>
+<p>注意：如果原型是由{ }重写的就不能反映在实例上了，因为这相当于创建了另外一个原型对象，此时的构造函数会指向新原型，而实例仍指向旧原型。</p>
+<h4 id="11-原生对象的原型"><a href="#11-原生对象的原型" class="headerlink" title="(11) 原生对象的原型"></a><strong>(11) 原生对象的原型</strong></h4><p>不推荐通过原型来向原生对象原型中添加方法，因为这样可能会在不同实现中导致命名冲突。</p>
+<h4 id="12-原型对象的缺点"><a href="#12-原型对象的缺点" class="headerlink" title="(12) 原型对象的缺点"></a><strong>(12) 原型对象的缺点</strong></h4><ul>
+<li>它省略了为构造函数传递初始化参数的环节，导致所有实例默认取得相同属性值。</li>
+</ul>
+<h2 id="4-组合构造函数模式和原型模式（最广泛、认同度最高）"><a href="#4-组合构造函数模式和原型模式（最广泛、认同度最高）" class="headerlink" title="4. 组合构造函数模式和原型模式（最广泛、认同度最高）"></a><strong>4. 组合构造函数模式和原型模式（最广泛、认同度最高）</strong></h2><h4 id="1-原理"><a href="#1-原理" class="headerlink" title="(1) 原理"></a><strong>(1) 原理</strong></h4><p>构造函数用于定义实例属性，原型模式用于定于方法和共享的属性。</p>
+<p><img src="9.png" alt="img"></p>
+<h2 id="5-动态原型模式"><a href="#5-动态原型模式" class="headerlink" title="5. 动态原型模式"></a><strong>5. 动态原型模式</strong></h2><h4 id="1-原理-1"><a href="#1-原理-1" class="headerlink" title="(1) 原理"></a><strong>(1) 原理</strong></h4><p>通过检查某个应该存在的方法是否有效，来决定是否需要初始化原型。</p>
+<h2 id="6-寄生构造函数模式"><a href="#6-寄生构造函数模式" class="headerlink" title="6. 寄生构造函数模式"></a><strong>6. 寄生构造函数模式</strong></h2><h4 id="1-原理-2"><a href="#1-原理-2" class="headerlink" title="(1) 原理"></a><strong>(1) 原理</strong></h4><p>function部分像工厂模式，定义新对象部分则用new。</p>
+<p><img src="10.png" alt="img"></p>
+<p><strong>new操作符</strong>有四个任务：</p>
+<p><strong>(a)</strong> 创建一个新对象friend；</p>
+<p><strong>(b)</strong> friend.__proto__=Person.prototype；</p>
+<p><strong>(c)</strong> Person.call(friend)。即把this赋给friend，并执行函数。</p>
+<p><strong>(d)</strong> 检测函数返回值，若是基本类型则返回friend对象本身，若是引用类型对象则返回该引用类型对象。</p>
+<h4 id="2-优点"><a href="#2-优点" class="headerlink" title="(2) 优点"></a><strong>(2) 优点</strong></h4><p>这种模式可以在特殊情况下为对象创建构造函数，例如下图中想要创建一种具有额外方法的数组类型：</p>
+<p><img src="11.png" alt="img"></p>
+<h4 id="3-缺点"><a href="#3-缺点" class="headerlink" title="(3) 缺点"></a><strong>(3) 缺点</strong></h4><p>如上图，新定义出来的实例有可能不是构造函数的实例（比如这里就跟SpecialArray构造函数没有关系，而是Array的实例，原因请看上面对new操作符的解释），所以不能用instanceof来判断其类型。</p>
+<p>由于它的这种缺点，一般在可以使用其它模式的情况下不考虑此模式。</p>
+<h2 id="7-稳妥构造函数模式"><a href="#7-稳妥构造函数模式" class="headerlink" title="7. 稳妥构造函数模式"></a><strong>7. 稳妥构造函数模式</strong></h2><h4 id="1-原理-3"><a href="#1-原理-3" class="headerlink" title="(1) 原理"></a><strong>(1) 原理</strong></h4><p><u>稳妥对象</u>：没有公共属性，而且其方法也不引用this。它最适合在一些安全的环境中（禁用this和new的环境）、防止数据被其它应用程序修改的环境中使用。</p>
+<p><img src="12.png" alt="img"></p>
+<p>注意：这里与工厂模式的区别是sayName方法中没用this。它的思想是：不想暴露给外面的变量就不提供暴露渠道（比如不使用this，或不挂到o上，而是直接var出来而已）。</p>
+<p>注意2：稳妥构造函数模式构造出来的对象也跟构造函数没什么关系，所以也不能用instanceof来检测类型。</p>
+<p><br></p>
+<center>-&nbsp;<em>end</em>&nbsp;-</center>
+
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/11/06/细谈JS对象的6种继承方式/" data-toggle="tooltip" data-placement="top"
+                           title="细谈JS对象的6种继承方式">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/11/02/BOM总结/" data-toggle="tooltip" data-placement="top"
+                           title="BOM总结">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-工厂模式"><span class="toc-text">1. 工厂模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-优点"><span class="toc-text">(1) 优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-缺点"><span class="toc-text">(2) 缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-构造函数模式"><span class="toc-text">2. 构造函数模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-较工厂模式的优势"><span class="toc-text">(1) 较工厂模式的优势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-实例创建步骤"><span class="toc-text">(2) 实例创建步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-用法"><span class="toc-text">(3) 用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-缺点"><span class="toc-text">(4) 缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-原型模式"><span class="toc-text">3. 原型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-isPrototypeOf"><span class="toc-text">(1) isPrototypeOf()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Object-getPrototypeOf-（ES5新增）"><span class="toc-text">(2) Object.getPrototypeOf()（ES5新增）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-访问优先级"><span class="toc-text">(3) 访问优先级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-hasOwnProperty"><span class="toc-text">(4) hasOwnProperty()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-in操作符"><span class="toc-text">(5) in操作符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-for-in枚举"><span class="toc-text">(6) for-in枚举</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-Object-keys"><span class="toc-text">(7) Object.keys()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-Object-getOwnPropertyNames"><span class="toc-text">(8) Object.getOwnPropertyNames()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-更简便的原型语法"><span class="toc-text">(9) 更简便的原型语法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-原型的动态性"><span class="toc-text">(10) 原型的动态性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-原生对象的原型"><span class="toc-text">(11) 原生对象的原型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-原型对象的缺点"><span class="toc-text">(12) 原型对象的缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-组合构造函数模式和原型模式（最广泛、认同度最高）"><span class="toc-text">4. 组合构造函数模式和原型模式（最广泛、认同度最高）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-原理"><span class="toc-text">(1) 原理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-动态原型模式"><span class="toc-text">5. 动态原型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-原理-1"><span class="toc-text">(1) 原理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-寄生构造函数模式"><span class="toc-text">6. 寄生构造函数模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-原理-2"><span class="toc-text">(1) 原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-优点"><span class="toc-text">(2) 优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-缺点"><span class="toc-text">(3) 缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-稳妥构造函数模式"><span class="toc-text">7. 稳妥构造函数模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-原理-3"><span class="toc-text">(1) 原理</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#前端基础"
+                           title="前端基础">前端基础</a>
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

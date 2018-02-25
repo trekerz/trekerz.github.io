@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Python网络框架纵览｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/03/13/Python网络框架纵览/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170313.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170313.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Python网络框架纵览</h1>
+                    
+                    <h2 class="subheading">【笔记】Python基础</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-03-13
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#前端基础"
+                           title="前端基础">前端基础</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#Python"
+                           title="Python">Python</a>
+                        
+                        <a class="tag" href="/TAGS/#网络技术"
+                           title="网络技术">网络技术</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            Python网络框架纵览
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h3 id="一、-网络框架综述"><a href="#一、-网络框架综述" class="headerlink" title="一、   网络框架综述"></a><strong>一、   网络框架综述</strong></h3><h5 id="1-网络框架及MVC架构"><a href="#1-网络框架及MVC架构" class="headerlink" title="1.    网络框架及MVC架构"></a><strong>1.    </strong>网络框架及MVC架构</h5><h6 id="1-网络框架"><a href="#1-网络框架" class="headerlink" title="(1)  网络框架"></a>(1)  网络框架</h6><p>一组Python包，能使开发者专注于网站应用业务逻辑的开发，无须处理网络应用底层的协议、线程、进程等方面。</p>
+<h6 id="2-MVC架构"><a href="#2-MVC架构" class="headerlink" title="(2)  MVC架构"></a>(2)  MVC架构</h6><p>​    模型：用于封装与应用程序的业务逻辑相关的数据及对数据的处理方法。</p>
+<p>​    视图：负责数据的显示和呈现。一个模型通常为多个视图提供服务。</p>
+<p>​    控制器：负责从用户端收集用户的输入，可以看成提供视图的反向功能。</p>
+<h5 id="2-4种Python网络框架"><a href="#2-4种Python网络框架" class="headerlink" title="2.    4种Python网络框架"></a><strong>2.    </strong>4种Python网络框架</h5><p>​    (1)  Django（最成熟，强大、相对封闭）</p>
+<p>​    (2)  Tornado（强大、支持协程、高效并发）</p>
+<p>​    (3)  Flask（年轻、集大成、微小）</p>
+<p>​    (4)  Twisted（开源、事件驱动）</p>
+<h3 id="二、-开发环境准备"><a href="#二、-开发环境准备" class="headerlink" title="二、  开发环境准备"></a><strong>二、  开发环境准备</strong></h3><p>easy_install和pip</p>
+<h5 id="1-使用Python虚环境"><a href="#1-使用Python虚环境" class="headerlink" title="1.    使用Python虚环境"></a><strong>1.    </strong>使用Python虚环境</h5><p>可以避免同一计算机中不同项目中相同组件的不同版本间的冲突。</p>
+<h5 id="2-Windows环境下的安装"><a href="#2-Windows环境下的安装" class="headerlink" title="2.    Windows环境下的安装"></a><strong>2.    </strong>Windows环境下的安装</h5><h5 id="3-Linux环境下的安装"><a href="#3-Linux环境下的安装" class="headerlink" title="3.    Linux环境下的安装"></a><strong>3.    </strong>Linux环境下的安装</h5><p>​    (1)  easy_install的下载与安装</p>
+<p>​    (2)  pip的下载与安装</p>
+<h5 id="4-easy-install与pip的使用"><a href="#4-easy-install与pip的使用" class="headerlink" title="4.    easy_install与pip的使用"></a><strong>4.    </strong>easy_install与pip的使用</h5><p>​    (1)  用easy_install管理其他组件</p>
+<p>​    (2)  用pip管理其他组件</p>
+<h3 id="三、-Web服务器"><a href="#三、-Web服务器" class="headerlink" title="三、  Web服务器"></a><strong>三、  Web服务器</strong></h3><p>a.    Web服务器：Nginx、Apache、lighthttpd、IIS</p>
+<p>b.    Python程序与Web服务器的接口：WSGI。</p>
+<h5 id="1-实例1：WSGI接口"><a href="#1-实例1：WSGI接口" class="headerlink" title="1.    实例1：WSGI接口"></a><strong>1.    </strong>实例1：WSGI接口</h5><p>​    a.    WSGI是Python服务器端程序连接到Web服务器的通用协议。</p>
+<p>​    b.    WSGI Sever与Web服务器的接口包括：uwsgi、fastcgi等。</p>
+<p>步骤：定义一个服务器端程序.py，再定义一个WSGI Server程序.py，通过python命令执行wsgi_server.py，监听服务器端口，即可。</p>
+<p>WSGI Server本身也可以作为一个服务器，但由于性能方面的原因，一般只做测试使用，不能用于正式运行。</p>
+<h5 id="2-实例2：Linux-Nginx-uWSGI配置"><a href="#2-实例2：Linux-Nginx-uWSGI配置" class="headerlink" title="2.    实例2：Linux+Nginx+uWSGI配置"></a><strong>2.    </strong>实例2：Linux+Nginx+uWSGI配置</h5><p>​    (1)  安装Nginx（并启动）</p>
+<p>​    (2)  按需调整Nginx参数</p>
+<p>​    (3)  安装uWSGI配置</p>
+<p>​    (4)  集成Nginx与uWSGI</p>
+<p>在站点配置文件中为location配置uwsgi_pass。两方面要配置成同一个地址。</p>
+<p>注：可以为一个uWSGI配置多个Nginx Server和location，这样就能实现多个域名访问同一个Python程序。</p>
+<h5 id="3-实例3：建立安全的HTTPS网站"><a href="#3-实例3：建立安全的HTTPS网站" class="headerlink" title="3.    实例3：建立安全的HTTPS网站"></a><strong>3.    </strong>实例3：建立安全的HTTPS网站</h5><p>在HTTP下加入SSL层，通过SSL达到数据加密及身份确认的功能。OpenSSL是一个强大的免费Socket层密码库，可以通过它搭建HTTPS站点。</p>
+<p>步骤：</p>
+<p>​    a.    在服务器中安装OpenSSL包（openssl和libssl-dev）</p>
+<p>​    b.    生成SSL密钥和证书</p>
+<p>​    c.    将证书配置到Web服务器中（在Nginx配置文件中添加server段，指定服务器证书和服务器密钥的全路径文件名）</p>
+<p>此时，就要通过443端口访问网站了。</p>
+<p><br></p>
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/03/14/用户行为数据的利用2/" data-toggle="tooltip" data-placement="top"
+                           title="用户行为数据的利用2">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/03/13/用户行为数据的利用/" data-toggle="tooltip" data-placement="top"
+                           title="用户行为数据的利用">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、-网络框架综述"><span class="toc-text">一、   网络框架综述</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-网络框架及MVC架构"><span class="toc-text">1.    网络框架及MVC架构</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-网络框架"><span class="toc-text">(1)  网络框架</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-MVC架构"><span class="toc-text">(2)  MVC架构</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4种Python网络框架"><span class="toc-text">2.    4种Python网络框架</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、-开发环境准备"><span class="toc-text">二、  开发环境准备</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-使用Python虚环境"><span class="toc-text">1.    使用Python虚环境</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-Windows环境下的安装"><span class="toc-text">2.    Windows环境下的安装</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-Linux环境下的安装"><span class="toc-text">3.    Linux环境下的安装</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-easy-install与pip的使用"><span class="toc-text">4.    easy_install与pip的使用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、-Web服务器"><span class="toc-text">三、  Web服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-实例1：WSGI接口"><span class="toc-text">1.    实例1：WSGI接口</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-实例2：Linux-Nginx-uWSGI配置"><span class="toc-text">2.    实例2：Linux+Nginx+uWSGI配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-实例3：建立安全的HTTPS网站"><span class="toc-text">3.    实例3：建立安全的HTTPS网站</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#前端基础"
+                           title="前端基础">前端基础</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#Python"
+                           title="Python">Python</a>
+                        
+                        <a class="tag" href="/TAGS/#网络技术"
+                           title="网络技术">网络技术</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

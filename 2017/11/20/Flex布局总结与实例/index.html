@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Flex布局总结与实例｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/11/20/Flex布局总结与实例/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null171120.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null171120.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Flex布局总结与实例</h1>
+                    
+                    <h2 class="subheading">【整理】flex容器项目属性、骰子实例</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-11-20
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#前端基础"
+                           title="前端基础">前端基础</a>
+                        
+                        <a class="tag" href="/TAGS/#CSS"
+                           title="CSS">CSS</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            Flex布局总结与实例
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="一、Flex-布局"><a href="#一、Flex-布局" class="headerlink" title="一、Flex 布局"></a><strong>一、Flex 布局</strong></h2><p>网页布局（layout）是 CSS 的一个重点应用：</p>
+<p><img src="1.png" alt="img"></p>
+<p>Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。</p>
+<p>它是2009年W3C提出的一种新布局方案，不同于传统的display+position+float+margin布局，Flex布局可以简便、完整、响应式地实现各种页面布局。</p>
+<p>浏览器的支持情况：Chrome21+、Opera12.1+、Firefox22+、Safari6.1+、IE10+，这意味着现在可以很安全地使用这项功能。</p>
+<p>下面就来归纳一下Flex布局的基本使用方法，如果对属性使用已经熟悉，也可以直接看最后的实例。</p>
+<h2 id="二、基本概念"><a href="#二、基本概念" class="headerlink" title="二、基本概念"></a><strong>二、基本概念</strong></h2><p>采用 Flex 布局的元素，称为<strong>Flex 容器</strong>（flex container）。它的所有子元素自动成为容器成员，称为<strong>Flex 项目</strong>（flex item）。</p>
+<p><img src="2.png" alt="img"></p>
+<p>容器默认存在两根轴：<strong>水平的主轴</strong>（main axis）和<strong>垂直的交叉轴</strong>（cross axis）。主轴的开始位置（与边框的交叉点）叫做<strong>main start</strong>，结束位置叫做<strong>main end</strong>；交叉轴的开始位置叫做<strong>cross start</strong>，结束位置叫做<strong>cross end</strong>。</p>
+<p><strong>项目默认沿主轴排列</strong>。单个项目占据的主轴空间叫做<strong>main size</strong>，占据的交叉轴空间叫做<strong>cross size</strong>。</p>
+<h2 id="三、容器的属性"><a href="#三、容器的属性" class="headerlink" title="三、容器的属性"></a><strong>三、容器的属性</strong></h2><p>以下6个属性设置在容器上。</p>
+<ul>
+<li><strong><font color="#F36767">flex-direction</font></strong>：<strong>row</strong>、row-reverse、column、column-reverse</li>
+<li><strong><font color="#F36767">flex-wrap</font></strong>：<strong>nowrap</strong>、wrap、wrap-reverse</li>
+<li><strong><font color="#F36767">flex-flow</font></strong>：<strong>row nowrap</strong></li>
+<li><strong><font color="#F36767">justify-content</font></strong>：<strong>flex-start</strong>、flex-end、center、space-between、space-around</li>
+<li><strong><font color="#F36767">align-items</font></strong>：flex-start、flex-end、center、baseline、<strong>stretch</strong></li>
+<li><strong><font color="#F36767">align-content</font></strong>：flex-start、flex-end、center、space-between、space-around、<strong>stretch</strong></li>
+</ul>
+<h4 id="1-flex-direction属性"><a href="#1-flex-direction属性" class="headerlink" title="(1) flex-direction属性"></a><strong>(1) flex-direction属性</strong></h4><p>flex-direction属性决定主轴的方向（即项目的排列方向）。</p>
+<p><img src="3.png" alt="img"></p>
+<p>它可能有4个值。</p>
+<ul>
+<li><strong>row</strong>（默认值）：主轴为水平方向，起点在左端。</li>
+<li><strong>row-reverse</strong>：主轴为水平方向，起点在右端。</li>
+<li><strong>column</strong>：主轴为垂直方向，起点在上沿。</li>
+<li><strong>column-reverse</strong>：主轴为垂直方向，起点在下沿。</li>
+</ul>
+<h4 id="2-flex-wrap属性"><a href="#2-flex-wrap属性" class="headerlink" title="(2) flex-wrap属性"></a><strong>(2) flex-wrap属性</strong></h4><p>默认情况下，项目都排在一条线（又称”轴线”）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。</p>
+<p>它可能取三个值。</p>
+<ul>
+<li><strong>nowrap（默认）</strong>：不换行。</li>
+</ul>
+<ul>
+<li><strong>wrap</strong>：换行，第一行在上方。</li>
+</ul>
+<ul>
+<li><strong>wrap-reverse</strong>：换行，第一行在下方。</li>
+</ul>
+<h4 id="3-flex-flow"><a href="#3-flex-flow" class="headerlink" title="(3) flex-flow"></a><strong>(3) flex-flow</strong></h4><p>flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，<strong>默认值为row nowrap</strong>。</p>
+<h4 id="4-justify-content属性"><a href="#4-justify-content属性" class="headerlink" title="(4) justify-content属性"></a><strong>(4) justify-content属性</strong></h4><p>justify-content属性定义了项目在主轴上的对齐方式。</p>
+<p><img src="4.png" alt="img"></p>
+<p>它可能取5个值，具体对齐方式与轴的方向有关。下面假设主轴为从左到右。</p>
+<ul>
+<li><strong>flex-start（默认值）</strong>：左对齐</li>
+<li><strong>flex-end</strong>：右对齐</li>
+<li><strong>center</strong>： 居中</li>
+<li><strong>space-between</strong>：两端对齐，项目之间的间隔都相等。</li>
+<li><strong>space-around</strong>：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。</li>
+</ul>
+<h4 id="5-align-items属性"><a href="#5-align-items属性" class="headerlink" title="(5) align-items属性"></a><strong>(5) align-items属性</strong></h4><p>align-items属性定义项目在交叉轴上如何对齐。</p>
+<p><img src="5.png" alt="img"></p>
+<p>它可能取5个值。具体的对齐方式与交叉轴的方向有关，下面假设交叉轴从上到下。</p>
+<ul>
+<li><strong>flex-start</strong>：交叉轴的起点对齐。</li>
+<li><strong>flex-end</strong>：交叉轴的终点对齐。</li>
+<li><strong>center</strong>：交叉轴的中点对齐。</li>
+<li><strong>baseline</strong> ：项目的第一行文字的基线对齐。</li>
+<li><strong>stretch（默认值）</strong>：如果项目未设置高度或设为auto，将占满整个容器的高度。</li>
+</ul>
+<h4 id="6-align-content属性"><a href="#6-align-content属性" class="headerlink" title="(6) align-content属性"></a><strong>(6) align-content属性</strong></h4><p>align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。</p>
+<p><img src="6.png" alt="img"></p>
+<p>该属性可能取6个值。</p>
+<ul>
+<li><strong>flex-start</strong>：与交叉轴的起点对齐。</li>
+<li><strong>flex-end</strong>：与交叉轴的终点对齐。</li>
+<li><strong>center</strong>：与交叉轴的中点对齐。</li>
+<li><strong>space-between</strong>：与交叉轴两端对齐，轴线之间的间隔平均分布。</li>
+<li><strong>space-around</strong>：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。</li>
+<li><strong>stretch（默认值）</strong>：轴线占满整个交叉轴。</li>
+</ul>
+<h2 id="四、项目的属性"><a href="#四、项目的属性" class="headerlink" title="四、项目的属性"></a><strong>四、项目的属性</strong></h2><p>以下6个属性设置在项目上。</p>
+<ul>
+<li><strong><font color="#F36767">order</font></strong>：整数（可负）</li>
+<li><strong><font color="#F36767">flex-grow</font></strong>：整数（默认0）</li>
+<li><strong><font color="#F36767">flex-shrink</font></strong>：整数（默认1）</li>
+<li><strong><font color="#F36767">flex-basis</font></strong>：长度或auto（默认auto）</li>
+<li><strong><font color="#F36767">flex</font></strong>：以上三个属性的组合（默认 0 1 auto）</li>
+<li><strong><font color="#F36767">align-self</font></strong>：auto、flex-start、flex-end、center、baseline、stretch</li>
+</ul>
+<h4 id="1-order属性"><a href="#1-order属性" class="headerlink" title="(1) order属性"></a><strong>(1) order属性</strong></h4><p>order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。</p>
+<h4 id="2-flex-grow属性"><a href="#2-flex-grow属性" class="headerlink" title="(2) flex-grow属性"></a><strong>(2) flex-grow属性</strong></h4><p>flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。</p>
+<p><img src="7.png" alt="img"></p>
+<p>如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。</p>
+<h4 id="3-flex-shrink属性"><a href="#3-flex-shrink属性" class="headerlink" title="(3) flex-shrink属性"></a><strong>(3) flex-shrink属性</strong></h4><p>flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。</p>
+<p><img src="8.png" alt="img"></p>
+<p>如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。<strong>负值对该属性无效</strong>。</p>
+<h4 id="4-flex-basis属性"><a href="#4-flex-basis属性" class="headerlink" title="(4) flex-basis属性"></a><strong>(4) flex-basis属性</strong></h4><p>flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。</p>
+<p>它可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间。</p>
+<h4 id="5-flex属性"><a href="#5-flex属性" class="headerlink" title="(5) flex属性"></a><strong>(5) flex属性</strong></h4><p>flex属性是flex-grow, flex-shrink 和 flex-basis的简写，<strong>默认值为0 1 auto</strong>。后两个属性可选。建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。</p>
+<p>flex属性的不同取值会影响到这三个值，具体如下：</p>
+<table>
+<thead>
+<tr>
+<th>flex取值</th>
+<th>flex-grow</th>
+<th>flex-shrink</th>
+<th>flex-basis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>auto</td>
+<td>1</td>
+<td>1</td>
+<td>auto</td>
+</tr>
+<tr>
+<td>none</td>
+<td>0</td>
+<td>0</td>
+<td>auto</td>
+</tr>
+<tr>
+<td>非负数</td>
+<td>非负数</td>
+<td>1</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>两个非负数</td>
+<td>非负数</td>
+<td>非负数</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>长度/百分比</td>
+<td>1</td>
+<td>1</td>
+<td>长度/百分比</td>
+</tr>
+<tr>
+<td>非负数+长度/百分比</td>
+<td>非负数</td>
+<td>1</td>
+<td>长度/百分比</td>
+</tr>
+</tbody>
+</table>
+<h4 id="6-align-self属性"><a href="#6-align-self属性" class="headerlink" title="(6) align-self属性"></a><strong>(6) align-self属性</strong></h4><p>align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。该属性可取6个值，除了auto，其他都与align-items属性完全一致。</p>
+<p><img src="9.png" alt="img"></p>
+<h2 id="五、实例：骰子的布局"><a href="#五、实例：骰子的布局" class="headerlink" title="五、实例：骰子的布局"></a><strong>五、实例：骰子的布局</strong></h2><h4 id="1-单项目"><a href="#1-单项目" class="headerlink" title="(1) 单项目"></a><strong>(1) 单项目</strong></h4><p><img src="10.png" alt="img"></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div class="box"&gt;</span><br><span class="line">  &lt;span class="item"&gt;&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="2-双项目"><a href="#2-双项目" class="headerlink" title="(2) 双项目"></a><strong>(2) 双项目</strong></h4><p><img src="11.png" alt="img"></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: space-between;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.item</span><span class="selector-pseudo">:nth-child(2)</span> &#123;</span><br><span class="line">  <span class="attribute">align-self</span>: flex-end;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div class="box"&gt;</span><br><span class="line">  &lt;span class="item"&gt;&lt;/span&gt;</span><br><span class="line">  &lt;span class="item"&gt;&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="3-三项目"><a href="#3-三项目" class="headerlink" title="(3) 三项目"></a><strong>(3) 三项目</strong></h4><p><img src="12.png" alt="img"></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-direction</span>: column;</span><br><span class="line">  <span class="attribute">justify-content</span>: space-between;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.item</span><span class="selector-pseudo">:nth-child(2)</span> &#123;</span><br><span class="line">  <span class="attribute">align-self</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.item</span><span class="selector-pseudo">:nth-child(3)</span> &#123;</span><br><span class="line">  <span class="attribute">align-self</span>: flex-end;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div class="box"&gt;</span><br><span class="line">  &lt;span class="item"&gt;&lt;/span&gt;</span><br><span class="line">  &lt;span class="item"&gt;&lt;/span&gt;</span><br><span class="line">  &lt;span class="item"&gt;&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="4-四项目"><a href="#4-四项目" class="headerlink" title="(4) 四项目"></a><strong>(4) 四项目</strong></h4><p><img src="13.png" alt="img"></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-wrap</span>: wrap;</span><br><span class="line">  <span class="attribute">align-content</span>: space-between;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.column</span> &#123;</span><br><span class="line">  <span class="attribute">flex-basis</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: space-between;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div class="box"&gt;</span><br><span class="line">  &lt;div class="column"&gt;</span><br><span class="line">    &lt;span class="item"&gt;&lt;/span&gt;</span><br><span class="line">    &lt;span class="item"&gt;&lt;/span&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class="column"&gt;</span><br><span class="line">    &lt;span class="item"&gt;&lt;/span&gt;</span><br><span class="line">    &lt;span class="item"&gt;&lt;/span&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="5-六项目"><a href="#5-六项目" class="headerlink" title="(5) 六项目"></a><strong>(5) 六项目</strong></h4><p><img src="14.png" alt="img"></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: space-between;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.column</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-direction</span>: column;</span><br><span class="line">  <span class="attribute">justify-content</span>: space-between;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div class="box"&gt;</span><br><span class="line">  &lt;div class="column"&gt;</span><br><span class="line">    &lt;span class="item"&gt;&lt;/span&gt;</span><br><span class="line">    &lt;span class="item"&gt;&lt;/span&gt;</span><br><span class="line">    &lt;span class="item"&gt;&lt;/span&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class="column"&gt;</span><br><span class="line">    &lt;span class="item"&gt;&lt;/span&gt;</span><br><span class="line">    &lt;span class="item"&gt;&lt;/span&gt;</span><br><span class="line">    &lt;span class="item"&gt;&lt;/span&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<center>-&nbsp;<em>end</em>&nbsp;-</center>
+
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/11/21/CSS处理居中问题总结/" data-toggle="tooltip" data-placement="top"
+                           title="CSS处理居中问题总结">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/11/13/几种多列布局的实现方法/" data-toggle="tooltip" data-placement="top"
+                           title="几种多列布局的实现方法">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Flex-布局"><span class="toc-text">一、Flex 布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、基本概念"><span class="toc-text">二、基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、容器的属性"><span class="toc-text">三、容器的属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-flex-direction属性"><span class="toc-text">(1) flex-direction属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-flex-wrap属性"><span class="toc-text">(2) flex-wrap属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-flex-flow"><span class="toc-text">(3) flex-flow</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-justify-content属性"><span class="toc-text">(4) justify-content属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-align-items属性"><span class="toc-text">(5) align-items属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-align-content属性"><span class="toc-text">(6) align-content属性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、项目的属性"><span class="toc-text">四、项目的属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-order属性"><span class="toc-text">(1) order属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-flex-grow属性"><span class="toc-text">(2) flex-grow属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-flex-shrink属性"><span class="toc-text">(3) flex-shrink属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-flex-basis属性"><span class="toc-text">(4) flex-basis属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-flex属性"><span class="toc-text">(5) flex属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-align-self属性"><span class="toc-text">(6) align-self属性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、实例：骰子的布局"><span class="toc-text">五、实例：骰子的布局</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-单项目"><span class="toc-text">(1) 单项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-双项目"><span class="toc-text">(2) 双项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-三项目"><span class="toc-text">(3) 三项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-四项目"><span class="toc-text">(4) 四项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-六项目"><span class="toc-text">(5) 六项目</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#前端基础"
+                           title="前端基础">前端基础</a>
+                        
+                        <a class="tag" href="/TAGS/#CSS"
+                           title="CSS">CSS</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        网站架构2｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/03/01/网站架构2/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170301.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170301.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>网站架构2</h1>
+                    
+                    <h2 class="subheading">【笔记】常用网站架构</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-03-01
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#网络技术"
+                           title="网络技术">网络技术</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            网站架构2
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h3 id="四、-键值对数据库Redis"><a href="#四、-键值对数据库Redis" class="headerlink" title="四、   键值对数据库Redis"></a><strong>四、   键值对数据库Redis</strong></h3><p><strong>    a.</strong>    一个基于内存的键值对存储系统，常用作数据库、缓存、消息代理。</p>
+<p>​    <strong>b.</strong>    支持的数据类型：字符串、字典、列表、集合、有序集合、位图、地理位置、HyperLogLog等等。</p>
+<p>​    <strong>c.</strong>    支持事务、分片、主从复制，支持RDB（将内存中的数据保存在文件中）、AOF（类似于MySQL的binlog）两种持久化方式。</p>
+<p>​    <strong>d.</strong>    还支持订阅、分发、集群等特性。</p>
+<p>​    <strong>e.</strong>    用作缓存时和Memcached相似，但Redis还能实现主从同步，并且Redis有丰富的命令和数据结构，像列表、集合这样的数据结构是Memcached所没有的。</p>
+<h4 id="1-Redis的应用场景"><a href="#1-Redis的应用场景" class="headerlink" title="1.    Redis的应用场景"></a><strong>1.    Redis的应用场景</strong></h4><p>当不需要数据库的高级功能（回滚、关联查询、UPDATE操作等等），且Redis能满足此应用场景时就可以使用Redis。</p>
+<p>注意：Redis本身并没有序列化/反序列化，本书使用MessagePack来完成这项工作。（序列化/反序列化使得Redis能够把对象存起来，这也是消息对列能实现的原因）</p>
+<h6 id="1-实例：取topN操作（排行榜应用）"><a href="#1-实例：取topN操作（排行榜应用）" class="headerlink" title="(1)  实例：取topN操作（排行榜应用）"></a><strong>(1)  实例：取topN操作（排行榜应用）</strong></h6><p>​    (相比于MySQL+Memcached的方式，redis能够更有效地提高计算和排名的效率）</p>
+<h6 id="2-实例：计数器"><a href="#2-实例：计数器" class="headerlink" title="(2)  实例：计数器"></a><strong>(2)  实例：计数器</strong></h6><h6 id="3-实例：实时统计"><a href="#3-实例：实时统计" class="headerlink" title="(3)  实例：实时统计"></a><strong>(3)  实例：实时统计</strong></h6><p>Redis的位图提供了二进制操作，非常适合存储布尔值。常见场景是用来记录用户登录状态，可以用来统计一段时间内活跃的用户量。</p>
+<h4 id="2-分片和集群管理"><a href="#2-分片和集群管理" class="headerlink" title="2.    分片和集群管理"></a><strong>2.    分片和集群管理</strong></h4><p>当单机的Redis不能满足需要时，可以通过一致性哈希算法将Redis数据的键进行散列，通过哈希函数，让特定的键映射到特性的Redis节点上。（但Redis的Python客户端redis-py目前还不支持分片）</p>
+<h6 id="1-常见的分片和集群管理方式"><a href="#1-常见的分片和集群管理方式" class="headerlink" title="(1)  常见的分片和集群管理方式"></a><strong>(1)  常见的分片和集群管理方式</strong></h6><p>​    a.    Twemproxy：Redis3.0之前通用的方式。一般一个Redis应用由多个Twemproxy来管，少数负责写，多数负责读。它能自动替换出现异常的节点，但它无法平滑地扩容/缩容，不便于维护，而且没有友好的控制面板。</p>
+<p>​    b.    Redis Cluster：Redis3.0添加的集群方式。它使用数据分片而非一致性哈希。</p>
+<p>​    c.    Codis：豌豆荚的Redis分布式集群解决方案。Codis对前端来说是透明的，它会处理请求的转发、不停机的数据迁移等工作。</p>
+<h3 id="五、-NoSQL数据库MongoDB"><a href="#五、-NoSQL数据库MongoDB" class="headerlink" title="五、   NoSQL数据库MongoDB"></a><strong>五、   NoSQL数据库MongoDB</strong></h3><h4 id="1-为什么使用NoSQL"><a href="#1-为什么使用NoSQL" class="headerlink" title="1.    为什么使用NoSQL"></a><strong>1.    为什么使用NoSQL</strong></h4><p>​    a.    对数据库可以进行高并发读写</p>
+<p>​    b.    对海量数据的高效率存储和访问</p>
+<p>​    c.    高可扩展性和高可用性</p>
+<p>NoSQL是不能完全替代关系型数据库的，他们没有绝对的孰优孰劣。</p>
+<h4 id="2-MongoDB"><a href="#2-MongoDB" class="headerlink" title="2.    MongoDB"></a><strong>2.    MongoDB</strong></h4><h6 id="1-优点"><a href="#1-优点" class="headerlink" title="(1)  优点"></a><strong>(1)  优点</strong></h6><p>​    a.    文档型存储（键值对）</p>
+<p>​    b.    使用高效的二进制BSON作为数据存储（拥有更快的遍历速度）</p>
+<p>​    c.    自带高可用及分区的解决方案（副本集和分片）</p>
+<p>​    d.    基于文档的富查询语言（多种查询方式）</p>
+<p>​    e.    内置聚合工具（可通过MapReduce等方式进行复杂的统计和并行计算）</p>
+<p>​    f.     3.0版本后增加了高性能、可伸缩、支持压缩和文档级锁的数据存储引擎WiredTiger。</p>
+<h6 id="2-安装MongoDB（注意添加源）"><a href="#2-安装MongoDB（注意添加源）" class="headerlink" title="(2)  安装MongoDB（注意添加源）"></a><strong>(2)  安装MongoDB（注意添加源）</strong></h6><h4 id="3-使用pymongo的例子"><a href="#3-使用pymongo的例子" class="headerlink" title="3.    使用pymongo的例子"></a><strong>3.    使用pymongo的例子</strong></h4><p>MongoDB的一大核心是聚合功能，主要用于返回计算好的结果。</p>
+<p>常用的执行聚合的方式有如下三种：</p>
+<p>​    a.    使用管道</p>
+<p>​    b.    MapReduce</p>
+<p>​    c.    单一目的的聚合操纵方法</p>
+<h4 id="4-使用Mongoengine的例子"><a href="#4-使用Mongoengine的例子" class="headerlink" title="4.    使用Mongoengine的例子"></a><strong>4.    使用Mongoengine的例子</strong></h4><p>Mongoengine是MongoDB的ODM（对象文档映射）框架，相当于MySQL的ORM框架SQLAlchemy。</p>
+<h4 id="5-MongoDB实践经验（需详看）"><a href="#5-MongoDB实践经验（需详看）" class="headerlink" title="5.    MongoDB实践经验（需详看）"></a><strong>5.    MongoDB实践经验（需详看）</strong></h4><h6 id="1-善用组合式的大文档"><a href="#1-善用组合式的大文档" class="headerlink" title="(1)  善用组合式的大文档"></a><strong>(1)  善用组合式的大文档</strong></h6><p>可以尽量把数据组合起来节省空间。</p>
+<h6 id="2-正确使用索引（需详看）"><a href="#2-正确使用索引（需详看）" class="headerlink" title="(2)  正确使用索引（需详看）"></a><strong>(2)  正确使用索引（需详看）</strong></h6><p>添加索引就是为了提高查询速度。（但还是要经常查看MongoDB的日志，发现和找出速度问题）</p>
+<h6 id="3-高复用方案"><a href="#3-高复用方案" class="headerlink" title="(3)  高复用方案"></a><strong>(3)  高复用方案</strong></h6><p>MongoDB提供两种复制：主从复制和副本集。</p>
+<p>副本集是推荐的复制策略，它提供自动的故障转移：主服务器因为某些原因下线后，如果可能的话，可以把一个节点提升为主节点。</p>
+<p>​    Primary：主节点</p>
+<p>​    Secondary：从节点</p>
+<p>​    Arbiter：仲裁节点</p>
+<p>​    Hidden：隐藏节点</p>
+<p>​    Secondary-Only：只能作为从节点，防止这种性能不高的节点成为主节点。</p>
+<p>注意：复制不是备份。</p>
+<h6 id="4-分片方案"><a href="#4-分片方案" class="headerlink" title="(4)  分片方案"></a><strong>(4)  分片方案</strong></h6><p>情景：单台服务器无法应对越来越高的读写吞吐量的时候。</p>
+<p>MongoDB支持自动分片，就是把一个集合根据片键分成多个块，然后将各个块分别分发到各个分片副本集上。</p>
+<h3 id="六、-大型网站架构经验"><a href="#六、-大型网站架构经验" class="headerlink" title="六、  大型网站架构经验"></a><strong>六、  大型网站架构经验</strong></h3><h4 id="1-缓存"><a href="#1-缓存" class="headerlink" title="1.     缓存"></a><strong>1.     缓存</strong></h4><p>通常来说，用户访问的热点数据只集中在一小部分数据上，这部分数据应该放在缓存中，这样就减轻了后端应用和数据存储的负担。</p>
+<p>​    (1)  本地缓存（应用服务器内）</p>
+<p>​    (2)  分布式缓存（分布式缓存集群，适合于大型网站）</p>
+<p>​    (3)  反向代理（通常决定是从后端获取内容还是从缓存获取的就是代理服务器了）</p>
+<p>​    (4)  CDN缓存（在CDN上缓存一些变化少的内容可以有效提升页面加载速度）</p>
+<h4 id="2-负载均衡"><a href="#2-负载均衡" class="headerlink" title="2.     负载均衡"></a><strong>2.     负载均衡</strong></h4><p>较好的服务器负担更大的访问量，较差的服务器负担较小的访问量。这样就均衡了服务器的负载，以达到最优化资源使用、最大化吞吐率、最小化响应时间的目的。</p>
+<p>常用的负载均衡工具：LVS、HAProxy、Nginx。</p>
+<h4 id="3-高可用"><a href="#3-高可用" class="headerlink" title="3.     高可用"></a><strong>3.     高可用</strong></h4><p>Keepalived、Heartbeat。（这些工具通常都跟负载均衡一起使用）</p>
+<h4 id="4-业务拆分"><a href="#4-业务拆分" class="headerlink" title="4.     业务拆分"></a><strong>4.     业务拆分</strong></h4><p>每个应用独立开发、部署、维护，应用之间通过网络进行通信，或者使用消息队列进行分发。业务拆分还包括对数据库的分库，其实现的成本低，但效果相对较好。</p>
+<h4 id="5-集群"><a href="#5-集群" class="headerlink" title="5.     集群"></a><strong>5.     集群</strong></h4><p>解决高并发、海量数据问题的常用手段。</p>
+<h4 id="6-前端性能优化"><a href="#6-前端性能优化" class="headerlink" title="6.     前端性能优化"></a><strong>6.     前端性能优化</strong></h4><p>(1)  减少页面请求和请求内容量（合并、压缩等）</p>
+<p>(2)  动静页面分离（把静态资源应用部署在专门的服务器集群中）</p>
+<p><br></p>
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/03/02/Twitter开发基础/" data-toggle="tooltip" data-placement="top"
+                           title="Twitter开发基础">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/02/28/数据库及ORM基础/" data-toggle="tooltip" data-placement="top"
+                           title="数据库及ORM基础">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#四、-键值对数据库Redis"><span class="toc-text">四、   键值对数据库Redis</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Redis的应用场景"><span class="toc-text">1.    Redis的应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-实例：取topN操作（排行榜应用）"><span class="toc-text">(1)  实例：取topN操作（排行榜应用）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-实例：计数器"><span class="toc-text">(2)  实例：计数器</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-实例：实时统计"><span class="toc-text">(3)  实例：实时统计</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-分片和集群管理"><span class="toc-text">2.    分片和集群管理</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-常见的分片和集群管理方式"><span class="toc-text">(1)  常见的分片和集群管理方式</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、-NoSQL数据库MongoDB"><span class="toc-text">五、   NoSQL数据库MongoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-为什么使用NoSQL"><span class="toc-text">1.    为什么使用NoSQL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-MongoDB"><span class="toc-text">2.    MongoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-优点"><span class="toc-text">(1)  优点</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-安装MongoDB（注意添加源）"><span class="toc-text">(2)  安装MongoDB（注意添加源）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-使用pymongo的例子"><span class="toc-text">3.    使用pymongo的例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-使用Mongoengine的例子"><span class="toc-text">4.    使用Mongoengine的例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-MongoDB实践经验（需详看）"><span class="toc-text">5.    MongoDB实践经验（需详看）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-善用组合式的大文档"><span class="toc-text">(1)  善用组合式的大文档</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-正确使用索引（需详看）"><span class="toc-text">(2)  正确使用索引（需详看）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-高复用方案"><span class="toc-text">(3)  高复用方案</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4-分片方案"><span class="toc-text">(4)  分片方案</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、-大型网站架构经验"><span class="toc-text">六、  大型网站架构经验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-缓存"><span class="toc-text">1.     缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-负载均衡"><span class="toc-text">2.     负载均衡</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-高可用"><span class="toc-text">3.     高可用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-业务拆分"><span class="toc-text">4.     业务拆分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-集群"><span class="toc-text">5.     集群</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-前端性能优化"><span class="toc-text">6.     前端性能优化</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#网络技术"
+                           title="网络技术">网络技术</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

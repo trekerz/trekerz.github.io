@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        用户行为数据的利用｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/03/13/用户行为数据的利用/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170313.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170313.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>用户行为数据的利用</h1>
+                    
+                    <h2 class="subheading">【笔记】基础与实验</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-03-13
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#社交挖掘"
+                           title="社交挖掘">社交挖掘</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            用户行为数据的利用
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>(1)  实现个性化推荐最理想的情况就是在注册时候让用户主动告诉我们他喜欢什么，但这种方法有3个缺点：</p>
+<p>​    a.    自然语言理解技术有限</p>
+<p>​    b.    用户的兴趣会变</p>
+<p>​    c.    用户自己也很难描述</p>
+<p>(2)  用户的行为不是随机的，而是蕴含着很多模式。</p>
+<p>(3)  基于用户行为分析的推荐算法是个性化推荐系统的重要算法，学术界称之为“协同过滤算法”。</p>
+<h3 id="一、-用户行为数据简介"><a href="#一、-用户行为数据简介" class="headerlink" title="一、   用户行为数据简介"></a><strong>一、   用户行为数据简介</strong></h3><h5 id="1-原始日志（文件系统）–-gt-会话日志-–-gt-展示日志"><a href="#1-原始日志（文件系统）–-gt-会话日志-–-gt-展示日志" class="headerlink" title="1.    原始日志（文件系统）–&gt; 会话日志  –&gt;  展示日志"></a><strong>1.    </strong>原始日志（文件系统）–&gt; 会话日志  –&gt;  展示日志</h5><h5 id="2-用户行为分为2种"><a href="#2-用户行为分为2种" class="headerlink" title="2.    用户行为分为2种"></a><strong>2.    </strong>用户行为分为2种</h5><p>​    a.    显性反馈行为（explicit feedback）：评分等</p>
+<p>​    b.    隐性反馈行为（implicit feedback）：页面浏览行为等</p>
+<p><img src="1.png" alt="img"></p>
+<h5 id="3-用户行为的衡量"><a href="#3-用户行为的衡量" class="headerlink" title="3.    用户行为的衡量"></a><strong>3.    </strong>用户行为的衡量</h5><p>6个部分：</p>
+<p>​    a.    产生行为的用户</p>
+<p>​    b.    行为的对象</p>
+<p>​    c.    行为的种类</p>
+<p>​    d.    产生行为的上下文</p>
+<p>​    e.    行为权重</p>
+<p>​    f.     行为内容</p>
+<p><img src="2.png" alt="img"></p>
+<p>这六个部分不一定要同时具备，而是针对不同的行为给出不同表示，像“上下文”有时可以忽略。一般来说，不同的数据集包含不同的行为，比较有代表性的数据集有如下4个：</p>
+<p>​    a.    无上下文信息的隐性反馈数据集</p>
+<p>​    b.    无上下文信息的显性反馈数据集</p>
+<p>​    c.    有上下文信息的隐性反馈数据集</p>
+<p>​    d.    有上下文信息的显性反馈数据集</p>
+<p>（本章使用的数据集基本都是第一种）</p>
+<h3 id="二、-用户行为分析"><a href="#二、-用户行为分析" class="headerlink" title="二、   用户行为分析"></a><strong>二、   用户行为分析</strong></h3><h5 id="1-用户活跃度和物品流行度的分布"><a href="#1-用户活跃度和物品流行度的分布" class="headerlink" title="1.    用户活跃度和物品流行度的分布"></a><strong>1.    </strong>用户活跃度和物品流行度的分布</h5><p>令f<sub>u</sub>(k)为对k个物品产生过行为的用户数；f<sub>i</sub>(k)为被k个用户产生过行为的物品数。则：</p>
+<p>​    f<sub>u</sub>(k) = a<sub>u</sub>k<sup>B<sub>u</sub></sup>  ——  用户活跃度</p>
+<p>​    f<sub>i</sub>(k) = a<sub>i</sub>k<sup>B<sub>i</sub></sup>  ——  物品流行度</p>
+<p>这种关系称为<u>长尾分布</u>。长尾分布在双对数曲线上应该呈直线。</p>
+<h5 id="2-用户活跃度和物品流行度的关系"><a href="#2-用户活跃度和物品流行度的关系" class="headerlink" title="2.    用户活跃度和物品流行度的关系"></a><strong>2.    </strong>用户活跃度和物品流行度的关系</h5><p>实验表明：用户越活跃，越倾向于浏览冷门的物品。</p>
+<p>研究用户行为的推荐 = 协同过滤算法 –&gt; 基于领域的、隐语义模型、基于图的随机游走算法</p>
+<p>（基于邻域的方法中应用最广泛的：<u>基于用户</u>的协同过滤算法、<u>基于物品</u>的协同过滤算法）</p>
+<h3 id="三、-实验设计和算法测评"><a href="#三、-实验设计和算法测评" class="headerlink" title="三、   实验设计和算法测评"></a><strong>三、   实验设计和算法测评</strong></h3><h5 id="1-实验方法：离线实验"><a href="#1-实验方法：离线实验" class="headerlink" title="1.    实验方法：离线实验"></a><strong>1.    </strong>实验方法：离线实验</h5><p>数据集：GroupLens提供的MovieLens数据集</p>
+<h5 id="2-实验设计："><a href="#2-实验设计：" class="headerlink" title="2.    实验设计："></a><strong>2.    </strong>实验设计：</h5><p>​    a.    将用户行为数据集按照均匀分布随机分成M份（本章取M=8），挑1份作为测试集，(M-1)份为训练集。</p>
+<p>​    b.    在训练集上建立用户兴趣模型，并在测试集上对用户行为进行预测，统计出相应的测评指标。为了保证测评指标不是过拟合的结果，需要进行M次实验，每次都使用不同的测试集。</p>
+<p>​    c.    将M次实验测出的评测指标的平均值作为最终的评测指标。</p>
+<h5 id="3-测评指标"><a href="#3-测评指标" class="headerlink" title="3.    测评指标"></a><strong>3.    </strong>测评指标</h5><p>对用户u推荐N个物品（记为R(u)），令用户u在测试集上喜欢的物品集合为T(u)，然后可以通过<u>准确率/召回率</u>评测推荐算法的精度：</p>
+<p><img src="3.png" alt="img"></p>
+<p>召回率：有多少比例的用户-物品评分记录包含在最终的推荐列表中；</p>
+<p>准确率：最终的推荐列表中有多少比例是发生过的用户-物品评分记录。</p>
+<p>最简单的<u>覆盖率</u>定义：</p>
+<p><img src="4.png" alt="img"></p>
+<p>覆盖率能反映推荐算法发掘长尾的能力，覆盖率越高说明算法越能对长尾中的物品推荐给用户。如果所有物品都能被推荐给至少一个用户，那么覆盖率就是100%</p>
+<p>新颖性，可以用推荐结果中物品的平均流行度（画图是记得取对数，画出来会更平直，因为是长尾分布）来度量。</p>
+<p><br></p>
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/03/13/Python网络框架纵览/" data-toggle="tooltip" data-placement="top"
+                           title="Python网络框架纵览">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/03/13/推荐系统测评指标/" data-toggle="tooltip" data-placement="top"
+                           title="推荐系统测评指标">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、-用户行为数据简介"><span class="toc-text">一、   用户行为数据简介</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-原始日志（文件系统）–-gt-会话日志-–-gt-展示日志"><span class="toc-text">1.    原始日志（文件系统）–> 会话日志  –>  展示日志</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-用户行为分为2种"><span class="toc-text">2.    用户行为分为2种</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-用户行为的衡量"><span class="toc-text">3.    用户行为的衡量</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、-用户行为分析"><span class="toc-text">二、   用户行为分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-用户活跃度和物品流行度的分布"><span class="toc-text">1.    用户活跃度和物品流行度的分布</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-用户活跃度和物品流行度的关系"><span class="toc-text">2.    用户活跃度和物品流行度的关系</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、-实验设计和算法测评"><span class="toc-text">三、   实验设计和算法测评</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-实验方法：离线实验"><span class="toc-text">1.    实验方法：离线实验</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-实验设计："><span class="toc-text">2.    实验设计：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-测评指标"><span class="toc-text">3.    测评指标</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#社交挖掘"
+                           title="社交挖掘">社交挖掘</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

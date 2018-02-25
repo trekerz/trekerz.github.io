@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Windows下Apache+PHP+MySQL搭建历程｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2016/09/29/Windows下Apache-PHP-MySQL搭建历程/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null160929.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null160929.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Windows下Apache+PHP+MySQL搭建历程</h1>
+                    
+                    <h2 class="subheading">从前端到后台</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2016-09-29
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#服务器"
+                           title="服务器">服务器</a>
+                        
+                        <a class="tag" href="/TAGS/#Apache"
+                           title="Apache">Apache</a>
+                        
+                        <a class="tag" href="/TAGS/#Windows"
+                           title="Windows">Windows</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            Windows下Apache+PHP+MySQL搭建历程
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="一、需求来源"><a href="#一、需求来源" class="headerlink" title="一、需求来源"></a>一、需求来源</h1><p>最近在做一个就业信息发布网站，发布每天的南北校宣讲会信息。此时前端模型已经搭建好，用的是HTML+CSS+JS，JavaScript用到jQuery库，总体上实现了静态页面的设计、UI图标效果的制作、页面动画的制作和信息展示区的模型搭建。</p>
+<p>小巧的发布网站已经建地七七八八，万事具备，只差最关键的数据和网络部分了。</p>
+<hr>
+<h1 id="二、方案更改"><a href="#二、方案更改" class="headerlink" title="二、方案更改"></a>二、方案更改</h1><p>在“早日完成项目”的目标驱动之下，我尝试着自己完成后台服务器的搭建工作。既然是要快速搭建，我能想到的首选就是使用集成开发环境xampp。这是一个后台服务器集成环境，在最新的版本中，xampp集成了Apache、MySQL、PHP、phpMyAdmin、FileZilla和Tomcat，使用的时候只要启动相应模块即可。</p>
+<p>虽然，这对于想要快速建后台的同学来说不失为一个快捷简便的捷径，但是如此臃肿的集成环境并不是每一个模块我们都能用得到，并且，在简单的start和stop之间，我们并不能真正地理解每个模块其中的原理，只有自己动手把每个模块独自搭建起来并使它们相互关联，才能方便我们自己的后期维护。</p>
+<hr>
+<h1 id="三、集齐模块"><a href="#三、集齐模块" class="headerlink" title="三、集齐模块"></a>三、集齐模块</h1><p>要搭建一个后台服务器，有几个必要的模块：一个作为载体的服务器软件、一个数据库、一种后台语言环境，它们分别是Apache服务器、MySQL数据库和PHP环境。此外，为了方便管理数据库，我还增加了一个phpMyAdmin模块，用于在后台以可视化形式对数据库进行增删查改。各模块的版本如下：</p>
+<p><strong>Apache：2.4.12</strong></p>
+<p><strong>MySQL：5.5.34</strong></p>
+<p><strong>PHP：5.6.26</strong></p>
+<p><strong>phpMyAdmin：4.4.11</strong></p>
+<p>要注意的是，PHP7已经不再用php_mysql组件，而是采用了更新的php_mysqli组件，这对其它模块会有些影响，我最开始用的是php7，在测试mysql_connect函数的时候显示找不到函数，但在查阅了半天资料后确认各个模块的配置并无问题，后来换了较低的5.6.26版本后，一切正常。</p>
+<p>各模块都在网上有得下载，这里就不再多言了，下面说说在安装和配置过程中的注意事项。</p>
+<p>搭建之前，你需要在某个根目录创建一个文件，比如叫做amp，代表Apache+MySQL+PHP。这个文件夹最终的结果会是这个样子：</p>
+<p><img src="amp.png" alt="文件夹amp最终结果"></p>
+<center>文件夹amp最终结果</center>
+
+<h2 id="1-Apache安装"><a href="#1-Apache安装" class="headerlink" title="1.Apache安装"></a>1.Apache安装</h2><p>目前，从网络上下载的Apache模块大都是免安装直接解压的压缩包，那么直接解压到amp里面即可。</p>
+<h2 id="2-MySQL安装"><a href="#2-MySQL安装" class="headerlink" title="2.MySQL安装"></a>2.MySQL安装</h2><p>MySQL分为客户端和服务器端，我选择的5.5.34版本本身是一个客户端，但是在安装完之后会推荐你再装一个服务器端，这个是必须的，因为我们要的就是一个服务器端的 MySQL。</p>
+<p>关于MySQL客户端的安装并没有什么难度，一般来说一路“下一步”即可，一直到最后一步，提示安装服务器端，点击进入，进入以下配置：</p>
+<p>首先是选择详细配置，点击下一步：</p>
+<p><img src="详细配置.png" alt="详细配置"></p>
+<center>详细配置</center>
+
+<p>作为开发者选择Developer Machine，点击下一步：</p>
+<p><img src="开发者机器.png" alt="开发者机器"></p>
+<center>开发者机器</center>
+
+<p>选择数据库类型，点击下一步：</p>
+<p><img src="数据库类型.png" alt="数据库类型"></p>
+<center>数据库类型</center>
+
+<p>配置数据库端口和开启严格模式，点击下一步：</p>
+<p><img src="端口和严格模式.png" alt="端口和严格模式"></p>
+<center>端口和严格模式</center>
+
+<p>选择utf8字符集，点击下一步：</p>
+<p><img src="字符集.png" alt="字符集"></p>
+<center>字符集</center>
+
+<p>这里选择服务器名称，默认MySQL（如果配置的最后一步无响应，可能是以前安装的版本未删除干净，此时可以删除相应注册表项目和修改这个服务器名称再尝试，具体可百度）；接着勾选设置环境变量选项，点击下一步：</p>
+<p><img src="服务器名称和环境变量.png" alt="服务器名称和环境变量"></p>
+<center>服务器名称和环境变量设置</center>
+
+<p>最后设置账号和密码后即可完成安装。</p>
+<h2 id="3-PHP环境安装"><a href="#3-PHP环境安装" class="headerlink" title="3.PHP环境安装"></a>3.PHP环境安装</h2><p>我采用的5.6.26版本php是免安装解压版，直接解压到amp文件夹即可。</p>
+<h2 id="4-phpMyAdmin安装"><a href="#4-phpMyAdmin安装" class="headerlink" title="4.phpMyAdmin安装"></a>4.phpMyAdmin安装</h2><p>phpMyAdmin4.4.11也是免安装解压版，直接解压到amp文件夹即可。</p>
+<hr>
+<h1 id="四、坑坑洼洼"><a href="#四、坑坑洼洼" class="headerlink" title="四、坑坑洼洼"></a>四、坑坑洼洼</h1><p>到这里我们已经把三大模块和一个工具集齐，此时，这些模块仅仅是简单地放在一块儿，并没有产生关联。在这一步，我们要做的就是牵线搭桥的工作。</p>
+<h2 id="1-Apache配置"><a href="#1-Apache配置" class="headerlink" title="1.Apache配置"></a>1.Apache配置</h2><p>配置Apache要修改的文件只有一个：conf文件夹里的httpd.conf，用文本编辑器打开它，开始我们的配置。</p>
+<h4 id="（1）设置服务器端口"><a href="#（1）设置服务器端口" class="headerlink" title="（1）设置服务器端口"></a>（1）设置服务器端口</h4><p>打开httpd.conf后，查找到listen，把80端口改为8080端口，以避免和IIS端口号冲突，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Listen 8080</span><br></pre></td></tr></table></figure>
+<h4 id="（2）加载php模块"><a href="#（2）加载php模块" class="headerlink" title="（2）加载php模块"></a>（2）加载php模块</h4><p>找到 #LoadModule vhost_alias_module modules/mod_vhost_alias.so （大概在第174行），在这行的后面添加以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">LoadModule php5_module &quot;D:/amp/php5/php5apache2_4.dll&quot;</span><br><span class="line"></span><br><span class="line">AddType application/x-httpd-php .php</span><br><span class="line"></span><br><span class="line">PHPIniDir &quot;D:/amp/php5&quot;</span><br></pre></td></tr></table></figure>
+<p>第一行代码：让Apache加载位于amp目录下的php模块；</p>
+<p>第二行代码：将以.php为扩展名的文件作为php脚本来运行；</p>
+<p>第三行代码：指定php模块的初始化文件（php.ini）所在目录。</p>
+<h4 id="（3）设置Apache网站入口"><a href="#（3）设置Apache网站入口" class="headerlink" title="（3）设置Apache网站入口"></a>（3）设置Apache网站入口</h4><p>在httpd.conf中找到DocumentRoot（大概在247行），后面的路径一般为htdocs，那里是存放项目网站的地方，服务器会以这个指定目录为入口进入网站。修改这个入口以及下面的Directory可以让Apache做不同的事情，比如修改为如下目录：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DocumentRoot &quot;D:/amp/&quot;</span><br><span class="line"></span><br><span class="line">&lt;Directory &quot;D:/amp/&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>然后restart服务器，在浏览器输入localhost:8080/phpmyadmin/index.php，这时服务器会以phpmyadmin目录下的index.php为入口，进入数据库管理页面。</p>
+<p>如无特别需要，此处一般设置为项目网站的入口目录。</p>
+<h4 id="（4）开启Apache服务"><a href="#（4）开启Apache服务" class="headerlink" title="（4）开启Apache服务"></a>（4）开启Apache服务</h4><p>在打开Apache服务器之前，可能我们会遇到一个问题，就是在“服务”里面无法开启Apache2.4服务，导致这种结果的原因又很多，其中普遍的原因很多网友都有提到，这里说一个比较偏门的，也是我踩中的一个大坑。</p>
+<p>如果是第一次安装Apache，那么在“服务”选择Apache2.4，点击右键，选择属性，里面有个“可执行文件的路径”是这样的：</p>
+<p><img src="apache服务路径.png" alt="Apache服务路径"></p>
+<center>Apache服务路径</center>
+
+<p>这是一个正确的路径。问题就出在这里。</p>
+<p>由于我之前安装过Apache，“服务”里面已经存在Apache2.4服务，其“可执行文件的路径”是当时的安装路径。当我重新安装Apache后，新的路径和旧的路径不一样，而“服务”里面用的仍然是旧路径，当然启动不了啦。</p>
+<p>解决办法就是进入注册表，在注册表中修改相应的路径，这里就不赘述了，同学们可以自行搜索。</p>
+<h2 id="2-PHP配置"><a href="#2-PHP配置" class="headerlink" title="2.PHP配置"></a>2.PHP配置</h2><p>在php5目录下我们会看到php.ini-development和php.ini-production两个文件，这里由于我们是作开发用，所以选择前者，把文件名修改为php，后缀名为ini，这就是我们在httpd.conf里面指定的php模块初始化文件。接下来我们就来配置这个php.ini：</p>
+<h4 id="（1）添加环境变量"><a href="#（1）添加环境变量" class="headerlink" title="（1）添加环境变量"></a>（1）添加环境变量</h4><p>既然是一个语言环境，那么就少不了环境变量的设置。无论怎样，先添加环境变量再说。做法就是将“D:\amp\php5\;”加入系统环境变量中的PATH，相信同学们都已经很熟悉了。</p>
+<h4 id="（2）设置扩展库目录"><a href="#（2）设置扩展库目录" class="headerlink" title="（2）设置扩展库目录"></a>（2）设置扩展库目录</h4><p>在php.ini中查找到extension_dir（大概在734行），设置它的值如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">extension_dir = &quot;D:/amp/php5/ext&quot;</span><br></pre></td></tr></table></figure>
+<p>这个目录指定php扩展模块的存放目录，以便调用相应的.dll文件。这里用到的扩展模块有php_mysql.dll、php_mysqli.dll等等，在第三步中去注释的模块都是从这里调用的。</p>
+<h4 id="（3）开启相应的扩展库"><a href="#（3）开启相应的扩展库" class="headerlink" title="（3）开启相应的扩展库"></a>（3）开启相应的扩展库</h4><p>php本身就是一个资源库，要让php做某件事，只要开启相应的模块就行了。</p>
+<p>最开始的php.ini并没有开启任何扩展模块，这些模块都被注释了，我们可以把需要的模块去注释，这样就是开启模块了。这里需要开启的模块如下（把分号去掉即可）：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">;extension=php_curl.dll</span><br><span class="line">;extension=php_gd2.dll</span><br><span class="line">;extension=php_mbstring.dll</span><br><span class="line">;extension=php_exif.dll</span><br><span class="line">;extension=php_mysql.dll</span><br><span class="line">;extension=php_mysqli.dll</span><br><span class="line">;extension=php_pdo_mysql.dll</span><br><span class="line">;extension=php_pdo_odbc.dll</span><br><span class="line">;extension=php_sockets.dll</span><br><span class="line">;extension=php_xmlrpc.dll</span><br><span class="line">;extension=php_xsl.dll</span><br></pre></td></tr></table></figure>
+<h4 id="（4）让php支持短标签"><a href="#（4）让php支持短标签" class="headerlink" title="（4）让php支持短标签"></a>（4）让php支持短标签</h4><p>短标签是指可以用简洁的&lt;? … ?&gt;来代替&lt;?php … ?&gt;。短标签的应用很普遍，开启短标签可以节省一些麻烦。</p>
+<p>在php.ini中找到short_open_tag（大概在202行），设置其值如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">short_open_tag = On</span><br></pre></td></tr></table></figure>
+<h4 id="（5）配置php的session功能和上传功能"><a href="#（5）配置php的session功能和上传功能" class="headerlink" title="（5）配置php的session功能和上传功能"></a>（5）配置php的session功能和上传功能</h4><p>在使用session功能时，我们必须配置session文件在服务器上的保存目录。我们需要为session建立一个可读写的目录，这个目录最好独立于网站目录之外，我把这个目录建在了php5里面，命名为sessiontmp。</p>
+<p>然后，在php.ini中找到session.save_path（大概在1391行），设置如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">session.save_path = &quot;D:/amp/php5/sessiontmp&quot;</span><br></pre></td></tr></table></figure>
+<p>同session一样，在使用php文件上传功能时，我们必须要指定一个临时文件夹以完成文件上传功能，否则文件上传功能会失败。我们再建一个文件夹uploadtmp，作为上传文件的临时存放处。</p>
+<p>在php.ini中找到upload_tmp_dir（大概在804行），设置如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">upload_tmp_dir = &quot;D:/amp/php5/uploadtmp&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="（6）设置时区"><a href="#（6）设置时区" class="headerlink" title="（6）设置时区"></a>（6）设置时区</h4><p>在php中，默认date.timezone是被注释掉的，也就是默认时区是UTC格林尼治标准时间。这里我们需要把时区调整为中国时区，解决时间相差八小时的问题。找到date.timezone（大概在925行），设置如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">date.timezone = PRC</span><br></pre></td></tr></table></figure>
+<h4 id="（7）测试php"><a href="#（7）测试php" class="headerlink" title="（7）测试php"></a>（7）测试php</h4><p>建立好php环境后，我们要测试一下php应用程序服务器能否在后台起到解析php的作用。可以在htdocs目录下创建一个php网页，命名为testphp.php，输入以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">     &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">     &lt;title&gt;测试php&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">     &lt;div&gt;</span><br><span class="line">          &lt;?php</span><br><span class="line">               echo &quot;hello&quot;;</span><br><span class="line">          ?&gt;</span><br><span class="line">     &lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>启动Apache，在浏览器中输入“localhost:8080/testphp.php”，如果浏览器显示hello，说明php环境已经成功搭建并被Apache服务器所调用。</p>
+<h2 id="3-MySQL配置"><a href="#3-MySQL配置" class="headerlink" title="3.MySQL配置"></a>3.MySQL配置</h2><p>在安装完MySQL服务器端后，我们还需要对它进行启动前的设置。由于之前在安装的时候已经进行了一些选择，这里我们只需要再对MySQL目录下的my.ini稍作设置即可。</p>
+<h4 id="（1）查看设置情况"><a href="#（1）查看设置情况" class="headerlink" title="（1）查看设置情况"></a>（1）查看设置情况</h4><p>如果我们在安装程序中已经进行了选择，那么用文本编辑器打开my.ini后，我们可以看到客户端和服务器端已经设置好了端口和字符集，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[client]</span><br><span class="line">port=3306</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[mysql]</span><br><span class="line">default-character-set=utf8</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">port=3306</span><br></pre></td></tr></table></figure>
+<h4 id="（2）设置basedir和datadir"><a href="#（2）设置basedir和datadir" class="headerlink" title="（2）设置basedir和datadir"></a>（2）设置basedir和datadir</h4><p>basedir选项和datadir选项分别表示数据库服务器的位置和数据存放的位置。在[mysqld]内找到如下两行并设置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">basedir=&quot;D:/amp/mysql/MySQL Server 5.5/&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">datadir=&quot;D:/amp/mysql/MySQL Server 5.5/Data/&quot;</span><br></pre></td></tr></table></figure>
+<p>记得每次设置完后要到“服务”里面重新启动一下mysql条目。</p>
+<h4 id="（3）设置默认存储引擎"><a href="#（3）设置默认存储引擎" class="headerlink" title="（3）设置默认存储引擎"></a>（3）设置默认存储引擎</h4><p>my.ini一般会为数据库选择一种存储引擎，默认为MYISAM，这里我们选择MYISAM即可，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">default-storage-engine=MYISAM</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，如果选择的是innoDB引擎，那么还要再设置其数据存储目录，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">innodb_data_home_dir=&quot;D:/amp/mysql/&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="（4）设置SQL-mode"><a href="#（4）设置SQL-mode" class="headerlink" title="（4）设置SQL mode"></a>（4）设置SQL mode</h4><p>SQL mode可以对数据库进行一些有效地约束，一般设置为严格模式，在这里设置如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sql-mode=&quot;STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="（5）测试MySQL"><a href="#（5）测试MySQL" class="headerlink" title="（5）测试MySQL"></a>（5）测试MySQL</h4><p>至此，MySQL的配置就差不多了，但是要启用它，我们还需要到“服务”里启动mysql条目。然后再启动Apache，它就会带着MySQL一起飞了。</p>
+<p>如何测试MySQL在php环境下起作用了呢？比较简单的方法就是写一个php去连接数据库。</p>
+<p>我们可以在htdocs目录下新建一个php文本，命名为test.php写入如下代码：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	$link=mysql_connect(<span class="string">"localhost:3306"</span>,<span class="string">"user"</span>,<span class="string">"password"</span>);</span><br><span class="line">	<span class="keyword">if</span>(!$link) <span class="keyword">echo</span> <span class="string">"MySQL无法连接！"</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">echo</span> <span class="string">"MySQL连接成功！"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后启动Apache并访问localhost:8080/test.php，如果php能够正常使用mysql模块，那么mysql_connect函数是可以被调用到的，结果会显示“MySQL连接成功！”。</p>
+<h2 id="4-phpMyAdmin配置"><a href="#4-phpMyAdmin配置" class="headerlink" title="4.phpMyAdmin配置"></a>4.phpMyAdmin配置</h2><p>在解压了phpMyAdmin之后，进入相应目录，在目录中找到一个名为config.sample.inc.php的文件，将此文件复制一份并命名为config.inc.php，这个文件就是phpMyAdmin的配置文件了。</p>
+<h4 id="（1）设置phpMyAdmin的登陆方式"><a href="#（1）设置phpMyAdmin的登陆方式" class="headerlink" title="（1）设置phpMyAdmin的登陆方式"></a>（1）设置phpMyAdmin的登陆方式</h4><p>phpMyAdmin有四种登陆方式：cookie、config、http和signon，其中默认方式是cookie，它的特点就是每次登陆都得输入用户名和密码，这里我们选择cookie就行。</p>
+<p>打开config.inc.php，查找到<code>$cfg[&#39;Servers&#39;][$i][&#39;auth_type&#39;]</code>，设置如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$cfg[&apos;Servers&apos;][i][&apos;auth_type&apos;] = &apos;cookie&apos;;</span><br></pre></td></tr></table></figure>
+<p>设置了cookie方式后我们还要设置短语密码<code>$cfg[&#39;blowfish_secret&#39;]</code>，它可以用于Cookies加密，我们可以随便填，比如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$cfg[&apos;blowfish_secret&apos;] = &apos;passwordpassword&apos;;</span><br></pre></td></tr></table></figure>
+<h4 id="（2）创建一个MySQL控制用户"><a href="#（2）创建一个MySQL控制用户" class="headerlink" title="（2）创建一个MySQL控制用户"></a>（2）创建一个MySQL控制用户</h4><p>创建控制用户的目的是授予其特定的权限以限制其完成特定的功能。在config.inc.php中找到如下两行并设置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$cfg[&apos;Servers&apos;][i][&apos;controluser&apos;] = &apos;controluser&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][i][&apos;controlpass&apos;] = &apos;controlpass&apos;;</span><br></pre></td></tr></table></figure>
+<p>其中，controluser是设置控制用户的用户名，controlpass是设置控制用户的密码。</p>
+<h4 id="（3）设置phpMyAdmin高级功能"><a href="#（3）设置phpMyAdmin高级功能" class="headerlink" title="（3）设置phpMyAdmin高级功能"></a>（3）设置phpMyAdmin高级功能</h4><p>我们还需要在phpMyAdmin里开启一些高级功能，只要在config.inc.php中去掉相应注释即可，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;controldb&apos;] = &apos;phpmyadmin&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;bookmarktable&apos;] = &apos;control_bookmark&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;relation&apos;] = &apos;control_relation&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;table_info&apos;] = &apos;control_table_info&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;table_coords&apos;] = &apos;control_table_coords&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;pdf_pages&apos;] = &apos;control_pdf_pages&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;column_info&apos;] = &apos;control_column_info&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;history&apos;] = &apos;control_history&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;tracking&apos;] = &apos;control_tracking&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;designer_coords&apos;] = &apos;control_designer_coords&apos;;</span><br><span class="line">$cfg[&apos;Servers&apos;][$i][&apos;userconfig&apos;] = &apos;control_userconfig&apos;;</span><br></pre></td></tr></table></figure>
+<h4 id="（4）测试phpMyAdmin"><a href="#（4）测试phpMyAdmin" class="headerlink" title="（4）测试phpMyAdmin"></a>（4）测试phpMyAdmin</h4><p>至此，我们的phpMyAdmin的配置就全部完成了，如何测试呢？</p>
+<p>之前提到过，要使用phpMyAdmin进入数据库管理界面，我们需要在httpd.conf中修改一下入口地址，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DocumentRoot &quot;D:/amp/&quot;</span><br><span class="line">&lt;Directory &quot;D:/amp/&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>重启Apache，在浏览器中输入“localhost:8080/phpmyadmin/index.php”，我们就可以进入phpMyAdmin登陆界面了。输入用户名和密码即可进入管理界面。管理完毕后记得把入口地址改回来，方便进入项目网站。</p>
+<h1 id="五、结语"><a href="#五、结语" class="headerlink" title="五、结语"></a>五、结语</h1><p>到这里，我们的后台服务器的搭建就告一段落了，之后要怎么去使用它就是真正的后台开发的事情了。在没有了解服务器搭建之前，服务器的搭建对我来说一直是一种高深莫测的存在，后来读了鸟哥的Linux服务器开发篇，发现Linux下各种服务器的搭建就是改改配置文件和几句命令行的事，现在在Windows下也搭了一回，发现仍然是继续修改配置文件，只不过多了一些环境变量和服务的东西。其实前人已经帮我们做了许多工作，这使我们搭建服务器时没有想象中那么艰辛，所以，如果你需要一个后台，那就自己动手搭一个吧！</p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/12/07/RECON-在线交友双向推荐器/" data-toggle="tooltip" data-placement="top"
+                           title="RECON-在线交友双向推荐器">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、需求来源"><span class="toc-text">一、需求来源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、方案更改"><span class="toc-text">二、方案更改</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、集齐模块"><span class="toc-text">三、集齐模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Apache安装"><span class="toc-text">1.Apache安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-MySQL安装"><span class="toc-text">2.MySQL安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-PHP环境安装"><span class="toc-text">3.PHP环境安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-phpMyAdmin安装"><span class="toc-text">4.phpMyAdmin安装</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、坑坑洼洼"><span class="toc-text">四、坑坑洼洼</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Apache配置"><span class="toc-text">1.Apache配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#（1）设置服务器端口"><span class="toc-text">（1）设置服务器端口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（2）加载php模块"><span class="toc-text">（2）加载php模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（3）设置Apache网站入口"><span class="toc-text">（3）设置Apache网站入口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（4）开启Apache服务"><span class="toc-text">（4）开启Apache服务</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-PHP配置"><span class="toc-text">2.PHP配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#（1）添加环境变量"><span class="toc-text">（1）添加环境变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（2）设置扩展库目录"><span class="toc-text">（2）设置扩展库目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（3）开启相应的扩展库"><span class="toc-text">（3）开启相应的扩展库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（4）让php支持短标签"><span class="toc-text">（4）让php支持短标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（5）配置php的session功能和上传功能"><span class="toc-text">（5）配置php的session功能和上传功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（6）设置时区"><span class="toc-text">（6）设置时区</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（7）测试php"><span class="toc-text">（7）测试php</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-MySQL配置"><span class="toc-text">3.MySQL配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#（1）查看设置情况"><span class="toc-text">（1）查看设置情况</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（2）设置basedir和datadir"><span class="toc-text">（2）设置basedir和datadir</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（3）设置默认存储引擎"><span class="toc-text">（3）设置默认存储引擎</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（4）设置SQL-mode"><span class="toc-text">（4）设置SQL mode</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（5）测试MySQL"><span class="toc-text">（5）测试MySQL</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-phpMyAdmin配置"><span class="toc-text">4.phpMyAdmin配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#（1）设置phpMyAdmin的登陆方式"><span class="toc-text">（1）设置phpMyAdmin的登陆方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（2）创建一个MySQL控制用户"><span class="toc-text">（2）创建一个MySQL控制用户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（3）设置phpMyAdmin高级功能"><span class="toc-text">（3）设置phpMyAdmin高级功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（4）测试phpMyAdmin"><span class="toc-text">（4）测试phpMyAdmin</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、结语"><span class="toc-text">五、结语</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#服务器"
+                           title="服务器">服务器</a>
+                        
+                        <a class="tag" href="/TAGS/#Apache"
+                           title="Apache">Apache</a>
+                        
+                        <a class="tag" href="/TAGS/#Windows"
+                           title="Windows">Windows</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

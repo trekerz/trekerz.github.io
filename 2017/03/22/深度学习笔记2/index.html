@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        深度学习笔记2｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/03/22/深度学习笔记2/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170322.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170322.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>深度学习笔记2</h1>
+                    
+                    <h2 class="subheading">【笔记】DL基础</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-03-22
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#深度学习"
+                           title="深度学习">深度学习</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            深度学习笔记2
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h3 id="五、-深度学习（DL）基本思想"><a href="#五、-深度学习（DL）基本思想" class="headerlink" title="五、  深度学习（DL）基本思想"></a><strong>五、  深度学习（DL）基本思想</strong></h3><p>​       假设有一个n层的系统，S<sub>1</sub>、S<sub>2</sub>、…、S<sub>n</sub>，它的输入式I，输出是O，形象地表示为I=&gt;S<sub>1</sub>=&gt;S<sub>2</sub>=&gt;…=&gt;S<sub>n</sub>=&gt;O。根据信息处理不等式，信息在经过处理之后不可能没有损失，所以I≠O。</p>
+<p>​       假设有一堆I，我们通过调整系统中的参数，使得它的输出仍然是输入I，那么我们就可以自动地获取得到输入I的一系列层次特征，即S<sub>1</sub>、…、S<sub>n</sub>。对于DL来说，其思想<u>就是堆叠多个层，也就是说这一层的输出作为下一层的输入</u>。通过这种方式，就可以实现对输入信息进行分级表达了。</p>
+<p>​       上述假设太严格，我们可以略微地放松这个限制，比如只要使得输入与输出的差别尽可能地小即可，这个放松会导致另外一类不同的DL方法。</p>
+<h3 id="六、-浅层学习和深度学习"><a href="#六、-浅层学习和深度学习" class="headerlink" title="六、  浅层学习和深度学习"></a><strong>六、  浅层学习和深度学习</strong></h3><h4 id="1-浅层学习"><a href="#1-浅层学习" class="headerlink" title="1.    浅层学习"></a><strong>1.    浅层学习</strong></h4><p>​        反向传播算法、支持向量机、Boosting、最大熵方法（LR）。</p>
+<p>​        这些模型的结构基本上可以看成带有<u>一层隐层节点</u>（SVM、Boosting）或<u>没有隐层节点</u>（LR）。这些模型在理论分析和应用中都获得了巨大的成功，但由于分析难度大，训练方法需要很多经验和技巧，这个时期浅层人工神经网络反而相对沉寂。</p>
+<h4 id="2-深度学习"><a href="#2-深度学习" class="headerlink" title="2.    深度学习"></a><strong>2.    深度学习</strong></h4><p>2006年Geoffrey Hinton的一篇文章的观点：</p>
+<p>a.    <u>多隐层的人工神经网络</u>具有优异的特征学习能力，学习得到的特征对数据有更本质的刻画，从而有利于可视化或分类</p>
+<p>b.    深度神经网络在训练上的难度，可以通过“<u>逐层初始化</u>”（layer-wise pre-training）来有效克服，在这篇文章中，逐层初始化是通过<u>无监督学习</u>实现的</p>
+<p>​        DL的实质，是通过构建具有<u>多隐层的机器学习模型</u>和<u>海量的训练数据</u>，来<u>学习更有用的特征</u>，从而最终提升分类或预测的准确性。</p>
+<h3 id="七、-深度学习与神经网络（NW）"><a href="#七、-深度学习与神经网络（NW）" class="headerlink" title="七、  深度学习与神经网络（NW）"></a><strong>七、  深度学习与神经网络（NW）</strong></h3><p>​       深度学习本身算是机器学习的一个分支，简单可以理解为神经网络的发展。神经网络曾经是机器学习一个很火热的方向，但后来慢慢淡出了（在淡出的时期是SVM和boosting的天下），原因有二：</p>
+<p>a.    比较容易过拟合，参数比较难调，需要不少经验技巧</p>
+<p>b.    训练速度比较慢，在层次比较少（≤3）的情况下效果并不比其他方法更优</p>
+<p>​       DL采用了和神经网络相似的分层结构，只有相邻层之间有连接。为了克服神经网络训练中的问题，DL采用了与NW很不同的训练机制。</p>
+<p><img src="1.png" alt="img"></p>
+<p>a.    传统NW中，采用的是<u>back propagation</u>的方式进行，简单来讲就是采用<u>迭代</u>的算法来训练整个网络，随机设定初值，计算当前网络的输出，然后根据当前输出和label之间的差去改变前面各层的参数，直到收敛（整体是一个梯度下降法）。</p>
+<p>b.    而DL整体上是一个<u>layer-wise</u>的训练机制。这样做的原因是因为，如果采用backpropagation的机制，对于一个deep network（7层以上），残差传播到最前面的层已经变得太小，出现所谓的gradientdiffusion（梯度扩散）。</p>
+<h3 id="八、-深度学习训练过程"><a href="#八、-深度学习训练过程" class="headerlink" title="八、  深度学习训练过程"></a><strong>八、  深度学习训练过程</strong></h3><h4 id="1-传统NW的训练方法为什么不能用在深度神经网络"><a href="#1-传统NW的训练方法为什么不能用在深度神经网络" class="headerlink" title="1.    传统NW的训练方法为什么不能用在深度神经网络"></a><strong>1.    传统NW的训练方法为什么不能用在深度神经网络</strong></h4><p>a.    梯度越来越稀疏：从顶层越往下，误差校正信号越来越小</p>
+<p>b.    收敛到局部最小值：尤其是从远离最优区域开始的时候（随机值初始化会导致这种情况的发生）</p>
+<p>c.    一般，我们只能用有标签的数据来训练：但大部分的数据是没标签的，而大脑可以从没有标签的数据中学习</p>
+<h4 id="2-DL的训练过程"><a href="#2-DL的训练过程" class="headerlink" title="2.    DL的训练过程"></a><strong>2.    DL的训练过程</strong></h4><p><strong>(1)    </strong>问题：若所有层同时训练，时间复杂度太高；若每次训练一层，偏差就会逐层传递，出现欠拟合。</p>
+<p><strong>(2)    </strong>解决：2006年hinton提出的在非监督数据上建立多层神经网络的一个有效方法：①一次训练一层网络。②调优（wake-sleep算法），使原始表示x向上生成的高级表示r和该高级表示r向下生成的x’尽可能一致。</p>
+<p>​        将除最顶层的其它层间的<u>权重变为双向的</u>，这样最顶层仍然是一个单层神经网络，而其它层则变为了图模型。由顶向下输出，向上的权重用于“认知”，向下的权重用于“生成”。</p>
+<p><strong>(3)  </strong>wake-sleep算法：</p>
+<p>a.    <u>醒阶段：认知过程</u>。通过外界的特征和向上的权重（认知权重）产生每一层的抽象表示（结点状态），并且使用梯度下降修改层间的下行权重（生成权重）。也就是“<u>如果现实跟我想象的不一样，改变我的权重使得我想象的东西就是这样的</u>”。</p>
+<p>b.    <u>睡阶段：生成过程</u>。通过顶层表示（醒时学得的概念）和向下权重，生成底层的状态，同时修改层间向上的权重。也就是“<u>如果梦中的景象不是我脑中的相应概念（我之前想象的东西），改变我的认知权重使得这种景象在我看来就是这个概念</u>”。</p>
+<p><strong>(4)  </strong>训练的具体过程</p>
+<p>1)    使用自下上升非监督学习（就是从底层开始，一层一层地往顶层训练。（feature learning））</p>
+<p>​          具体的，先用无标定数据训练第一层，训练时先学习第一层的参数（这一层可以看作是得到一个使得输出和输入差别最小的三层神经网络的隐层），由于模型capacity的限制以及稀疏性约束，使得得到的模型能够学习到数据本身的结构，从而得到比输入更具有表示能力的特征；在学习得到第n-1层后，将n-1层的输出作为第n层的输入，训练第n层，由此分别得到各层的参数。</p>
+<p>2)    自顶向下的监督学习（就是通过带标签的数据去训练，误差自顶向下传输，对网络进行微调）</p>
+<p>​          基于第一步得到的各层参数进一步fine-tune整个多层模型的参数，这一步是一个有监督训练过程；第一步类似神经网络的随机初始化初值过程，由于DL的第一步不是随机初始化，而是通过学习输入数据的结构得到的，因而这个初值更接近全局最优，从而能够取得更好的效果；所以deep learning效果好很大程度上归功于第一步的feature learning过程。</p>
+<p><br></p>
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/03/23/利用用户标签数据推荐2/" data-toggle="tooltip" data-placement="top"
+                           title="利用用户标签数据推荐2">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/03/21/利用用户标签数据推荐/" data-toggle="tooltip" data-placement="top"
+                           title="利用用户标签数据推荐">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#五、-深度学习（DL）基本思想"><span class="toc-text">五、  深度学习（DL）基本思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、-浅层学习和深度学习"><span class="toc-text">六、  浅层学习和深度学习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-浅层学习"><span class="toc-text">1.    浅层学习</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-深度学习"><span class="toc-text">2.    深度学习</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七、-深度学习与神经网络（NW）"><span class="toc-text">七、  深度学习与神经网络（NW）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#八、-深度学习训练过程"><span class="toc-text">八、  深度学习训练过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-传统NW的训练方法为什么不能用在深度神经网络"><span class="toc-text">1.    传统NW的训练方法为什么不能用在深度神经网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-DL的训练过程"><span class="toc-text">2.    DL的训练过程</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#深度学习"
+                           title="深度学习">深度学习</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

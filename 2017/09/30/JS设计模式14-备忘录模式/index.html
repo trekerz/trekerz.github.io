@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        JS设计模式14-备忘录模式｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/09/30/JS设计模式14-备忘录模式/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170930.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170930.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>JS设计模式14-备忘录模式</h1>
+                    
+                    <h2 class="subheading">分页和撤销例子</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-09-30
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                        <a class="tag" href="/TAGS/#JS设计模式"
+                           title="JS设计模式">JS设计模式</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            JS设计模式14-备忘录模式
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="备忘录模式的基础"><a href="#备忘录模式的基础" class="headerlink" title="备忘录模式的基础"></a><strong>备忘录模式的基础</strong></h1><p><strong>定义</strong>：在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样就可以将该对象恢复到原先保存的状态。<br><strong>作用</strong>：在我们的开发中偶尔会遇到这样一种情况，需要对用户的行为进行撤销。要想实现撤销，首先需要保存软件系统的历史状态，当用户执行撤销时用之前的状态覆盖当前状态。</p>
+<p>本节介绍的备忘录模式提供了一种状态恢复的实现机制，使得用户可以方便的回到一个特定的历史步骤。备忘录模式在js中经常用于数据缓存。</p>
+<p><strong>使用场景</strong>：分页控件、撤销组件    </p>
+<h1 id="分页控件"><a href="#分页控件" class="headerlink" title="分页控件"></a><strong>分页控件</strong></h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Page = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">let</span> page = <span class="number">1</span>,</span><br><span class="line">		cache = &#123;&#125;,</span><br><span class="line">		data;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"> page </span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> ( cache[ page ] )&#123;</span><br><span class="line">				data =  cache[ page ];</span><br><span class="line">				render( data );</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				Ajax.send( <span class="string">'cgi.xx.com/xxx'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> data </span>)</span>&#123;</span><br><span class="line">				   cache[ page ] = data;</span><br><span class="line">				   render( data );</span><br><span class="line">				&#125;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure>
+<p>PS：分页控件, <strong>从服务器获得某一页的数据后可以存入缓存。以后再翻回这一页的时候，可以直接使用缓存里的数据而无需再次请求服务器</strong>。</p>
+<h1 id="撤销组件"><a href="#撤销组件" class="headerlink" title="撤销组件"></a><strong>撤销组件</strong></h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 备忘录构造函数</span></span><br><span class="line"><span class="keyword">var</span> Memento = <span class="function"><span class="keyword">function</span>(<span class="params">state</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> _state = state;</span><br><span class="line">	<span class="keyword">this</span>.getState = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> _state;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 原发器，saveStateToMemento创建一个备忘录，存储当前状态。</span></span><br><span class="line"><span class="keyword">var</span> Originator = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> _state;</span><br><span class="line">	<span class="keyword">this</span>.setState = <span class="function"><span class="keyword">function</span>(<span class="params">state</span>)</span>&#123;</span><br><span class="line">		_state = state;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">this</span>.getState = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> _state;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">this</span>.saveStateToMemento = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Memento(_state)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">this</span>.getStateFromMemento = <span class="function"><span class="keyword">function</span>(<span class="params">memento</span>)</span>&#123;</span><br><span class="line">		_state = memento.getState();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// CareTaker称之为负责人也可以叫管理者，它负责保存备忘录</span></span><br><span class="line"><span class="keyword">var</span> CareTaker = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> _mementoList = [];</span><br><span class="line">	<span class="keyword">this</span>.add = <span class="function"><span class="keyword">function</span>(<span class="params">memento</span>)</span>&#123;</span><br><span class="line">		_mementoList.push(memento);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">this</span>.get = <span class="function"><span class="keyword">function</span>(<span class="params">index</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> _mementoList[index];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> originator = <span class="keyword">new</span> Originator();</span><br><span class="line"><span class="keyword">var</span> careTaker = <span class="keyword">new</span> CareTaker();</span><br><span class="line">originator.setState(<span class="string">"State 1"</span>);</span><br><span class="line">originator.setState(<span class="string">"State 2"</span>);</span><br><span class="line">careTaker.add(originator.saveStateToMemento());</span><br><span class="line">originator.setState(<span class="string">"State 3"</span>);</span><br><span class="line">careTaker.add(originator.saveStateToMemento());</span><br><span class="line">originator.setState(<span class="string">"State 4"</span>);</span><br><span class="line"> </span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"当前状态: "</span> + originator.getState());</span><br><span class="line"><span class="comment">// 当前状态: State 4</span></span><br><span class="line">originator.getStateFromMemento(careTaker.get(<span class="number">0</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"恢复第一次保存状态: "</span> + originator.getState());</span><br><span class="line"><span class="comment">// 恢复第一次保存状态: State 2</span></span><br><span class="line">originator.getStateFromMemento(careTaker.get(<span class="number">1</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"恢复第二次保存: "</span> + originator.getState());</span><br><span class="line"><span class="comment">// 恢复第二次保存: State 3</span></span><br></pre></td></tr></table></figure>
+<p>PS：这个例子里面Originator称为原发器，可以通过saveStateToMemento创建一个备忘录，存储当前状态。    Memento是一个备忘录对象，只供原发器使用，提供状态提取方法。CareTaker称之为负责人也可以叫管理者，    它负责保存备忘录，但是不能对备忘录内容进行操作或检查。</p>
+<p><strong>优点</strong>：    </p>
+<ul>
+<li>提供了一种状态恢复的时间机制，使得用户可以方便的回退到一个特定的历史步骤。    </li>
+<li>备忘录实现了对信息的封装，一个备忘录对象是一种原发器对象状态的表示，<strong>不会被其他代码所改动</strong>。</li>
+</ul>
+<p><strong>缺点</strong>：    </p>
+<ul>
+<li>备忘录模式的主要缺点是<strong>资源消耗过大</strong>，如果需要保存的原发器类的成员变量太多，就不可避免的需要占用大量的存储空间。</li>
+</ul>
+<blockquote>
+<p>参考文档：<br><a href="http://www.isjs.cn/?p=998" target="_blank" rel="external">《javascript设计模式 – 备忘录模式》</a><br><a href="http://www.alloyteam.com/2012/10/commonly-javascript-design-patterns-memorandum-mode/" target="_blank" rel="external">【Javascript设计模式14】-备忘录模式</a></p>
+</blockquote>
+<p><br></p>
+<center>-&nbsp;<em>end</em>&nbsp;-</center>
+
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/10/08/JS设计模式15-职责链模式/" data-toggle="tooltip" data-placement="top"
+                           title="JS设计模式15-职责链模式">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/09/25/JS设计模式13-组合模式/" data-toggle="tooltip" data-placement="top"
+                           title="JS设计模式13-组合模式">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#备忘录模式的基础"><span class="toc-text">备忘录模式的基础</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分页控件"><span class="toc-text">分页控件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#撤销组件"><span class="toc-text">撤销组件</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                        <a class="tag" href="/TAGS/#JS设计模式"
+                           title="JS设计模式">JS设计模式</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

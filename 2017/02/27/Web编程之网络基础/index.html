@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Web编程之网络基础｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/02/27/Web编程之网络基础/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170227.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170227.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Web编程之网络基础</h1>
+                    
+                    <h2 class="subheading">【笔记】计算机网络知识</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-02-27
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#网络技术"
+                           title="网络技术">网络技术</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            Web编程之网络基础
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h3 id="一、-TCP-IP网络"><a href="#一、-TCP-IP网络" class="headerlink" title="一、 TCP/IP网络"></a><strong>一、 TCP/IP网络</strong></h3><h5 id="1-综述"><a href="#1-综述" class="headerlink" title="1.    综述"></a>1.    综述</h5><h6 id="1-网络分层"><a href="#1-网络分层" class="headerlink" title="(1)  网络分层"></a>(1)  网络分层</h6><p>数据的网络传输大致要经过信息格式转换、分发、寻址、物理传输等过程，这些过程中还要加入多种校验措施以保证传输的正确性。</p>
+<p>本书把TCP/IP网络分为四层：应用层（HTTP、SMTP等）、传输层（TCP或UDP）、网络层（IP）、接口层（物理细节）。</p>
+<h6 id="2-网络设备"><a href="#2-网络设备" class="headerlink" title="(2)  网络设备"></a>(2)  网络设备</h6><p>集线器、交换机、网桥、路由器、网关、调试解调器、无线接入点、防火墙。</p>
+<h6 id="3-IP地址"><a href="#3-IP地址" class="headerlink" title="(3)  IP地址"></a>(3)  IP地址</h6><h6 id="4-域名"><a href="#4-域名" class="headerlink" title="(4)  域名"></a>(4)  域名</h6><h6 id="5-URL"><a href="#5-URL" class="headerlink" title="(5)  URL"></a>(5)  URL</h6><h5 id="2-TCP和UDP"><a href="#2-TCP和UDP" class="headerlink" title="2.    TCP和UDP"></a>2.    TCP和UDP</h5><h6 id="1-端口"><a href="#1-端口" class="headerlink" title="(1)  端口"></a>(1)  端口</h6><p>包括各种常用端口号。</p>
+<h6 id="2-TCP"><a href="#2-TCP" class="headerlink" title="(2)  TCP"></a>(2)  TCP</h6><p>面向连接、可靠的、基于字节流的传输层通信协议。</p>
+<p>三次握手建立连接、四次消息关闭连接。</p>
+<h6 id="3-UDP"><a href="#3-UDP" class="headerlink" title="(3)  UDP"></a>(3)  UDP</h6><p>无连接、不可靠的传输层通信协议。</p>
+<p>没有拥塞控制算法，程序需在应用层自行控制。</p>
+<p>没有拆分合并，直接向下层交付，故在应用层就需要注意报文大小。</p>
+<h5 id="3-C-S及B-S架构"><a href="#3-C-S及B-S架构" class="headerlink" title="3.    C/S及B/S架构"></a>3.    C/S及B/S架构</h5><p>B/S相对于C/S的优点：便于部署、维护和升级；跨平台、开放、对客户端要求低；对安全性的要求较高。</p>
+<h3 id="二、-HTTP"><a href="#二、-HTTP" class="headerlink" title="二、 HTTP"></a>二、 HTTP</h3><h5 id="1-HTTP流程"><a href="#1-HTTP流程" class="headerlink" title="1.    HTTP流程"></a>1.    HTTP流程</h5><p>浏览器发起一次请求的全过程。</p>
+<p>注意：域名解析本身不是HTTP的一部分；HTTP中有keep-alive选择，可以使连接在一次请求后不关闭以便接下来的第二次请求。</p>
+<h5 id="2-HTTP消息结构"><a href="#2-HTTP消息结构" class="headerlink" title="2.    HTTP消息结构"></a><strong>2.    </strong>HTTP消息结构</h5><h6 id="1-Request消息结构"><a href="#1-Request消息结构" class="headerlink" title="(1)  Request消息结构"></a>(1)  Request消息结构</h6><p>由消息头（请求方法、URL、协议版本以及多个头字段）和消息体组成。</p>
+<p>注意格式。</p>
+<h6 id="2-Response消息结构"><a href="#2-Response消息结构" class="headerlink" title="(2)  Response消息结构"></a>(2)  Response消息结构</h6><p>也由消息头和消息体组成，不同点是第一行由协议版本和错误码组成。</p>
+<h6 id="3-常用头字段（熟记）"><a href="#3-常用头字段（熟记）" class="headerlink" title="(3)  常用头字段（熟记）"></a>(3)  常用头字段（熟记）</h6><h6 id="4-常用错误码（熟记）"><a href="#4-常用错误码（熟记）" class="headerlink" title="(4)  常用错误码（熟记）"></a>(4)  常用错误码（熟记）</h6><h5 id="3-HTTP请求方法"><a href="#3-HTTP请求方法" class="headerlink" title="3.    HTTP请求方法"></a><strong>3.    </strong>HTTP请求方法</h5><p>GET、POST、DELETE、HEAD、OPTIONS、PUT。</p>
+<h5 id="4-基于HTTP的网站开发"><a href="#4-基于HTTP的网站开发" class="headerlink" title="4.    基于HTTP的网站开发"></a><strong>4.    </strong>基于HTTP的网站开发</h5><p>(1)  常用Web服务器：Apache、Nginx、IIS、Tomcat、JBoss。</p>
+<p>(2)  主流语言的Web调用接口规范：CGI、ISAPI、WSGI（Python专用）。</p>
+<h3 id="三、-Socket编程"><a href="#三、-Socket编程" class="headerlink" title="三、 Socket编程"></a><strong>三、 Socket编程</strong></h3><p>一种非公有协议（而HTTP是公有协议）。用于描述IP地址和端口，是一个通信链句柄，可以实现不同计算机或虚拟机之间的通信。</p>
+<p>Socket为应用程序屏蔽了TCP/IP网络传输层及以下的网络细节，为用户空间提供网络抽象，通过这个抽象可以很容易地控制TCP和UDP，甚至IP和ICMP。</p>
+<p>Socket使用IP+端口+协议的三元组唯一标识一个通信链路。</p>
+<h6 id="1-Socket的TCP原语"><a href="#1-Socket的TCP原语" class="headerlink" title="(1)  Socket的TCP原语"></a>(1)  Socket的TCP原语</h6><p>包括连接中使用到的多个函数。在Python中封装在了Socket包里，使用时要import进来。</p>
+<h6 id="2-Socket的UDP原语"><a href="#2-Socket的UDP原语" class="headerlink" title="(2)  Socket的UDP原语"></a>(2)  Socket的UDP原语</h6><p>相对于TCP，UDP在传输层提供更少的控制，没有建立连接、断开连接等概念，过程稍微比TCP简单些。</p>
+<p>UDP Socket可以复用TCP中的socket()和bind()原语，同时UDP有自己的原语：recvfrom()和sendto()。</p>
+<p><br></p>
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/02/27/网站架构/" data-toggle="tooltip" data-placement="top"
+                           title="网站架构">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/02/27/Python基础知识/" data-toggle="tooltip" data-placement="top"
+                           title="Python基础知识">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、-TCP-IP网络"><span class="toc-text">一、 TCP/IP网络</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-综述"><span class="toc-text">1.    综述</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-网络分层"><span class="toc-text">(1)  网络分层</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-网络设备"><span class="toc-text">(2)  网络设备</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-IP地址"><span class="toc-text">(3)  IP地址</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4-域名"><span class="toc-text">(4)  域名</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#5-URL"><span class="toc-text">(5)  URL</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-TCP和UDP"><span class="toc-text">2.    TCP和UDP</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-端口"><span class="toc-text">(1)  端口</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-TCP"><span class="toc-text">(2)  TCP</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-UDP"><span class="toc-text">(3)  UDP</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-C-S及B-S架构"><span class="toc-text">3.    C/S及B/S架构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、-HTTP"><span class="toc-text">二、 HTTP</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-HTTP流程"><span class="toc-text">1.    HTTP流程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-HTTP消息结构"><span class="toc-text">2.    HTTP消息结构</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-Request消息结构"><span class="toc-text">(1)  Request消息结构</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-Response消息结构"><span class="toc-text">(2)  Response消息结构</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-常用头字段（熟记）"><span class="toc-text">(3)  常用头字段（熟记）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4-常用错误码（熟记）"><span class="toc-text">(4)  常用错误码（熟记）</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-HTTP请求方法"><span class="toc-text">3.    HTTP请求方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-基于HTTP的网站开发"><span class="toc-text">4.    基于HTTP的网站开发</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、-Socket编程"><span class="toc-text">三、 Socket编程</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-Socket的TCP原语"><span class="toc-text">(1)  Socket的TCP原语</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-Socket的UDP原语"><span class="toc-text">(2)  Socket的UDP原语</span></a></li></ol></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#网络技术"
+                           title="网络技术">网络技术</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

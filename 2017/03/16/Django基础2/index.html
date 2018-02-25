@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Django基础2｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/03/16/Django基础2/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170316.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170316.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Django基础2</h1>
+                    
+                    <h2 class="subheading">【笔记】Django框架基础知识——第2部分</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-03-16
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#前端基础"
+                           title="前端基础">前端基础</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#Python"
+                           title="Python">Python</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            Django基础2
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h3 id="四、-Django视图层"><a href="#四、-Django视图层" class="headerlink" title="四、   Django视图层"></a><strong>四、   Django视图层</strong></h3><p>视图层主要工作：衔接HTTP请求、Python程序、HTTP模板等。</p>
+<h4 id="1-URL映射"><a href="#1-URL映射" class="headerlink" title="1.    URL映射"></a><strong>1.    </strong>URL映射</h4><p>通过URL dispatcher可以指定用户的每一个访问的后台Python处理函数是什么。</p>
+<h6 id="1-普通URL映射"><a href="#1-普通URL映射" class="headerlink" title="(1)  普通URL映射"></a><strong>(1)  </strong>普通URL映射</h6><p>django.conf.urls.url</p>
+<p>通过urlpatterns列表维护，用正则表达式定义。</p>
+<h6 id="2-正则表达式"><a href="#2-正则表达式" class="headerlink" title="(2)  正则表达式"></a><strong>(2)  </strong>正则表达式</h6><p>（语法、字符意义）</p>
+<h6 id="3-命名URL参数映射"><a href="#3-命名URL参数映射" class="headerlink" title="(3)  命名URL参数映射"></a><strong>(3)  </strong>命名URL参数映射</h6><p>参数代替表达式：?P\<param_name\>pattern</param_name\></p>
+<p>（注意：当URL可以映射多个函数时，取第一个）</p>
+<h6 id="4-分布式URL映射"><a href="#4-分布式URL映射" class="headerlink" title="(4)  分布式URL映射"></a><strong>(4)  </strong>分布式URL映射</h6><p>include()提供了同个项目中多个应用之间的分布式URL映射功能。</p>
+<p>（注意：各种父映射文件、子映射文件之间的相互作用）</p>
+<h6 id="5-反向解析"><a href="#5-反向解析" class="headerlink" title="(5)  反向解析"></a><strong>(5)  </strong>反向解析</h6><p>从映射名（即函数名）到URL地址的解析功能。</p>
+<p>在模板文件中：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;%URL &apos;name&apos; %&#125;</span><br></pre></td></tr></table></figure>
+<p>在Python程序中：django.core.urlresolvers.reverse(‘name’)</p>
+<h4 id="2-视图函数"><a href="#2-视图函数" class="headerlink" title="2.    视图函数"></a><strong>2.    </strong>视图函数</h4><p>​        视图函数是处理HTTP请求的Python函数，视图函数的功能是通过模型层对象处理数据，然后用如下中的一种方式返回HTTP Response:</p>
+<p>a.    直接构造HTTP Body</p>
+<p>b.    用数据渲染HTML模板文件</p>
+<p>c.    如果有逻辑错误，则返回HTTP错误或其他状态</p>
+<h6 id="1-直接构造HTML页面"><a href="#1-直接构造HTML页面" class="headerlink" title="(1)  直接构造HTML页面"></a><strong>(1)  </strong>直接构造HTML页面</h6><p>​         适用于简单的页面，直接构造出返回值后用HttpResponse()函数封装后返回。</p>
+<h6 id="2-用数据渲染HTML模板文件"><a href="#2-用数据渲染HTML模板文件" class="headerlink" title="(2)  用数据渲染HTML模板文件"></a><strong>(2)  </strong>用数据渲染HTML模板文件</h6><p>​         使用render()函数。</p>
+<h6 id="3-返回HTTP错误"><a href="#3-返回HTTP错误" class="headerlink" title="(3)  返回HTTP错误"></a><strong>(3)  </strong>返回HTTP错误</h6><p>​         通过HTTP头中的Status参数表达并用HttpResponse()返回；也可以直接返回Django自带的定义好的Status参数的子类（例如：return HttpResponseNotFound()）。</p>
+<h4 id="3-模板语法"><a href="#3-模板语法" class="headerlink" title="3.    模板语法"></a><strong>3.    </strong>模板语法</h4><p>​        由目标文件（HTML、CSS等）和用于替换动态内容的模板特殊语法组成。</p>
+<h6 id="1-变量替换"><a href="#1-变量替换" class="headerlink" title="(1)  变量替换"></a><strong>(1)  </strong>变量替换</h6>
+<h6 id="2-过滤器"><a href="#2-过滤器" class="headerlink" title="(2)  过滤器"></a><strong>(2)  </strong>过滤器</h6><p>​         放在变量后用于控制变量显示格式的技术。变量与过滤器之间通过管道符号|连接。如下是将upper过滤器应用在moment.headline变量中：</p>
+
+<p>​         此外还有更多不同功能的过滤器。</p>
+<h6 id="3-流程控制"><a href="#3-流程控制" class="headerlink" title="(3)  流程控制"></a><strong>(3)  </strong>流程控制</h6><p>​         模板文件提供流程控制功能：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% for %&#125;</span><br></pre></td></tr></table></figure>
+<p>和</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% if %&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="4-模板继承"><a href="#4-模板继承" class="headerlink" title="(4)  模板继承"></a><strong>(4)  </strong>模板继承</h6><p>​         将多个页面的公共部分写在一个模板文件中，然后在其他模板文件中共享该公用部分的内容。包括两种：父模板文件（公用部分）、子模板文件。视图函数通过渲染继承了父模板文件的子模板文件来获得最终的页面。</p>
+<h3 id="五、-使用Django表单"><a href="#五、-使用Django表单" class="headerlink" title="五、  使用Django表单"></a><strong>五、  使用Django表单</strong></h3><h4 id="1-表单绑定状态"><a href="#1-表单绑定状态" class="headerlink" title="1.    表单绑定状态"></a><strong>1.    </strong>表单绑定状态</h4><p>bound：一个表单对象在实例化且被赋予过数据内容后的状态。此状态具有表单数据验证功能。</p>
+<p>unbound：违背赋予过数据内容的状态。此状态可以被赋予数据。</p>
+<h4 id="2-表单数据验证"><a href="#2-表单数据验证" class="headerlink" title="2.    表单数据验证"></a><strong>2.    </strong>表单数据验证</h4><p>​        在服务器端用Python代码验证表单中数据的合法性。包括：字段属性验证、自定义逻辑验证。</p>
+<h6 id="1-字段属性验证"><a href="#1-字段属性验证" class="headerlink" title="(1)  字段属性验证"></a><strong>(1)  </strong>字段属性验证</h6><p>​         在Form渲染的过程Django会自动根据验证约束要求验证字段内容。开发者也可以在代码中通过is_vaild()函数在代码中获得表单验证是否通过的信息，用errors属性获得错误提示信息。</p>
+<h6 id="2-自定义逻辑验证"><a href="#2-自定义逻辑验证" class="headerlink" title="(2)  自定义逻辑验证"></a><strong>(2)  </strong>自定义逻辑验证</h6><p>​         开发者可以重载Form子类的clean()函数进行自定义逻辑定义。</p>
+<h4 id="3-检查变更字段"><a href="#3-检查变更字段" class="headerlink" title="3.    检查变更字段"></a><strong>3.    </strong>检查变更字段</h4><p>​        Django提供了has_changed()函数来判断用户是否修改过表单数据。此外还能用changed_data()精确定位修改过哪些内容。</p>
+<h3 id="六、-个性化管理员站点"><a href="#六、-个性化管理员站点" class="headerlink" title="六、  个性化管理员站点"></a><strong>六、  个性化管理员站点</strong></h3><p>​       开发者可以通过继承Django定义的管理员数据模型、模板、站点类来开发出个性化的管理员站点。</p>
+<h4 id="1-模型"><a href="#1-模型" class="headerlink" title="1.    模型"></a><strong>1.    </strong>模型</h4><p>​        通过定义继承自django.contrib.admin.ModelAdmin的子类，可以定制个性化的数据模型管理功能，并且需要在应用的admin.py文件中注册模型类时指定该子类。</p>
+<p>​        8个常用的管理类属性。</p>
+<h4 id="2-模板"><a href="#2-模板" class="headerlink" title="2.    模板"></a><strong>2.    </strong>模板</h4><p>​        开发者可以自定义模板文件，具体步骤如下：</p>
+<h6 id="1-定义子模板文件路径"><a href="#1-定义子模板文件路径" class="headerlink" title="(1)  定义子模板文件路径"></a><strong>(1)  </strong>定义子模板文件路径</h6><h6 id="2-修改项目settings-py"><a href="#2-修改项目settings-py" class="headerlink" title="(2)  修改项目settings.py"></a><strong>(2)  </strong>修改项目settings.py</h6><h6 id="3-开发子模板文件"><a href="#3-开发子模板文件" class="headerlink" title="(3)  开发子模板文件"></a><strong>(3)  </strong>开发子模板文件</h6><h6 id="4-测试定制效果"><a href="#4-测试定制效果" class="headerlink" title="(4)  测试定制效果"></a><strong>(4)  </strong>测试定制效果</h6><h4 id="3-站点"><a href="#3-站点" class="headerlink" title="3.    站点"></a><strong>3.    </strong>站点</h4><p>​        如果需要修改一些管理站点中的通用属性，比如管理站点头、站点标题等，则可以通过定义自己的AdminSite类来实现，具体步骤如下：</p>
+<h6 id="1-定义AdminSite子类"><a href="#1-定义AdminSite子类" class="headerlink" title="(1)  定义AdminSite子类"></a><strong>(1)  </strong>定义AdminSite子类</h6><h6 id="2-修改项目urls-py"><a href="#2-修改项目urls-py" class="headerlink" title="(2)  修改项目urls.py"></a><strong>(2)  </strong>修改项目urls.py</h6><h6 id="3-测试定制效果"><a href="#3-测试定制效果" class="headerlink" title="(3)  测试定制效果"></a><strong>(3)  </strong>测试定制效果</h6><p>AdminSite中常用的定制属性：site_header、site_title、site_url、login_form。</p>
+<p><br></p>
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/03/17/浅谈Google文本计算API/" data-toggle="tooltip" data-placement="top"
+                           title="浅谈Google文本计算API">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/03/16/用户行为数据的利用4/" data-toggle="tooltip" data-placement="top"
+                           title="用户行为数据的利用4">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#四、-Django视图层"><span class="toc-text">四、   Django视图层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-URL映射"><span class="toc-text">1.    URL映射</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-普通URL映射"><span class="toc-text">(1)  普通URL映射</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-正则表达式"><span class="toc-text">(2)  正则表达式</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-命名URL参数映射"><span class="toc-text">(3)  命名URL参数映射</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4-分布式URL映射"><span class="toc-text">(4)  分布式URL映射</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#5-反向解析"><span class="toc-text">(5)  反向解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-视图函数"><span class="toc-text">2.    视图函数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-直接构造HTML页面"><span class="toc-text">(1)  直接构造HTML页面</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-用数据渲染HTML模板文件"><span class="toc-text">(2)  用数据渲染HTML模板文件</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-返回HTTP错误"><span class="toc-text">(3)  返回HTTP错误</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-模板语法"><span class="toc-text">3.    模板语法</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-变量替换"><span class="toc-text">(1)  变量替换</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-过滤器"><span class="toc-text">(2)  过滤器</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-流程控制"><span class="toc-text">(3)  流程控制</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4-模板继承"><span class="toc-text">(4)  模板继承</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、-使用Django表单"><span class="toc-text">五、  使用Django表单</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-表单绑定状态"><span class="toc-text">1.    表单绑定状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-表单数据验证"><span class="toc-text">2.    表单数据验证</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-字段属性验证"><span class="toc-text">(1)  字段属性验证</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-自定义逻辑验证"><span class="toc-text">(2)  自定义逻辑验证</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-检查变更字段"><span class="toc-text">3.    检查变更字段</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、-个性化管理员站点"><span class="toc-text">六、  个性化管理员站点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-模型"><span class="toc-text">1.    模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-模板"><span class="toc-text">2.    模板</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-定义子模板文件路径"><span class="toc-text">(1)  定义子模板文件路径</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-修改项目settings-py"><span class="toc-text">(2)  修改项目settings.py</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-开发子模板文件"><span class="toc-text">(3)  开发子模板文件</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4-测试定制效果"><span class="toc-text">(4)  测试定制效果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-站点"><span class="toc-text">3.    站点</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-定义AdminSite子类"><span class="toc-text">(1)  定义AdminSite子类</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-修改项目urls-py"><span class="toc-text">(2)  修改项目urls.py</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-测试定制效果"><span class="toc-text">(3)  测试定制效果</span></a></li></ol></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#前端基础"
+                           title="前端基础">前端基础</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#Python"
+                           title="Python">Python</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

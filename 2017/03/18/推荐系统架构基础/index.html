@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        推荐系统架构基础｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/03/18/推荐系统架构基础/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170318.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170318.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>推荐系统架构基础</h1>
+                    
+                    <h2 class="subheading">【笔记】浅谈推荐系统架构</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-03-18
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#推荐系统"
+                           title="推荐系统">推荐系统</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            推荐系统架构基础
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h3 id="一、-外围架构"><a href="#一、-外围架构" class="headerlink" title="一、  外围架构"></a><strong>一、  外围架构</strong></h3><p><img src="1.png" alt="img"></p>
+<p>​       开发者要通过UI展示的过程向用户推广网站并通过记录用户行为日志获得用户的反应，这就涉及到推荐系统和用户行为数据的存储。</p>
+<p>​       在用户数据的收集和存储中，能否实时获取数据用以推荐系统非常重要，所以，在收集数据时，就要把需要实时存取的数据和不需要实时存取的数据分开存储。</p>
+<p>​       一般来说，需要实时存取的数据存储在数据库和缓存中，不需要实时存取的数据存储在分布式文件系统中。</p>
+<h3 id="二、-推荐系统架构"><a href="#二、-推荐系统架构" class="headerlink" title="二、  推荐系统架构"></a><strong>二、  推荐系统架构</strong></h3><h4 id="1-推荐系统核心任务"><a href="#1-推荐系统核心任务" class="headerlink" title="1.    推荐系统核心任务"></a><strong>1.    推荐系统核心任务</strong></h4><h6 id="1-为给定用户生成特征（人口统计学特征、用户行为特征、用户的话题特征等）"><a href="#1-为给定用户生成特征（人口统计学特征、用户行为特征、用户的话题特征等）" class="headerlink" title="(1)  为给定用户生成特征（人口统计学特征、用户行为特征、用户的话题特征等）"></a><strong>(1)  </strong>为给定用户生成特征（人口统计学特征、用户行为特征、用户的话题特征等）</h6><h6 id="2-根据特征找到物品"><a href="#2-根据特征找到物品" class="headerlink" title="(2)  根据特征找到物品"></a><strong>(2)  </strong>根据特征找到物品</h6><p>推荐系统需要由多个引擎组成，每个推荐引擎负责一类特征和一种任务。</p>
+<p><img src="2.png" alt="img"></p>
+<p>好处：</p>
+<p>​    a.    可以方便地增加/删除引擎</p>
+<p>​    b.    可以实现推荐引擎级别的用户反馈</p>
+<h3 id="三、-推荐引擎架构"><a href="#三、-推荐引擎架构" class="headerlink" title="三、  推荐引擎架构"></a><strong>三、  推荐引擎架构</strong></h3><p>主要包括三部分：</p>
+<p>​    a.    从数据或者缓存中拿到用户行为数据，通过分析不同行为，生成当前用户的特征向量</p>
+<p>​    b.    将用户特征向量通过特征-物品相关矩阵转化为初始推荐物品列表</p>
+<p>​    c.    对初始的推荐列表进行过滤、排名等处理，从而生成最终的推荐结果</p>
+<p><img src="3.png" alt="img"></p>
+<h4 id="1-生成用户特征向量"><a href="#1-生成用户特征向量" class="headerlink" title="1.    生成用户特征向量"></a><strong>1.    生成用户特征向量</strong></h4><p>​    要考虑的因素：</p>
+<p>​    a.    用户行为种类</p>
+<p>​    b.    用户行为产生的时间</p>
+<p>​    c.    用户行为的次数</p>
+<p>​    d.    物品的热门程度</p>
+<h4 id="2-特征-物品相关推荐"><a href="#2-特征-物品相关推荐" class="headerlink" title="2.    特征-物品相关推荐"></a><strong>2.    特征-物品相关推荐</strong></h4><p>​         根据离线的相关表得到初始的物品推荐列表，这时就要用上各种算法计算物品之间的相似度、相关性等参数。</p>
+<p>（上图中有个“候选物品集合”，主要是想在某些情况下，将推荐的物品限定在一个范围内）</p>
+<p>​         物品推荐模块除了要给出推荐物品外，还要注意给出解释列表。</p>
+<h4 id="3-过滤模块"><a href="#3-过滤模块" class="headerlink" title="3.    过滤模块"></a><strong>3.    过滤模块</strong></h4><p>会被过滤的物品：</p>
+<p>​    a.    用户已经产生过行为的物品</p>
+<p>​    b.    候选物品以外的物品（一般是用户施加的一些条件）</p>
+<p>​    c.    某些质量很差的物品</p>
+<h4 id="4-排名模块"><a href="#4-排名模块" class="headerlink" title="4.    排名模块"></a><strong>4.    排名模块</strong></h4><h6 id="1-新颖性排名（不知道的、长尾的）"><a href="#1-新颖性排名（不知道的、长尾的）" class="headerlink" title="(1)  新颖性排名（不知道的、长尾的）"></a><strong>(1)  新颖性排名（不知道的、长尾的）</strong></h6><p>要在推荐引擎的各个部分考虑新颖性问题。</p>
+<p>思路：可以给热门物品降权处理进行新颖性排名</p>
+<h6 id="2-多样性"><a href="#2-多样性" class="headerlink" title="(2)  多样性"></a><strong>(2)  多样性</strong></h6><p>让推荐结果覆盖尽可能多的用户兴趣。</p>
+<p>几种方法：</p>
+<p>​    a.    将推荐结果按照某种物品的内容属性分为几类，然后再唉每个类中都选择该类中排名最高的物品组合成最终的生成列表。（缺点是类别分类具有主观性）</p>
+<p>​    b.    控制不同推荐结果的推荐理由出现的次数。（尽量让推荐理由不同）</p>
+<h6 id="3-时间多样性"><a href="#3-时间多样性" class="headerlink" title="(3)  时间多样性"></a><strong>(3)  时间多样性</strong></h6><p>保证用户不要每天来推荐系统都看到同样的推荐结果。</p>
+<p>入手：</p>
+<p>​    a.    要保证推荐系统的实时性</p>
+<p>​    b.    要在用户没有行为时也能变化推荐结果</p>
+<h6 id="4-用户反馈"><a href="#4-用户反馈" class="headerlink" title="(4)  用户反馈"></a><strong>(4)  用户反馈</strong></h6><p>主要是通过分析用户之间和推荐结果的交互日志，预测用户会对什么样的推荐结果比较感兴趣。</p>
+<p>如果推荐系统的目标是提高用户对推荐结果的点击率，那么可以利用点击模型预测用户是否会点击推荐结果。</p>
+<p>（为了提高在线预测效率，一般可以使用线性模型）</p>
+<h3 id="四、-扩展阅读"><a href="#四、-扩展阅读" class="headerlink" title="四、  扩展阅读"></a><strong>四、  扩展阅读</strong></h3><p>有名的推荐架构： <a href="http://mymediaproject.codeplex.com/" target="_blank" rel="external">MyMedia</a>、<a href="http://www.infoq.com/cn/hulu" target="_blank" rel="external">Hulu架构</a></p>
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/03/20/推荐系统冷启动问题/" data-toggle="tooltip" data-placement="top"
+                           title="推荐系统冷启动问题">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/03/17/浅谈Google文本计算API/" data-toggle="tooltip" data-placement="top"
+                           title="浅谈Google文本计算API">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、-外围架构"><span class="toc-text">一、  外围架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、-推荐系统架构"><span class="toc-text">二、  推荐系统架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-推荐系统核心任务"><span class="toc-text">1.    推荐系统核心任务</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-为给定用户生成特征（人口统计学特征、用户行为特征、用户的话题特征等）"><span class="toc-text">(1)  为给定用户生成特征（人口统计学特征、用户行为特征、用户的话题特征等）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-根据特征找到物品"><span class="toc-text">(2)  根据特征找到物品</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、-推荐引擎架构"><span class="toc-text">三、  推荐引擎架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-生成用户特征向量"><span class="toc-text">1.    生成用户特征向量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-特征-物品相关推荐"><span class="toc-text">2.    特征-物品相关推荐</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-过滤模块"><span class="toc-text">3.    过滤模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-排名模块"><span class="toc-text">4.    排名模块</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-新颖性排名（不知道的、长尾的）"><span class="toc-text">(1)  新颖性排名（不知道的、长尾的）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-多样性"><span class="toc-text">(2)  多样性</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-时间多样性"><span class="toc-text">(3)  时间多样性</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4-用户反馈"><span class="toc-text">(4)  用户反馈</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、-扩展阅读"><span class="toc-text">四、  扩展阅读</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#推荐系统"
+                           title="推荐系统">推荐系统</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

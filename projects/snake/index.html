@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Snake Game</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            text-align: center;
+            background-color: #B8B9B5; 
+        }
+        #cv {
+            text-align: center;
+            margin: 10px 0 10px 0;
+        }
+        .name {
+            font-size: 2em;
+            font-weight: bold;
+            font-family: "Microsoft YaHei";
+            margin: 20px 0 15px 0;
+        }
+        #score {
+            color: red;
+            font-size: 20px;
+            font-family: 'Microsoft YaHei';
+        }
+    </style>
+</head>
+
+<body>
+    <div class="name">Snake Game</div>
+    <div id="score">0</div>
+    <canvas id="cv" width="400" height="400">您的浏览器不支持canvas功能！</canvas>
+    <div>提示：按方向键开始游戏。</div>
+    <script>
+        window.onload = function() {
+            cv = document.getElementById("cv");
+            ctx = cv.getContext("2d");
+            document.addEventListener("keydown", keyPush);
+            setInterval(game, 1000 / speed); //移动速度
+        }
+
+        px = py = 10; //蛇头坐标
+        gs = tc = 20; //像素放大倍数
+        ax = ay = 15; //食物坐标
+        xv = yv = 0; //移动量。每次按键后保持同一个值
+        trail = []; //蛇身数组。蛇头位于数组尾部，保持更新状态
+        tail = 3; //蛇长度
+        lastKey = 0; // 上一次按键
+        score = 0; // 得分
+        speed = 15; //游戏速度
+
+        function game() {
+            px += xv;
+            py += yv;
+            if (px < 0) {
+                px = tc - 1; //从左边界穿过
+            }
+            if (px > tc - 1) {
+                px = 0; //从右边界穿过
+            }
+            if (py < 0) {
+                py = tc - 1; //从上边界穿过
+            }
+            if (py > tc - 1) {
+                py = 0; //从下边界穿过
+            }
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, cv.width, cv.height);
+            ctx.fillStyle = "lime";
+
+            //打印蛇身
+            for (var i = 0; i < trail.length; i++) {
+                ctx.fillRect(trail[i].x * gs, trail[i].y * gs, gs - 2, gs - 2);
+                if (trail[i].x == px && trail[i].y == py) {
+                    tail = 3; //蛇头与蛇身任一处触碰
+                    score = 0;
+                    document.getElementById('score').innerHTML = 0;
+                }
+            }
+
+            //每次更新蛇头
+            trail.push({
+                x: px,
+                y: py
+            });
+
+            //每次弹出蛇尾
+            while (trail.length > tail) {
+                trail.shift();
+            }
+
+            //吃到食物
+            if (ax == px && ay == py) {
+                tail++;
+                ax = Math.floor(Math.random() * tc);
+                ay = Math.floor(Math.random() * tc);
+                document.getElementById('score').innerHTML = (++score);
+            }
+
+            ctx.fillStyle = "red";
+            ctx.fillRect(ax * gs, ay * gs, gs - 2, gs - 2);
+        }
+
+        //按键
+        function keyPush(evt) {
+            switch (evt.keyCode) {
+                case 37:
+                    if (lastKey!=37 && lastKey!=39) {
+                        xv = -1;
+                        yv = 0;
+                    }
+                    break;
+                case 38:
+                    if (lastKey!=38 && lastKey!=40) {
+                        xv = 0;
+                        yv = -1;
+                    }
+                    break;
+                case 39:
+                    if (lastKey!=39 && lastKey!=37) {
+                        xv = 1;
+                        yv = 0;
+                    }
+                    break;
+                case 40:
+                    if (lastKey!=40 && lastKey!=38) {
+                        xv = 0;
+                        yv = 1;
+                    }
+                    break;
+            }
+            lastKey = evt.keyCode;
+        }
+    </script>
+</body>
+
+</html>

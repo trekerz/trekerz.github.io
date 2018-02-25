@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        社交网络数据的利用2｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/03/11/社交网络数据的利用2/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170311.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170311.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>社交网络数据的利用2</h1>
+                    
+                    <h2 class="subheading">【笔记】社交数据挖掘理论——第2部分</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-03-11
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#社交挖掘"
+                           title="社交挖掘">社交挖掘</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            社交网络数据的利用2
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h3 id="四、-给用户推荐好友"><a href="#四、-给用户推荐好友" class="headerlink" title="四、   给用户推荐好友"></a><strong>四、   给用户推荐好友</strong></h3><p>好友关系是社会化网站的重要组成部分，好友推荐系统的目的就是根据<u>用户的好友</u>、<u>用户的行为记录</u>给用户推荐新的好友，从而增加整个社交网络的<u>稠密程度</u>和社交网站用户的<u>活跃度</u>。</p>
+<p>好友推荐算法在社交网络上被称为<u>链接预测</u>，代表文章是Jon Kleinberg的“<u>Link Prediction in SocialNetwork</u>”。</p>
+<h4 id="1-基于内容的匹配"><a href="#1-基于内容的匹配" class="headerlink" title="1.    基于内容的匹配"></a><strong>1.    基于内容的匹配</strong></h4><p>利用内容信息计算用户的相似度和利用内容信息计算物品的相似度类似，常用的内容属性有：</p>
+<p>​    用户人口统计学属性；</p>
+<p>​    用户的兴趣</p>
+<p>​    用户的位置信息</p>
+<h4 id="2-基于共同兴趣的好友推荐"><a href="#2-基于共同兴趣的好友推荐" class="headerlink" title="2.    基于共同兴趣的好友推荐"></a><strong>2.    基于共同兴趣的好友推荐</strong></h4><p>第3章中讲过利用协同过滤算法（UserCF）来计算用户之间的兴趣相似度，在第4章中提到如何分析用户发言的内容、提取文本的关键词、计算文本的相似度等等。</p>
+<h4 id="3-基于社交网络图的好友推荐"><a href="#3-基于社交网络图的好友推荐" class="headerlink" title="3.    基于社交网络图的好友推荐"></a><strong>3.    基于社交网络图的好友推荐</strong></h4><p>在社交网站中，我们会获得用户之间现有的社交网络图，然后基于它给用户推荐新的好友。</p>
+<p>最简单的好友推荐算法就是给用户推荐好友的好友（人人网找老同学）。下面介绍三种基于社交网络的好友推荐算法。</p>
+<p>对于用户u和用户v，我们可以用共同好友比例计算它们的相似度：</p>
+<p><img src="1.png" alt="img"></p>
+<p>out(u)是在社交网络图中用户u指向的其他好友的集合，一般的无向社交网络图中，out(u)和in(u)是相同的集合，但在微博这种有向社交网络中，这两个集合就不同了，因此也可以通过in(u)定义另一种相似度：</p>
+<p><img src="2.png" alt="img"></p>
+<p>用微博来解释这两个公式就是：w<sub>out</sub>(v,u)越大就表示用户u和用户v关注的用户集合重合度越大，w<sub>in</sub>(v,u)越大就表示关注用户u和关注用户v的用户的集合重合度越大。</p>
+<p>前两种相似度都是对称的，即w<sub>out</sub>(v,u)=w<sub>out</sub>(u,v)，w<sub>in</sub>(u,v)=w<sub>in</sub>(v,u)。同时，我们还能定义第三种有向的相似度：</p>
+<p><img src="3.png" alt="img"></p>
+<p>这个相似度的含义是用户u关注的用户里面有多大比例关注了用户v。但有个缺点就是，该相似度的定义中所有人都和名人有很大的相似度，这是因为这个公式的分母中没有考虑到|in(v)|的大小。因此就有了如下改进：</p>
+<p><img src="4.png" alt="img"></p>
+<p>上面这些公式都是基于一些简单的计算公式给出的，无论时间复杂度还是空间复杂度都不高，<u>非常适合在线应用使用</u>。</p>
+<h5 id=""><a href="#" class="headerlink" title=" "></a> </h5><p><strong>离线实验</strong></p>
+<p>​        这个实验在于评测哪种相似度能更好地预测用户之间的好友关系。</p>
+<p>​        <u>互联网上有很多社交网络数据集，比较著名的有斯坦福大学的大规模网络数据集<a href="http://snap.stanford.edu/data" target="_blank" rel="external">http://snap.stanford.edu/data</a></u>，该数据集包括很多链接结构数据集，包括社交网络数据集、互联网超级链接数据集、道路交通数据集、用户行为网络、论文应用网络等。这里我们使用该集合提供的Slashdot社交网络数据集，该数据集是一个有向图，包含82168个顶点、948464条边。</p>
+<p>​        这里将数据集按照9:1分成训练集和测试集，然后给定用户u，利用训练集中的社交网络给用户生成长度为10的好友推荐列表R(u)，其中R(u)中的用户不包含用户u在训练集中的好友。下表展示了召回率和准确率：</p>
+<p><img src="5.png" alt="img"></p>
+<p>​        可以看出，<u>不同数据集上不同算法那的性能并不相同</u>。在Slashdot上，w<sub>in</sub>取得了最好的性能；在Epinion上，w<sub>out,in</sub>取得了最好的性能。</p>
+<h4 id="4-基于用户调查的好友推荐算法对比"><a href="#4-基于用户调查的好友推荐算法对比" class="headerlink" title="4.    基于用户调查的好友推荐算法对比"></a><strong>4.    基于用户调查的好友推荐算法对比</strong></h4><p>上面提到的三种不同的好友推荐算法，GroupLen的Jilin Chen进行了研究，他通过用户调查对比了不同算法的用户满意度。算法包括：</p>
+<p>​    InterestBased：给用户推荐和他兴趣相似的其它用户。</p>
+<p>​    SocialBased：基于社交网络给用户推荐他好友的好友作为好友。</p>
+<p>​    Interest+Social：上述两种算法的按权重融合。</p>
+<p>​    SONA：IBM内部的推荐算法。该算法利用了IBM员工信息建立的内部社交网络。</p>
+<p> Jilin Chen在IBM数据的基础上用上述算法建立4中好友推荐系统，然后参试的用户提供12个推荐（每个算法3个），然后问卷调查，调查结果如下表：</p>
+<p><img src="6.png" alt="img"></p>
+<p>从结果可以发现，对推荐结果的新颖性，不同算法排名如下：</p>
+<p>​    InterestBased &gt; Interest+Social &gt; SocialBased &gt;SONA（因为SONA是IBM内部的）</p>
+<p>从用户认为推荐结果是否好的比例看，不同算法排名如下：</p>
+<p>​    SONA &gt; SocialBased &gt; Interest+Social &gt; InterestBased</p>
+<h4 id="五、-扩展阅读"><a href="#五、-扩展阅读" class="headerlink" title="五、  扩展阅读"></a><strong>五、  扩展阅读</strong></h4><h5 id="1-六度原理"><a href="#1-六度原理" class="headerlink" title="1.    六度原理"></a><strong>1.    </strong><a href="https://baike.baidu.com/item/%E5%85%AD%E5%BA%A6%E4%BA%BA%E8%84%89%E7%90%86%E8%AE%BA/8838624" target="_blank" rel="external">六度原理</a></h5><h5 id="2-随机图论"><a href="#2-随机图论" class="headerlink" title="2.    随机图论"></a><strong>2.    </strong><a href="http://mathworld.wolfram.com/RandomGraph.html" target="_blank" rel="external">随机图论</a></h5><h5 id="3-社交网络的两个著名问题"><a href="#3-社交网络的两个著名问题" class="headerlink" title="3.    社交网络的两个著名问题"></a><strong>3.    </strong>社交网络的两个著名问题</h5><p>​    (1)  如何度量人的重要性，也就是顶点的中心度。</p>
+<p>​    (2)  如何度量人与人之间的关系，也就是链接预测。</p>
+<h5 id="4-基于矩阵分解的社会化推荐算法"><a href="#4-基于矩阵分解的社会化推荐算法" class="headerlink" title="4.    基于矩阵分解的社会化推荐算法"></a><strong>4.    </strong><a href="http://blog.csdn.net/sun_168/article/details/20637833" target="_blank" rel="external">基于矩阵分解的社会化推荐算法</a></h5>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/03/13/推荐系统测评指标/" data-toggle="tooltip" data-placement="top"
+                           title="推荐系统测评指标">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/03/02/Facebook开发基础/" data-toggle="tooltip" data-placement="top"
+                           title="Facebook开发基础">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#四、-给用户推荐好友"><span class="toc-text">四、   给用户推荐好友</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-基于内容的匹配"><span class="toc-text">1.    基于内容的匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-基于共同兴趣的好友推荐"><span class="toc-text">2.    基于共同兴趣的好友推荐</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-基于社交网络图的好友推荐"><span class="toc-text">3.    基于社交网络图的好友推荐</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#"><span class="toc-text"> </span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-基于用户调查的好友推荐算法对比"><span class="toc-text">4.    基于用户调查的好友推荐算法对比</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#五、-扩展阅读"><span class="toc-text">五、  扩展阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-六度原理"><span class="toc-text">1.    六度原理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-随机图论"><span class="toc-text">2.    随机图论</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-社交网络的两个著名问题"><span class="toc-text">3.    社交网络的两个著名问题</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-基于矩阵分解的社会化推荐算法"><span class="toc-text">4.    基于矩阵分解的社会化推荐算法</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#社交挖掘"
+                           title="社交挖掘">社交挖掘</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

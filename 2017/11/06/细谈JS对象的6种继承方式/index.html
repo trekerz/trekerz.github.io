@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        细谈JS对象的6种继承方式｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/11/06/细谈JS对象的6种继承方式/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null171106.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null171106.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>细谈JS对象的6种继承方式</h1>
+                    
+                    <h2 class="subheading">对象的属性和访问</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-11-06
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#前端基础"
+                           title="前端基础">前端基础</a>
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            细谈JS对象的6种继承方式
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>ECMA只支持<strong>实现继承</strong>，不支持<strong>接口继承</strong>。</p>
+<h2 id="1-原型链"><a href="#1-原型链" class="headerlink" title="1.原型链"></a><strong>1.原型链</strong></h2><h4 id="1-原理"><a href="#1-原理" class="headerlink" title="(1) 原理"></a><strong>(1) 原理</strong></h4><p>让原型对象等于另一个类型的实例。</p>
+<p><img src="1.png" alt="img"></p>
+<h4 id="2-搜索属性的顺序"><a href="#2-搜索属性的顺序" class="headerlink" title="(2) 搜索属性的顺序"></a><strong>(2) 搜索属性的顺序</strong></h4><p>实例 –&gt;SubType.prototype –&gt; SuperType.prototype</p>
+<p>注意：连接原型链时不是SubType的原型的constructor属性被重写了，<u>而是SubType的原型指向了另一个对象——SuperType的原型</u>，而这个原型的constructor属性指向SuperType。</p>
+<h4 id="3-instanceof"><a href="#3-instanceof" class="headerlink" title="(3) instanceof"></a><strong>(3) instanceof</strong></h4><p>用来确定原型和实例的关系</p>
+<p><img src="2.png" alt="img"></p>
+<h4 id="4-isPrototypeOf"><a href="#4-isPrototypeOf" class="headerlink" title="(4) isPrototypeOf()"></a><strong>(4) <font color="#F1BE4D">isPrototypeOf()</font></strong></h4><p><img src="3.png" alt="img"></p>
+<h4 id="5-谨慎地定义方法"><a href="#5-谨慎地定义方法" class="headerlink" title="(5) 谨慎地定义方法"></a><strong>(5) 谨慎地定义方法</strong></h4><p>即：给原型添加方法的代码一定要放在替换原型的语句之后；且要注意不能使用字面量即{ }方式添加原型，否则替换的原型就无效了。</p>
+<p><img src="4.png" alt="img"></p>
+<p>注意：SuperType里本来就有getSuperValue方法，这里被SubType重写覆盖了，故在调用SubType.getSuperValue()时会用重写后的方法，但在调用SuperType.getSuperValue()时仍是使用SuperType里的该方法。</p>
+<h4 id="6-原型链的缺点"><a href="#6-原型链的缺点" class="headerlink" title="(6) 原型链的缺点"></a><strong>(6) 原型链的缺点</strong></h4><ul>
+<li>超类中包含引用类型值的属性会被所有实例共享，这时由于子类的原型就是超类的一个实例，所以子类的每个实例会共享一个引用类型值。</li>
+</ul>
+<p><img src="5.png" alt="img"></p>
+<ul>
+<li>在创建子类的实例时，不能向超类的构造函数中传递参数。</li>
+</ul>
+<p>鉴于此两缺点，实践中很少单独使用原型链。</p>
+<h2 id="2-借用构造函数"><a href="#2-借用构造函数" class="headerlink" title="2.借用构造函数"></a><strong>2.借用构造函数</strong></h2><h4 id="1-原理-1"><a href="#1-原理-1" class="headerlink" title="(1) 原理"></a><strong>(1) 原理</strong></h4><p>在子类型构造函数的内部调用超类型构造函数。<u>这样一来SubType的每个实例就都会有自己的colors属性副本了，而且还可以传递初始化参数</u>。</p>
+<p><img src="6.png" alt="img"></p>
+<h4 id="2-缺点"><a href="#2-缺点" class="headerlink" title="(2) 缺点"></a><strong>(2) 缺点</strong></h4><ul>
+<li>构造函数模式存在的问题：方法都在构造函数中定义，因此函数复用就无从谈起了。</li>
+<li>在超类型的原型中定义的方法，对子类型而言也是不可见的，结果所有类型只能使用构造函数模式。</li>
+</ul>
+<p>鉴于此两点，借用构造函数模式也很少单独使用。</p>
+<h2 id="3-组合继承（最常用）"><a href="#3-组合继承（最常用）" class="headerlink" title="3.组合继承（最常用）"></a><strong>3.组合继承（最常用）</strong></h2><h4 id="1-原理-2"><a href="#1-原理-2" class="headerlink" title="(1) 原理"></a><strong>(1) 原理</strong></h4><p>使用原型链实现对原型属性和方法的继承，而通过借用构造函数来实现对实例属性的继承。</p>
+<h4 id="2-优点"><a href="#2-优点" class="headerlink" title="(2) 优点"></a><strong>(2) 优点</strong></h4><ul>
+<li>每个实例拥有自己的属性；</li>
+<li>每个实例可以使用相同的方法。</li>
+<li>Instanceof和isPrototypeOf()能够识别此方法创建的对象。</li>
+</ul>
+<h4 id="3-缺点"><a href="#3-缺点" class="headerlink" title="(3) 缺点"></a><strong>(3) 缺点</strong></h4><p>每次都会调用两次超类型构造函数。</p>
+<h2 id="4-原型式继承"><a href="#4-原型式继承" class="headerlink" title="4.原型式继承"></a><strong>4.原型式继承</strong></h2><h4 id="1-原理-3"><a href="#1-原理-3" class="headerlink" title="(1) 原理"></a><strong>(1) 原理</strong></h4><p>基于已有的对象创建新对象，同时还不必因此创建自定义类型。</p>
+<p><img src="7.png" alt="img"></p>
+<p>这相当于把对象o进行了一次<u>浅复制</u>。</p>
+<p>例子：</p>
+<p><img src="8.png" alt="img"></p>
+<p>新对象将person作为原型，其中包含一个基本类型属性name和一个引用类型属性friends，其中friends会被两个新对象所共享。</p>
+<h4 id="2-ES5中的实现——Object-create"><a href="#2-ES5中的实现——Object-create" class="headerlink" title="(2) ES5中的实现——Object.create()"></a><strong>(2) ES5中的实现——<font color="#F1BE4D">Object.create()</font></strong></h4><p>接收2个参数：作为新对象的原型的对象、新对象额外属性组成的对象（可选）。</p>
+<h4 id="3-优点"><a href="#3-优点" class="headerlink" title="(3) 优点"></a><strong>(3) 优点</strong></h4><p>在没有必要创建构造函数，只想让一个对象与另一个对象保持类似的情况下，此种方法可以胜任。</p>
+<h4 id="4-缺点"><a href="#4-缺点" class="headerlink" title="(4) 缺点"></a><strong>(4) 缺点</strong></h4><p>会存在与原型模式一样的情况——引用类型值属性会被共享。</p>
+<h2 id="5-寄生式继承"><a href="#5-寄生式继承" class="headerlink" title="5.寄生式继承"></a><strong>5.寄生式继承</strong></h2><h4 id="1-原理-4"><a href="#1-原理-4" class="headerlink" title="(1) 原理"></a><strong>(1) 原理</strong></h4><p>创建一个仅用于封装继承过程的函数，该函数在内部以某种方式来增强对象，最后再像真的是它做了所有工作一样返回对象。</p>
+<p><img src="9.png" alt="img"></p>
+<p>（<u>是与原型式继承紧密相关的一种思路</u>，构造上与寄生构造函数模式、工厂模式很像。）</p>
+<h4 id="2-适用场景"><a href="#2-适用场景" class="headerlink" title="(2) 适用场景"></a><strong>(2) 适用场景</strong></h4><p>在主要考虑对象而不是自定义类型和构造函数的情况下可用。</p>
+<p>注意：其中的object()函数不是必需的，任何能返回新对象的函数都适用于此模式。</p>
+<h4 id="3-缺点-1"><a href="#3-缺点-1" class="headerlink" title="(3) 缺点"></a><strong>(3) 缺点</strong></h4><p>会存在与构造函数模式一样的情况——不能做到函数复用（此例中的sayHi方法）。</p>
+<h2 id="6-寄生组合式继承"><a href="#6-寄生组合式继承" class="headerlink" title="6.寄生组合式继承"></a><strong>6.寄生组合式继承</strong></h2><h4 id="1-原理-5"><a href="#1-原理-5" class="headerlink" title="(1) 原理"></a><strong>(1) 原理</strong></h4><p>寄生组合式继承是为了解决组合继承中两次调用超类型构造函数的问题的。</p>
+<p><img src="10.png" alt="img"></p>
+<p>如上图：第一次调用的时候<u>对超类型进行了实例化</u>，此时<u>超类型中的实例属性name和colors被继承到SubType的原型中</u>；第二次调用的时候又会<u>再次把SuperType的两个实例属性赋到SubType的实例中</u>。这样过后，SubType原型中的name和colors就被实例中的name和colors覆盖了。</p>
+<p>下图是寄生组合继承的原理图：</p>
+<p><img src="11.png" alt="img"></p>
+<p>运用了<u>原型式继承</u>。使用时只需将组合击沉中的“SubType.prototype = new SuperType();”替换成inheritPrototype(subType,superType);即可。</p>
+<h4 id="2-优点-1"><a href="#2-优点-1" class="headerlink" title="(2) 优点"></a><strong>(2) 优点</strong></h4><ul>
+<li>只调用了一次超类型构造函数，避免了创建多余的属性；</li>
+<li>原型链还能保持不变，还能正常使用instanceof和isPrototypeOf()。</li>
+</ul>
+<p>鉴于此两优点，<u>寄生组合式继承是引用类型最理想的继承范式</u>。</p>
+<p><br></p>
+<center>-&nbsp;<em>end</em>&nbsp;-</center>
+
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/11/12/DOM总结/" data-toggle="tooltip" data-placement="top"
+                           title="DOM总结">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/11/03/细谈创建JS对象的7种方式/" data-toggle="tooltip" data-placement="top"
+                           title="细谈创建JS对象的7种方式">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-原型链"><span class="toc-text">1.原型链</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-原理"><span class="toc-text">(1) 原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-搜索属性的顺序"><span class="toc-text">(2) 搜索属性的顺序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-instanceof"><span class="toc-text">(3) instanceof</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-isPrototypeOf"><span class="toc-text">(4) isPrototypeOf()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-谨慎地定义方法"><span class="toc-text">(5) 谨慎地定义方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-原型链的缺点"><span class="toc-text">(6) 原型链的缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-借用构造函数"><span class="toc-text">2.借用构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-原理-1"><span class="toc-text">(1) 原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-缺点"><span class="toc-text">(2) 缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-组合继承（最常用）"><span class="toc-text">3.组合继承（最常用）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-原理-2"><span class="toc-text">(1) 原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-优点"><span class="toc-text">(2) 优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-缺点"><span class="toc-text">(3) 缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-原型式继承"><span class="toc-text">4.原型式继承</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-原理-3"><span class="toc-text">(1) 原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-ES5中的实现——Object-create"><span class="toc-text">(2) ES5中的实现——Object.create()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-优点"><span class="toc-text">(3) 优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-缺点"><span class="toc-text">(4) 缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-寄生式继承"><span class="toc-text">5.寄生式继承</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-原理-4"><span class="toc-text">(1) 原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-适用场景"><span class="toc-text">(2) 适用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-缺点-1"><span class="toc-text">(3) 缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-寄生组合式继承"><span class="toc-text">6.寄生组合式继承</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-原理-5"><span class="toc-text">(1) 原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-优点-1"><span class="toc-text">(2) 优点</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#前端基础"
+                           title="前端基础">前端基础</a>
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

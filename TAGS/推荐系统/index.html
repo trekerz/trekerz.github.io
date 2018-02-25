@@ -1,0 +1,2039 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/tags/推荐系统/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="true
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+<style>
+    .intro-header .site-heading {
+        margin: 50px;
+    }
+    
+    header.intro-header {
+        background-image: url('default-img.jpg')
+    }
+    
+</style>
+
+<!-- Page Header -->
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <div class="site-heading text-center">
+                    <h1>ARCHIVE</h1>
+                    <span class="subheading">可以根据归档日期检索所有文件</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <!-- archive list -->
+            
+				
+				
+				
+					
+					
+					<div class="archive archive-year" data-date="2017">
+						<h2 class="archive-title">
+						<span class="fa fa-archive">
+							2017年
+						</span>
+						</h2>
+				
+				
+					
+					
+					<div class="archive archive-month" data-date="201712">
+						<h3 class="archive-title">
+							12月
+						</h3>
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/12/03/dpr-devicePixelRatio-的概念与应用/">
+                        <h4 class="post-title">
+                            dpr(devicePixelRatio)的概念与应用
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            对设备像素比的理解
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+					
+					</div><!--month-->
+					
+					
+					<div class="archive archive-month" data-date="201711">
+						<h3 class="archive-title">
+							11月
+						</h3>
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/11/28/浏览器js脚本与防止抢购脚本的方案/">
+                        <h4 class="post-title">
+                            浏览器js脚本与防止抢购脚本的方案
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            前端防重复点击方案
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/11/27/在JS中用for-in-遍历数组的问题与解决/">
+                        <h4 class="post-title">
+                            JS中用for...in...遍历数组遇到的坑
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            尾部多出函数项
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/11/22/CSS格式化上下文概念解析/">
+                        <h4 class="post-title">
+                            CSS格式化上下文概念解析
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            BFC(详细)、IFC、GFC、FFC
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/11/21/CSS处理居中问题总结/">
+                        <h4 class="post-title">
+                            CSS处理居中问题总结
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            水平居中、水平垂直居中
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/11/20/Flex布局总结与实例/">
+                        <h4 class="post-title">
+                            Flex布局总结与实例
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【整理】flex容器项目属性、骰子实例
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/11/13/几种多列布局的实现方法/">
+                        <h4 class="post-title">
+                            几种多列布局的实现方法
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            定宽与自适应、九宫格等利用float、table以及flex的实现
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/11/12/JS函数表达式的应用/">
+                        <h4 class="post-title">
+                            JS函数表达式的应用
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            递归、闭包、模仿块级作用域、私有变量
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/11/12/DOM总结/">
+                        <h4 class="post-title">
+                            DOM总结
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            DOM知识点
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/11/06/细谈JS对象的6种继承方式/">
+                        <h4 class="post-title">
+                            细谈JS对象的6种继承方式
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            对象的属性和访问
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/11/03/细谈创建JS对象的7种方式/">
+                        <h4 class="post-title">
+                            细谈创建JS对象的7种方式
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            JS对象的创建
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/11/02/BOM总结/">
+                        <h4 class="post-title">
+                            BOM总结
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            BOM知识点
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/11/02/理解JavaScript对象/">
+                        <h4 class="post-title">
+                            理解JavaScript对象
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            对象的属性和访问
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+					
+					</div><!--month-->
+					
+					
+					<div class="archive archive-month" data-date="201710">
+						<h3 class="archive-title">
+							10月
+						</h3>
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/10/31/JS引用类型总结/">
+                        <h4 class="post-title">
+                            JS引用类型总结
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            JavaScript细节
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/10/09/JS设计模式16-享元模式/">
+                        <h4 class="post-title">
+                            JS设计模式16-享元模式
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            气泡对象池例子
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/10/08/JS设计模式15-职责链模式/">
+                        <h4 class="post-title">
+                            JS设计模式15-职责链模式
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            交押金预定手机
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+					
+					</div><!--month-->
+					
+					
+					<div class="archive archive-month" data-date="201709">
+						<h3 class="archive-title">
+							09月
+						</h3>
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/09/30/JS设计模式14-备忘录模式/">
+                        <h4 class="post-title">
+                            JS设计模式14-备忘录模式
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            分页和撤销例子
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/09/25/JS设计模式13-组合模式/">
+                        <h4 class="post-title">
+                            JS设计模式13-组合模式
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            文件扫描例子
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/09/24/JS设计模式12-模板方法模式/">
+                        <h4 class="post-title">
+                            JS设计模式12-模板方法模式
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            IT公司面试例子
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/09/21/JS设计模式11-访问者模式/">
+                        <h4 class="post-title">
+                            JS设计模式11-访问者模式
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            访问一个类
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/09/19/JS设计模式10-外观模式/">
+                        <h4 class="post-title">
+                            JS设计模式10-外观模式
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            兼容不同浏览器
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/09/15/JS设计模式9-迭代器模式/">
+                        <h4 class="post-title">
+                            JS设计模式9-迭代器模式
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            不同浏览器中的上传方法
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/09/11/JS设计模式8-适配器模式/">
+                        <h4 class="post-title">
+                            JS设计模式8-适配器模式
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            两种库$和get转换
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/09/10/JS设计模式7-发布订阅者模式/">
+                        <h4 class="post-title">
+                            JS设计模式7-发布订阅者模式
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            买家卖家
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/09/02/JS设计模式6-装饰者模式/">
+                        <h4 class="post-title">
+                            JS设计模式6-装饰者模式
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            雷霆战机吃道具
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+					
+					</div><!--month-->
+					
+					
+					<div class="archive archive-month" data-date="201708">
+						<h3 class="archive-title">
+							08月
+						</h3>
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/08/31/JS设计模式5-中介者模式/">
+                        <h4 class="post-title">
+                            JS设计模式5-中介者模式
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            手机购买按钮
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/08/29/JS设计模式4-代理模式/">
+                        <h4 class="post-title">
+                            JS设计模式4-代理模式
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            加法缓存结果
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/08/25/JS设计模式3-策略模式/">
+                        <h4 class="post-title">
+                            JS设计模式3-策略模式
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            表单的多重验证
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/08/24/JS设计模式2-单例模式/">
+                        <h4 class="post-title">
+                            JS设计模式2-单例模式
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            登录模态框
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/08/22/JS设计模式1-工厂模式/">
+                        <h4 class="post-title">
+                            JS设计模式1-工厂模式
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            RPG游戏中的职业
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/08/16/JS设计模式概览/">
+                        <h4 class="post-title">
+                            JS设计模式概览
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            「简述18种常用设计模式」
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/08/06/浅谈JS垃圾收集/">
+                        <h4 class="post-title">
+                            浅谈JS垃圾收集
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            JavaScript细节
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/08/06/JS变量类型和作用域/">
+                        <h4 class="post-title">
+                            JS变量类型和作用域
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            JavaScript细节
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+					
+					</div><!--month-->
+					
+					
+					<div class="archive archive-month" data-date="201707">
+						<h3 class="archive-title">
+							07月
+						</h3>
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/07/27/图解HTML、XHTML、SGML、XML的关系/">
+                        <h4 class="post-title">
+                            图解HTML、XHTML、SGML、XML的关系
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】html的细节
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/07/21/各大网站CSS代码初始化集合/">
+                        <h4 class="post-title">
+                            各大网站CSS代码初始化集合
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】CSS初始化经验
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/07/21/Schema和DTD的区别/">
+                        <h4 class="post-title">
+                            Schema和DTD的区别
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】html的细节
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/07/20/逻辑与或的操作数对结果的影响/">
+                        <h4 class="post-title">
+                            逻辑与或的操作数对结果的影响
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】JavaScript细节
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+					
+					</div><!--month-->
+					
+					
+					<div class="archive archive-month" data-date="201705">
+						<h3 class="archive-title">
+							05月
+						</h3>
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/05/17/常用推荐系统算法总结及性能比较/">
+                        <h4 class="post-title">
+                            常用推荐系统算法总结及性能比较
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【转载】
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+					
+					</div><!--month-->
+					
+					
+					<div class="archive archive-month" data-date="201704">
+						<h3 class="archive-title">
+							04月
+						</h3>
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/04/24/分类、推荐算法笔记/">
+                        <h4 class="post-title">
+                            分类、推荐算法笔记
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】算法概念
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/04/22/4月22日推荐算法适用性分析/">
+                        <h4 class="post-title">
+                            4月22日推荐算法适用性分析
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】算法适用性分析
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+					
+					</div><!--month-->
+					
+					
+					<div class="archive archive-month" data-date="201703">
+						<h3 class="archive-title">
+							03月
+						</h3>
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/26/深度学习笔记4/">
+                        <h4 class="post-title">
+                            深度学习笔记4
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】限制玻尔兹曼机（RBM）和深信度网络
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/25/挖掘网页：自然语言处理/">
+                        <h4 class="post-title">
+                            挖掘网页：自然语言处理
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】NLP
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/24/深度学习笔记3/">
+                        <h4 class="post-title">
+                            深度学习笔记3
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】稀疏编码
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/23/利用用户标签数据推荐2/">
+                        <h4 class="post-title">
+                            利用用户标签数据推荐2
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】用户标签
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/22/深度学习笔记2/">
+                        <h4 class="post-title">
+                            深度学习笔记2
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】DL基础
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/21/利用用户标签数据推荐/">
+                        <h4 class="post-title">
+                            利用用户标签数据推荐
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】用户标签
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/20/推荐系统冷启动问题/">
+                        <h4 class="post-title">
+                            推荐系统冷启动问题
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】浅谈冷启动
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/18/推荐系统架构基础/">
+                        <h4 class="post-title">
+                            推荐系统架构基础
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】浅谈推荐系统架构
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/17/浅谈Google文本计算API/">
+                        <h4 class="post-title">
+                            浅谈Google文本计算API
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】文档相似度、提取匹配
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/16/Django基础2/">
+                        <h4 class="post-title">
+                            Django基础2
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】Django框架基础知识——第2部分
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/16/用户行为数据的利用4/">
+                        <h4 class="post-title">
+                            用户行为数据的利用4
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】隐语义模型
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/15/用户行为数据的利用3/">
+                        <h4 class="post-title">
+                            用户行为数据的利用3
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】隐语义模型
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/14/Django基础/">
+                        <h4 class="post-title">
+                            Django基础
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】Django框架基础知识
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/14/用户行为数据的利用2/">
+                        <h4 class="post-title">
+                            用户行为数据的利用2
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】UserCF和ItemCF
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/13/Python网络框架纵览/">
+                        <h4 class="post-title">
+                            Python网络框架纵览
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】Python基础
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/13/用户行为数据的利用/">
+                        <h4 class="post-title">
+                            用户行为数据的利用
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】基础与实验
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/13/推荐系统测评指标/">
+                        <h4 class="post-title">
+                            推荐系统测评指标
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】如题
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/11/社交网络数据的利用2/">
+                        <h4 class="post-title">
+                            社交网络数据的利用2
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】社交数据挖掘理论——第2部分
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/02/Facebook开发基础/">
+                        <h4 class="post-title">
+                            Facebook开发基础
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】浅谈FacebookAPI
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/02/Twitter开发基础/">
+                        <h4 class="post-title">
+                            Twitter开发基础
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】浅谈TwitterAPI
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/03/01/网站架构2/">
+                        <h4 class="post-title">
+                            网站架构2
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】常用网站架构
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+					
+					</div><!--month-->
+					
+					
+					<div class="archive archive-month" data-date="201702">
+						<h3 class="archive-title">
+							02月
+						</h3>
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/02/28/数据库及ORM基础/">
+                        <h4 class="post-title">
+                            数据库及ORM基础
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】算法概念
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/02/28/社交网络数据的利用/">
+                        <h4 class="post-title">
+                            社交网络数据的利用
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】社交数据挖掘理论
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/02/28/客户端的编程技术/">
+                        <h4 class="post-title">
+                            客户端的编程技术
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】HTML、CSS、JS
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/02/27/网站架构/">
+                        <h4 class="post-title">
+                            网站架构
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】常用网站架构
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/02/27/Web编程之网络基础/">
+                        <h4 class="post-title">
+                            Web编程之网络基础
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】计算机网络知识
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/02/27/Python基础知识/">
+                        <h4 class="post-title">
+                            Python基础知识
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】Python基础
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+					
+					</div><!--month-->
+					
+					
+					<div class="archive archive-month" data-date="201701">
+						<h3 class="archive-title">
+							01月
+						</h3>
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/01/28/同步io、异步io、阻塞和非阻塞之间的关系/">
+                        <h4 class="post-title">
+                            同步io、异步io、阻塞和非阻塞之间的关系
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】举例说明
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/01/12/论文阅读中遇到的相关概念解析/">
+                        <h4 class="post-title">
+                            论文阅读中遇到的算法概念解析
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】多图！多图！多图！
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/01/10/连接求职者和职位——一种互惠推荐方法/">
+                        <h4 class="post-title">
+                            连接求职者和职位——一种互惠推荐方法
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【论文笔记】经典职场互惠推荐问题
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/01/08/基于多匹配子组的人际推荐/">
+                        <h4 class="post-title">
+                            基于多匹配子组的人际推荐
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【论文笔记】从单匹配到多匹配
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/01/05/一个利用LDA和Social-Folksonomy的语义化分类推荐系统/">
+                        <h4 class="post-title">
+                            一个利用LDA和Social Folksonomy的语义化分类推荐系统
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【论文笔记】浅谈利用聚类分布的语义化分类
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/01/05/Folksonomy分类法简介/">
+                        <h4 class="post-title">
+                            Folksonomy分类法简介
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】标签分类算法
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/01/05/K-Means聚类算法简介/">
+                        <h4 class="post-title">
+                            K-Means聚类算法简介
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】经典聚类算法
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2017/01/05/LDA算法简介/">
+                        <h4 class="post-title">
+                            LDA算法简介
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【笔记】文档主题生成模型算法
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+					
+					</div><!--month-->
+					</div><!--year-->
+					
+					
+					
+					<div class="archive archive-year" data-date="2016">
+						<h2 class="archive-title">
+						<span class="fa fa-archive">
+							2016年
+						</span>
+						</h2>
+				
+				
+					
+					
+					<div class="archive archive-month" data-date="201612">
+						<h3 class="archive-title">
+							12月
+						</h3>
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2016/12/09/常见推荐算法解析/">
+                        <h4 class="post-title">
+                            常见推荐算法解析
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【转载】推荐算法
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2016/12/07/开放式协同合作中的信誉系统/">
+                        <h4 class="post-title">
+                            开放式协同合作中的信誉系统
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【论文笔记】浅析WikiTrust和Crowdsensus
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2016/12/07/RECON-在线交友双向推荐器/">
+                        <h4 class="post-title">
+                            RECON-在线交友双向推荐器
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            【论文笔记】一个澳洲交友网站的推荐系统实践
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+				
+				
+				
+				
+					
+					</div><!--month-->
+					
+					
+					<div class="archive archive-month" data-date="201609">
+						<h3 class="archive-title">
+							09月
+						</h3>
+				
+				<div class="one-tag-list">
+                <div class="post-preview">
+                    <a href="/2016/09/29/Windows下Apache-PHP-MySQL搭建历程/">
+                        <h4 class="post-title">
+                            Windows下Apache+PHP+MySQL搭建历程
+                        </h4>
+                        
+                        <h4 class="post-subtitle">
+                            从前端到后台
+                        </h4>
+                        
+                    </a>
+                </div>
+				<hr>
+				</div>
+            
+        </div>
+    </div>
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

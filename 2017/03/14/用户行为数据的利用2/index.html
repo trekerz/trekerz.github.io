@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        用户行为数据的利用2｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/03/14/用户行为数据的利用2/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170314.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170314.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>用户行为数据的利用2</h1>
+                    
+                    <h2 class="subheading">【笔记】UserCF和ItemCF</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-03-14
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#社交挖掘"
+                           title="社交挖掘">社交挖掘</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            用户行为数据的利用2
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h3 id="四、-基于邻域的算法"><a href="#四、-基于邻域的算法" class="headerlink" title="四、  基于邻域的算法"></a><strong>四、  基于邻域的算法</strong></h3><p>分为两类：基于用户的协同过滤算法UserCF、基于物品的协同过滤算法ItemCF。</p>
+<h5 id="1-基于用户的协同过滤算法"><a href="#1-基于用户的协同过滤算法" class="headerlink" title="1.    基于用户的协同过滤算法"></a><strong>1.    </strong>基于用户的协同过滤算法</h5><p>主要两个步骤：</p>
+<p>​    a.    找到和目标用户兴趣相似的用户集合</p>
+<p>​    b.    找到这个集合中的用户喜欢的，且目标用户没有听说过的物品推荐给目标用户</p>
+<h6 id="1-计算两个用户兴趣的相似度（利用用户行为）"><a href="#1-计算两个用户兴趣的相似度（利用用户行为）" class="headerlink" title="(1)  计算两个用户兴趣的相似度（利用用户行为）"></a>(1)  计算两个用户兴趣的相似度（利用用户行为）</h6><p>给定用户u和用户v，令N(u)表示用户u曾经有过正反馈的物品集合，令N(v)表示用户v曾经有过正反馈的集合。那么，u和v的兴趣相似度就可以用如下Jaccard公式计算：</p>
+<p><img src="1.png" alt="img"></p>
+<p>或通过余弦相似度计算：</p>
+<p><img src="2.png" alt="img"></p>
+<p>（关于算法方面要说的：很多用户其实并没有相交的物品，所以考虑到时间复杂度，可以先判断哪些用户的 ，然后再计算。这里的“判断”可以是建立一个物品到用户的倒排表，用稀疏矩阵表示，如下。）</p>
+<p><img src="3.png" alt="img"></p>
+<h6 id="2-给目标用户推荐物品"><a href="#2-给目标用户推荐物品" class="headerlink" title="(2)  给目标用户推荐物品"></a>(2)  给目标用户推荐物品</h6><p>a.    UserCF算法中用户u对物品i的感兴趣程度：</p>
+<p><img src="4.png" alt="img"></p>
+<p>​         其中，S(u,K)包含和用户u兴趣最接近的K个用户，N(i)是对物品i有过行为的用户集合， 是用户u和用户v的兴趣相似度， 代表用户v对物品i的兴趣，因为使用的是单一行为的隐反馈数据，所以所有的 。</p>
+<p>测评：测量不同K值下UserCF算法的性能指标。</p>
+<p>测评结果：对比已有的Random算法和MostPopular算法，UserCF有一个很关键的参数K，随着K的增长，大概在K=80的时候UserCF的准确率和召回率达到最佳水平。同时，随着K增长，流行度在不断增长，因为K越大，参考的用户就越多，结果就越接近全局热门物品。而覆盖率就随K增长而降低了，因为流行度的增长导致了长尾物品更多地被忽略，覆盖率就随之下降。</p>
+<h6 id="3-用户相似度计算的改进"><a href="#3-用户相似度计算的改进" class="headerlink" title="(3)  用户相似度计算的改进"></a>(3)  用户相似度计算的改进</h6><p>要解决的问题：两个用户对冷门物品采取过同样的行为更能说明他们兴趣相似度。</p>
+<p>John S. Breese提出了如下计算用户的兴趣相似度的公式：</p>
+<p><img src="5.png" alt="img"></p>
+<p>看以看出， 上式分子中的分数因子惩罚了用户u和用户v共同兴趣列表中热门物品对他们相似度的影响。</p>
+<p>运用上式的用户相似度计算称为User-IIF算法。</p>
+<p>测评：同样取K=80，测评结果表明User-IIF在各项性能上略优于UserCF算法。</p>
+<h6 id="4-在实际在线系统试用UserCF的例子"><a href="#4-在实际在线系统试用UserCF的例子" class="headerlink" title="(4)  在实际在线系统试用UserCF的例子"></a>(4)  在实际在线系统试用UserCF的例子</h6><p>Digg通过“顶”和“踩”来判断用户的兴趣，这种活动不断地带动了用户反馈的行为，而且推荐结果也促进了交互活跃度和用户评论。</p>
+<h5 id="2-基于物品的协同过滤算法"><a href="#2-基于物品的协同过滤算法" class="headerlink" title="2.    基于物品的协同过滤算法"></a><strong>2.    </strong>基于物品的协同过滤算法</h5><p>​        要解决的问题：基于用户的协同过滤存在一些问题，例如随着用户量增加，计算用户兴趣相似度矩阵将越来越困难，时间复杂度和空间复杂度都和用户数的增长近似于平方关系。</p>
+<p>​        基于物品的协同过滤并不是分析物品内容间的关系，而是通过用户行为记录计算物品之间的的相似度。（Customers Who Bought This Item Also Bought）</p>
+<p>主要两个步骤：</p>
+<p>​    a.    计算物品之间的相似度</p>
+<p>​    b.    根据物品的相似度和用户的历史行为给用户生成推荐列表。</p>
+<h6 id="1-计算物品相似度"><a href="#1-计算物品相似度" class="headerlink" title="(1)  计算物品相似度"></a>(1)  计算物品相似度</h6><p>物品的相似度公式：</p>
+<p><img src="6.png" alt="img"></p>
+<p>分母是喜欢物品i的用户数，分子是同时喜欢物品i和物品j的用户数。上式可理解为：喜欢物品i的用户中有多大比例也喜欢物品j。</p>
+<p>上式存在的问题：如果物品j很热门，大家都喜欢，那么就会影响相似度计算，这对于挖掘长尾信息的推荐系统来说不是一个好特性。则有如下改进公式：</p>
+<p><img src="7.png" alt="img"></p>
+<p>这个公式惩罚了物品j的权重，因此减轻了热门物品回合很多物品相似的可能性。</p>
+<p>具体操作方法：类似于UserCF，ItemCF也可以先建立用户-物品倒排表（对每个用户建立一个他喜欢的物品列表）</p>
+<p><img src="8.png" alt="img"></p>
+<p>图中最左边是输入的用户行为记录，每一行代表一个用户感兴趣的物品集合。然后，对于每个物品集合，我们将里面的物品两两加一，得到一个矩阵。最终将这些矩阵相加得到C矩阵。</p>
+<h6 id="2-计算用户对物品的兴趣"><a href="#2-计算用户对物品的兴趣" class="headerlink" title="(2)  计算用户对物品的兴趣"></a>(2)  计算用户对物品的兴趣</h6><p>ItemCF通过如下公式计算用户u对物品j的兴趣：</p>
+<p><img src="9.png" alt="img"></p>
+<p> 是用户u喜欢的物品的集合，S(j,K)是和物品j最相似的K个物品的集合， 是物品j和i的相似度， 是用户u对物品i的兴趣。对于隐反馈数据集，如果用户u对物品i有过行为，即可令 。</p>
+<p>上述公式的含义是：和用户历史上感兴趣的物品越相似的物品，越有可能在用户的推荐列表中获得比较高的排名。</p>
+<p>测评和结果：</p>
+<p>​    a.    选对K值对获得高推荐精度是非常重要的（K值与推荐精度非正相关）</p>
+<p>​    b.    K值与流行度也不是正相关的</p>
+<p>​    c.    K增加会降低系统的覆盖率</p>
+<h6 id="3-用户活跃度对物品相似度的影响"><a href="#3-用户活跃度对物品相似度的影响" class="headerlink" title="(3)  用户活跃度对物品相似度的影响"></a>(3)  用户活跃度对物品相似度的影响</h6><p>要解决的问题：“书店老板网上进书”的问题，并非出于兴趣，而且庞大的购书量会导致巨大矩阵，导致内存告急。</p>
+<p>John S. Breese提出的IUF参数，即用户活跃度对数的倒数，这个参数可以削弱过于活跃的用户（书店老板这种）对物品相似度的贡献（即惩罚），修正后的公式如下：</p>
+<p><img src="10.png" alt="img"></p>
+<p>但这只是软性惩罚，对于真正的过于活跃的用户，在计算时还是直接忽略他的兴趣列表。</p>
+<p>以上算法称为ItemCF-IUF算法。</p>
+<p>测评和结果：提高了推荐结果的覆盖率，降低了推荐结果的流行度。改进了ItemCF的综合性能。</p>
+<h6 id="4-物品相似度的归一化"><a href="#4-物品相似度的归一化" class="headerlink" title="(4)  物品相似度的归一化"></a>(4)  物品相似度的归一化</h6><p>Karypis在研究时发现如果把ItemCF的相似度矩阵按最大值归一化，可以提高推荐的准确率、覆盖率和多样性。</p>
+<p><img src="11.png" alt="img"></p>
+<h5 id="3-UserCF和ItemCF的综合比较"><a href="#3-UserCF和ItemCF的综合比较" class="headerlink" title="3.    UserCF和ItemCF的综合比较"></a><strong>3.    </strong>UserCF和ItemCF的综合比较</h5><h6 id="1-结果综述"><a href="#1-结果综述" class="headerlink" title="(1)  结果综述"></a>(1)  结果综述</h6><p>UserCF推荐结果着重于反映和用户兴趣相似的小群体的特点（更社会化），而ItemCF推荐结果着重于维系用户的历史兴趣（更个性化）。</p>
+<p><img src="12.png" alt="img"></p>
+<h6 id="2-各种曲线的走向"><a href="#2-各种曲线的走向" class="headerlink" title="(2)  各种曲线的走向"></a>(2)  各种曲线的走向</h6><p><img src="13.png" alt="img"></p>
+<p><img src="14.png" alt="img"></p>
+<p><img src="15.png" alt="img"></p>
+<p>注意：离线实验的性能在选择推荐算法的时候并不起作用。</p>
+<h6 id="3-《哈利波特》问题"><a href="#3-《哈利波特》问题" class="headerlink" title="(3)  《哈利波特》问题"></a>(3)  《哈利波特》问题</h6><p>​         如上面所说，ItemCF算法容易被很热门的物品所影响，那么计算出来的相似度就是很多物品都会被算作跟这个热门物品“相似”。</p>
+<p>​         其实在定义ItemCF时，已经给出了这种问题的一个解决办法：在分母加大对热门物品的惩罚，如下：</p>
+<p><img src="16.png" alt="img"></p>
+<p>​         其中，α取0.5就是标准的ItemCF算法，α越大，对物品j的惩罚程度就越大。下面是α取值对各项测评指标的影响：</p>
+<p><img src="17.png" alt="img"></p>
+<p>​         可以看出：α越大，准确率和召回率都变得越低，但是可以提高覆盖率和流行度。这说明使用较高的α可以适当地牺牲准确率获得覆盖率。</p>
+<p>​         但上述方法还能彻底解决《哈利波特》问题，每个用户一般都会在不同领域喜欢一种物品，这样就导致两个不同领域的最热门物品之间往往具有比较高的相似度。这个时候，仅靠用户行为数据是不能解决这个问题的，只能依靠引入物品的内容数据解决这个问题了。</p>
+<p><br></p>
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/03/14/Django基础/" data-toggle="tooltip" data-placement="top"
+                           title="Django基础">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/03/13/Python网络框架纵览/" data-toggle="tooltip" data-placement="top"
+                           title="Python网络框架纵览">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#四、-基于邻域的算法"><span class="toc-text">四、  基于邻域的算法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-基于用户的协同过滤算法"><span class="toc-text">1.    基于用户的协同过滤算法</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-计算两个用户兴趣的相似度（利用用户行为）"><span class="toc-text">(1)  计算两个用户兴趣的相似度（利用用户行为）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-给目标用户推荐物品"><span class="toc-text">(2)  给目标用户推荐物品</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-用户相似度计算的改进"><span class="toc-text">(3)  用户相似度计算的改进</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4-在实际在线系统试用UserCF的例子"><span class="toc-text">(4)  在实际在线系统试用UserCF的例子</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-基于物品的协同过滤算法"><span class="toc-text">2.    基于物品的协同过滤算法</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-计算物品相似度"><span class="toc-text">(1)  计算物品相似度</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-计算用户对物品的兴趣"><span class="toc-text">(2)  计算用户对物品的兴趣</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-用户活跃度对物品相似度的影响"><span class="toc-text">(3)  用户活跃度对物品相似度的影响</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4-物品相似度的归一化"><span class="toc-text">(4)  物品相似度的归一化</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-UserCF和ItemCF的综合比较"><span class="toc-text">3.    UserCF和ItemCF的综合比较</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-结果综述"><span class="toc-text">(1)  结果综述</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-各种曲线的走向"><span class="toc-text">(2)  各种曲线的走向</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-《哈利波特》问题"><span class="toc-text">(3)  《哈利波特》问题</span></a></li></ol></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#社交挖掘"
+                           title="社交挖掘">社交挖掘</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

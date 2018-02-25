@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        理解JavaScript对象｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/11/02/理解JavaScript对象/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null171102.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null171102.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>理解JavaScript对象</h1>
+                    
+                    <h2 class="subheading">对象的属性和访问</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-11-02
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#前端基础"
+                           title="前端基础">前端基础</a>
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            理解JavaScript对象
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>每个对象都是基于一个<strong>引用类型</strong>创建的。</p>
+<p>ECMAScript有两种属性类型：<strong>数据属性</strong>、<strong>访问器属性</strong>。</p>
+<h2 id="1-数据属性"><a href="#1-数据属性" class="headerlink" title="1.数据属性"></a><strong>1.数据属性</strong></h2><h4 id="1-Configurable"><a href="#1-Configurable" class="headerlink" title="(1) [[Configurable]]"></a><strong>(1) <font color="#7485FF">[[Configurable]]</font></strong></h4><p>能否用delete删除属性、修改属性特性以及修改为访问器属性，默认true；</p>
+<h4 id="2-Enumerable"><a href="#2-Enumerable" class="headerlink" title="(2) [[Enumerable]]"></a><strong>(2) <font color="#7485FF">[[Enumerable]]</font></strong></h4><p>能否通过for-in循环返回属性，默认true；</p>
+<h4 id="3-Writable"><a href="#3-Writable" class="headerlink" title="(3) [[Writable]]"></a><strong>(3) <font color="#7485FF">[[Writable]]</font></strong></h4><p>能否修改属性值，默认true；</p>
+<h4 id="4-Value"><a href="#4-Value" class="headerlink" title="(4) [[Value]]"></a><strong>(4) <font color="#7485FF">[[Value]]</font></strong></h4><p>包含这个属性的值，默认undefined。</p>
+<p>注意1：要修改以上属性的特性值，必须用Object.defineProperty(属性所在对象，属性名字，一个描述符对象（可包含多个描述符名值对） )。如果是用此方法创建一个属性，则不赋值的话默认是false。</p>
+<p>注意2：如果[[Writable]]被设为false后还进行赋值，非严格模式下会忽略，严格模式下报错。</p>
+<p>注意3：一旦把[[Configurable]]设为false，就不能再把它变回可配置的了。</p>
+<h2 id="2-访问器属性"><a href="#2-访问器属性" class="headerlink" title="2.访问器属性"></a><strong>2.访问器属性</strong></h2><p>不包含数据值，读取时会调用getter函数，写入时会调用setter函数。</p>
+<h4 id="1-Configurable-1"><a href="#1-Configurable-1" class="headerlink" title="(1) [[Configurable]]"></a><strong>(1) <font color="#7485FF">[[Configurable]]</font></strong></h4><p>能否用delete删除属性、修改属性特性以及修改为访问器属性，默认true；</p>
+<h4 id="2-Enumerable-1"><a href="#2-Enumerable-1" class="headerlink" title="(2) [[Enumerable]]"></a><strong>(2) <font color="#7485FF">[[Enumerable]]</font></strong></h4><p>能否通过for-in循环返回属性，默认true；</p>
+<h4 id="3-Get"><a href="#3-Get" class="headerlink" title="(3) [[Get]]"></a><strong>(3) <font color="#7485FF">[[Get]]</font></strong></h4><p>读取时调用的函数，默认undefined；</p>
+<h4 id="4-Set"><a href="#4-Set" class="headerlink" title="(4) [[Set]]"></a><strong>(4) <font color="#7485FF">[[Set]]</font></strong></h4><p>写入时调用的函数，默认undefined；</p>
+<p>注意1：访问器属性不能直接定义，需用Object.defineProperty()。</p>
+<p>注意2：get（一个指向getter函数的指针）和set函数支持IE9+，在IE8以前使用<strong>defineGetter</strong>()和<strong>defineSetter</strong>()。</p>
+<h2 id="3-同时定义多个属性"><a href="#3-同时定义多个属性" class="headerlink" title="3.同时定义多个属性"></a><strong>3.同时定义多个属性</strong></h2><h4 id="1-Object-defineProperty"><a href="#1-Object-defineProperty" class="headerlink" title="(1) Object.defineProperty()"></a><strong>(1) <font color="#F1BE4D">Object.defineProperty()</font></strong></h4><p>接收3个参数：属性所在对象、属性名字（可以是包含多个属性的一个对象）、一个描述符对象（可包含多个描述符名值对）。可以一次定义多个属性里的多个特性值。</p>
+<h2 id="4-读取属性的特性"><a href="#4-读取属性的特性" class="headerlink" title="4.读取属性的特性"></a><strong>4.读取属性的特性</strong></h2><h4 id="1-Object-getOwnPropertyDescriptor"><a href="#1-Object-getOwnPropertyDescriptor" class="headerlink" title="(1) Object.getOwnPropertyDescriptor()"></a><strong>(1) <font color="#F1BE4D">Object.getOwnPropertyDescriptor()</font></strong></h4><p>接收2个参数：属性所在对象、属性名称。返回的是一个包含所有属性特性名值对的对象。</p>
+<p>注意：在实例上调用时只取得实例本身的属性，不能取得原型上的属性（访问原型上的属性需要另外在原型对象上调用此方法）。</p>
+<p><br></p>
+<center>-&nbsp;<em>end</em>&nbsp;-</center>
+
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/11/02/BOM总结/" data-toggle="tooltip" data-placement="top"
+                           title="BOM总结">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/10/31/JS引用类型总结/" data-toggle="tooltip" data-placement="top"
+                           title="JS引用类型总结">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-数据属性"><span class="toc-text">1.数据属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Configurable"><span class="toc-text">(1) [[Configurable]]</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Enumerable"><span class="toc-text">(2) [[Enumerable]]</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Writable"><span class="toc-text">(3) [[Writable]]</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Value"><span class="toc-text">(4) [[Value]]</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-访问器属性"><span class="toc-text">2.访问器属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Configurable-1"><span class="toc-text">(1) [[Configurable]]</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Enumerable-1"><span class="toc-text">(2) [[Enumerable]]</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Get"><span class="toc-text">(3) [[Get]]</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Set"><span class="toc-text">(4) [[Set]]</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-同时定义多个属性"><span class="toc-text">3.同时定义多个属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Object-defineProperty"><span class="toc-text">(1) Object.defineProperty()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-读取属性的特性"><span class="toc-text">4.读取属性的特性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Object-getOwnPropertyDescriptor"><span class="toc-text">(1) Object.getOwnPropertyDescriptor()</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#前端基础"
+                           title="前端基础">前端基础</a>
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

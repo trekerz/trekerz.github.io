@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        JS引用类型总结｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/10/31/JS引用类型总结/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null171031.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null171031.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>JS引用类型总结</h1>
+                    
+                    <h2 class="subheading">JavaScript细节</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-10-31
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#前端基础"
+                           title="前端基础">前端基础</a>
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            JS引用类型总结
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="一、Object类型"><a href="#一、Object类型" class="headerlink" title="一、Object类型"></a>一、Object类型</h2><h3 id="1-作用特点"><a href="#1-作用特点" class="headerlink" title="1. 作用特点"></a><strong>1. 作用特点</strong></h3><p>(1) 存储和传输数据</p>
+<h3 id="2-创建方式"><a href="#2-创建方式" class="headerlink" title="2. 创建方式"></a><strong>2. 创建方式</strong></h3><p>(1) new操作符+Object构造函数</p>
+<p>(2) 对象字面量</p>
+<p>此种方法可用来向函数传递可选参数（最佳实践：必需参数用命名参数，可选参数用对象字面量）。</p>
+<h3 id="3-访问方式"><a href="#3-访问方式" class="headerlink" title="3. 访问方式"></a><strong>3. 访问方式</strong></h3><p>(1) 点表示法</p>
+<p>(2) 方括号法</p>
+<p>此种方式可通过变量来访问属性。</p>
+<h2 id="二、Array类型"><a href="#二、Array类型" class="headerlink" title="二、Array类型"></a>二、Array类型</h2><h3 id="1-作用特点-1"><a href="#1-作用特点-1" class="headerlink" title="1. 作用特点"></a><strong>1. 作用特点</strong></h3><p>(1) 每一项可以保存任何类型的数值</p>
+<p>(2) 数组的大小可以动态调整</p>
+<p>(3) 其length属性可读可写，可以通过它增减数组末项</p>
+<h3 id="2-创建方式-1"><a href="#2-创建方式-1" class="headerlink" title="2. 创建方式"></a><strong>2. 创建方式</strong></h3><p>(1) new操作符（可省略）+Array构造函数</p>
+<p>(2) 数组字面量</p>
+<h3 id="3-访问方式-1"><a href="#3-访问方式-1" class="headerlink" title="3. 访问方式"></a><strong>3. 访问方式</strong></h3><p>(1) 方括号法。</p>
+<h3 id="4-检测数组"><a href="#4-检测数组" class="headerlink" title="4. 检测数组"></a><strong>4. 检测数组</strong></h3><p>(1) instanceof</p>
+<p>(2) Array.isArray()</p>
+<p>推荐。不管是在哪个全局执行环境中创建的。</p>
+<h3 id="5-转换方法"><a href="#5-转换方法" class="headerlink" title="5. 转换方法"></a><strong>5. 转换方法</strong></h3><p><strong>(1) valueOf()</strong></p>
+<p>返回数组本身。</p>
+<p><strong>(2) toString()</strong></p>
+<p>返回每个值以逗号分隔的字符串。</p>
+<p><strong>注意</strong>：这里的toString()虽然是继承自Object的，但被Array重写过了。这也就能解释为何数组对象直接调用toString跟调用Object的toString会输出不同的结果了：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>];</span><br><span class="line">arr.toString();  <span class="comment">// 2,3,5</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(arr);  <span class="comment">// [object Array]</span></span><br></pre></td></tr></table></figure>
+<p><strong>(3) toLocaleString()</strong></p>
+<h3 id="6-栈方法"><a href="#6-栈方法" class="headerlink" title="6. 栈方法"></a><strong>6. 栈方法</strong></h3><p><strong>(1) <font color="#F3A167">push()</font>（<font color="#F36767">改变原数组</font>）</strong></p>
+<p>接受任意数量参数，逐个加到末尾，返回新数组长度。</p>
+<p><strong>(2) <font color="#6799F3">pop()</font>（<font color="#F36767">改变原数组</font>）</strong></p>
+<p>移除最后一项，减少数组length值，返回移除的项。</p>
+<h3 id="7-队列方法"><a href="#7-队列方法" class="headerlink" title="7.队列方法"></a><strong>7.队列方法</strong></h3><p><strong>(1) <font color="#F3A167">shift()</font>（<font color="#F36767">改变原数组</font>）</strong></p>
+<p>移除第一项，减少数组length值，返回移除的项。</p>
+<p><strong>(2) <font color="#6799F3">unshift()</font>（<font color="#F36767">改变原数组</font>）</strong></p>
+<p>在数组前端添加任意个项，返回新数组长度。</p>
+<h3 id="8-重排序方法"><a href="#8-重排序方法" class="headerlink" title="8. 重排序方法"></a><strong>8. 重排序方法</strong></h3><p><strong>(1) reverse()（<font color="#F36767">改变原数组</font>）</strong></p>
+<p>返回翻转后的数组。</p>
+<p><strong>(2) sort()（<font color="#F36767">改变原数组</font>）</strong></p>
+<p>用法a：对数组中每一项调用toString()方法，获得其字符串表示，再按字符串排序；</p>
+<p>用法b：接收1个比较函数，默认会把数组相邻项依次传入函数。</p>
+<h3 id="9-操作方法"><a href="#9-操作方法" class="headerlink" title="9.操作方法"></a><strong>9.操作方法</strong></h3><p><strong>(1) concat()</strong></p>
+<p>接收任意个参数：<strong>可以是数组，也可以是用逗号隔开的参数</strong>。创建当前数组的一个副本，然后将接收到的参数添加到副本末尾，最后返回新构建的数组（若无参数则就只复制并返回一个副本）。</p>
+<p><strong>(2) slice()</strong></p>
+<p>提取数组中的一或多个项组成新数组。</p>
+<p>用法a：接收1个参数，返回参数索引到数组结尾所有项组成的数组（包含索引项）。</p>
+<p>用法b：接收2个参数，返回参数索引之间的项组成的数组（<strong>不包含结束位置项。如果首尾同项，则返回空数组</strong>）。</p>
+<p><strong>注意</strong>：如果接收的是负数，则用数组长度加上该数。</p>
+<p><strong>(3) splice()（<font color="#F36767">改变原数组</font>）</strong></p>
+<p>向数组中部插入项，返回删除的项组成的数组。</p>
+<p>用法a：删除。接收2个参数：起始位置索引、要删除的项数。</p>
+<p>用法b：插入。接收3或3个以上参数：起始位置索引、0（要删除的项数）、要插入的项（插在起始索引前）。</p>
+<p>用法c：替换。接收3或3个以上参数：起始位置索引、要删除的项数、要插入的项。</p>
+<p><strong>注意</strong>：插入和替换中，如果第三个参数是数组，<strong>则原数组变成一个二维数组</strong>，而不是一个个插入。</p>
+<h3 id="10-位置方法"><a href="#10-位置方法" class="headerlink" title="10.位置方法"></a><strong>10.位置方法</strong></h3><p>内部是利用“===”号来比较数组中的每一项。</p>
+<p><strong>(1) indexOf()</strong></p>
+<p>接收1或2个参数：要查找的项、查找起点索引（可选）。返回所查项第一次出现的位置索引（<strong>找不到则返回-1</strong>）。</p>
+<p><strong>(2) lastIndexOf()</strong></p>
+<p>从后往前找。</p>
+<h3 id="11-迭代方法"><a href="#11-迭代方法" class="headerlink" title="11.迭代方法"></a><strong>11.迭代方法</strong></h3><p>以下五个方法都接收1或2个参数，要在每一项上运行的函数、运行该函数的作用域对象（影响this值）（可选）。<strong>函数接收三个参数：数组项的值item、该项在数组中的索引index、数组对象本身array</strong>。</p>
+<p><strong>(1) every()</strong></p>
+<p>若数组中每一项都返回true，则返回true。</p>
+<p><strong>(2) filter()</strong></p>
+<p>返回那些返回true的项所组成的数组。</p>
+<p><strong>(3) forEach()</strong></p>
+<p>没有返回值，只是运行函数。</p>
+<p><strong>(4) map()</strong></p>
+<p>返回每次函数调用结果所组成的数组。</p>
+<p><strong>(5) some()</strong></p>
+<p>只要数组中有一项返回true，则返回true。</p>
+<h3 id="12-归并方法"><a href="#12-归并方法" class="headerlink" title="12.归并方法"></a><strong>12.归并方法</strong></h3><p>以下两个方法都接收1或2个参数：要在每一项上调用的函数（<strong>参数为prev,cur,index,array</strong>）、作为归并基础的初始值（可选）。</p>
+<p>第一次迭代发生在第二项；函数每次返回的值都会作为第一个参数自动传给下一项。</p>
+<p><strong>(1) reduce()</strong></p>
+<p>从前往后，返回一个最终归并后的值。</p>
+<p><strong>(2) reduceRight()</strong></p>
+<p>从后往前，返回一个最终归并后的值。</p>
+<h2 id="三、Date类型"><a href="#三、Date类型" class="headerlink" title="三、Date类型"></a>三、Date类型</h2><h3 id="1-创建方式"><a href="#1-创建方式" class="headerlink" title="1.创建方式"></a><strong>1.创建方式</strong></h3><p><strong>(1) new操作符+Date()构造函数</strong></p>
+<p>返回的格式为”Fri June 18 2010 00:00:00 GMT+0800(中国标准时间)”。</p>
+<p><strong>(2) new操作符+Date(方法parse()中的参数)</strong></p>
+<p>内部会调用parse()。</p>
+<p><strong>(3) new操作符+Date(方法UTC()中的参数)</strong></p>
+<p>内部会调用UTC()，但日期和时间都基于本地时区。</p>
+<h3 id="2-基本方法"><a href="#2-基本方法" class="headerlink" title="2.基本方法"></a><strong>2.基本方法</strong></h3><p><strong>(1) Date.parse()</strong></p>
+<p>接收1个表示日期的字符串。返回相应的毫秒数；若字符串格式不对则返回NaN；Opera遇到January32,2017时会倾向于把日转化为当前日，而有的会直接转化为February 1,2017。</p>
+<p>字符串格式通常有：”6/18/2010”、”June 18,2010”、”Fri June 18 2010 00:00:00GMT+0800”（new出来返回的就是这种格式）、”2010-06-18T00:00:00”（ES5才有）。</p>
+<p><strong>(2) Date.UTC()</strong></p>
+<p>接收6个参数（可选）：年、月（0-11）、日（1-31）、时（0-23）、分、秒，返回相应的毫秒数。</p>
+<p><strong>(3) Date.now()</strong></p>
+<p>返回调用这个方法时的日期和时间的毫秒数。（可用于计算代码运行耗时）</p>
+<h3 id="3-继承的方法"><a href="#3-继承的方法" class="headerlink" title="3.继承的方法"></a><strong>3.继承的方法</strong></h3><p><strong>(1) valueOf()</strong></p>
+<p>返回日期的毫秒数。</p>
+<p><strong>(2) toString()</strong></p>
+<p><strong>(3) toLocaleString()</strong></p>
+<p>这两者返回日期的字符串表示，返回值会因浏览器而不同。</p>
+<h3 id="4-日期格式化方法"><a href="#4-日期格式化方法" class="headerlink" title="4.日期格式化方法"></a><strong>4.日期格式化方法</strong></h3><p>以下方法返回值会因浏览器而不同。</p>
+<p><strong>(1) toDateString()</strong></p>
+<p>星期、月、日、年。（格式特定于实现）</p>
+<p><strong>(2) toTimeString()</strong></p>
+<p>时、分、秒、时区。（格式特定于实现）</p>
+<p><strong>(3) toLocaleDateString()</strong></p>
+<p>星期、月、日、年。（格式特定于地区）</p>
+<p><strong>(4) toLocaleTimeString()</strong></p>
+<p>时、分、秒。（格式特定于地区）</p>
+<p><strong>(5) toUTCString()</strong></p>
+<p>完整的UTC日期。（格式特定于实现）</p>
+<h3 id="5-日期-时间组件方法"><a href="#5-日期-时间组件方法" class="headerlink" title="5.日期/时间组件方法"></a>5.日期/时间组件方法</h3><p>略（一系列的getxxx和setxxx方法）。</p>
+<h2 id="四、RegExp类型"><a href="#四、RegExp类型" class="headerlink" title="四、RegExp类型"></a>四、RegExp类型</h2><h3 id="1-创建方式-1"><a href="#1-创建方式-1" class="headerlink" title="1.创建方式"></a><strong>1.创建方式</strong></h3><p><strong>(1)new操作符+RegExp(“pattern”,”flags”)</strong></p>
+<p>参数是字符串，可能会需要双重转义。</p>
+<p><strong>(2)对象字面量</strong></p>
+<p>var expression = /pattern/flags;</p>
+<p>其中：pattern是正则表达式，flags是行为标志（g、i、m）。正则表达式中的元字符必须转义，有( ) { } [ ] \ ^ . $ | ? * +。</p>
+<p>ES3中两种创建方式的区别：构造函数创建的每一个实例都是一个新实例，而字面量则共享一个实例。</p>
+<h3 id="2-RegExp实例属性"><a href="#2-RegExp实例属性" class="headerlink" title="2.RegExp实例属性"></a><strong>2.RegExp实例属性</strong></h3><p>RegExp的每个实例都有下列属性：</p>
+<p>(1) <strong>global</strong>：布尔值，是否有g标志；</p>
+<p>(2) <strong>ignoreCase</strong>：布尔值，是否有i标志；</p>
+<p>(3) <strong>lastIndex</strong>：整数，下一次搜索开始索引位置；</p>
+<p>(4) <strong>multiline</strong>：布尔值，是否有m标志；</p>
+<p>(5) <strong>source</strong>：正则表达式的字符串表示（不带//）。</p>
+<h3 id="3-RegExp实例方法"><a href="#3-RegExp实例方法" class="headerlink" title="3.RegExp实例方法"></a><strong>3.RegExp实例方法</strong></h3><p><strong>(1) exec()</strong></p>
+<p>接收1个参数：要应用模式的字符串。返回null或有关第一个匹配项的信息数组（一个含有index属性和input属性的Array实例，专门为捕获组而设计）。</p>
+<p><strong>(2) test()</strong></p>
+<p>接收1个参数：要应用模式的字符串。返回true或false。</p>
+<p><strong>(3) toString()和toLocaleString()</strong></p>
+<p>都返回正则表达式的字面量（带有//）。</p>
+<h2 id="五、Function类型"><a href="#五、Function类型" class="headerlink" title="五、Function类型"></a>五、Function类型</h2><h3 id="1-创建方式-2"><a href="#1-创建方式-2" class="headerlink" title="1.创建方式"></a><strong>1.创建方式</strong></h3><p><strong>(1) Function构造函数</strong>，接收任意个参数（字符串），最后一个会被视为函数体。（不推荐这种，因为会被解析两次）</p>
+<p><strong>(2) 函数声明</strong></p>
+<p><strong>(3) 函数表达式</strong></p>
+<p>上文中(2)和(3)的区别：函数声明会在代码执行前被解析，函数表达式只有在被执行到时才被解析。</p>
+<h3 id="2-作为值的函数"><a href="#2-作为值的函数" class="headerlink" title="2.作为值的函数"></a><strong>2.作为值的函数</strong></h3><p>函数名（即指针）可以作为一个值来传递，主要有下面两种用法：</p>
+<p><strong>(1) 将一个函数作为另一个函数的结果返回</strong></p>
+<p><strong>(2) 从一个函数中返回一个函数</strong></p>
+<h3 id="3-函数内部属性"><a href="#3-函数内部属性" class="headerlink" title="3.函数内部属性"></a><strong>3.函数内部属性</strong></h3><p><strong>(1) arguments对象</strong></p>
+<p>主要用途是保存函数的参数。里面有个callee属性，指向拥有这个arguments的函数，常用于递归，但严格模式下无法访问callee。</p>
+<p><strong>(2) this对象</strong></p>
+<p>引用的是函数执行的环境对象，在全局作用域下执行就是window（严格模式下为undefined）。</p>
+<p><strong>(3) caller属性</strong></p>
+<p>保存着调用当前函数的函数的引用。严格模式下无法为caller赋值。</p>
+<h3 id="4-函数的属性和方法"><a href="#4-函数的属性和方法" class="headerlink" title="4.函数的属性和方法"></a><strong>4.函数的属性和方法</strong></h3><p><strong>(1) <font color="#6799F3">length属性</font></strong></p>
+<p>表示函数希望接收的命名参数个数。</p>
+<p><strong>(2) <font color="#F3A167">prototype属性</font></strong></p>
+<p>保存所有的实例方法。</p>
+<p><strong>(3) <font color="#6799F3">toString()</font>（继承的）</strong></p>
+<p><strong>(4) <font color="#6799F3">toLocaleString() </font>(继承的)</strong></p>
+<p><strong>(5) <font color="#6799F3">valueOf() </font>(继承的)</strong></p>
+<p><strong>(6) <font color="#F3A167">apply()</font></strong></p>
+<p>在特定作用域中调用函数，相当于设置this对象的值。</p>
+<p>接收2个参数：作用域、参数数组。</p>
+<p><strong>(7) <font color="#F3A167">call()</font></strong></p>
+<p>作用同apply()，区别在于call()接收参数是一个个列出来。</p>
+<p><strong>(8) <font color="#F3A167">bind()</font></strong></p>
+<p>会创建并返回一个函数实例，其this值会被绑定到传入的值。</p>
+<h2 id="六、基本包装类型"><a href="#六、基本包装类型" class="headerlink" title="六、基本包装类型"></a>六、基本包装类型</h2><p>Boolean、Number、String。</p>
+<p>每当读取一个基本类型值时，后台就会创建一个对应的基本包装类型对象实例，让我们可以调用一系列方法（这个过程发生在读取时，也就是调用方法的时候才发生，使用完后就销毁这个实例）。</p>
+<h3 id="1-创建方式-3"><a href="#1-创建方式-3" class="headerlink" title="1.创建方式"></a><strong>1.创建方式</strong></h3><p><strong>(1) new操作符+Number()构造函数</strong></p>
+<p>注意和转型函数Number()区分。</p>
+<h3 id="2-Boolean类型"><a href="#2-Boolean类型" class="headerlink" title="2.Boolean类型"></a><strong>2.Boolean类型</strong></h3><p>建议永远不要使用Boolean对象。</p>
+<p><strong>(1) valueOf()（重写的，返回<font color="#F36767">布尔值</font>）</strong></p>
+<p><strong>(2) toString()（重写的）</strong></p>
+<p><strong>(3) toLocaleString()（重写的）</strong></p>
+<h3 id="3-Number类型"><a href="#3-Number类型" class="headerlink" title="3.Number类型"></a><strong>3.Number类型</strong></h3><p><strong>(1) <font color="#F3A167">valueOf()</font>（重写的，返回<font color="#F36767">数值</font>）</strong></p>
+<p><strong>(2) <font color="#F3A167">toString()</font>（重写的）</strong></p>
+<p><strong>(3) <font color="#F3A167">toLocaleString()</font>（重写的）</strong></p>
+<p><strong>(4) <font color="#6799F3">toFixed()</font></strong></p>
+<p>接收1个参数：<strong>小数位数</strong>。按照指定小数位返回数值的字符串表示。</p>
+<p><strong>(5) <font color="#6799F3">toExponential()</font></strong></p>
+<p>接收1个参数：<strong>小数位数</strong>。返回以指数表示的数值的字符串形式。</p>
+<p><strong>(6) <font color="#6799F3">toPrecision()</font></strong></p>
+<p>接收1个参数：<strong>有效数字位数</strong>。数值所有数字的位数（不包含指数），会根据数值自动返回最合适的形式。</p>
+<h3 id="4-String类型"><a href="#4-String类型" class="headerlink" title="4.String类型"></a><strong>4.String类型</strong></h3><p><strong>(1) <font color="#6799F3">valueOf()</font>（继承的，返回<font color="#F36767">字符串</font>）</strong></p>
+<p><strong>(2) <font color="#6799F3">toString()</font>（继承的）</strong></p>
+<p><strong>(3) <font color="#6799F3">toLocaleString()</font>（继承的）</strong></p>
+<p><strong>(4) <font color="#F3A167">length属性</font></strong></p>
+<p>注意：双字节字符也算作一个字符</p>
+<p><strong>(5) <font color="#6799F3">charAt()</font></strong></p>
+<p>接收1个参数：字符索引。返回单字符的字符串形式。</p>
+<p>注意：在某些浏览器中用[]语法可以等价这个方法。</p>
+<p><strong>(6) <font color="#6799F3">charCodeAt()</font></strong></p>
+<p>接收1个参数：字符索引。返回单字符的字符编码。</p>
+<p><strong>(7) <font color="#F3A167">concat()</font></strong></p>
+<p>接收任意个参数，拼接一个或多个字符串，返回新字符串。</p>
+<p><strong>(8) <font color="#F3A167">slice()</font></strong></p>
+<p>接收1或2个参数：开始索引、结束索引（可选，不包含结束位置）。返回子字符串。</p>
+<p><strong>注意</strong>：对于负值，把负值与字符长度相加。</p>
+<p><strong>(9) <font color="#F3A167">substring()</font></strong></p>
+<p>接收1或2个参数：开始索引、结束索引（可选，不包含结束位置）。返回子字符串。</p>
+<p><strong>注意</strong>：对于负值，都转换为0。</p>
+<p><strong>(10)<font color="#F3A167"> substr()</font></strong></p>
+<p>接收1或2个参数：开始索引、截取长度（可选）。返回子字符串。</p>
+<p><strong>注意</strong>：对于负值，第一个参数则与字符长度相加，第二个参数则转换为0。</p>
+<p><strong>(11) <font color="#6799F3">indexOf()</font></strong></p>
+<p>从一个字符串中搜索给定的子字符串，返回-1或子字符串第一次出现的位置索引。</p>
+<p><strong>(12) <font color="#6799F3">lastIndexOf()</font></strong></p>
+<p>从后往前。</p>
+<p><strong>(13)<font color="#F3A167"> trim()</font></strong></p>
+<p>创建一个字符串副本，删除前置及后缀的所有空格，返回新字符串。</p>
+<p>注意：chrome还支持trimLeft()和trimRight()</p>
+<p><strong>(14) <font color="#6799F3">toLowerCase()</font></strong></p>
+<p>不改变原字符串，返回的是新字符串。</p>
+<p><strong>(15) <font color="#6799F3">toLocaleLowerCase()</font></strong></p>
+<p><strong>(16) <font color="#6799F3">toUpperCase()</font></strong></p>
+<p><strong>(17) <font color="#6799F3">toLocaleUpperCase()</font></strong></p>
+<p><strong>(18) <font color="#F3A167">match()</font></strong></p>
+<p>接收1个参数：正则表示式或RegExp对象。返回一个数组（第一个找到的匹配项、其索引、原字符串）。与exec()方法正好执行和被执行对象相反。</p>
+<p><strong>(19) <font color="#F3A167">search()</font></strong></p>
+<p>接收1个参数：正则表示式或RegExp对象。返回-1或字符串中第一个匹配项的索引。</p>
+<p><strong>(20)<font color="#F3A167"> replace()</font></strong></p>
+<p>接收2个参数：正则表示式或RegExp对象或一个字符串、一个字符串或一个函数。返回替换后的新字符串，但不改变原字符串。</p>
+<p><strong>注意</strong>：若第一个参数是字符串，则只替换一次；想替换全部只能用正则，并且加g。</p>
+<p><strong>注意</strong>：若第二个参数是字符串，则可以加上一些特殊的字符序列来将匹配插入结果中。</p>
+<p><strong>注意</strong>：若第二个参数是函数，则函数的参数为：模式的匹配项、第一捕获组的匹配项（若有）、第二捕获组的匹配项（若有）、……、模式匹配项在字符串中的位置、原始字符串。</p>
+<p><strong>(21) <font color="#6799F3">split()</font></strong></p>
+<p>接收1或2个参数：指定的分隔符、返回的数组的大小。返回分隔后组成的数组。</p>
+<p><strong>注意</strong>：如果分隔符刚好位于开头或结尾，则结果中会有空字符串（开头项和结尾项）。</p>
+<p><strong>(22)<font color="#F3A167"> localeCompare()</font></strong></p>
+<p>比较两个字符串，如果字符串在字母表中应该排在字符串参数之前，则返回-1，相等则返回0，应排在之后则返回1。</p>
+<p>注意：该方法会按照地区来决定是否考虑大小写。</p>
+<p><strong>(23) <font color="#6799F3">String.fromCharCode()</font></strong></p>
+<p>接收任意个参数：字符编码。返回字符编码组成的字符串。</p>
+<p><strong>(24) <font color="#F3A167">HTML方法</font></strong></p>
+<p>就是用方法来创建html标签并以字符串形式返回。尽量不要使用。</p>
+<h2 id="七、单体内置对象"><a href="#七、单体内置对象" class="headerlink" title="七、单体内置对象"></a>七、单体内置对象</h2><p>上面介绍的所有这些对象在程序执行前已经存在了，叫做内置对象。ECMA-262还定义了两个单体内置对象：Global和Math。</p>
+<h3 id="1-Global对象"><a href="#1-Global对象" class="headerlink" title="1.Global对象"></a><strong>1.Global对象</strong></h3><p>不属于任何其他对象的属性和方法，最终都是它的属性和方法。</p>
+<p>所有在全局作用域中定义的属性和函数都是Global对象的属性。例如isNaN()、isFinite()、parseInt()、parseFloat()。</p>
+<p><strong>(1)<font color="#F3A167"> encodeURI()</font></strong></p>
+<p>对URI进行编码，替换掉空格（现在的功能已经和encodeURIComponent一样了），从而让浏览器能够理解。</p>
+<p><strong>(2) <font color="#F3A167">encodeURIComponent()</font></strong></p>
+<p>替换掉所有非字母数字字符（包括空格）。</p>
+<p><strong>(4) <font color="#F3A167">decodeURI()</font></strong></p>
+<p><strong>(5) <font color="#F3A167">decodeURIComponent()</font></strong></p>
+<p><strong>(6) <font color="#6799F3">eval()</font></strong></p>
+<p>接收1个参数：要执行的ECMAScript字符串。</p>
+<p><strong>注意</strong>：被执行的代码与该执行环境有相同作用域链。</p>
+<p><strong>注意</strong>：严格模式下，外部访问不到eval()中创建的任何变量或函数。</p>
+<p><strong>(7) <font color="#F3A167">Global对象的属性</font></strong></p>
+<p>undefined、NaN、Infinity以及各种构造函数（包括上面的几个引用类型）都是Global对象的属性。</p>
+<p>注意：Web浏览器下Global对象是window对象的一部分，所以全局作用域中声明的各种变量、函数就都成了window对象的属性。</p>
+<h3 id="2-Math对象"><a href="#2-Math对象" class="headerlink" title="2.Math对象"></a><strong>2.Math对象</strong></h3><p><strong>(1) <font color="#F3A167">Math对象的属性</font></strong></p>
+<table>
+<thead>
+<tr>
+<th>Math.E</th>
+<th>Math.LN10</th>
+<th>Math.LN2</th>
+<th>Math.LOG2E</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Math.LOG10E</td>
+<td>Math.PI</td>
+<td>Math.SQRT1_2</td>
+<td>Math.SQRT2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>(2) <font color="#6799F3">Math.min()、Math.max()</font></strong></p>
+<p>接收任意个参数。</p>
+<p>数组技巧：var values = [1,2,3,4,5,6]; var max =Math.max.apply(Math,values);</p>
+<p><strong>(3) <font color="#F3A167">Math.ceil()</font></strong></p>
+<p>向上舍入。</p>
+<p><strong>(4)<font color="#F3A167"> Math.floor()</font></strong></p>
+<p>向下舍入。</p>
+<p><strong>(5) <font color="#F3A167">Math.round()</font></strong></p>
+<p>四舍五入。</p>
+<p><strong>(6) <font color="#6799F3">Math.random()</font></strong></p>
+<p>返回 <strong>[0,1)</strong>之间的一个随机数。</p>
+<p><strong>技巧</strong>：想要某个区间的整数值：Math.floor( Math.random() * 可能值的总数+ 第一个可能的值 );</p>
+<p><strong>(7) <font color="#F3A167">其它方法</font></strong></p>
+<table>
+<thead>
+<tr>
+<th>Math.abs(num)</th>
+<th>Math.exp(num)</th>
+<th>Math.log(num)</th>
+<th>Math.pow(num,power)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Math.sqrt(num)</td>
+<td>Math.acos(x)</td>
+<td>Math.asin(x)</td>
+<td>Math.atan(x)</td>
+</tr>
+<tr>
+<td>Math.atan2(y,x)</td>
+<td>Math.cos(x)</td>
+<td>Math.sin(x)</td>
+<td>Math.tan(x)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意</strong>：在不同实现中精度可能会有不同。</p>
+<p><br></p>
+<center>-&nbsp;<em>end</em>&nbsp;-</center>
+
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/11/02/理解JavaScript对象/" data-toggle="tooltip" data-placement="top"
+                           title="理解JavaScript对象">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/10/09/JS设计模式16-享元模式/" data-toggle="tooltip" data-placement="top"
+                           title="JS设计模式16-享元模式">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Object类型"><span class="toc-text">一、Object类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-作用特点"><span class="toc-text">1. 作用特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-创建方式"><span class="toc-text">2. 创建方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-访问方式"><span class="toc-text">3. 访问方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Array类型"><span class="toc-text">二、Array类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-作用特点-1"><span class="toc-text">1. 作用特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-创建方式-1"><span class="toc-text">2. 创建方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-访问方式-1"><span class="toc-text">3. 访问方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-检测数组"><span class="toc-text">4. 检测数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-转换方法"><span class="toc-text">5. 转换方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-栈方法"><span class="toc-text">6. 栈方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-队列方法"><span class="toc-text">7.队列方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-重排序方法"><span class="toc-text">8. 重排序方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-操作方法"><span class="toc-text">9.操作方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-位置方法"><span class="toc-text">10.位置方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-迭代方法"><span class="toc-text">11.迭代方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-归并方法"><span class="toc-text">12.归并方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、Date类型"><span class="toc-text">三、Date类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-创建方式"><span class="toc-text">1.创建方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-基本方法"><span class="toc-text">2.基本方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-继承的方法"><span class="toc-text">3.继承的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-日期格式化方法"><span class="toc-text">4.日期格式化方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-日期-时间组件方法"><span class="toc-text">5.日期/时间组件方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、RegExp类型"><span class="toc-text">四、RegExp类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-创建方式-1"><span class="toc-text">1.创建方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-RegExp实例属性"><span class="toc-text">2.RegExp实例属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-RegExp实例方法"><span class="toc-text">3.RegExp实例方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、Function类型"><span class="toc-text">五、Function类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-创建方式-2"><span class="toc-text">1.创建方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-作为值的函数"><span class="toc-text">2.作为值的函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-函数内部属性"><span class="toc-text">3.函数内部属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-函数的属性和方法"><span class="toc-text">4.函数的属性和方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、基本包装类型"><span class="toc-text">六、基本包装类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-创建方式-3"><span class="toc-text">1.创建方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Boolean类型"><span class="toc-text">2.Boolean类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Number类型"><span class="toc-text">3.Number类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-String类型"><span class="toc-text">4.String类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、单体内置对象"><span class="toc-text">七、单体内置对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Global对象"><span class="toc-text">1.Global对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Math对象"><span class="toc-text">2.Math对象</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#前端基础"
+                           title="前端基础">前端基础</a>
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

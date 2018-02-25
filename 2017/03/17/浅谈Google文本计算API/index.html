@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        浅谈Google文本计算API｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/03/17/浅谈Google文本计算API/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170317.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170317.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>浅谈Google文本计算API</h1>
+                    
+                    <h2 class="subheading">【笔记】文档相似度、提取匹配</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-03-17
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#社交挖掘"
+                           title="社交挖掘">社交挖掘</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            浅谈Google文本计算API
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h3 id="一、-概述"><a href="#一、-概述" class="headerlink" title="一、  概述"></a><strong>一、  概述</strong></h3><p>​    Google+ API以及发送API的请求</p>
+<p>​    词频-逆文档频率（TF-IDF），这一分析文档中单词的基本技术</p>
+<p>​    如何将NLTK（自然语言工具箱）应用到人类语言中</p>
+<p>​    如何将余弦相似度应用到按关键字查询文档等常见问题中</p>
+<p>​    如何通过检测搭配模式从人类语言数据中提取有用的词组</p>
+<h3 id="二、-探索Google-API"><a href="#二、-探索Google-API" class="headerlink" title="二、  探索Google+ API"></a><strong>二、  探索Google+ API</strong></h3><p>​    人员</p>
+<p>​    动态</p>
+<p>​    评论</p>
+<p>​    生活片段</p>
+<h4 id="1-发起Google-API"><a href="#1-发起Google-API" class="headerlink" title="1.    发起Google+ API"></a><strong>1.    </strong>发起Google+ API</h4><p>（一个用Google+API查找人的例子）</p>
+<h3 id="三、-TF-IDF简介"><a href="#三、-TF-IDF简介" class="headerlink" title="三、  TF-IDF简介"></a><strong>三、  TF-IDF简介</strong></h3><p>​    a.    句子切分</p>
+<p>​    b.    分词</p>
+<p>​    c.    单词组合</p>
+<p>​    d.    实体检测</p>
+<p>TF-IDF：词频-逆向文档频率。TF表示一个词语在具体文档中的重要性，IDF表示一个词语在整个语料库中的重要性，两者相乘可以同时说明这两个因素的得分。</p>
+<h4 id="1-词频TF"><a href="#1-词频TF" class="headerlink" title="1.    词频TF"></a><strong>1.    </strong>词频TF</h4><p>​        词频可以简单的表示为它在文档中出现的次数，但是更普遍的用法是通过考虑文本中词的总数对它进行归一化。这样总分就能表示文档长度与词频的相对关系。</p>
+<h4 id="2-逆文档频率IDF"><a href="#2-逆文档频率IDF" class="headerlink" title="2.    逆文档频率IDF"></a><strong>2.    </strong>逆文档频率IDF</h4><p>​        逆文档频率提供的计算结果表示语料库的通用归一化度量，对于该度量值的直观理解是如果某个词在语料库中不常出现，那么就会产生一个更大的值。</p>
+<p>​        词的IDF得分是文档的总数除以语料库中包含该词的文本数量的商的对数。词频的得分是基于每个文档计算的，即词的IDF分数是基于整个语料库计算的，IDF意在对整个语料库常见单词进行归一化。</p>
+<h4 id="3-TF-IDF"><a href="#3-TF-IDF" class="headerlink" title="3.    TF-IDF"></a><strong>3.    </strong>TF-IDF</h4><h3 id="四、-用TF-IDF查询人类语言数据"><a href="#四、-用TF-IDF查询人类语言数据" class="headerlink" title="四、  用TF-IDF查询人类语言数据"></a><strong>四、  用TF-IDF查询人类语言数据</strong></h3><h4 id="1-自然语言工具包概述"><a href="#1-自然语言工具包概述" class="headerlink" title="1.    自然语言工具包概述"></a><strong>1.    </strong>自然语言工具包概述</h4><p>Zipf法则：语料库中单词频率的分布（长尾），提供了对预测频率有用的经验法则。</p>
+<h4 id="2-对人类语言使用TF-IDF"><a href="#2-对人类语言使用TF-IDF" class="headerlink" title="2.    对人类语言使用TF-IDF"></a><strong>2.    </strong>对人类语言使用TF-IDF</h4><p>NLTK工具集各模块的使用（nltk.stem等）</p>
+<h4 id="3-寻找相似文档"><a href="#3-寻找相似文档" class="headerlink" title="3.    寻找相似文档"></a><strong>3.    </strong>寻找相似文档</h4><h6 id="1-向量空间模型和余弦相似度理论"><a href="#1-向量空间模型和余弦相似度理论" class="headerlink" title="(1)  向量空间模型和余弦相似度理论"></a>(1)  向量空间模型和余弦相似度理论</h6><p>​         除了TF-IDF将文档建模为无序的单词集合，另一个对文档建模的合适方法是向量空间模型。</p>
+<p>​         向量空间模型的基本理论是认为你有一个很大的多维空间，这个空间对每个文档都有一个向量，向量的距离就表示文档间的相似度。可以将查询表示成一个向量，并通过寻找与查询向量距离最近的文档向量，来发现最相关的文档。</p>
+<p>​         假设一个有两个单词的文档（“open”，“web”），那么它在向量空间中就表示为一个二维向量（有N个单词就是N维向量），其值可以用TF-IDF来表示，比如：（0.47，0.58）。那么，根据历史上的种种经验表明，两个向量之间的余弦值（即点乘）可以很好地用来表示它们的相似度（重合即为1，正交即为0），称为余弦相似度。</p>
+<h6 id="2-用余弦相似度来归类帖子"><a href="#2-用余弦相似度来归类帖子" class="headerlink" title="(2)  用余弦相似度来归类帖子"></a>(2)  用余弦相似度来归类帖子</h6><p>​         查询一个向量空间和计算文件之间的相似度是相同的操作，不同之处无非在于用查询向量和文档的向量之间的比较替代文档之间的比较。</p>
+<p>​         正确以及适当地降维对于比较多维向量是一个很有必要的操作。</p>
+<h6 id="3-用矩阵图表示可视化文件相似度（D3-js）"><a href="#3-用矩阵图表示可视化文件相似度（D3-js）" class="headerlink" title="(3)  用矩阵图表示可视化文件相似度（D3.js）"></a>(3)  用矩阵图表示可视化文件相似度（D3.js）</h6><p>​         和基于图的布局相比，矩阵图表的优势在于没有边之间的杂乱复杂，因此，你可以通过这一显示方式来避免总所周知的“毛线球”问题。</p>
+<p>​         然而，行和列的顺序会影响矩阵的模式，因此需要细心地思考行和列的最佳的顺序。通常，行和列用它们附加的属性来进行排序，这样能更容易确定数据的模式。</p>
+<h4 id="4-分析人类语言中的二元文法"><a href="#4-分析人类语言中的二元文法" class="headerlink" title="4.    分析人类语言中的二元文法"></a><strong>4.    </strong>分析人类语言中的二元文法</h4><p>​        n元文法仅仅是一个简洁的表示方法，来表示文本中n个连续词的每一种可能的顺序，并且n元文法提供了用于计算搭配的基本数据结构。</p>
+<p>​        对于任意n，总有(n-1)个二元文法。n元文法的存储开销是原文档存储开销的n倍（T*n个单词，T是文档单词总数）。</p>
+<p>​        NLTK可以很好地处理n元文法计算任务，发现文本中的搭配，发现一个或多个单词使用的语境。但使用NLTK内置函数的缺点就是这些函数通常不会反悔你可以存储和操作的数据结构。</p>
+<p>评测：雅尔卡系数、相依表、排序单词的共现。</p>
+<h6 id="1-相依表和打分函数"><a href="#1-相依表和打分函数" class="headerlink" title="(1)  相依表和打分函数"></a>(1)  相依表和打分函数</h6><p>​         相依表是用来计算关于二元文法度量方法的常见数据结构。表中是各个元素之间的相互的频率值，它可以计算各种相似性度量方法，它们可以用来打分，并按可能的重要性来排序二元文法。</p>
+<p>雅卡尔系数：两个集合的相似度。</p>
+<p><img src="1.png" alt="img"></p>
+<p>一个二元文法的雅卡尔系数表示，该二元文法的频率与所有含有感兴趣单词的二元文法出现的频率之和的比率。比率越高，(token1，token2)出现在文档中的可能性越大，搭配“token1 token2”越有可能表达有意义的概念。</p>
+<p>其它度量方法：</p>
+<p>​    a.    原始频率</p>
+<p>​    b.    雅卡尔系数</p>
+<p>​    c.    Dice系数</p>
+<p>​    d.    学生t分数</p>
+<p>​    e.    卡方检验</p>
+<p>​    f.     似然率</p>
+<p>​    g.    逐点互信息</p>
+<h4 id="5-分析人类语言数据的反思"><a href="#5-分析人类语言数据的反思" class="headerlink" title="5.    分析人类语言数据的反思"></a><strong>5.    </strong>分析人类语言数据的反思</h4><h6 id="1-上下文驱动其意义"><a href="#1-上下文驱动其意义" class="headerlink" title="(1)  上下文驱动其意义"></a>(1)  上下文驱动其意义</h6><h6 id="2-人类语言遭遇上下文过载"><a href="#2-人类语言遭遇上下文过载" class="headerlink" title="(2)  人类语言遭遇上下文过载"></a>(2)  人类语言遭遇上下文过载</h6><h6 id="3-从人类语言解析上下文不是件容易的事"><a href="#3-从人类语言解析上下文不是件容易的事" class="headerlink" title="(3)  从人类语言解析上下文不是件容易的事"></a>(3)  从人类语言解析上下文不是件容易的事</h6>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/03/18/推荐系统架构基础/" data-toggle="tooltip" data-placement="top"
+                           title="推荐系统架构基础">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/03/16/Django基础2/" data-toggle="tooltip" data-placement="top"
+                           title="Django基础2">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、-概述"><span class="toc-text">一、  概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、-探索Google-API"><span class="toc-text">二、  探索Google+ API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-发起Google-API"><span class="toc-text">1.    发起Google+ API</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、-TF-IDF简介"><span class="toc-text">三、  TF-IDF简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-词频TF"><span class="toc-text">1.    词频TF</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-逆文档频率IDF"><span class="toc-text">2.    逆文档频率IDF</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-TF-IDF"><span class="toc-text">3.    TF-IDF</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、-用TF-IDF查询人类语言数据"><span class="toc-text">四、  用TF-IDF查询人类语言数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-自然语言工具包概述"><span class="toc-text">1.    自然语言工具包概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-对人类语言使用TF-IDF"><span class="toc-text">2.    对人类语言使用TF-IDF</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-寻找相似文档"><span class="toc-text">3.    寻找相似文档</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-向量空间模型和余弦相似度理论"><span class="toc-text">(1)  向量空间模型和余弦相似度理论</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-用余弦相似度来归类帖子"><span class="toc-text">(2)  用余弦相似度来归类帖子</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-用矩阵图表示可视化文件相似度（D3-js）"><span class="toc-text">(3)  用矩阵图表示可视化文件相似度（D3.js）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-分析人类语言中的二元文法"><span class="toc-text">4.    分析人类语言中的二元文法</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-相依表和打分函数"><span class="toc-text">(1)  相依表和打分函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-分析人类语言数据的反思"><span class="toc-text">5.    分析人类语言数据的反思</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-上下文驱动其意义"><span class="toc-text">(1)  上下文驱动其意义</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-人类语言遭遇上下文过载"><span class="toc-text">(2)  人类语言遭遇上下文过载</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-从人类语言解析上下文不是件容易的事"><span class="toc-text">(3)  从人类语言解析上下文不是件容易的事</span></a></li></ol></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#社交挖掘"
+                           title="社交挖掘">社交挖掘</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

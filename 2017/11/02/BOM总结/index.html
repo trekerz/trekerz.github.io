@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        BOM总结｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/11/02/BOM总结/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null171102.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null171102.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>BOM总结</h1>
+                    
+                    <h2 class="subheading">BOM知识点</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-11-02
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#前端基础"
+                           title="前端基础">前端基础</a>
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            BOM总结
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="一、window对象"><a href="#一、window对象" class="headerlink" title="一、window对象"></a><strong>一、window对象</strong></h2><h4 id="1-框架中window"><a href="#1-框架中window" class="headerlink" title="1. 框架中window"></a><strong>1. 框架中window</strong></h4><h5 id="1-name属性"><a href="#1-name属性" class="headerlink" title="(1) name属性"></a><strong>(1) name属性</strong></h5><p>window的属性，即框架frame的名字。</p>
+<h5 id="2-top对象"><a href="#2-top对象" class="headerlink" title="(2) top对象"></a><strong>(2) top对象</strong></h5><p>指向最外层框架。</p>
+<h5 id="3-parent对象"><a href="#3-parent对象" class="headerlink" title="(3) parent对象"></a><strong>(3) parent对象</strong></h5><p>指向直接上层框架。</p>
+<h5 id="4-self对象"><a href="#4-self对象" class="headerlink" title="(4) self对象"></a><strong>(4) self对象</strong></h5><p>始终指向window。</p>
+<h4 id="2-window的位置"><a href="#2-window的位置" class="headerlink" title="2. window的位置"></a><strong>2. window的位置</strong></h4><h5 id="1-screenLeft、screenTop（IE、Opera、Safari、Chrome）"><a href="#1-screenLeft、screenTop（IE、Opera、Safari、Chrome）" class="headerlink" title="(1) screenLeft、screenTop（IE、Opera、Safari、Chrome）"></a><strong>(1) screenLeft、screenTop（IE、Opera、Safari、Chrome）</strong></h5><p>窗口相对于屏幕左边和上边的位置。</p>
+<h5 id="2-screenX、screenY（FireFox、Safari、Chrome）"><a href="#2-screenX、screenY（FireFox、Safari、Chrome）" class="headerlink" title="(2) screenX、screenY（FireFox、Safari、Chrome）"></a><strong>(2) screenX、screenY（FireFox、Safari、Chrome）</strong></h5><p>同上。</p>
+<p>注意：在IE、Opera中，screenLeft和screenY把工具栏也考虑了，所以最大化时不是0；而Safari、Chrome、FireFox最大化则为0。</p>
+<h5 id="3-moveTo-、moveBy"><a href="#3-moveTo-、moveBy" class="headerlink" title="(3) moveTo()、moveBy()"></a><strong>(3) moveTo()、moveBy()</strong></h5><p>接收2个参数：moveTo是新位置的坐标值，moveBy是水平和垂直要移动的像素数。</p>
+<h4 id="3-window的大小"><a href="#3-window的大小" class="headerlink" title="3. window的大小"></a><strong>3. window的大小</strong></h4><h5 id="1-innerWidth、innerHeight、outerWidth、outerHeight（≥IE8才有）"><a href="#1-innerWidth、innerHeight、outerWidth、outerHeight（≥IE8才有）" class="headerlink" title="(1) innerWidth、innerHeight、outerWidth、outerHeight（≥IE8才有）"></a><strong>(1) innerWidth、innerHeight、outerWidth、outerHeight（≥IE8才有）</strong></h5><p>注意：在Chrome中，inner和outer值相同；其它outer指整个浏览器窗口，inner指除去边框后。</p>
+<h5 id="2-document-documentElement-clientWidth、document-documentElement-clientHeight、document-body-clientWidth、document-body-clientHeight（≤IE8也有）"><a href="#2-document-documentElement-clientWidth、document-documentElement-clientHeight、document-body-clientWidth、document-body-clientHeight（≤IE8也有）" class="headerlink" title="(2)document.documentElement.clientWidth、document.documentElement.clientHeight、document.body.clientWidth、document.body.clientHeight（≤IE8也有）"></a><strong>(2)document.documentElement.clientWidth、document.documentElement.clientHeight、document.body.clientWidth、document.body.clientHeight（≤IE8也有）</strong></h5><p>注意：在IE6的标准模式下用documentElement，混杂模式下用body；在Chrome下则都可以。</p>
+<h5 id="3-resizeTo-、resizeBy"><a href="#3-resizeTo-、resizeBy" class="headerlink" title="(3) resizeTo()、resizeBy()"></a><strong>(3) resizeTo()、resizeBy()</strong></h5><p>接收2个参数：resizeTo是新宽度和新高度，moveBy是宽度差和高度差。</p>
+<h4 id="4-导航和打开窗口"><a href="#4-导航和打开窗口" class="headerlink" title="4. 导航和打开窗口"></a><strong>4. 导航和打开窗口</strong></h4><h5 id="1-open"><a href="#1-open" class="headerlink" title="(1) open()"></a><strong>(1) open()</strong></h5><p>接收4个参数：URL（必选）、窗口目标（已有窗口或框架名称）、一个特性字符串（新窗口特性）、一个表示新页面是否取代历史记录中当前加载页面的布尔值。返回一个指向新窗口的引用。</p>
+<h5 id="2-close"><a href="#2-close" class="headerlink" title="(2) close()"></a><strong>(2) close()</strong></h5><p>仅适用于通过window.open()打开的弹出窗口。</p>
+<h5 id="3-closed属性、opener属性"><a href="#3-closed属性、opener属性" class="headerlink" title="(3) closed属性、opener属性"></a><strong>(3) closed属性、opener属性</strong></h5><h4 id="5-间歇调用和超时调用"><a href="#5-间歇调用和超时调用" class="headerlink" title="5. 间歇调用和超时调用"></a><strong>5. 间歇调用和超时调用</strong></h4><h5 id="1-setTimeout-、setInterval"><a href="#1-setTimeout-、setInterval" class="headerlink" title="(1) setTimeout()、setInterval ()"></a><strong>(1) setTimeout()、setInterval ()</strong></h5><p>接收2个参数：要执行的代码、以毫秒表示的时间。JavaScript会有一个任务队列，把添加进来的任务按添加顺序执行。</p>
+<p>最佳实践：一般用超时调用来模拟间歇调用，因为间歇调用可能会导致后一个调用在前一个调用结束前启动。</p>
+<h5 id="2-clearTimeout-、clearInterval"><a href="#2-clearTimeout-、clearInterval" class="headerlink" title="(2) clearTimeout ()、clearInterval()"></a><strong>(2) clearTimeout ()、clearInterval()</strong></h5><h4 id="6-系统对话框"><a href="#6-系统对话框" class="headerlink" title="6. 系统对话框"></a><strong>6. 系统对话框</strong></h4><h5 id="1-alert"><a href="#1-alert" class="headerlink" title="(1) alert()"></a><strong>(1) alert()</strong></h5><h5 id="2-confirm"><a href="#2-confirm" class="headerlink" title="(2) confirm()"></a><strong>(2) confirm()</strong></h5><h5 id="3-prompt"><a href="#3-prompt" class="headerlink" title="(3) prompt()"></a><strong>(3) prompt()</strong></h5><p>注意：以上三个方法都是同步、模态的，调用时代码会暂停执行。</p>
+<h5 id="4-find"><a href="#4-find" class="headerlink" title="(4) find()"></a><strong>(4) find()</strong></h5><h5 id="5-print"><a href="#5-print" class="headerlink" title="(5) print()"></a><strong>(5) print()</strong></h5><h2 id="二、location对象"><a href="#二、location对象" class="headerlink" title="二、location对象"></a><strong>二、location对象</strong></h2><p>注意：location既是window的对象又是document的对象，window.location和document.location引用的是同一个对象。</p>
+<h4 id="1-属性"><a href="#1-属性" class="headerlink" title="1. 属性"></a><strong>1. 属性</strong></h4><table>
+<thead>
+<tr>
+<th>8个属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hash</td>
+</tr>
+<tr>
+<td>host</td>
+</tr>
+<tr>
+<td>hostname</td>
+</tr>
+<tr>
+<td>href</td>
+</tr>
+<tr>
+<td>pathname</td>
+</tr>
+<tr>
+<td>port</td>
+</tr>
+<tr>
+<td>protocol</td>
+</tr>
+<tr>
+<td>search</td>
+</tr>
+</tbody>
+</table>
+<p>注意：这些属性可写，每次修改后页面都会重新加载。</p>
+<h4 id="2-位置操作"><a href="#2-位置操作" class="headerlink" title="2. 位置操作"></a><strong>2. 位置操作</strong></h4><h5 id="1-assign"><a href="#1-assign" class="headerlink" title="(1) assign()"></a><strong>(1) assign()</strong></h5><p>改变窗口的网址（即位置）。</p>
+<h5 id="2-replace"><a href="#2-replace" class="headerlink" title="(2) replace()"></a><strong>(2) replace()</strong></h5><p>同assign()，但去到新的位置后无法后退（后退按钮失效）。</p>
+<h5 id="3-reload"><a href="#3-reload" class="headerlink" title="(3) reload()"></a><strong>(3) reload()</strong></h5><p>重新加载当前页面。</p>
+<p>注意：如果要强制从服务器重新加载（而不是从缓存），则要加一个true参数。</p>
+<h2 id="三、navigator对象"><a href="#三、navigator对象" class="headerlink" title="三、navigator对象"></a><strong>三、navigator对象</strong></h2><p>IE中有window.clientInformation，Opera有window.opera，但window.navigator是通用的。</p>
+<h4 id="1-属性-1"><a href="#1-属性-1" class="headerlink" title="1. 属性"></a><strong>1. 属性</strong></h4><p>略。（各种属性和方法）</p>
+<h4 id="2-检测插件"><a href="#2-检测插件" class="headerlink" title="2. 检测插件"></a><strong>2. 检测插件</strong></h4><h5 id="1-navigator-plugins数组（非IE浏览器）"><a href="#1-navigator-plugins数组（非IE浏览器）" class="headerlink" title="(1) navigator.plugins数组（非IE浏览器）"></a><strong>(1) navigator.plugins数组（非IE浏览器）</strong></h5><p>数组每一项都包含以下属性：name、description、filename、length（插件所处理的MIME类型数量）。</p>
+<p>注意：IE浏览器则是用ActiveXObject类型（COM对象）来表示插件的，检测IE插件就是new一个该类型并传入要检测的插件名称，看有没有报错来确定插件存不存在。</p>
+<h4 id="3-注册处理程序"><a href="#3-注册处理程序" class="headerlink" title="3. 注册处理程序"></a><strong>3. 注册处理程序</strong></h4><p>以下两个方法可以让站点指明它可以处理特定类型的信息。</p>
+<h5 id="1-registerContentHandler"><a href="#1-registerContentHandler" class="headerlink" title="(1) registerContentHandler()"></a><strong>(1) registerContentHandler()</strong></h5><p>接收3个参数：要处理的MIME类型、可以处理该MIME类型的页面的URL以及应用程序的名称。</p>
+<h5 id="2-registerProtocolHandler"><a href="#2-registerProtocolHandler" class="headerlink" title="(2) registerProtocolHandler()"></a><strong>(2) registerProtocolHandler()</strong></h5><p>接收3个参数：要处理的协议（mailto、ftp等）、处理该协议的页面的URL以及应用程序的名称。</p>
+<h2 id="四、screen对象"><a href="#四、screen对象" class="headerlink" title="四、screen对象"></a><strong>四、screen对象</strong></h2><p>只用来表明客户端的能力，包括浏览器窗口外部的显示器信息（像素宽高等）。</p>
+<h4 id="1-属性和方法"><a href="#1-属性和方法" class="headerlink" title="1. 属性和方法"></a><strong>1. 属性和方法</strong></h4><p>略。</p>
+<h2 id="五、history对象"><a href="#五、history对象" class="headerlink" title="五、history对象"></a><strong>五、history对象</strong></h2><h4 id="1-属性和方法-1"><a href="#1-属性和方法-1" class="headerlink" title="1. 属性和方法"></a><strong>1. 属性和方法</strong></h4><h5 id="1-go"><a href="#1-go" class="headerlink" title="(1) go()"></a><strong>(1) go()</strong></h5><p>接收1个参数：数字或字符串，表示在历史记录中前进或后退的步数或最近的某个页面。</p>
+<h5 id="2-back-、forward"><a href="#2-back-、forward" class="headerlink" title="(2) back()、forward()"></a><strong>(2) back()、forward()</strong></h5><p>注意：这两个方法不接收参数，只能进或退1页。</p>
+<h5 id="3-length属性"><a href="#3-length属性" class="headerlink" title="(3) length属性"></a><strong>(3) length属性</strong></h5><p>历史记录的数量。</p>
+<p><br></p>
+<center>-&nbsp;<em>end</em>&nbsp;-</center>
+
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/11/03/细谈创建JS对象的7种方式/" data-toggle="tooltip" data-placement="top"
+                           title="细谈创建JS对象的7种方式">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/11/02/理解JavaScript对象/" data-toggle="tooltip" data-placement="top"
+                           title="理解JavaScript对象">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、window对象"><span class="toc-text">一、window对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-框架中window"><span class="toc-text">1. 框架中window</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-name属性"><span class="toc-text">(1) name属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-top对象"><span class="toc-text">(2) top对象</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-parent对象"><span class="toc-text">(3) parent对象</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-self对象"><span class="toc-text">(4) self对象</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-window的位置"><span class="toc-text">2. window的位置</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-screenLeft、screenTop（IE、Opera、Safari、Chrome）"><span class="toc-text">(1) screenLeft、screenTop（IE、Opera、Safari、Chrome）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-screenX、screenY（FireFox、Safari、Chrome）"><span class="toc-text">(2) screenX、screenY（FireFox、Safari、Chrome）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-moveTo-、moveBy"><span class="toc-text">(3) moveTo()、moveBy()</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-window的大小"><span class="toc-text">3. window的大小</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-innerWidth、innerHeight、outerWidth、outerHeight（≥IE8才有）"><span class="toc-text">(1) innerWidth、innerHeight、outerWidth、outerHeight（≥IE8才有）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-document-documentElement-clientWidth、document-documentElement-clientHeight、document-body-clientWidth、document-body-clientHeight（≤IE8也有）"><span class="toc-text">(2)document.documentElement.clientWidth、document.documentElement.clientHeight、document.body.clientWidth、document.body.clientHeight（≤IE8也有）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-resizeTo-、resizeBy"><span class="toc-text">(3) resizeTo()、resizeBy()</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-导航和打开窗口"><span class="toc-text">4. 导航和打开窗口</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-open"><span class="toc-text">(1) open()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-close"><span class="toc-text">(2) close()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-closed属性、opener属性"><span class="toc-text">(3) closed属性、opener属性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-间歇调用和超时调用"><span class="toc-text">5. 间歇调用和超时调用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-setTimeout-、setInterval"><span class="toc-text">(1) setTimeout()、setInterval ()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-clearTimeout-、clearInterval"><span class="toc-text">(2) clearTimeout ()、clearInterval()</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-系统对话框"><span class="toc-text">6. 系统对话框</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-alert"><span class="toc-text">(1) alert()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-confirm"><span class="toc-text">(2) confirm()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-prompt"><span class="toc-text">(3) prompt()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-find"><span class="toc-text">(4) find()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-print"><span class="toc-text">(5) print()</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、location对象"><span class="toc-text">二、location对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-属性"><span class="toc-text">1. 属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-位置操作"><span class="toc-text">2. 位置操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-assign"><span class="toc-text">(1) assign()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-replace"><span class="toc-text">(2) replace()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-reload"><span class="toc-text">(3) reload()</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、navigator对象"><span class="toc-text">三、navigator对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-属性-1"><span class="toc-text">1. 属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-检测插件"><span class="toc-text">2. 检测插件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-navigator-plugins数组（非IE浏览器）"><span class="toc-text">(1) navigator.plugins数组（非IE浏览器）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-注册处理程序"><span class="toc-text">3. 注册处理程序</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-registerContentHandler"><span class="toc-text">(1) registerContentHandler()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-registerProtocolHandler"><span class="toc-text">(2) registerProtocolHandler()</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、screen对象"><span class="toc-text">四、screen对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-属性和方法"><span class="toc-text">1. 属性和方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、history对象"><span class="toc-text">五、history对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-属性和方法-1"><span class="toc-text">1. 属性和方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-go"><span class="toc-text">(1) go()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-back-、forward"><span class="toc-text">(2) back()、forward()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-length属性"><span class="toc-text">(3) length属性</span></a></li></ol></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#前端基础"
+                           title="前端基础">前端基础</a>
+                        
+                        <a class="tag" href="/TAGS/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

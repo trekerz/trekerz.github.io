@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/page/7/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
+" data-ishome = "true" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+
+<style>
+
+    .custom-haojen-container .post-preview:nth-of-type(1),
+    .custom-haojen-container .post-preview-poetry:nth-of-type(1) {
+        text-align: center;
+        background-repeat: no-repeat;
+        border-radius: 6px;
+        background-size: cover;
+        padding: 0;
+        height: 300px;
+        display: table;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.16);
+    }
+
+    /*去掉诗歌的背景图片*/
+    .custom-haojen-container .post-preview-poetry:nth-of-type(1) {
+        background-image: none !important;
+        background-color: rgba(255, 248, 220, 0.5);
+    }
+
+    .custom-haojen-container .post-preview:nth-child(1) h2,
+    .custom-haojen-container .post-preview:nth-child(1) .post-meta,
+    .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
+        text-shadow: 0 0 40px rgba(0, 0, 0, 1);
+        letter-spacing: 1px;
+        color: #fff;
+        margin-top: 0;
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+
+    .custom-haojen-container .post-preview:nth-child(1) .post-meta {
+        font-size: .9em;
+        font-weight: 300;
+        margin-top: 0;
+    }
+
+    .custom-haojen-container .post-preview-poetry:nth-child(1) .post-subtitle {
+        letter-spacing: 6px;
+        font-size: 18px;
+        font-family: unset;
+        font-weight: 400;
+        color: rgba(0, 0, 0, .75)
+    }
+
+    /*不显示摘要*/
+    .custom-haojen-container .post-preview:nth-child(1) .post-content-preview {
+        display: none
+    }
+
+    /*只第一个显示背景图片*/
+    .custom-haojen-container .post-preview:not(:nth-child(1)) {
+        background-image: none !important;
+    }
+
+    /*第一个分界线去掉*/
+    .custom-haojen-container hr:nth-of-type(1) {
+        display: none;
+    }
+
+    /*主题*/
+    .custom-haojen-container .post-preview:nth-of-type(1) > a {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    /*诗词标题*/
+    .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
+        font-size: 35px;
+        font-family: STKaiti;
+        color: rgba(0, 0, 0, .8);
+    }
+
+    .custom-haojen-container .post-preview-poetry:nth-of-type(1) .post-meta {
+        color: #0e2231;
+    }
+
+
+    .post-preview:nth-of-type(1) {
+        box-shadow: 0px 0px 20px #AAAAAA;
+        border-radius: 6px;
+    }
+
+
+    @media (max-width: 768px) {
+        .custom-haojen-container .post-preview:nth-child(1) {
+            height: 240px;
+        }
+
+        .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
+            font-size: 28px !important;
+            margin-top: 0;
+        }
+
+        .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .custom-haojen-container .post-preview:nth-of-type(1) > a {
+            padding: 20px
+        }
+    }
+
+    /*手机屏幕*/
+    @media (max-width: 400px) {
+        .custom-haojen-container .post-preview:nth-child(1) {
+            height: 195px;
+        }
+
+        .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
+            font-size: 20px !important;
+        }
+
+        .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
+            font-size: 16px;
+        }
+
+        .custom-haojen-container .post-preview:nth-child(1) a {
+            padding: 30px 20px;
+        }
+    }
+</style>
+
+<!-- Page Header -->
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 visible-xs-block visible-sm-block">
+    <div class="row">
+        <header class="intro-header">
+            <div class="container">
+                <div class="site-heading text-center">
+                    <div class="about-me">
+                        <!--移动端头部显示-->
+                        <img src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg"/>
+                        <h5><a href="/ABOUT/">Trekerz</a></h5>
+                        <p>求知若饥 虚心若愚</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+</div>
+<!-- Main Content -->
+<div class="container custom-haojen-container">
+    <!-- Post Container -->
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container">
+            <!-- Main Content -->
+
+
+
+<div class="post-preview "
+     style="background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170317.jpg')">
+    <a href="/2017/03/17/浅谈Google文本计算API/">
+        <h2 class="post-title">
+            浅谈Google文本计算API
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-17
+        </p>
+        
+        <h3 class="post-subtitle">
+            【笔记】文档相似度、提取匹配
+        </h3>
+        
+        <div class="post-content-preview">
+            <p>
+                一、  概述​    Google+ API以及发送API的请求
+​    词频-逆文档频率（TF-IDF），这一分析文档中单词的基本技术
+​    如何将NLTK（自然语言工具箱）应用到人类语言中
+​    如何将余弦相似度应用到按关键字查询文档等常见问题中
+​    如何通过检测搭配模式从人..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+<div class="post-preview "
+     style="background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170316.jpg')">
+    <a href="/2017/03/16/Django基础2/">
+        <h2 class="post-title">
+            Django基础2
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-16
+        </p>
+        
+        <h3 class="post-subtitle">
+            【笔记】Django框架基础知识——第2部分
+        </h3>
+        
+        <div class="post-content-preview">
+            <p>
+                四、   Django视图层视图层主要工作：衔接HTTP请求、Python程序、HTTP模板等。
+1.    URL映射通过URL dispatcher可以指定用户的每一个访问的后台Python处理函数是什么。
+(1)  普通URL映射django.conf.urls.url
+通过urlpatt..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+<div class="post-preview "
+     style="background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170316.jpg')">
+    <a href="/2017/03/16/用户行为数据的利用4/">
+        <h2 class="post-title">
+            用户行为数据的利用4
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-16
+        </p>
+        
+        <h3 class="post-subtitle">
+            【笔记】隐语义模型
+        </h3>
+        
+        <div class="post-content-preview">
+            <p>
+                六、  基于图的模型​       用户行为很容易用二分图表示。基于邻域的模型可以看做基于图的模型的简单形式，因此很多研究人员把基于邻域的模型也成为基于图的模型。
+1.    用户行为数据的二分图表示​        令G(V,E)表示用户物品二分图，其中V = VU∪VI由用户顶点集合VU和物..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+<div class="post-preview "
+     style="background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170315.jpg')">
+    <a href="/2017/03/15/用户行为数据的利用3/">
+        <h2 class="post-title">
+            用户行为数据的利用3
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-15
+        </p>
+        
+        <h3 class="post-subtitle">
+            【笔记】隐语义模型
+        </h3>
+        
+        <div class="post-content-preview">
+            <p>
+                五、  隐语义模型LFM（latent factor model），最早在文本挖掘领域被提出，用于找到文本的隐含语义。相关的名词有LSI、pLSA、LDA、Topic Model。
+1.    基础算法核心思想：通过隐含特征（latent factor）联系用户兴趣和物品。
+(1)  一个新的推..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+<div class="post-preview "
+     style="background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170314.jpg')">
+    <a href="/2017/03/14/Django基础/">
+        <h2 class="post-title">
+            Django基础
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-14
+        </p>
+        
+        <h3 class="post-subtitle">
+            【笔记】Django框架基础知识
+        </h3>
+        
+        <div class="post-content-preview">
+            <p>
+                一、  Django综述1.    Django的特点及结构​    a.    完善的文档
+​    b.    集成数据访问组件（Model层自带数据库ORM组件）
+​    c.    强大的URL映射技术（用正则表达式管理）
+​    d.    后台管理系统自动生成
+​    e.  ..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+<div class="post-preview "
+     style="background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170314.jpg')">
+    <a href="/2017/03/14/用户行为数据的利用2/">
+        <h2 class="post-title">
+            用户行为数据的利用2
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-14
+        </p>
+        
+        <h3 class="post-subtitle">
+            【笔记】UserCF和ItemCF
+        </h3>
+        
+        <div class="post-content-preview">
+            <p>
+                四、  基于邻域的算法分为两类：基于用户的协同过滤算法UserCF、基于物品的协同过滤算法ItemCF。
+1.    基于用户的协同过滤算法主要两个步骤：
+​    a.    找到和目标用户兴趣相似的用户集合
+​    b.    找到这个集合中的用户喜欢的，且目标用户没有听说过的物品推荐给目..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+<div class="post-preview "
+     style="background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170313.jpg')">
+    <a href="/2017/03/13/Python网络框架纵览/">
+        <h2 class="post-title">
+            Python网络框架纵览
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-13
+        </p>
+        
+        <h3 class="post-subtitle">
+            【笔记】Python基础
+        </h3>
+        
+        <div class="post-content-preview">
+            <p>
+                一、   网络框架综述1.    网络框架及MVC架构(1)  网络框架一组Python包，能使开发者专注于网站应用业务逻辑的开发，无须处理网络应用底层的协议、线程、进程等方面。
+(2)  MVC架构​    模型：用于封装与应用程序的业务逻辑相关的数据及对数据的处理方法。
+​    视图：负责..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+<div class="post-preview "
+     style="background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170313.jpg')">
+    <a href="/2017/03/13/用户行为数据的利用/">
+        <h2 class="post-title">
+            用户行为数据的利用
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-13
+        </p>
+        
+        <h3 class="post-subtitle">
+            【笔记】基础与实验
+        </h3>
+        
+        <div class="post-content-preview">
+            <p>
+                (1)  实现个性化推荐最理想的情况就是在注册时候让用户主动告诉我们他喜欢什么，但这种方法有3个缺点：
+​    a.    自然语言理解技术有限
+​    b.    用户的兴趣会变
+​    c.    用户自己也很难描述
+(2)  用户的行为不是随机的，而是蕴含着很多模式。
+(3)  基于..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+
+<!-- 翻页 pager -->
+
+<ul class="pager">
+    
+    <li class="previous">
+        <a href="/page/6/">&larr; Newer Posts</a>
+    </li>
+    
+    
+    <li class="next">
+        <a href="/page/8/">Older Posts &rarr;</a>
+    </li>
+    
+</ul>
+
+
+        </div>
+        <!-- Sidebar Container -->
+        <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+
+            <!-- About Me -->
+            <section class="visible-md visible-lg" style="padding: 0 18px">
+                <div class="short-about">
+                    <!--侧边栏头像-->
+                    
+                    <a href="/ABOUT/"><img class="img-trekerz" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg"/></a>
+                    
+                    <h5><a href="/ABOUT/">Trekerz</a></h5>
+                    
+                    <p>求知若饥 虚心若愚</p>
+                    
+                    <hr>
+                    <!-- SNS Link 社交 -->
+                    <ul class="list-inline">
+                        
+                        
+                        <li>
+                            <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                        </span>
+                            </a>
+                        </li>
+                        
+                        
+                        <li>
+                            <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa  fa-stack-1x fa-inverse">知</i>
+                                        </span>
+                            </a>
+                        </li>
+                        
+
+                        
+                        <li>
+                            <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                                        </span>
+                            </a>
+                        </li>
+                        
+
+                        
+
+                        
+                        <li>
+                            <a target="_blank" href="https://github.com/trekerz" class="github-logo">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                        </span>
+                            </a>
+                        </li>
+                        
+
+                        
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Featured Tags  标签 -->
+            
+            <section>
+                <div class="tags">
+                    
+                    
+                    <a href="/TAGS/#笔记" title="笔记"
+                       rel="44">笔记</a>
+                    
+                    
+                    
+                    <a href="/TAGS/#算法" title="算法"
+                       rel="8">算法</a>
+                    
+                    
+                    
+                    <a href="/TAGS/#推荐系统" title="推荐系统"
+                       rel="16">推荐系统</a>
+                    
+                    
+                    
+                    <a href="/TAGS/#前端基础" title="前端基础"
+                       rel="23">前端基础</a>
+                    
+                    
+                    
+                    <a href="/TAGS/#JavaScript" title="JavaScript"
+                       rel="29">JavaScript</a>
+                    
+                    
+                    
+                    <a href="/TAGS/#CSS" title="CSS"
+                       rel="6">CSS</a>
+                    
+                    
+                    
+                    <a href="/TAGS/#工具" title="工具"
+                       rel="3">工具</a>
+                    
+                    
+                    
+                    <a href="/TAGS/#读书笔记" title="读书笔记"
+                       rel="27">读书笔记</a>
+                    
+                    
+                    
+                    <a href="/TAGS/#Python" title="Python"
+                       rel="4">Python</a>
+                    
+                    
+                    
+                    <a href="/TAGS/#社交挖掘" title="社交挖掘"
+                       rel="10">社交挖掘</a>
+                    
+                    
+                    
+                    <a href="/TAGS/#JS设计模式" title="JS设计模式"
+                       rel="17">JS设计模式</a>
+                    
+                    
+                    
+                    <a href="/TAGS/#网络技术" title="网络技术"
+                       rel="4">网络技术</a>
+                    
+                    
+                    
+                    <a href="/TAGS/#论文笔记" title="论文笔记"
+                       rel="6">论文笔记</a>
+                    
+                    
+                    
+                    <a href="/TAGS/#HTML" title="HTML"
+                       rel="3">HTML</a>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <a href="/TAGS/#问题与解决" title="问题与解决"
+                       rel="2">问题与解决</a>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <a href="/TAGS/#深度学习" title="深度学习"
+                       rel="3">深度学习</a>
+                    
+                    
+                    
+                    
+                </div>
+            </section>
+            
+
+            
+            <hr>
+            <h5 style="text-align: center;">友链</h5>
+            <ul class="list-inline" style="text-align: center;">
+                
+                <li><a href="https://juejin.im" target="_blank">掘金</a></li>
+                
+                <li><a href="https://www.oschina.net/project/lang/28/javascript" target="_blank">开源中国</a></li>
+                
+                <li><a href="http://www.jianshu.com/" target="_blank">简书</a></li>
+                
+            </ul>
+            
+
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

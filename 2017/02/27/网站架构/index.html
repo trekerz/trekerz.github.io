@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        网站架构｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/02/27/网站架构/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170227.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null170227.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>网站架构</h1>
+                    
+                    <h2 class="subheading">【笔记】常用网站架构</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-02-27
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#网络技术"
+                           title="网络技术">网络技术</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            网站架构
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h3 id="一、-Python应用服务器"><a href="#一、-Python应用服务器" class="headerlink" title="一、 Python应用服务器"></a><strong>一、 Python应用服务器</strong></h3><h4 id="1-WSGI协议"><a href="#1-WSGI协议" class="headerlink" title="1.    WSGI协议"></a><strong>1.    WSGI协议</strong></h4><p>规定了一种在Web服务器与Web应用程序/框架之间推荐的标准接口，以确保Web应用程序在不同的Web服务器之间具有可移植性，有了它Web开发者就可以任意选择适合自己的组合。</p>
+<h4 id="2-常见的WSGI容器（用于生产环境中的）"><a href="#2-常见的WSGI容器（用于生产环境中的）" class="headerlink" title="2.    常见的WSGI容器（用于生产环境中的）"></a><strong>2.    常见的WSGI容器（用于生产环境中的）</strong></h4><p>WSGI是一个同步接口，所以Tornado的WSGI容器是无法实现异步的。主流的选择是Gunicorn和uWSGI。</p>
+<h6 id="1-Gunicorn"><a href="#1-Gunicorn" class="headerlink" title="(1)  Gunicorn"></a><strong>(1)  Gunicorn</strong></h6><p>易于配置，兼容性好，在豆瓣中广泛使用，支持多种Worker模式（同步Worker、异步Worker、异步IO Worker）。</p>
+<p>Worker的个数并不是越多越好，推荐CPU数×2+1。</p>
+<h6 id="2-uWSGI"><a href="#2-uWSGI" class="headerlink" title="(2)  uWSGI"></a><strong>(2)  uWSGI</strong></h6><p>用C编写，实现了自有的uWSGI协议的Web服务器。自带丰富插件，包括核心组件（进程管理、监控、IPC）和网关组件（负载均衡、代理、路由）。</p>
+<h3 id="二、-Web服务器Nginx"><a href="#二、-Web服务器Nginx" class="headerlink" title="二、 Web服务器Nginx"></a><strong>二、 Web服务器Nginx</strong></h3><h4 id="1-Web服务器与应用服务器的区别"><a href="#1-Web服务器与应用服务器的区别" class="headerlink" title="1.    Web服务器与应用服务器的区别"></a><strong>1.    Web服务器与应用服务器的区别</strong></h4><p>​    (1)  Web服务器负责处理HTTP协议；</p>
+<p>​        应用服务器既可以处理HTTP内容，也能处理其他协议，比如RPC。</p>
+<p>​    (2)  Web服务器用于处理静态页面的内容，对于脚本语言产生的动态内容要通过WSGI接口交给应用服务器。</p>
+<p>​    (3)  一般应用服务器都集成了Web服务器，但主要是为了调试方便，处于性能和稳定性考虑，应用服务器并不能在生产环境中使用。</p>
+<h4 id="2-Nginx的优点"><a href="#2-Nginx的优点" class="headerlink" title="2.    Nginx的优点"></a><strong>2.    Nginx的优点</strong></h4><h4 id="3-Nginx安装"><a href="#3-Nginx安装" class="headerlink" title="3.    Nginx安装"></a><strong>3.    Nginx安装</strong></h4><h4 id="4-使用Nginx部署Flask应用"><a href="#4-使用Nginx部署Flask应用" class="headerlink" title="4.    使用Nginx部署Flask应用"></a><strong>4.    使用Nginx部署Flask应用</strong></h4><p>部署Flask应用时，通常都是使用一种WSGI应用服务器搭配Nginx作为反向代理。</p>
+<h6 id="1-反向代理和正向代理"><a href="#1-反向代理和正向代理" class="headerlink" title="(1)  反向代理和正向代理"></a><strong>(1)  反向代理和正向代理</strong></h6><p>​    a.    正向代理和反向代理的概念；</p>
+<p>​    b.    Nginx是反向代理的最佳选择。</p>
+<p>​    c.    反向代理的优点：提高IO能力；加密加速；安全；负载均衡；缓存静态内容；支持压缩。</p>
+<h6 id="2-Nginx的配置"><a href="#2-Nginx的配置" class="headerlink" title="(2)  Nginx的配置"></a><strong>(2)  Nginx的配置</strong></h6><p>​    a.    以块（即“{}”）的形式。</p>
+<p>​    b.    也有Nginx和Gunicorn共用一个配置文件的情况。</p>
+<h6 id="3-负载均衡算法"><a href="#3-负载均衡算法" class="headerlink" title="(3)  负载均衡算法"></a><strong>(3)  负载均衡算法</strong></h6><p>Nginx支持4种调度算法：</p>
+<p>​    a.    round-robin：默认轮询算法。每个请求按时间顺序逐一分配到不同后端服务器，若有服务器宕机会被自动剔除。</p>
+<p>​    b.    least_conn：请求会被发送到活跃连接最少的服务器上。</p>
+<p>​    c.    ip_hash：按访问IP的哈希结果分配请求。即同一个IP会固定访问同一个服务器。</p>
+<p>​    d.    hash：按某个键的哈希结果分配。</p>
+<h6 id="4-负载均衡中的状态参数"><a href="#4-负载均衡中的状态参数" class="headerlink" title="(4)  负载均衡中的状态参数"></a><strong>(4)  负载均衡中的状态参数</strong></h6><p>Upstream模块（Nginx中关于负载均衡的配置）中支持4种状态：down、max_fails、fail_timeout、backup。</p>
+<h6 id="5-通过Gunicorn启动Flask应用"><a href="#5-通过Gunicorn启动Flask应用" class="headerlink" title="(5)  通过Gunicorn启动Flask应用"></a><strong>(5)  通过Gunicorn启动Flask应用</strong></h6><h6 id="6-通过uWSGI启动Flask应用"><a href="#6-通过uWSGI启动Flask应用" class="headerlink" title="(6)  通过uWSGI启动Flask应用"></a><strong>(6)  通过uWSGI启动Flask应用</strong></h6><h6 id="7-TCP-IP-Socket和UNIX-Socket区别"><a href="#7-TCP-IP-Socket和UNIX-Socket区别" class="headerlink" title="(7)  TCP/IP Socket和UNIX Socket区别"></a><strong>(7)  TCP/IP Socket和UNIX Socket区别</strong></h6><p>​    a.    UNIX Socket是同一台服务器上不同进程间的通信机制；而TCP/IP是网络上不同服务器之间进程的通信机制，也可以让同一台服务器不同进程通信。</p>
+<p>​    b.    有实验证明，UNIX Socket比TCP/IP Socket方式要快31%，所以在同一台服务器中优先使用UNIX Socket。</p>
+<h3 id="三、-缓存系统Memcached"><a href="#三、-缓存系统Memcached" class="headerlink" title="三、 缓存系统Memcached"></a><strong>三、 缓存系统Memcached</strong></h3><p>通过在内存中缓存数据来减少读取数据库的次数，减轻应用服务器对于数据库大量访问造成的负担，提高Web应用的速度。</p>
+<p>守护进程用C编写，客户端则可以使用任何语言。Python中的客户端有Python-memcached、Pymemcached（Pinterest开源客户端）、Python-Libmemcached（豆瓣曾经的开源客户端；Cython实现；豆瓣使用它的时候打过补丁）、Pylibmc、Libmc（测试对比中最；豆瓣现任；支持一致性哈希的方式一次性与多个Memcached节点交互）。</p>
+<h4 id="1-Libmc安装配置（首先装Memcached）"><a href="#1-Libmc安装配置（首先装Memcached）" class="headerlink" title="1.    Libmc安装配置（首先装Memcached）"></a><strong>1.    Libmc安装配置（首先装Memcached）</strong></h4><h4 id="2-使用原生SQL缓存"><a href="#2-使用原生SQL缓存" class="headerlink" title="2.    使用原生SQL缓存"></a><strong>2.    使用原生SQL缓存</strong></h4><h4 id="3-常用缓存更新策略"><a href="#3-常用缓存更新策略" class="headerlink" title="3.    常用缓存更新策略"></a><strong>3.    常用缓存更新策略</strong></h4><p><strong>    a.    懒惰式加载</strong></p>
+<p>​        客户端先查Memcached，若命中则返回，若没命中（没有数据或数据过期）则从数据库中获得最新数        据，并传一份给Memcached。</p>
+<p>​        在高并发的场景下，突然失效会让后端数据库的压力骤增。</p>
+<p><strong>    b.    主动更新</strong></p>
+<p>​        默认缓存永不失效。当有数据需要更新时，同时也会把最新数据写回到Memcached中。</p>
+<p>​        这种更新如果耗时过长，应该注意使用异步更新，如放在消息队列中。</p>
+<h4 id="4-Memcached使用的经验"><a href="#4-Memcached使用的经验" class="headerlink" title="4.    Memcached使用的经验"></a><strong>4.    Memcached使用的经验</strong></h4><p>​    a.    批量获取时尽可能使用“mc.get_multi”代替“mc.get”，能减少网络请求次数。</p>
+<p>​    b.    对缓存全部更新，可以直接升级缓存键（版本号）。</p>
+<p>​    c.    批量更新缓存的时候应该尽量少给后端数据库带来压力，需要对缓存预热。</p>
+<p>​    d.    Memcached不仅能缓存SQL查询结果，还能缓存HTML。</p>
+<p>​    e.    不鼓励缓存的值大于1MB（Memcached协议规定大小）。</p>
+<p>​    f.     不鼓励使用读/写/删之外的接口，会给运维带来困难。</p>
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/02/28/客户端的编程技术/" data-toggle="tooltip" data-placement="top"
+                           title="客户端的编程技术">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/02/27/Web编程之网络基础/" data-toggle="tooltip" data-placement="top"
+                           title="Web编程之网络基础">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、-Python应用服务器"><span class="toc-text">一、 Python应用服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-WSGI协议"><span class="toc-text">1.    WSGI协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-常见的WSGI容器（用于生产环境中的）"><span class="toc-text">2.    常见的WSGI容器（用于生产环境中的）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-Gunicorn"><span class="toc-text">(1)  Gunicorn</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-uWSGI"><span class="toc-text">(2)  uWSGI</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、-Web服务器Nginx"><span class="toc-text">二、 Web服务器Nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Web服务器与应用服务器的区别"><span class="toc-text">1.    Web服务器与应用服务器的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Nginx的优点"><span class="toc-text">2.    Nginx的优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Nginx安装"><span class="toc-text">3.    Nginx安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-使用Nginx部署Flask应用"><span class="toc-text">4.    使用Nginx部署Flask应用</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-反向代理和正向代理"><span class="toc-text">(1)  反向代理和正向代理</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-Nginx的配置"><span class="toc-text">(2)  Nginx的配置</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-负载均衡算法"><span class="toc-text">(3)  负载均衡算法</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4-负载均衡中的状态参数"><span class="toc-text">(4)  负载均衡中的状态参数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#5-通过Gunicorn启动Flask应用"><span class="toc-text">(5)  通过Gunicorn启动Flask应用</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#6-通过uWSGI启动Flask应用"><span class="toc-text">(6)  通过uWSGI启动Flask应用</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#7-TCP-IP-Socket和UNIX-Socket区别"><span class="toc-text">(7)  TCP/IP Socket和UNIX Socket区别</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、-缓存系统Memcached"><span class="toc-text">三、 缓存系统Memcached</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Libmc安装配置（首先装Memcached）"><span class="toc-text">1.    Libmc安装配置（首先装Memcached）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-使用原生SQL缓存"><span class="toc-text">2.    使用原生SQL缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-常用缓存更新策略"><span class="toc-text">3.    常用缓存更新策略</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Memcached使用的经验"><span class="toc-text">4.    Memcached使用的经验</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#网络技术"
+                           title="网络技术">网络技术</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>

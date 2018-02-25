@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>PingPong Game</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            text-align: center;
+            background-color: #B8B9B5; 
+        }
+        #canv {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .name {
+            font-size: 2em;
+            font-weight: bold;
+            font-family: "Microsoft YaHei";
+            margin: 20px 0 15px 0;
+        }
+        .button-wrap {
+            margin: 10px 0 10px 0;
+        }
+        .button {
+            width: 50px;
+            height: 30px;
+            border-radius: 5px;
+            font-size: 20px;
+            color: #fff;
+            outline: none;
+            border: 0px;
+            background-color: #000;
+        }
+        .button:active {
+            background-color: #fff;
+            color: #000;
+        }
+        .button:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="name">PingPong Game</div>
+        <canvas id="canv" width="640" height="480">您的浏览器不支持canvas功能！</canvas>
+        <div>提示：移动鼠标接球。</div>
+        <div class="button-wrap">
+            <button class="button" onclick="shorter()"> - </button>
+            &nbsp;&nbsp;
+            <button class="button" onclick="longer()"> + </button>
+        </div>
+    </div>
+    <script>
+        p1y = p2y = 40; //挡板位置
+        pt = 6; //挡板厚度
+        ph = 100; //挡板高度
+        bx = by = 50; //球的初始位置
+        bd = 6; //球直径
+        xv = yv = 4; //每次位移
+        score1 = score2 = 0;
+        ais = 4; //电脑每次移动距离
+
+        window.onload = function() {
+            canv = document.getElementById("canv");
+            cc = canv.getContext("2d");
+            gaming = setInterval(update, 1000 / 60); //球速
+            document.addEventListener('mousemove', function(e) {
+                if (e.clientY < 500 && e.clientY > 0) {
+                    p1y = e.clientY - ph / 2; //玩家位移
+                }
+            })
+        };
+
+        //重置函数
+        function reset() {
+            bx = canv.width / 2;
+            by = canv.height / 2;
+            xv = -xv;
+            yv = 3;
+        }
+
+        //每次更新
+        function update() {
+            bx += xv;
+            by += yv;
+            if (by < 0 && yv < 0) {
+                //上方反弹
+                yv = -yv;
+            }
+            if (by > canv.height && yv > 0) {
+                //下方反弹
+                yv = -yv;
+            }
+            if (bx < 0) {
+                if (by > p1y && by < p1y + ph) {
+                    //玩家接住球
+                    xv = -xv;
+                    dy = by - (p1y + ph / 2);
+                    yv = dy * 0.3;
+                } else {
+                    //玩家接不住球
+                    score2++;
+                    reset();
+                }
+            }
+            if (bx > canv.width) {
+                if (by > p2y && by < p2y + ph) {
+                    //电脑接住球
+                    xv = -xv;
+                    dy = by - (p2y + ph / 2);
+                    yv = dy * 0.3;
+                } else {
+                    //电脑接不住球
+                    score1++;
+                    reset();
+                }
+            }
+
+            //电脑移动规则
+            if (p2y + ph / 2 < by) {
+                p2y += ais;
+            } else {
+                p2y -= ais;
+            }
+
+            cc.fillStyle = 'black';
+            cc.fillRect(0, 0, canv.width, canv.height);
+            cc.fillStyle = 'white';
+            cc.fillRect(0, p1y, pt, ph);
+            cc.fillRect(canv.width - pt, p2y, pt, ph);
+            cc.fillRect(bx - bd / 2, by - bd / 2, bd, bd);
+            cc.fillText(score1, 100, 100);
+            cc.fillText(score2, canv.width - 100, 100);
+        }
+
+        // 板子变短
+        function shorter() {
+            if (ph > 20) {
+                ph -= 20;
+            }
+        }
+
+        // 板子变长
+        function longer() {
+            if (ph < 140) {
+                ph += 20;
+            }
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        CSS处理居中问题总结｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2017/11/21/CSS处理居中问题总结/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null171121.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://ozehuspmv.bkt.clouddn.com/blog/bg-img/null171121.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>CSS处理居中问题总结</h1>
+                    
+                    <h2 class="subheading">水平居中、水平垂直居中</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2017-11-21
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#前端基础"
+                           title="前端基础">前端基础</a>
+                        
+                        <a class="tag" href="/TAGS/#CSS"
+                           title="CSS">CSS</a>
+                        
+                        <a class="tag" href="/TAGS/#工具"
+                           title="工具">工具</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            CSS处理居中问题总结
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>在HTML的标准盒模型中，居中是一个很常见的问题，不同标签的居中有不同的处理方式，在不同的浏览器中也会有不同的表现，今天就来归纳一下最常遇到的<strong>水平居中问题</strong>和<strong>水平垂直居中问题</strong>的处理方式。</p>
+<h1 id="一、水平居中"><a href="#一、水平居中" class="headerlink" title="一、水平居中"></a><strong>一、水平居中</strong></h1><h3 id="1-使块级标签中的内容居中（包括文字、图片、行内元素）"><a href="#1-使块级标签中的内容居中（包括文字、图片、行内元素）" class="headerlink" title="1.使块级标签中的内容居中（包括文字、图片、行内元素）"></a><strong>1.使块级标签中的内容居中（包括文字、图片、行内元素）</strong></h3><h5 id="1-方法"><a href="#1-方法" class="headerlink" title="(1) 方法"></a><strong>(1) 方法</strong></h5><p><code>text-align: center;</code></p>
+<p>解读：众所周知，这个属性的本意就是让标签内部文本水平居中，除此之外，其它像img、span、button等行内元素也适用，各浏览器也都兼容，可以说是一个人畜无害的方法。</p>
+<h5 id="2-实例"><a href="#2-实例" class="headerlink" title="(2) 实例"></a><strong>(2) 实例</strong></h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.div1</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> <span class="number">#000</span> solid;</span><br><span class="line">    <span class="attribute">text-align</span>: center; <span class="comment">/* 能使标签的内容或图片水平居中 */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div class="div1"&gt;</span><br><span class="line">	这是一个例子</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="3-效果"><a href="#3-效果" class="headerlink" title="(3) 效果"></a><strong>(3) 效果</strong></h5><p><img src="1.png" alt="img"></p>
+<h5 id="4-适用性"><a href="#4-适用性" class="headerlink" title="(4) 适用性"></a><strong>(4) 适用性</strong></h5><p>用于使<strong><u>块级标签的内容（包括文字、图片、行内标签）</u></strong>水平居中，<strong>但有一点需要注意：加了</strong><code>text-align: center;</code><strong>的元素其后代元素的文本都会居中</strong>。<u>完美兼容各大浏览器，无论高低版本的IE均兼容</u>。</p>
+<h3 id="2-使块级标签居中"><a href="#2-使块级标签居中" class="headerlink" title="2.使块级标签居中"></a><strong>2.使块级标签居中</strong></h3><h5 id="1-方法-1"><a href="#1-方法-1" class="headerlink" title="(1) 方法"></a><strong>(1) 方法</strong></h5><p><code>margin: 0 auto;</code></p>
+<p>解读：这个方法的原理是让标签上下边距为0，左右边距自适应，<strong>它无论对于块级元素还是行内元素都适用</strong>。要注意的是内层标签的宽度应不同于外层标签的宽度，否则二者重叠就看不出居中效果了。</p>
+<h5 id="2-实例-1"><a href="#2-实例-1" class="headerlink" title="(2) 实例"></a><strong>(2) 实例</strong></h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.outer</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> <span class="number">#000</span> solid;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.inner</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> <span class="number">#000</span> solid;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto; <span class="comment">/* 能使整个inner水平居中 */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div class="outer"&gt;</span><br><span class="line">	&lt;div class="inner"&gt;123&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="3-效果-1"><a href="#3-效果-1" class="headerlink" title="(3) 效果"></a><strong>(3) 效果</strong></h5><p><img src="2.png" alt="img"></p>
+<h5 id="4-适用性-1"><a href="#4-适用性-1" class="headerlink" title="(4) 适用性"></a><strong>(4) 适用性</strong></h5><p>用于使<strong><u>块级标签</u></strong>水平居中。<u>完美兼容各大浏览器，<strong>≥IE6</strong></u>。</p>
+<h3 id="3-总结"><a href="#3-总结" class="headerlink" title="3.总结"></a><strong>3.总结</strong></h3><p>应用以上两种方法就可以处理大部分的水平居中问题了。这两种方法不要求父标签必须固定高宽，它会自动适应父标签的高宽变化，所以处理起来比较简单。</p>
+<h1 id="二、水平垂直居中"><a href="#二、水平垂直居中" class="headerlink" title="二、水平垂直居中"></a><strong>二、水平垂直居中</strong></h1><h3 id="1-固定高宽div的水平垂直居中"><a href="#1-固定高宽div的水平垂直居中" class="headerlink" title="1.固定高宽div的水平垂直居中"></a><strong>1.固定高宽div的水平垂直居中</strong></h3><h5 id="1-方法-2"><a href="#1-方法-2" class="headerlink" title="(1) 方法"></a><strong>(1) 方法</strong></h5><blockquote>
+<p>a. 设置要居中的子标签绝对定位，其父标签相对定位；</p>
+<p>b. 综合父标签和子标签的宽高，设置left、top、margin-left、margin-top属性，使其水平垂直居中。</p>
+</blockquote>
+<p>解读：也可以设置子标签<code>position: relative;</code>，这样父标签则保持普通流即可。但如果子标签设置<code>position: absolute;</code>，那么由于绝对定位需要参考最近的定位标签，所以父标签必须设置<code>position: relative;</code>。</p>
+<h5 id="2-实例-2"><a href="#2-实例-2" class="headerlink" title="(2) 实例"></a><strong>(2) 实例</strong></h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.outer</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative; <span class="comment">/* 父元素需要定位 */</span></span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> <span class="number">#000</span> solid;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.inner</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute; <span class="comment">/* 子元素绝对定位，用以设置位置 */</span></span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> <span class="number">#000</span> solid;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">50%</span>; <span class="comment">/* left和top是用来设置子元素左上角对准父元素中心 */</span></span><br><span class="line">    <span class="attribute">top</span>:<span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>; <span class="comment">/* width和height可以为下面的margin提供偏移依据 */</span></span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">margin-left</span>: -<span class="number">50px</span>; <span class="comment">/* 根据子元素的width和height往回偏移，使父子元素的中心相互对准 */</span></span><br><span class="line">    <span class="attribute">margin-top</span>: -<span class="number">50px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div class="outer"&gt;</span><br><span class="line">	&lt;div class="inner"&gt;例子&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="3-效果-2"><a href="#3-效果-2" class="headerlink" title="(3) 效果"></a><strong>(3) 效果</strong></h5><p><img src="3.png" alt="img"></p>
+<h5 id="4-适用性-2"><a href="#4-适用性-2" class="headerlink" title="(4) 适用性"></a><strong>(4) 适用性</strong></h5><p>用于在父标签固定宽高的情况下使子标签（无论块级元素还是行内元素都可以，因为这里设置了absolute定位）水平垂直居中。<u><strong>完美兼容各大浏览器，无论高低版本的IE均兼容</strong></u>。</p>
+<h3 id="2-不固定宽高div的水平垂直居中——方法1（ghost）"><a href="#2-不固定宽高div的水平垂直居中——方法1（ghost）" class="headerlink" title="2.不固定宽高div的水平垂直居中——方法1（ghost）"></a><strong>2.不固定宽高div的水平垂直居中——方法1（ghost）</strong></h3><h5 id="1-方法-3"><a href="#1-方法-3" class="headerlink" title="(1) 方法"></a><strong>(1) 方法</strong></h5><blockquote>
+<p>(a) 设置一个ghost元素（可以是:before伪元素也可以是其它没有内容的空元素）的<code>content: &#39;&#39;;</code>且<code>display: inline-block;</code>且<code>vertical-align: middle;</code>。</p>
+<p>(b) 把需要水平垂直居中的元素设置为<code>display: inline-block;</code>且<code>vertical-align: middle;</code>。</p>
+</blockquote>
+<p>解读：这种巧妙的方法是利用ghost元素（空元素）进行辅助垂直，为此就需要保证ghost元素与子元素是行内元素，这样才能既让二者置于同一行，又可以设置ghost的高度，最后再利用<code>vertical-align</code>进行辅助垂直。</p>
+<h5 id="2-实例-3"><a href="#2-实例-3" class="headerlink" title="(2) 实例"></a><strong>(2) 实例</strong></h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.outer</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> <span class="number">#000</span> solid;</span><br><span class="line">    <span class="attribute">text-align</span>: center; <span class="comment">/* 此为水平居中 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outer</span><span class="selector-pseudo">:before</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">''</span>; <span class="comment">/* 设为空内容，为了不占据空间 */</span></span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>; <span class="comment">/* 设置该空元素高度等于父元素高度，使inner元素可以以此为高度参考进行垂直居中 */</span></span><br><span class="line">  	<span class="attribute">margin-right</span>: -<span class="number">0.25em</span>; <span class="comment">/* 如下面第二张图所示，ghost元素与子元素间有一段空白需要补偿（回车造成的空元素） */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.inner</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50%</span>; <span class="comment">/* 此为子元素宽度，无关紧要，能容纳内容即可 */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div class="outer"&gt;</span><br><span class="line">	&lt;div class="inner"&gt;垂直居中的文字&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="3-效果（下面第二张图是给ghost元素和子元素加边框之后的效果，方便理解原理）"><a href="#3-效果（下面第二张图是给ghost元素和子元素加边框之后的效果，方便理解原理）" class="headerlink" title="(3) 效果（下面第二张图是给ghost元素和子元素加边框之后的效果，方便理解原理）"></a><strong>(3) 效果（下面第二张图是给ghost元素和子元素加边框之后的效果，方便理解原理）</strong></h5><center><img src="4.png" alt="img"><img src="5.png" alt="img"></center>
+
+<h5 id="4-适用性-3"><a href="#4-适用性-3" class="headerlink" title="(4) 适用性"></a><strong>(4) 适用性</strong></h5><p>用于标签的垂直居中。<strong>子元素可以是块级元素也可以是行内元素</strong>，但<strong>无论如何ghost元素和子元素都必须是行内元素（若子元素是块级元素则应设display为inline-block，若子元素是行内元素则可以不设其display），因为这样才能设置ghost元素的高度，同时又能把二者放在同一行内</strong>。<u>该方法完美兼容各大浏览器，<strong>＞IE6</strong></u>。</p>
+<h3 id="3-不固定宽高div的水平垂直居中——方法2（table）"><a href="#3-不固定宽高div的水平垂直居中——方法2（table）" class="headerlink" title="3.不固定宽高div的水平垂直居中——方法2（table）"></a><strong>3.不固定宽高div的水平垂直居中——方法2（table）</strong></h3><h5 id="1-方法-4"><a href="#1-方法-4" class="headerlink" title="(1) 方法"></a><strong>(1) 方法</strong></h5><blockquote>
+<p>创建一个table，在其中的td元素内设置<code>text-align:center;</code>和<code>vertical-align: center;</code>。</p>
+</blockquote>
+<p>解读：这个方法利用了table元素的便利，真正意义上地只用最原始的属性来进行居中操作。也可以用div代替table，把display设为table和table-cell。</p>
+<h5 id="2-实例（table原版和div版本）"><a href="#2-实例（table原版和div版本）" class="headerlink" title="(2) 实例（table原版和div版本）"></a><strong>(2) 实例（table原版和div版本）</strong></h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* table原版 */</span></span><br><span class="line"><span class="selector-class">.outer</span> &#123;</span><br><span class="line">  	<span class="attribute">width</span>:<span class="number">200px</span>;</span><br><span class="line"> 	<span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.inner</span> &#123;</span><br><span class="line">  	<span class="attribute">text-align</span>: center;</span><br><span class="line">  	<span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;table class="outer" border="1"&gt;</span><br><span class="line">  &lt;<span class="selector-tag">tr</span>&gt;</span><br><span class="line">    &lt;td class="inner"&gt;</span><br><span class="line">    	这是一个例子</span><br><span class="line">    &lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* div版 */</span></span><br><span class="line"><span class="selector-class">.outer</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span><br><span class="line">    <span class="attribute">display</span>: table;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.inner</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span><br><span class="line">    <span class="attribute">display</span>: table-cell; <span class="comment">/* 这里如果只有一个子div的话，其宽度是无法设置的，只能跟父元素一样 */</span></span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div class="outer"&gt;</span><br><span class="line">	&lt;div class="inner"&gt;这是一个例子&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="3-效果（上图table下图div）"><a href="#3-效果（上图table下图div）" class="headerlink" title="(3) 效果（上图table下图div）"></a><strong>(3) 效果（上图table下图div）</strong></h5><p><img src="6.png" alt="img"><img src="7.png" alt="img"></p>
+<h5 id="4-适用性-4"><a href="#4-适用性-4" class="headerlink" title="(4) 适用性"></a><strong>(4) 适用性</strong></h5><p>是个好方法，但也有局限性。<u>该方法完美兼容各大浏览器，<strong>＞IE6</strong></u>。</p>
+<h3 id="4-不固定宽高div的水平垂直居中——方法3（CSS3-translate-）"><a href="#4-不固定宽高div的水平垂直居中——方法3（CSS3-translate-）" class="headerlink" title="4.不固定宽高div的水平垂直居中——方法3（CSS3-translate()）"></a><strong>4.不固定宽高div的水平垂直居中——方法3（CSS3-translate()）</strong></h3><h5 id="1-方法-5"><a href="#1-方法-5" class="headerlink" title="(1) 方法"></a><strong>(1) 方法</strong></h5><blockquote>
+<p>此方法与1中固定宽高的方法相似，都是先利用position设置父子标签的定位，再让父子元素的中心相互对准，最后再回移。不同的是这个方法中使用了CSS3的<code>translate</code>方法，使得回移的距离不再是基于子元素的固定宽高，而是基于子元素宽高的百分比。</p>
+</blockquote>
+<p>解读：1和4这两种方法用到了<code>position</code>，通过修改<code>position</code>值和设置<code>top</code>、<code>left</code>等属性就能把它应用在“整页弹出层”的应用场景中。</p>
+<h5 id="2-实例-4"><a href="#2-实例-4" class="headerlink" title="(2) 实例"></a><strong>(2) 实例</strong></h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.outer</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.inner</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">-webkit-transform</span>: <span class="built_in">translateX</span>(-50%) <span class="built_in">translateY</span>(-50%);</span><br><span class="line">    <span class="attribute">-moz-transform</span>: <span class="built_in">translateX</span>(-50%) <span class="built_in">translateY</span>(-50%);</span><br><span class="line">    <span class="attribute">-ms-transform</span>: <span class="built_in">translateX</span>(-50%) <span class="built_in">translateY</span>(-50%); <span class="comment">/* &gt;IE8 */</span></span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-50%) <span class="built_in">translateY</span>(-50%);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div class="outer"&gt;</span><br><span class="line">	&lt;div class="inner"&gt;举个例子&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="3-效果-3"><a href="#3-效果-3" class="headerlink" title="(3) 效果"></a><strong>(3) 效果</strong></h5><p><img src="8.png" alt="img"></p>
+<h5 id="4-适用性-5"><a href="#4-适用性-5" class="headerlink" title="(4) 适用性"></a><strong>(4) 适用性</strong></h5><p>是一种比较完美的方法，但浏览器必须支持CSS3才行。<u>该方法完美兼容各大浏览器，<strong>＞IE8</strong></u>。</p>
+<h3 id="5-不固定宽高div的水平垂直居中——方法4（flex方法）"><a href="#5-不固定宽高div的水平垂直居中——方法4（flex方法）" class="headerlink" title="5.不固定宽高div的水平垂直居中——方法4（flex方法）"></a><strong>5.不固定宽高div的水平垂直居中——方法4（flex方法）</strong></h3><h5 id="1-方法-6"><a href="#1-方法-6" class="headerlink" title="(1) 方法"></a><strong>(1) 方法</strong></h5><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">display</span>: <span class="selector-tag">flex</span>;</span><br><span class="line"><span class="selector-tag">justify-content</span>: <span class="selector-tag">center</span>; <span class="comment">/* 子元素水平居中 */</span></span><br><span class="line"><span class="selector-tag">align-items</span>: <span class="selector-tag">center</span>; <span class="comment">/* 子元素垂直居中 */</span></span><br></pre></td></tr></table></figure>
+<p>解读：这种方法运用了flex弹性布局，让父元素变成一个flex-box就可以很方便地对子元素进行水平垂直居中了。</p>
+<h5 id="2-实例-5"><a href="#2-实例-5" class="headerlink" title="(2) 实例"></a><strong>(2) 实例</strong></h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.outer</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">display</span>: flex; <span class="comment">/* 把父元素变成一个flex-box */</span></span><br><span class="line">    <span class="attribute">justify-content</span>: center; <span class="comment">/* 主轴（水平）居中 */</span></span><br><span class="line">    <span class="attribute">align-items</span>: center; <span class="comment">/* 侧轴（垂直）居中 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.inner</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div class="outer"&gt;</span><br><span class="line">	&lt;div class="inner"&gt;举个例子&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="3-效果-4"><a href="#3-效果-4" class="headerlink" title="(3) 效果"></a><strong>(3) 效果</strong></h5><p><img src="8.png" alt="img"></p>
+<h5 id="4-适用性-6"><a href="#4-适用性-6" class="headerlink" title="(4) 适用性"></a><strong>(4) 适用性</strong></h5><p>弹性布局是2009年提出的一种新的布局方式，不兼容老版本浏览器，<u>但目前在各大新版本的主流浏览器中已经兼容，<strong>＞IE9</strong></u>。</p>
+<h3 id="6-不固定宽高div的水平垂直居中——方法5（margin-auto）"><a href="#6-不固定宽高div的水平垂直居中——方法5（margin-auto）" class="headerlink" title="6.不固定宽高div的水平垂直居中——方法5（margin:auto）"></a><strong>6.不固定宽高div的水平垂直居中——方法5（margin:auto）</strong></h3><h5 id="1-方法-7"><a href="#1-方法-7" class="headerlink" title="(1) 方法"></a><strong>(1) 方法</strong></h5><blockquote>
+<p>此方法与1和4中的方法相似。不同的是这个方法是在定位后使用<code>top:0;bottom:0;left:0;right:0;</code>+<code>margin:auto;</code>来实现水平与垂直居中的。</p>
+</blockquote>
+<p>解读：与1和4这两种方法相同，都可以通过修改<code>position</code>值和设置<code>top</code>、<code>left</code>等属性来把它应用在“整页弹出层”的应用场景中。</p>
+<h5 id="2-实例-6"><a href="#2-实例-6" class="headerlink" title="(2) 实例"></a><strong>(2) 实例</strong></h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.outer</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.inner</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">margin</span>:auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div class="outer"&gt;</span><br><span class="line">	&lt;div class="inner"&gt;举个例子&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="3-效果-5"><a href="#3-效果-5" class="headerlink" title="(3) 效果"></a><strong>(3) 效果</strong></h5><p><img src="8.png" alt="img"></p>
+<h5 id="4-适用性-7"><a href="#4-适用性-7" class="headerlink" title="(4) 适用性"></a><strong>(4) 适用性</strong></h5><p>是一种不错的方法，<u>完美兼容各大浏览器，<strong>＞IE6</strong></u>。</p>
+<p><br></p>
+<center>-&nbsp;<em>end</em>&nbsp;-</center>
+
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/11/22/CSS格式化上下文概念解析/" data-toggle="tooltip" data-placement="top"
+                           title="CSS格式化上下文概念解析">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/11/20/Flex布局总结与实例/" data-toggle="tooltip" data-placement="top"
+                           title="Flex布局总结与实例">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、水平居中"><span class="toc-text">一、水平居中</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-使块级标签中的内容居中（包括文字、图片、行内元素）"><span class="toc-text">1.使块级标签中的内容居中（包括文字、图片、行内元素）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-方法"><span class="toc-text">(1) 方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-实例"><span class="toc-text">(2) 实例</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-效果"><span class="toc-text">(3) 效果</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-适用性"><span class="toc-text">(4) 适用性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-使块级标签居中"><span class="toc-text">2.使块级标签居中</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-方法-1"><span class="toc-text">(1) 方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-实例-1"><span class="toc-text">(2) 实例</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-效果-1"><span class="toc-text">(3) 效果</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-适用性-1"><span class="toc-text">(4) 适用性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-总结"><span class="toc-text">3.总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、水平垂直居中"><span class="toc-text">二、水平垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-固定高宽div的水平垂直居中"><span class="toc-text">1.固定高宽div的水平垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-方法-2"><span class="toc-text">(1) 方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-实例-2"><span class="toc-text">(2) 实例</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-效果-2"><span class="toc-text">(3) 效果</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-适用性-2"><span class="toc-text">(4) 适用性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-不固定宽高div的水平垂直居中——方法1（ghost）"><span class="toc-text">2.不固定宽高div的水平垂直居中——方法1（ghost）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-方法-3"><span class="toc-text">(1) 方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-实例-3"><span class="toc-text">(2) 实例</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-效果（下面第二张图是给ghost元素和子元素加边框之后的效果，方便理解原理）"><span class="toc-text">(3) 效果（下面第二张图是给ghost元素和子元素加边框之后的效果，方便理解原理）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-适用性-3"><span class="toc-text">(4) 适用性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-不固定宽高div的水平垂直居中——方法2（table）"><span class="toc-text">3.不固定宽高div的水平垂直居中——方法2（table）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-方法-4"><span class="toc-text">(1) 方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-实例（table原版和div版本）"><span class="toc-text">(2) 实例（table原版和div版本）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-效果（上图table下图div）"><span class="toc-text">(3) 效果（上图table下图div）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-适用性-4"><span class="toc-text">(4) 适用性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-不固定宽高div的水平垂直居中——方法3（CSS3-translate-）"><span class="toc-text">4.不固定宽高div的水平垂直居中——方法3（CSS3-translate()）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-方法-5"><span class="toc-text">(1) 方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-实例-4"><span class="toc-text">(2) 实例</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-效果-3"><span class="toc-text">(3) 效果</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-适用性-5"><span class="toc-text">(4) 适用性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-不固定宽高div的水平垂直居中——方法4（flex方法）"><span class="toc-text">5.不固定宽高div的水平垂直居中——方法4（flex方法）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-方法-6"><span class="toc-text">(1) 方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-实例-5"><span class="toc-text">(2) 实例</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-效果-4"><span class="toc-text">(3) 效果</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-适用性-6"><span class="toc-text">(4) 适用性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-不固定宽高div的水平垂直居中——方法5（margin-auto）"><span class="toc-text">6.不固定宽高div的水平垂直居中——方法5（margin:auto）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-方法-7"><span class="toc-text">(1) 方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-实例-6"><span class="toc-text">(2) 实例</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-效果-5"><span class="toc-text">(3) 效果</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-适用性-7"><span class="toc-text">(4) 适用性</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#前端基础"
+                           title="前端基础">前端基础</a>
+                        
+                        <a class="tag" href="/TAGS/#CSS"
+                           title="CSS">CSS</a>
+                        
+                        <a class="tag" href="/TAGS/#工具"
+                           title="工具">工具</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zjfjz" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://ozehuspmv.bkt.clouddn.com/blog/avator/avator.jpg">
+</body>
+
+</html>
