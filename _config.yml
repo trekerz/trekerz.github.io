@@ -150,7 +150,7 @@ deploy:
 
 
 # img CDN path
-cdn-url:  http://prjadt00w.bkt.clouddn.com
+cdn-url:  https://h1.ioliu.cn
 
 # Qiniu imageView2 API
 # More info http://developer.qiniu.com/code/v6/api/kodo-api/image/imageview2.html

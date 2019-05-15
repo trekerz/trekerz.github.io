@@ -7,7 +7,7 @@ tags:
 	- 前端基础
 layout: post
 author: "Trekerz"
-header-img: "https://h1.ioliu.cn/bing/JasperCub_ZH-CN4314891686_1920x1080.jpg"
+header-img: "/bing/JasperCub_ZH-CN4314891686_1920x1080.jpg"
 ---
 
 ## **一、理清dpr的概念**
