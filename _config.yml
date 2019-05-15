@@ -12,10 +12,10 @@ timezone:
 # custom Site settings
 # more detail check out docs
 SEOTitle: Trekerz's blog 
-header-img: //o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg
+header-img: http://prjadt00w.bkt.clouddn.com/default-img.jpg
 email: zjf007@qq.com
 description: "庄嘉峰在 Github 上的个人博客"
-keyword: # seo key words
+keyword: 'trekerz blog github'
 
 favicon: http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png
 # custom end
@@ -150,7 +150,7 @@ deploy:
 
 
 # img CDN path
-cdn-url:  http://ozehuspmv.bkt.clouddn.com
+cdn-url:  http://prjadt00w.bkt.clouddn.com
 
 # Qiniu imageView2 API
 # More info http://developer.qiniu.com/code/v6/api/kodo-api/image/imageview2.html
