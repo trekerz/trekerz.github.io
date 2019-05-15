@@ -7,7 +7,7 @@ tags:
 	- JavaScript
 layout: post
 author: "Trekerz"
-header-img: "/blog/bg-img/null170910.jpg"
+header-img: "/bing/LaysanAlbatross_ZH-CN2784683590_1920x1080.jpg"
 ---
 
 # **发布-订阅模式（观察者模式）**

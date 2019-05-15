@@ -7,7 +7,7 @@ tags:
 	- JavaScript
 layout: post
 author: "Trekerz"
-header-img: "/blog/bg-img/null171103.jpg"
+header-img: "/bing/CumulusCaribbean_ZH-CN4884493707_1920x1080.jpg"
 ---
 
 

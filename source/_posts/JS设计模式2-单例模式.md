@@ -7,7 +7,7 @@ tags:
 	- JavaScript
 layout: post
 author: "Trekerz"
-header-img: "/blog/bg-img/null170824.jpg"
+header-img: "/bing/BloomingAloe_ZH-CN8209855003_1920x1080.jpg"
 ---
 
 # **单例模式**

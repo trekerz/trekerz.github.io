@@ -7,7 +7,7 @@ tags:
 	- JavaScript
 layout: post
 author: "Trekerz"
-header-img: "/blog/bg-img/null170915.jpg"
+header-img: "/bing/SibWrestling_ZH-CN4106007210_1920x1080.jpg"
 ---
 
 # **迭代器模式介绍**

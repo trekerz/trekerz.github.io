@@ -7,7 +7,7 @@ tags:
 	- JavaScript
 layout: post
 author: "Trekerz"
-header-img: "/blog/bg-img/null170822.jpg"
+header-img: "/bing/SpringBadlands_ZH-CN8280871661_1920x1080.jpg"
 ---
 
 # **简单工厂**

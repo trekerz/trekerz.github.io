@@ -7,7 +7,7 @@ tags:
 	- JavaScript
 layout: post
 author: "Trekerz"
-header-img: "/blog/bg-img/null170831.jpg"
+header-img: "/bing/RainforestMoss_ZH-CN2878951870_1920x1080.jpg"
 ---
 
 # **中介者模式**

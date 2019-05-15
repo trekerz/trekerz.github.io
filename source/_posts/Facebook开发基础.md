@@ -8,7 +8,7 @@ tags:
 	- 社交挖掘
 layout: post
 author: "Trekerz"
-header-img: "/blog/bg-img/null170302.jpg"
+header-img: "/bing/AmericanCulturalCapital_ZH-CN8717487767_1920x1080.jpg"
 ---
 
 

@@ -7,7 +7,7 @@ tags:
 	- JavaScript
 layout: post
 author: "Trekerz"
-header-img: "/blog/bg-img/null170806.jpg"
+header-img: "/bing/GlenfinnanViaduct_ZH-CN8400951216_1920x1080.jpg"
 ---
 
 

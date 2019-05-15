@@ -7,7 +7,7 @@ tags:
 	- JavaScript
 layout: post
 author: "Trekerz"
-header-img: "/blog/bg-img/null170902.jpg"
+header-img: "/bing/CasaBatllo_ZH-CN2826447794_1920x1080.jpg"
 ---
 
 # **装饰者模式**

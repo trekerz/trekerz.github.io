@@ -7,7 +7,7 @@ tags:
 	- 问题与解决
 layout: post
 author: "Trekerz"
-header-img: "/blog/bg-img/null171128.jpg"
+header-img: "/bing/BlueCannes_ZH-CN1811852585_1920x1080.jpg"
 ---
 
 JS是作为一种浏览器端脚本诞生的，这个特点使得JS脚本配合浏览器开发者工具可以完成一些特殊的功能。例如：刷抢购按钮。

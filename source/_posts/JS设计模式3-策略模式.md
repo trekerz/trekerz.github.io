@@ -7,7 +7,7 @@ tags:
 	- JavaScript
 layout: post
 author: "Trekerz"
-header-img: "/blog/bg-img/null170825.jpg"
+header-img: "/bing/CoastalFog_ZH-CN8104406852_1920x1080.jpg"
 ---
 
 # **策略模式**

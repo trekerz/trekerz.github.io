@@ -8,7 +8,7 @@ tags:
 	- Windows
 layout: post
 author: "Trekerz"
-header-img: "/blog/bg-img/null160929.jpg"
+header-img: "/bing/NelderPlot_ZH-CN3786459560_1920x1080.jpg"
 ---
 
 # 一、需求来源

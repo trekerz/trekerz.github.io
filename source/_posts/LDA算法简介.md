@@ -8,7 +8,7 @@ tags:
 	- 推荐系统
 layout: post
 author: "Trekerz"
-header-img: "/blog/bg-img/null170105.jpg"
+header-img: "/bing/BigWindDay_ZH-CN1837859776_1920x1080.jpg"
 ---
 
 

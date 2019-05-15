@@ -7,7 +7,7 @@ tags:
 	- CSS
 layout: post
 author: "Trekerz"
-header-img: "/blog/bg-img/null171122.jpg"
+header-img: "/bing/SerengetiZebra_ZH-CN9007197602_1920x1080.jpg"
 ---
 
 

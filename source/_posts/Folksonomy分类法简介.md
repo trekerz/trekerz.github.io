@@ -8,7 +8,7 @@ tags:
 	- 推荐系统
 layout: post
 author: "Trekerz"
-header-img: "/blog/bg-img/null170105.jpg"
+header-img: "/bing/RuffLek_ZH-CN8485019267_1920x1080.jpg"
 ---
 
 

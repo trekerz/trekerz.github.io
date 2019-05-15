@@ -8,7 +8,7 @@ tags:
 	- 推荐系统
 layout: post
 author: "Trekerz"
-header-img: "/blog/bg-img/null/blog/bg-img/null170105.jpg"
+header-img: "/bing/BistiBadlands_ZH-CN5428677883_1920x1080.jpg"
 ---
 
 <center>查看论文：[A Semantic Category Recommendation System Exploiting LDA Clustering Algorithm and Social Folksonomy](http://ieeexplore.ieee.org/document/7273446/)</center>
