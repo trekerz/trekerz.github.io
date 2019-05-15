@@ -17,7 +17,7 @@ email: zjf007@qq.com
 description: "庄嘉峰在 Github 上的个人博客"
 keyword: 'trekerz blog github'
 
-favicon: http://ozehuspmv.bkt.clouddn.com/blog/favicon/favicon.png
+favicon: http://prjadt00w.bkt.clouddn.com/favicon.png
 # custom end
 
 # URL
@@ -151,6 +151,7 @@ deploy:
 
 # img CDN path
 cdn-url:  https://h1.ioliu.cn
+cdn-url:  http://prjadt00w.bkt.clouddn.com
 
 # Qiniu imageView2 API
 # More info http://developer.qiniu.com/code/v6/api/kodo-api/image/imageview2.html
