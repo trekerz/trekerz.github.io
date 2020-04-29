@@ -295,27 +295,59 @@
 
 
 <div class="post-preview "
+     style="background-image: url('https://h1.ioliu.cn/bing/YukonEmerald_ZH-CN1893750172_1920x1080.jpg')">
+    <a href="/2019/11/25/Generator笔记/">
+        <h2 class="post-title">
+            Generator笔记
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-11-25
+        </p>
+        
+        <h3 class="post-subtitle">
+            两个协议
+        </h3>
+        
+        <div class="post-content-preview">
+            <p>
+                一、迭代协议
+两个协议
+可迭代协议
+迭代器协议
+
+
+可迭代协议允许Js对象去定义或定制迭代行为。（可迭代的判断标准）
+特点：可以使用for...of...、yield*、解构、扩展运算符来进行迭代
+(1) ES6内置的可迭代类型Array、Map、Set
+可调用.keys()、.values()..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+<div class="post-preview "
      style="background-image: url('https://h1.ioliu.cn/bing/OldTownTallinn_ZH-CN4833535739_1920x1080.jpg')">
-    <a href="/2019/08/12/观察者模式与发布订阅模式对比/">
+    <a href="/2019/11/04/Vue scoped总结/">
         <h2 class="post-title">
-            观察者模式与发布订阅模式对比
+            Vue scoped总结
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-08-12
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-11-04
         </p>
         
         <h3 class="post-subtitle">
-            易混淆的两个概念
+            奇巧淫技
         </h3>
         
         <div class="post-content-preview">
             <p>
-                观察者模式：
-
-没有一个调度中心，直接由被观察者触发观察者的update方法；
-观察者和被观察者抽象耦合，但观察者只知道被观察者发生了变化，不知道是怎么变化的；
-一个抽象类Observer，两个角色Subject被观察者、Client观察者；
-观察者Client实现Observer的update..
+                一、scoped的实现原理Vue中的scoped属性的效果主要是通过PostCss实现的。以下是转译前的代码:
+&lt;style scoped lang=&quot;less&quot;&gt;    .example&#123;        color:red;    &#125;&lt;..
             </p>
         </div>
     </a>
@@ -327,26 +359,26 @@
 
 
 <div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/JasperCub_ZH-CN4314891686_1920x1080.jpg')">
-    <a href="/2017/12/03/dpr-devicePixelRatio-的概念与应用/">
+     style="background-image: url('https://h1.ioliu.cn/bing/OldTownTallinn_ZH-CN4833535739_1920x1080.jpg')">
+    <a href="/2019/10/24/Vue组件生命周期执行顺序/">
         <h2 class="post-title">
-            dpr(devicePixelRatio)的概念与应用
+            Vue组件生命周期执行顺序
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-12-03
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-10-24
         </p>
         
         <h3 class="post-subtitle">
-            对设备像素比的理解
+            梳理脉络
         </h3>
         
         <div class="post-content-preview">
             <p>
-                一、理清dpr的概念devicePixelRatio，中文名称是设备像素比。这个概念在移动开发的时候会被特别关注，因为它关系到了整个画面的观感、布局甚至是清晰度。在JavaScript BOM中，它是window全局对象下的一个属性，它的定义如下：
+                
+一、一个例子
+代码
 
-dpr = 设备像素 / CSS像素
-
-也有..
+&lt;!-- HTML部分 --&gt;&lt;!-- 父组件挂载 --&gt;&lt;div id="app"&gt;&lt;/div&gt;&lt;!-- child模板 --&gt;&lt;div class="child" @click="updateTest(..
             </p>
         </div>
     </a>
@@ -358,24 +390,24 @@ dpr = 设备像素 / CSS像素
 
 
 <div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/NCFireweed_ZH-CN8827671063_1920x1080.jpg')">
-    <a href="/2017/11/30/一道简单的面试题/">
+     style="background-image: url('https://h1.ioliu.cn/bing/ChilehausHH_ZH-CN3895221092_1920x1080.jpg')">
+    <a href="/2019/10/22/Redux-Saga入门/">
         <h2 class="post-title">
-            一道简单的面试题
+            Redux-Saga入门
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-11-30
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-10-22
         </p>
         
         <h3 class="post-subtitle">
-            记录面试
+            基础知识
         </h3>
         
         <div class="post-content-preview">
             <p>
-                11月29日去面试，遇到了一道比较常见的面试题，当时因为忘了一个知识点而没做出来，想想可能是因为昨晚没睡好，导致一整天都有点魂不守舍。反正回来之后自己整理了一下，一下子就做出来了。以下是题目解答以及扩展。
+                一、Sagasaga的提出最初是为了解决分布式系统中的LLT（Long Lived Transaction），也就是长时运行事务的数据一致性问题的。
 
-题目：这是一个有关航班号和对应价格的嵌套对象，要求按照价格从低到高排序，并输出到DOM中..
+所谓“事务(Transaction)”，指的是一个原子操作，要么全部执行，要么全部回滚。那么问题来了，为了保证数据的一致性，我们是不是应该等待刚..
             </p>
         </div>
     </a>
@@ -387,25 +419,24 @@ dpr = 设备像素 / CSS像素
 
 
 <div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/BlueCannes_ZH-CN1811852585_1920x1080.jpg')">
-    <a href="/2017/11/28/浏览器js脚本与防止抢购脚本的方案/">
+     style="background-image: url('https://h1.ioliu.cn/bing/OldTownTallinn_ZH-CN4833535739_1920x1080.jpg')">
+    <a href="/2019/10/07/关于清除浮动/">
         <h2 class="post-title">
-            浏览器js脚本与防止抢购脚本的方案
+            关于清除浮动
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-11-28
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-10-07
         </p>
         
         <h3 class="post-subtitle">
-            前端防重复点击方案
+            小知识点
         </h3>
         
         <div class="post-content-preview">
             <p>
-                JS是作为一种浏览器端脚本诞生的，这个特点使得JS脚本配合浏览器开发者工具可以完成一些特殊的功能。例如：刷抢购按钮。
-这里我写了一个简单的刷抢购demo：
-for (var i=0;i&lt;100;i++)&#123;    btn.click();&#125;
-一般我们可以在浏览器调试工具中..
+                一、css浮动的概念浮动的框可以向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止。
+由于浮动框不在文档的普通流中，所以文档的普通流中的块框表现得就像浮动框不存在一样。当元素浮动之后，不会影响块级元素的布局，只会影响内联元素布局。
+二、为何要清除浮动当父元素框的高度小于浮动框的时候..
             </p>
         </div>
     </a>
@@ -417,23 +448,24 @@ for (var i=0;i&lt;100;i++)&#123;    btn.click();&#125;
 
 
 <div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/PineLogSP_ZH-CN1105763820_1920x1080.jpg')">
-    <a href="/2017/11/27/在JS中用for-in-遍历数组的问题与解决/">
+     style="background-image: url('https://h1.ioliu.cn/bing/OldTownTallinn_ZH-CN4833535739_1920x1080.jpg')">
+    <a href="/2019/09/29/组件高级知识（受控组件、无状态组件、高阶组件、纯组件）/">
         <h2 class="post-title">
-            JS中用for...in...遍历数组遇到的坑
+            组件高级知识
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-11-27
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-09-29
         </p>
         
         <h3 class="post-subtitle">
-            尾部多出函数项
+            受控组件、无状态组件、高阶组件、纯组件
         </h3>
         
         <div class="post-content-preview">
             <p>
-                今天在用JS写数组去重算法时候遇到一个跟for...in...有关的问题。函数原本是这么写的：
-Array.prototype.unique = function ()&#123;    var arr = this;    var obj = &#123;&#125;;    var data..
+                受控组件（controlled components）在原生的表单中，input的值是这么设定的。
+&lt;input value="mapbar_front" /&gt;
+并且在这种情况下，我们能够给input中输入任何的值。但是在react中，我们对于input如果给定一个初始值，它是不会随..
             </p>
         </div>
     </a>
@@ -445,23 +477,26 @@ Array.prototype.unique = function ()&#123;    var arr = this;    var obj = &#123
 
 
 <div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/SerengetiZebra_ZH-CN9007197602_1920x1080.jpg')">
-    <a href="/2017/11/22/CSS格式化上下文概念解析/">
+     style="background-image: url('https://h1.ioliu.cn/bing/OldTownTallinn_ZH-CN4833535739_1920x1080.jpg')">
+    <a href="/2019/09/26/CSS选择器 - 性能的探究及提升/">
         <h2 class="post-title">
-            CSS格式化上下文概念解析
+            CSS选择器 - 性能的探究及提升
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-11-22
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-09-26
         </p>
         
         <h3 class="post-subtitle">
-            BFC(详细)、IFC、GFC、FFC
+            性能探究
         </h3>
         
         <div class="post-content-preview">
             <p>
-                前几天在看flex布局的时候遇到了BFC这个概念，于是顺便看了几篇相关的文章，了解了几种上下文布局的基本概念，归结如下。今天在看flex布局的时候遇到了BFC这个概念，于是顺便看了几篇相关的文章，了解了几种上下文布局的基本概念，归结如下。
-FC的全称是：Formatting Contexts（格..
+                一. CSS选择器性能是如何消耗的？工作原理：浏览器利用CSS选择器来匹配文档元素。
+工作流程：例如 #hd .nav &gt; a { padding-left: 15px }
+　　1.在文档所有元素中寻找所有的 a 标签。
+　　2.在1的结果中寻找其父元素的类名为“.nav”的元素。
+　　3..
             </p>
         </div>
     </a>
@@ -473,53 +508,35 @@ FC的全称是：Formatting Contexts（格..
 
 
 <div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/ChannelIslandFox_ZH-CN5568101953_1920x1080.jpg')">
-    <a href="/2017/11/21/CSS处理居中问题总结/">
+     style="background-image: url('https://h1.ioliu.cn/bing/OldTownTallinn_ZH-CN4833535739_1920x1080.jpg')">
+    <a href="/2019/09/25/transform的高性能原理/">
         <h2 class="post-title">
-            CSS处理居中问题总结
+            transform的高性能原因
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-11-21
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-09-25
         </p>
         
         <h3 class="post-subtitle">
-            水平居中、水平垂直居中
+            为何比margin更快？
         </h3>
         
         <div class="post-content-preview">
             <p>
-                在HTML的标准盒模型中，居中是一个很常见的问题，不同标签的居中有不同的处理方式，在不同的浏览器中也会有不同的表现，今天就来归纳一下最常遇到的水平居中问题和水平垂直居中问题的处理方式。
-一、水平居中1.使块级标签中的内容居中（包括文字、图片、行内元素）(1) 方法text-align: cent..
-            </p>
-        </div>
-    </a>
+                一、重排DOM的变化影响到了元素的集合属性，浏览器需要进行重排，重排必然引起重绘。
 
-</div>
+重拍何时发生：
 
-<hr>
+元素位置改变
+元素尺寸改变
+元素内容改变
+页面渲染初始化（无法避免）
+浏览器窗口尺寸改变
 
 
-
-<div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/SkelligMichael_ZH-CN8635121409_1920x1080.jpg')">
-    <a href="/2017/11/20/Flex布局总结与实例/">
-        <h2 class="post-title">
-            Flex布局总结与实例
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-11-20
-        </p>
-        
-        <h3 class="post-subtitle">
-            【整理】flex容器项目属性、骰子实例
-        </h3>
-        
-        <div class="post-content-preview">
-            <p>
-                一、Flex 布局网页布局（layout）是 CSS 的一个重点应用：
-
-Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。
-它是2009年W3C提出的一种新布局方案，不同于传统的display+position+float+margin布局，Fl..
+浏览器的自动优化
+（1）相邻的三次重排重绘，v8会用队列缓存起来，一次完成。
+（2）获取布局信息（..
             </p>
         </div>
     </a>
@@ -629,7 +646,7 @@ Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模�
                     
                     
                     <a href="/TAGS/#笔记" title="笔记"
-                       rel="53">笔记</a>
+                       rel="69">笔记</a>
                     
                     
                     
@@ -644,7 +661,7 @@ Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模�
                     
                     
                     <a href="/TAGS/#前端基础" title="前端基础"
-                       rel="24">前端基础</a>
+                       rel="25">前端基础</a>
                     
                     
                     
@@ -659,7 +676,7 @@ Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模�
                     
                     
                     <a href="/TAGS/#读书笔记" title="读书笔记"
-                       rel="36">读书笔记</a>
+                       rel="50">读书笔记</a>
                     
                     
                     
@@ -668,8 +685,12 @@ Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模�
                     
                     
                     
+                    
+                    
                     <a href="/TAGS/#社交挖掘" title="社交挖掘"
                        rel="10">社交挖掘</a>
+                    
+                    
                     
                     
                     
@@ -715,6 +736,8 @@ Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模�
                     
                     <a href="/TAGS/#深度学习" title="深度学习"
                        rel="3">深度学习</a>
+                    
+                    
                     
                     
                     

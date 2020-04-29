@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="trekerz blog github">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Redux-Saga入门｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2019/10/22/Redux-Saga入门/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('http://prjadt00w.bkt.clouddn.com/default-img.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://h1.ioliu.cn/bing/ChilehausHH_ZH-CN3895221092_1920x1080.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://h1.ioliu.cn/bing/ChilehausHH_ZH-CN3895221092_1920x1080.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Redux-Saga入门</h1>
+                    
+                    <h2 class="subheading">基础知识</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2019-10-22
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            Redux-Saga入门
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="一、Saga"><a href="#一、Saga" class="headerlink" title="一、Saga"></a>一、Saga</h2><p>saga的提出最初是为了解决分布式系统中的<code>LLT（Long Lived Transaction）</code>，也就是长时运行事务的数据一致性问题的。</p>
+<blockquote>
+<p>所谓“事务(Transaction)”，指的是一个<strong>原子操作</strong>，要么全部执行，要么全部回滚。那么问题来了，为了保证数据的一致性，我们是不是应该等待刚才那个LLT执行完成呢？</p>
+<p>以订票系统为例，我们可以把这个<code>LLT</code>拆成两个子事务嘛，T1表示“预定”事务，T2表示“出票”事务。先执行T1，然后就可以把数据库释放出来了，其他人也可以正常订票了。如果用户在30分钟内完成了付款，那么再执行T2完成出票，这样整个事务就执行完毕了。假如超过了30分钟用户还没有付款怎么办？这时候需要<strong>执行一个“补偿”事务C1</strong>，用来回滚T1对数据库造成的修改。<strong>这几个子事务组合在一起，就叫一个saga</strong>。</p>
+</blockquote>
+<h2 id="二、副作用（Side-Effect）"><a href="#二、副作用（Side-Effect）" class="headerlink" title="二、副作用（Side Effect）"></a>二、副作用（Side Effect）</h2><ol>
+<li><h4 id="纯函数"><a href="#纯函数" class="headerlink" title="纯函数"></a>纯函数</h4><ul>
+<li>输出不受外部环境影响：同样的输入一定可以获得同样的输出；</li>
+<li>不影响外部环境：包括但不限于修改外部数据、发起网络请求、触发事件等等</li>
+</ul>
+</li>
+</ol>
+<p>显然，大多数的异步任务都需要和外部世界进行交互，不管是发起网络请求、访问本地文件或是数据库等等，因此，它们都会产生“副作用”。</p>
+<h2 id="三、redux-saga"><a href="#三、redux-saga" class="headerlink" title="三、redux-saga"></a>三、redux-saga</h2><p><strong>redux-saga是一个Redux中间件，用来帮你管理程序的副作用</strong>。或者更直接一点，主要是用来处理异步action。</p>
+<ol>
+<li><h3 id="Redux中间件"><a href="#Redux中间件" class="headerlink" title="Redux中间件"></a>Redux中间件</h3><p>在action被传递到reducer之前新进行了一次拦截，然后启动异步任务，等异步任务执行完成后再发送一个新的action，调用reducer修改状态数据。</p>
+</li>
+<li><h3 id="watcher-saga和worker-saga"><a href="#watcher-saga和worker-saga" class="headerlink" title="watcher saga和worker saga"></a>watcher saga和worker saga</h3><ul>
+<li>worker saga：具体业务逻辑实现</li>
+<li>watcher saga：接收特定的action，然后驱动worker saga执行</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Api <span class="keyword">from</span> <span class="string">'...'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">workerSaga</span>(<span class="params">action</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> user = <span class="keyword">yield</span> call(Api.fetchUser, action.payload.userId);</span><br><span class="line">      <span class="keyword">yield</span> put(&#123;<span class="attr">type</span>: <span class="string">"USER_FETCH_SUCCEEDED"</span>, <span class="attr">user</span>: user&#125;);</span><br><span class="line">   &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">      <span class="keyword">yield</span> put(&#123;<span class="attr">type</span>: <span class="string">"USER_FETCH_FAILED"</span>, <span class="attr">message</span>: e.message&#125;);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">watcherSaga</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">yield</span> takeEvery(<span class="string">"USER_FETCH_REQUESTED"</span>, workerSaga);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><h3 id="Effect"><a href="#Effect" class="headerlink" title="Effect"></a>Effect</h3><p>redux saga不直接调用异步函数，而是通过<code>call()</code>或<code>put()</code>这样的函数来调用，以方便测试。这些函数叫做Effect。</p>
+<ul>
+<li>call：函数调用</li>
+<li>select：获取store中的数据</li>
+<li>put：向store发送action</li>
+<li>take：在store上等待指定action</li>
+<li>fork：和call类似，但是是非阻塞的，立即返回</li>
+</ul>
+<p>例如上面代码中的<code>takeEvery</code>，内部就是不断地<code>take</code> –&gt; <code>fork</code> –&gt; <code>take</code> –&gt; …</p>
+</li>
+<li><h3 id="组合调用"><a href="#组合调用" class="headerlink" title="组合调用"></a>组合调用</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 组合为一个rootSaga</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>* <span class="title">rootSaga</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">yield</span> all([</span><br><span class="line">    takeEvery(<span class="string">"FOO_ACTION"</span>, fooASaga),</span><br><span class="line">    takeEvery(<span class="string">"BAR_ACTION"</span>, barASaga)</span><br><span class="line">  ])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createStore, applyMiddleware &#125; <span class="keyword">from</span> <span class="string">'redux'</span></span><br><span class="line"><span class="keyword">import</span> createSagaMiddleware <span class="keyword">from</span> <span class="string">'redux-saga'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> reducer <span class="keyword">from</span> <span class="string">'./reducers'</span></span><br><span class="line"><span class="keyword">import</span> rootSaga <span class="keyword">from</span> <span class="string">'./sagas'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建saga</span></span><br><span class="line"><span class="keyword">const</span> sagaMiddleware = createSagaMiddleware()</span><br><span class="line"><span class="comment">// 在store上挂载</span></span><br><span class="line"><span class="keyword">const</span> store = createStore(</span><br><span class="line">  reducer,</span><br><span class="line">  applyMiddleware(sagaMiddleware)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 传入rootSaga，运行saga</span></span><br><span class="line">sagaMiddleware.run(rootSaga)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>参考资料：</p>
+<ol>
+<li><a href="https://blog.csdn.net/TurkeyCock/article/details/88390208" target="_blank" rel="external">https://blog.csdn.net/TurkeyCock/article/details/88390208</a></li>
+<li><a href="https://juejin.im/post/59e083c8f265da43111f3a1f" target="_blank" rel="external">浅析redux-saga实现原理</a></li>
+<li><a href="https://redux-saga-in-chinese.js.org/" target="_blank" rel="external">官方文档</a></li>
+</ol>
+<p><br></p>
+<center>–end–</center>
+
+
+
+
+
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/10/24/Vue组件生命周期执行顺序/" data-toggle="tooltip" data-placement="top"
+                           title="Vue组件生命周期执行顺序">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/10/07/关于清除浮动/" data-toggle="tooltip" data-placement="top"
+                           title="关于清除浮动">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Saga"><span class="toc-text">一、Saga</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、副作用（Side-Effect）"><span class="toc-text">二、副作用（Side Effect）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#纯函数"><span class="toc-text">纯函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、redux-saga"><span class="toc-text">三、redux-saga</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Redux中间件"><span class="toc-text">Redux中间件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#watcher-saga和worker-saga"><span class="toc-text">watcher saga和worker saga</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Effect"><span class="toc-text">Effect</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组合调用"><span class="toc-text">组合调用</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/GarfunkelZhuang" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://prjadt00w.bkt.clouddn.com/avator.jpg">
+</body>
+
+</html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="trekerz blog github">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Webpack4总结｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2020/03/20/Webpack4总结/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('http://prjadt00w.bkt.clouddn.com/default-img.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://h1.ioliu.cn/bing/OldTownTallinn_ZH-CN4833535739_1920x1080.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://h1.ioliu.cn/bing/OldTownTallinn_ZH-CN4833535739_1920x1080.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Webpack4总结</h1>
+                    
+                    <h2 class="subheading">附带优化思路</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2020-03-20
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            Webpack4总结
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <ol>
+<li><h3 id="entry-output"><a href="#entry-output" class="headerlink" title="entry / output"></a>entry / output</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: <span class="string">'./index.js'</span>,</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: path.resolve(__dirname, <span class="string">'dist'</span>),</span><br><span class="line">    filename: <span class="string">'index.bundle.js'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: [</span><br><span class="line">    index: <span class="string">'./index.js'</span>,</span><br><span class="line">    main: <span class="string">'./main.js'</span></span><br><span class="line">  ],</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: path.resolve(__dirname, <span class="string">'dist'</span>),</span><br><span class="line">    filename: <span class="string">'[name].bundle.js'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><h3 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h3><h5 id="1-url-loader"><a href="#1-url-loader" class="headerlink" title="(1) url-loader"></a>(1) url-loader</h5><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 将图片转成base64</span></span><br><span class="line"><span class="comment">// 需导入url-loader、file-loader</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">		rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.(png|jpg|gif)$/i</span>,</span><br><span class="line">        use: [</span><br><span class="line">          &#123;</span><br><span class="line">            loader: <span class="string">'url-loader'</span>,</span><br><span class="line">            options: &#123;</span><br><span class="line">              limit: <span class="number">8192</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="2-babel-loader"><a href="#2-babel-loader" class="headerlink" title="(2) babel-loader"></a>(2) babel-loader</h5><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 需导入babel-loader</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">		rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.m?js$/</span>,</span><br><span class="line">        exclude: <span class="regexp">/(node_module|bower_components)/</span>,</span><br><span class="line">        use: [</span><br><span class="line">          &#123;</span><br><span class="line">            loader: <span class="string">'babel-loader'</span>,</span><br><span class="line">            options: &#123;</span><br><span class="line">              presets: [<span class="string">'@babel/preset-env'</span>],</span><br><span class="line">              plugins: [</span><br><span class="line">                <span class="comment">// 转换react jsx</span></span><br><span class="line">                <span class="string">'@babel-plugin-transform-react-jsx'</span></span><br><span class="line">              ]</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="3-sass-loader"><a href="#3-sass-loader" class="headerlink" title="(3) sass-loader"></a>(3) sass-loader</h5><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 需导入sass-loader、node-sass</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">		rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.scss$/</span>,</span><br><span class="line">        use: [</span><br><span class="line">          <span class="string">'style-loader'</span>,</span><br><span class="line">          <span class="string">'css-loader'</span>,</span><br><span class="line">          <span class="string">'sass-loader'</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><h3 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h3><h5 id="1-miniCssExtractPlugin"><a href="#1-miniCssExtractPlugin" class="headerlink" title="(1) miniCssExtractPlugin"></a>(1) miniCssExtractPlugin</h5><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 作用：把css从js文件分离出来</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="keyword">new</span> MiniCssExtractPlugin(&#123;</span><br><span class="line">      filename: <span class="string">'[name].css'</span>,</span><br><span class="line">      chunkFilename: <span class="string">'[id].css'</span></span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">		rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.scss$/</span>,</span><br><span class="line">        use: [</span><br><span class="line">          process.env.NODE_ENV !== <span class="string">'production'</span> ?</span><br><span class="line">  					<span class="string">'style-loader'</span> : MiniCssExtractPlugin.loader,</span><br><span class="line">          <span class="string">'css-loader'</span>,</span><br><span class="line">          <span class="string">'sass-loader'</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="2-DefinePlugin"><a href="#2-DefinePlugin" class="headerlink" title="(2) DefinePlugin"></a>(2) DefinePlugin</h5><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 用于定义公共变量，例如服务器地址</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="keyword">new</span> webpack.DefinePlugin(&#123;</span><br><span class="line">      <span class="string">'SERVER_URL'</span>: <span class="built_in">JSON</span>.stringify(<span class="string">'http://www.baidu.com'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="3-HtmlWebpackPlugin"><a href="#3-HtmlWebpackPlugin" class="headerlink" title="(3) HtmlWebpackPlugin"></a>(3) HtmlWebpackPlugin</h5><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 需导入html-webpack-plugin</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">      title: <span class="string">'website title'</span>,</span><br><span class="line">      filename: <span class="string">'index.html'</span>,</span><br><span class="line">      template: <span class="string">'template.html'</span></span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模板语法举例</span></span><br><span class="line">&lt;%= htmlWebpackPlugin.options.title %&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><h5 id="Hot-Module-Replacement"><a href="#Hot-Module-Replacement" class="headerlink" title="Hot Module Replacement"></a>Hot Module Replacement</h5><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 需要导入webpack-dev-server</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    contentBase: path.join(__dirname, <span class="string">'dist'</span>),</span><br><span class="line">    compress: <span class="literal">true</span>,</span><br><span class="line">    port: <span class="number">8080</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>参考资料：</p>
+<ol>
+<li><a href="https://www.bilibili.com/video/av58725971" target="_blank" rel="external">webpack教程视频</a></li>
+</ol>
+<h2 id="附：webpack打包优化实践"><a href="#附：webpack打包优化实践" class="headerlink" title="附：webpack打包优化实践"></a>附：webpack打包优化实践</h2><ol>
+<li><h3 id="性能查看工具"><a href="#性能查看工具" class="headerlink" title="性能查看工具"></a>性能查看工具</h3><p>(1) <code>webpack-bundle-analyzer</code>：以图表的形式展示各包的内部情况；</p>
+<p>(2) <code>speed-measure-webpack-plugin</code>：给出各个<code>Plugins</code>和各个<code>Loaders</code>的耗时；</p>
+</li>
+<li><h3 id="entry优化"><a href="#entry优化" class="headerlink" title="entry优化"></a><code>entry</code>优化</h3><h5 id="1-把公共模块合成单独的入口"><a href="#1-把公共模块合成单独的入口" class="headerlink" title="(1) 把公共模块合成单独的入口"></a>(1) 把公共模块合成单独的入口</h5><p>注意：这里只是合成，但这些模块还是没有从主文件<code>index</code>中抽离。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">entry: &#123;</span><br><span class="line">    vendor: [</span><br><span class="line">      <span class="string">'react'</span>,</span><br><span class="line">      <span class="string">'react-dom'</span>,</span><br><span class="line">      <span class="string">'react-router-dom'</span>,</span><br><span class="line">      <span class="string">'react-router'</span>,</span><br><span class="line">      <span class="string">'redux'</span>,</span><br><span class="line">      <span class="string">'react-redux'</span>,</span><br><span class="line">      <span class="string">'echarts'</span></span><br><span class="line">    ],</span><br><span class="line">    index: paths.appIndexJs,</span><br><span class="line">    polyfills: <span class="built_in">require</span>.resolve(<span class="string">'./polyfills'</span>)</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><h3 id="optimization优化"><a href="#optimization优化" class="headerlink" title="optimization优化"></a><code>optimization</code>优化</h3></li>
+</ol>
+<h5 id="1-使用splitChunks抽离代码（结合webpack-bundle-analyzer来操作）"><a href="#1-使用splitChunks抽离代码（结合webpack-bundle-analyzer来操作）" class="headerlink" title="(1) 使用splitChunks抽离代码（结合webpack-bundle-analyzer来操作）"></a>(1) 使用<code>splitChunks</code>抽离代码（结合<code>webpack-bundle-analyzer</code>来操作）</h5><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">optimization: &#123;</span><br><span class="line">    splitChunks: &#123;</span><br><span class="line">      chunks: <span class="string">'all'</span>,</span><br><span class="line">      cacheGroups: &#123;</span><br><span class="line">        <span class="comment">// ≥2次引用的公共模块</span></span><br><span class="line">        commons: &#123;</span><br><span class="line">          chunks: <span class="string">'all'</span>,</span><br><span class="line">          minChunks: <span class="number">2</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">// index页面</span></span><br><span class="line">        index: &#123;</span><br><span class="line">          test: <span class="regexp">/moment|lodash|react-dom/</span>,</span><br><span class="line">          chunks: <span class="string">'all'</span>,</span><br><span class="line">          name: <span class="string">'vendor~index'</span>,</span><br><span class="line">          enforce: <span class="literal">true</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">'antd'</span>: &#123;</span><br><span class="line">          test: <span class="regexp">/antd/</span>,</span><br><span class="line">          chunks: <span class="string">'all'</span>,</span><br><span class="line">          name: <span class="string">'antd'</span>,</span><br><span class="line">          enforce: <span class="literal">true</span></span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="2-优化minimizer性能"><a href="#2-优化minimizer性能" class="headerlink" title="(2) 优化minimizer性能"></a>(2) 优化<code>minimizer</code>性能</h5><ul>
+<li><code>js</code>压缩混淆是<code>webpack</code>编译中最耗时的任务之一，可以开启多线程与缓存，同时关闭<code>sourceMap</code>。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">minimizer: [</span><br><span class="line">  <span class="comment">// UglifyJs替代品</span></span><br><span class="line">  <span class="keyword">new</span> TerserJSPlugin(&#123;</span><br><span class="line">    parallel: <span class="literal">true</span>, <span class="comment">// 多核编译</span></span><br><span class="line">    cache: <span class="literal">true</span>, <span class="comment">// 开启缓存</span></span><br><span class="line">    sourceMap: <span class="literal">false</span>, <span class="comment">// 关闭sourceMap</span></span><br><span class="line">    terserOptions: &#123;</span><br><span class="line">      parse: &#123;</span><br><span class="line">        ecma: <span class="number">2017</span>, <span class="comment">// es8</span></span><br><span class="line">      &#125;,</span><br><span class="line">      compress: &#123;</span><br><span class="line">        drop_debugger: <span class="literal">true</span>,</span><br><span class="line">        drop_console: <span class="literal">true</span>,</span><br><span class="line">        ecma: <span class="number">5</span>,</span><br><span class="line">        warnings: <span class="literal">false</span></span><br><span class="line">      &#125;,</span><br><span class="line">      mangle: &#123;</span><br><span class="line">        safari10: <span class="literal">true</span></span><br><span class="line">      &#125;,</span><br><span class="line">      output: &#123;</span><br><span class="line">        ecma: <span class="number">5</span>,</span><br><span class="line">        comments: <span class="literal">false</span>,</span><br><span class="line">        ascii_only: <span class="literal">true</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;),</span><br><span class="line">  <span class="comment">// 优化、压缩css资源</span></span><br><span class="line">  <span class="keyword">new</span> OptimizeCSSAssetsPlugin(&#123;&#125;)</span><br><span class="line">],</span><br></pre></td></tr></table></figure>
+<ol>
+<li><h3 id="打包时间、加载时间的优化方向"><a href="#打包时间、加载时间的优化方向" class="headerlink" title="打包时间、加载时间的优化方向"></a>打包时间、加载时间的优化方向</h3><h5 id="1-细节优化"><a href="#1-细节优化" class="headerlink" title="(1) 细节优化"></a>(1) 细节优化</h5><ul>
+<li><p><a href="https://link.zhihu.com/?target=https%3A//github.com/ant-design/babel-plugin-import" target="_blank" rel="external"><strong>babel-plugin-import</strong></a> <strong>按需加载</strong></p>
+<p>例如<code>antd</code>、<code>lodash</code>、<code>material-ui</code>，可以使用 ；</p>
+</li>
+<li><p><strong>排除无用语言包</strong></p>
+<p>例如<code>date-fns</code>使用 <a href="https://link.zhihu.com/?target=https%3A//webpack.js.org/plugins/context-replacement-plugin/" target="_blank" rel="external">ContextReplacementPlugin</a>。</p>
+</li>
+<li><p><strong>特定的库有专门的<code>webpack</code>插件</strong></p>
+<p>例如 antd 使用 <a href="https://link.zhihu.com/?target=https%3A//github.com/ant-design/antd-dayjs-webpack-plugin" target="_blank" rel="external">antd-dayjs-webpack-plugin</a> 替换 moment 成 dayjs，例如 lodash 使用 <a href="https://link.zhihu.com/?target=https%3A//github.com/lodash/lodash-webpack-plugin" target="_blank" rel="external">lodash-webpack-plugin</a> 进一步减小打包体积。</p>
+</li>
+<li><p><strong>配置<code>noParse</code></strong></p>
+<p>像<code>jquery</code>这种<code>npm</code>包就是一个单文件的依赖，可以配<code>module.noParse</code>，这样 <code>webpack</code>就不会去解析其中的依赖关系。</p>
+</li>
+</ul>
+<h5 id="2-大优化"><a href="#2-大优化" class="headerlink" title="(2) 大优化"></a>(2) 大优化</h5><ul>
+<li><p><strong>路由懒加载<code>require.ensure()</code>、<code>import()</code></strong></p>
+<p>一些动态加载插件都是使用<code>import()</code>来实现。但要注意：<code>react-loadable</code>本身并不实现动态加载，只实现一个加载流程框架，代码的动态导入功能是外部调用传入的。</p>
+</li>
+<li><p><strong>合理配置<code>exclude</code>属性</strong></p>
+<p>例如：<code>babel-loader</code>我们一般配置<code>exclude：/node_modules/</code>，告诉<code>webpack</code>模块路径匹配<code>/node_modules/</code>的模块不用<code>babel-loader</code>处理。</p>
+</li>
+<li><p><strong>使用<code>DllPlugin</code>将依赖单独打包（作用类似<code>splitChunks</code>）</strong></p>
+<p>使用<code>DllPlugin</code>将依赖单独打包成<code>dll.bundle.js</code>，同时会生成一份<code>json</code>配置表，用来告诉<code>webpack</code>在编译时排除这些模块；</p>
+<p>再用<code>add-asset-html-webpack-plugin</code>将<code>dll.bundle.js</code>通过<code>script</code>标签插到 <code>index.html</code>，这样你开发时打包的代码只有业务代码，大大减少了打包体积。</p>
+</li>
+<li><p><strong>配置<code>external</code></strong></p>
+<p>所谓<code>external</code>就是告诉<code>webpack</code>哪些模块我会通过<code>script</code>加载的，<strong>在打包的时候不用处理这些依赖</strong>，例如<code>lodash</code>，<code>moment</code>，有条件的公司可以将这些依赖部署到 CDN 上。</p>
+</li>
+<li><p><strong>利用多线程</strong></p>
+<p>使用<code>babel</code>编译<code>TypeScript</code>，<code>fork-ts-checker-webpack-plugin</code>检查 <code>TypeScript</code>类型，而不是使用<code>ts-loader</code>串行编译和检查类型；</p>
+<p>使用<code>thread-loader</code>让<code>loader</code>跑在线程池里（<a href="https://www.webpackjs.com/loaders/thread-loader/#用法" target="_blank" rel="external">有限制</a>）。</p>
+</li>
+</ul>
+</li>
+<li><h3 id="其它情况"><a href="#其它情况" class="headerlink" title="其它情况"></a>其它情况</h3><h5 id="1-electron"><a href="#1-electron" class="headerlink" title="(1) electron"></a>(1) <code>electron</code></h5><p>因为 webpack 使用 babel 来编译代码，所以优化 babel 配置也是优化 webpack 打包配置。例如 <code>babel-preset-env</code> 用到了<code>browserslist</code> 来针对兼容环境提供 <code>polyfill</code> 和转换语法。</p>
+<p>假设你是写 electron 项目，那就可以配置 browerslist 兼容到 electron 对应版本即可；</p>
+<p>而且 electron 环境下就不要配置 postcss 的 autoprefixer 插件去自动添加浏览器头了。</p>
+<h5 id="2-其它配置"><a href="#2-其它配置" class="headerlink" title="(2) 其它配置"></a>(2) 其它配置</h5><p>对于有些插件例如 <code>@babel/plugin-proposal-class-properties</code>，还可以配置 <code>loose</code> 选项来减小转换后的代码体积。</p>
+</li>
+<li><h3 id="非webpack优化（微前端）"><a href="#非webpack优化（微前端）" class="headerlink" title="非webpack优化（微前端）"></a>非<code>webpack</code>优化（微前端）</h3><p>工具：<a href="https://github.com/umijs/qiankun" target="_blank" rel="external">qiankun</a></p>
+</li>
+</ol>
+<p>参考资料：</p>
+<ol>
+<li><a href="https://www.zhihu.com/question/388239916" target="_blank" rel="external">前端react单页应用项目太大，导致开发环境编译过慢，有什么解决思路么？</a></li>
+</ol>
+<p><br></p>
+<center>–end–</center>
+
+
+
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/04/02/Redux异步方案总结/" data-toggle="tooltip" data-placement="top"
+                           title="Redux异步方案总结">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/02/26/讲讲Axois/" data-toggle="tooltip" data-placement="top"
+                           title="讲讲Axois">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#entry-output"><span class="toc-text">entry / output</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Loader"><span class="toc-text">Loader</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-url-loader"><span class="toc-text">(1) url-loader</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-babel-loader"><span class="toc-text">(2) babel-loader</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-sass-loader"><span class="toc-text">(3) sass-loader</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Plugin"><span class="toc-text">Plugin</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-miniCssExtractPlugin"><span class="toc-text">(1) miniCssExtractPlugin</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-DefinePlugin"><span class="toc-text">(2) DefinePlugin</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-HtmlWebpackPlugin"><span class="toc-text">(3) HtmlWebpackPlugin</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Hot-Module-Replacement"><span class="toc-text">Hot Module Replacement</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附：webpack打包优化实践"><span class="toc-text">附：webpack打包优化实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#性能查看工具"><span class="toc-text">性能查看工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#entry优化"><span class="toc-text">entry优化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-把公共模块合成单独的入口"><span class="toc-text">(1) 把公共模块合成单独的入口</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#optimization优化"><span class="toc-text">optimization优化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-使用splitChunks抽离代码（结合webpack-bundle-analyzer来操作）"><span class="toc-text">(1) 使用splitChunks抽离代码（结合webpack-bundle-analyzer来操作）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-优化minimizer性能"><span class="toc-text">(2) 优化minimizer性能</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打包时间、加载时间的优化方向"><span class="toc-text">打包时间、加载时间的优化方向</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-细节优化"><span class="toc-text">(1) 细节优化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-大优化"><span class="toc-text">(2) 大优化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其它情况"><span class="toc-text">其它情况</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-electron"><span class="toc-text">(1) electron</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-其它配置"><span class="toc-text">(2) 其它配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非webpack优化（微前端）"><span class="toc-text">非webpack优化（微前端）</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/GarfunkelZhuang" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://prjadt00w.bkt.clouddn.com/avator.jpg">
+</body>
+
+</html>

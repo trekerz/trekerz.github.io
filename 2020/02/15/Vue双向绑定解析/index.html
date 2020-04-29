@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="trekerz blog github">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Vue双向绑定解析｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2020/02/15/Vue双向绑定解析/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('http://prjadt00w.bkt.clouddn.com/default-img.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://h1.ioliu.cn/bing/OldTownTallinn_ZH-CN4833535739_1920x1080.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://h1.ioliu.cn/bing/OldTownTallinn_ZH-CN4833535739_1920x1080.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Vue双向绑定解析</h1>
+                    
+                    <h2 class="subheading">聊聊来龙去脉</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2020-02-15
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            Vue双向绑定解析
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h3 id="一、准备知识"><a href="#一、准备知识" class="headerlink" title="一、准备知识"></a>一、准备知识</h3><ol>
+<li><p><code>[].slice.call(list)</code>：将伪数组转换为数组</p>
+</li>
+<li><p><code>node.nodeType</code>：得到节点类型</p>
+<p><code>Node</code>接口是所有节点类型的父类，节点从这个接口继承了属性和方法。</p>
+</li>
+<li><p><code>Object.defineProperty(obj, propertyName, descriptor)</code>：给对象添加属性（指定描述符）</p>
+<ul>
+<li>属性描述符<ul>
+<li>数据描述符（4）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>访问描述符（2）</li>
+</ul>
+<ol>
+<li><code>Object.keys()</code>：得到对象<strong>自身</strong>可枚举属性组成的数组</li>
+<li><code>obj.hasOwnProperty(prop)</code>：判断<code>props</code>是否是<code>obj</code>的<strong>自身</strong>属性</li>
+<li><code>DocumentFragment</code>：文档碎片（内存中保存n个element的容器对象，可用于高效批量更新多个节点）</li>
+</ol>
+<h3 id="二、数据代理"><a href="#二、数据代理" class="headerlink" title="二、数据代理"></a>二、数据代理</h3><p><code>Object.defineProperty</code></p>
+<ol>
+<li><h5 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h5><p>已知<code>a.b.xxx</code>，实现<code>a.xxx</code>，即<code>a</code>直接访问<code>xxx</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 举例</span></span><br><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    name: <span class="string">'zjf'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(vm.name) <span class="comment">// zjf</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="三、模板解析"><a href="#三、模板解析" class="headerlink" title="三、模板解析"></a>三、模板解析</h3><ol>
+<li><h5 id="去除el元素中所有子节点保存到一个fragment对象中"><a href="#去除el元素中所有子节点保存到一个fragment对象中" class="headerlink" title="去除el元素中所有子节点保存到一个fragment对象中"></a>去除<code>el</code>元素中所有子节点保存到一个<code>fragment</code>对象中</h5><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// node2fragment(el)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 创建空的fragment</span></span><br><span class="line"><span class="keyword">var</span> fragment = <span class="built_in">document</span>.createDocumentFragment(),</span><br><span class="line">    child</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 将el中所有子节点转移到fragment</span></span><br><span class="line"><span class="keyword">while</span> (child = el.firstChild) &#123;</span><br><span class="line">  fragment.appendChild(child)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><h5 id="编译fragment中所有层次子节点（递归）"><a href="#编译fragment中所有层次子节点（递归）" class="headerlink" title="编译fragment中所有层次子节点（递归）"></a>编译<code>fragment</code>中所有层次子节点（递归）</h5><ul>
+<li>对<code>{ { } }</code>表达式文本节点进行解析：使用正则解析，替换文本</li>
+<li>对元素节点的指令属性进行解析<ul>
+<li>事件指令：拆解指令类型和指令值，调用<code>node.addEventListener</code></li>
+<li>一般指令：拆解指令类型和指令值，根据指令类型确定要操作的属性</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// compileElement(fragment)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 去除最外层所有子节点</span></span><br><span class="line"><span class="keyword">var</span> childNodes = el.childNodes,</span><br><span class="line">    <span class="comment">// compile对象</span></span><br><span class="line">    me = <span class="keyword">this</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 遍历所有子节点</span></span><br><span class="line">[].slice.call(childNodes).forEach(<span class="function"><span class="keyword">function</span>(<span class="params">node</span>) =&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> text = node.textContent</span><br><span class="line">	<span class="keyword">var</span> reg = <span class="regexp">/\&#123;\&#123;(.*)\&#125;\&#125;/</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (me.isElementNode(node)) &#123;</span><br><span class="line">	  <span class="comment">// element节点</span></span><br><span class="line">    me.compile(node)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (me.isTextNode(node) &amp;&amp; reg.test(text)) &#123;</span><br><span class="line">    <span class="comment">// text节点</span></span><br><span class="line">    me.compileText(node, <span class="built_in">RegExp</span>.$<span class="number">1</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 递归遍历子节点</span></span><br><span class="line">  <span class="keyword">if</span> (node.childNodes &amp;&amp; node.childNodes.length) &#123;</span><br><span class="line">    me.compileElement(node)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><h5 id="将编译好的fragment添加到页面的el元素中"><a href="#将编译好的fragment添加到页面的el元素中" class="headerlink" title="将编译好的fragment添加到页面的el元素中"></a>将编译好的<code>fragment</code>添加到页面的<code>el</code>元素中</h5></li>
+</ol>
+<h3 id="四、数据绑定"><a href="#四、数据绑定" class="headerlink" title="四、数据绑定"></a>四、数据绑定</h3><ol>
+<li><h5 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h5><p>一旦更新了<code>data</code>中的某个属性数据，所有界面上直接使用或间接使用了此属性的节点都会更新。</p>
+</li>
+<li><h5 id="数据劫持"><a href="#数据劫持" class="headerlink" title="数据劫持"></a>数据劫持</h5><p>用来实现数据绑定的一种技术（<code>Object.defineProperty</code>）</p>
+</li>
+<li><h5 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h5><p><code>vm.name = &#39;a&#39;</code> –&gt; <code>data</code>中的<code>name</code>属性值变化 –&gt; <code>name</code>的<code>set()</code>调用 –&gt; <code>dep</code> –&gt; 相关的所有<code>watcher</code> –&gt; <code>cb()</code> –&gt; <code>updater</code></p>
+</li>
+<li><h5 id="四个重要对象"><a href="#四个重要对象" class="headerlink" title="四个重要对象"></a>四个重要对象</h5><h6 id="Dep："><a href="#Dep：" class="headerlink" title="Dep："></a>Dep：</h6><p>(1) 实例创建的时机：初始化时给<code>data</code>的属性进行数据劫持时创建的；</p>
+<p>(2) 实例个数：与<code>data</code>中的属性一一对应；</p>
+<p>(3) 实例结构：</p>
+<p><code>id</code>：标识</p>
+<p><code>subs</code>：n个相关的<code>watcher</code>的容器</p>
+<h6 id="Watcher："><a href="#Watcher：" class="headerlink" title="Watcher："></a>Watcher：</h6><p>(1) 实例创建的时机：初始化时解析模板语法时创建的；</p>
+<p>(2) 实例个数：与模板中表达式（不包含事件指令）一一对应；</p>
+<p>(3) 实例结构：</p>
+<ul>
+<li><code>cb</code>：用于界面更新的回调</li>
+<li><code>vm</code>：<code>vm</code></li>
+<li><code>exp</code>：对应的表达式</li>
+<li><code>depIds</code>：相关的n个<code>dep</code>的容器对象</li>
+<li><code>value</code>：当前表达式对应的<code>value</code></li>
+</ul>
+<h6 id="Dep与Watcher之间的关系（n-n的关系）"><a href="#Dep与Watcher之间的关系（n-n的关系）" class="headerlink" title="Dep与Watcher之间的关系（n:n的关系）"></a>Dep与Watcher之间的关系（n:n的关系）</h6><ul>
+<li><p><code>data</code>属性 –&gt; <code>Dep</code> –&gt; n个<code>watcher</code>（场景：模板中有多个表达式使用了此属性（<code>{ { a } } v-text=&quot;a&quot;</code>））</p>
+</li>
+<li><p>表达式 –&gt; <code>Watcher</code> –&gt; n个<code>dep</code>（场景：多层表达式（<code>a.b.c</code>））</p>
+</li>
+</ul>
+<h6 id="Dep与Watcher如何建立关系"><a href="#Dep与Watcher如何建立关系" class="headerlink" title="Dep与Watcher如何建立关系"></a>Dep与Watcher如何建立关系</h6><p>(1) <code>Observer</code>遍历<code>data</code>属性<code>value</code></p>
+<ul>
+<li><p>每个<code>value</code>里创建一个与<code>value</code>对应的<code>dep</code></p>
+</li>
+<li><p>在<code>value</code>的<code>get</code>操作中调用<code>dep</code>的<code>depend</code>方法去绑定依赖</p>
+</li>
+</ul>
+<p>(2) 每个模板表达式建立与表达式对应的<code>watcher</code></p>
+<ul>
+<li><p><code>watcher</code>建立时会根据表达式值去取属性值<code>value</code></p>
+</li>
+<li><p>将<code>Dep</code>的静态属性<code>target</code>暂时置为本<code>watcher</code></p>
+</li>
+<li><p>触发一次<code>value</code>的<code>get</code>操作</p>
+</li>
+<li><p><code>value</code>的<code>get</code>操作执行<code>dep</code>的<code>depend</code>方法，进而触发<code>watcher</code>和<code>dep</code>互相绑定</p>
+</li>
+</ul>
+</li>
+</ol>
+<p><br></p>
+<center>–end–</center>
+
+
+
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/02/26/讲讲Axois/" data-toggle="tooltip" data-placement="top"
+                           title="讲讲Axois">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/12/04/理解 React Hooks 的 Capture Value 特性/" data-toggle="tooltip" data-placement="top"
+                           title="理解 React Hooks 的 Capture Value 特性">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、准备知识"><span class="toc-text">一、准备知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、数据代理"><span class="toc-text">二、数据代理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#举例"><span class="toc-text">举例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、模板解析"><span class="toc-text">三、模板解析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#去除el元素中所有子节点保存到一个fragment对象中"><span class="toc-text">去除el元素中所有子节点保存到一个fragment对象中</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#编译fragment中所有层次子节点（递归）"><span class="toc-text">编译fragment中所有层次子节点（递归）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#将编译好的fragment添加到页面的el元素中"><span class="toc-text">将编译好的fragment添加到页面的el元素中</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、数据绑定"><span class="toc-text">四、数据绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#解释"><span class="toc-text">解释</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#数据劫持"><span class="toc-text">数据劫持</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#过程"><span class="toc-text">过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#四个重要对象"><span class="toc-text">四个重要对象</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Dep："><span class="toc-text">Dep：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Watcher："><span class="toc-text">Watcher：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Dep与Watcher之间的关系（n-n的关系）"><span class="toc-text">Dep与Watcher之间的关系（n:n的关系）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Dep与Watcher如何建立关系"><span class="toc-text">Dep与Watcher如何建立关系</span></a></li></ol></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/GarfunkelZhuang" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://prjadt00w.bkt.clouddn.com/avator.jpg">
+</body>
+
+</html>

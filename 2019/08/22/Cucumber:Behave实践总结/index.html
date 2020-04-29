@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="trekerz blog github">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Cucumber/Behave实践总结｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2019/08/22/Cucumber:Behave实践总结/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('http://prjadt00w.bkt.clouddn.com/default-img.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://h1.ioliu.cn/bing/OldTownTallinn_ZH-CN4833535739_1920x1080.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://h1.ioliu.cn/bing/OldTownTallinn_ZH-CN4833535739_1920x1080.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Cucumber/Behave实践总结</h1>
+                    
+                    <h2 class="subheading">讲讲测试</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2019-08-22
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#测试"
+                           title="测试">测试</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            Cucumber/Behave实践总结
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p><a href="https://cucumber.io/docs" target="_blank" rel="external">Cucumber</a> 是一个基于行为驱动（<a href="https://cucumber.io/docs/guides/bdd-tutorial/" target="_blank" rel="external">Behaviour-Driven Development / BDD</a>）的测试框架，它以「行为驱动测试」为理论基础，用一种运营、产品、开发、测试都能明白的语法（<a href="https://cucumber.io/docs/gherkin/reference/" target="_blank" rel="external"><code>Gherkin</code></a>）来描述一个测试过程。</p>
+<p>Cucumber兼容了多种开发语言，主要有Java、JavaScript、Kotlin、C++、PHP、Python；而本文要讲的 <a href="https://behave.readthedocs.io/en/latest/" target="_blank" rel="external">Behave</a> 就是 Cucumber 的 Python 版实践。</p>
+<h2 id="🥒-安装Behave"><a href="#🥒-安装Behave" class="headerlink" title="🥒  安装Behave"></a>🥒  安装Behave</h2><p>Behave的安装有两种方式。</p>
+<p>第一种是通过 <code>pip</code> 命令直接安装依赖包：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install behave</span><br></pre></td></tr></table></figure>
+<p>这种方式笔者在尝试的时候会报找不到资源的错误，估计是默认源的问题。</p>
+<p>第二种是通过 github 下载后安装：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pip install git+https://github.com/behave/behave</span><br></pre></td></tr></table></figure>
+<p>这种方式是在 github 下载 release 包之后自动进行本地安装。</p>
+<p>安装完成之后，在命令行输入 python 或 python3 进入 python 环境，输入 <code>import behave</code>，没有报错则表示成功安装。</p>
+<h2 id="🥒-基本概念"><a href="#🥒-基本概念" class="headerlink" title="🥒  基本概念"></a>🥒  基本概念</h2><p>注：此部分转载自简书 <a href="https://www.jianshu.com/p/0f52b13f2779" target="_blank" rel="external">python behave学习笔记 - 基础</a></p>
+<ol>
+<li><h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p>Behave 要被执行，需要运行在满足下面两种情况的目录下：</p>
+<ul>
+<li><p>有 <code>feature files</code> 。这个 <code>feature files</code> 可以试由非技术人员编写；</p>
+</li>
+<li><p>一个<code>“steps”</code>目录，<code>steps</code> 里面包含 <code>python step implementation</code> 。</p>
+</li>
+</ul>
+<p>还可以添加一些 <code>environmental controls</code> 。 比如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">before</span><br><span class="line">after</span><br><span class="line">scenarios</span><br><span class="line">features</span><br></pre></td></tr></table></figure>
+<h4 id="最小目录"><a href="#最小目录" class="headerlink" title="最小目录"></a>最小目录</h4><p>一个可执行的最小 <code>feature</code> 目录为</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">features/</span><br><span class="line">    - everything.feature</span><br><span class="line">    - steps/</span><br><span class="line">				- steps.py</span><br></pre></td></tr></table></figure>
+<h4 id="复杂目录"><a href="#复杂目录" class="headerlink" title="复杂目录"></a>复杂目录</h4><p>一个更复杂的目录为</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">features/</span><br><span class="line">		- signup.feature</span><br><span class="line">		- login.feature</span><br><span class="line">		- account_details.feature</span><br><span class="line">		- environment.py</span><br><span class="line">		- steps/</span><br><span class="line">				- website.py</span><br><span class="line">				- utils.py</span><br></pre></td></tr></table></figure>
+<p>按照项目的不同模块有不同的 <code>feature files</code> ，也有 <code>environment.py</code> 这样的环境配置文件，在 <code>steps</code> 里面则是测试代码。</p>
+</li>
+<li><h3 id="什么是-feature-files"><a href="#什么是-feature-files" class="headerlink" title="什么是 feature files"></a>什么是 feature files</h3><p><code>feature file</code> 是指一个通常命名为 <code>**.feature</code> 的纯文本文件（UTF-8）。</p>
+<p>这个文件里面包含了用自然语言（<code>Gherkin</code>）描述的系统的功能特征。这些功能特征是具有代表性的期望结果。</p>
+<p>一个典型的 <code>feature files</code> 如下：</p>
+<figure class="highlight feature"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Feature</span>: showing off behave</span><br><span class="line"></span><br><span class="line">  <span class="keyword">Scenario</span>: run a simple test</span><br><span class="line">     <span class="keyword">Given</span> we have behave installed</span><br><span class="line">      <span class="keyword">When</span> we implement a test</span><br><span class="line">      <span class="keyword">Then</span> behave will test it for us!</span><br></pre></td></tr></table></figure>
+<p>篇幅原因，详情请看 第二部分 开头的注释。</p>
+</li>
+<li><h3 id="关于测试代码"><a href="#关于测试代码" class="headerlink" title="关于测试代码"></a>关于测试代码</h3><p>测试代码实现在 python 文件中，这些 python 文件都需要被放入到 <code>steps</code> 文件夹下。</p>
+<p>测试代码的文件名并不需要与feature文件的名称一致。</p>
+<p><code>Steps</code> 是通过修饰符来进行匹配的。</p>
+<p>在测试代码中，修饰符接受一串字符串，这串字符串要和 <code>feature</code> 文件中 <code>scenario</code> 使用的字符串一样。</p>
+<p>篇幅原因，详情请看 第二部分 开头的注释。</p>
+</li>
+</ol>
+<h2 id="🥒-使用Behave"><a href="#🥒-使用Behave" class="headerlink" title="🥒  使用Behave"></a>🥒  使用Behave</h2><p>Behave的官网提供了一个 <a href="https://behave.readthedocs.io/en/latest/tutorial.html" target="_blank" rel="external">demo</a> 供初学者使用，我们来把它搭建起来。</p>
+<ol>
+<li><p>创建 Python 工程</p>
+<ul>
+<li>打开 PyCharm ，创建工程，编译器版本默认是 python3.6 ；</li>
+</ul>
+</li>
+<li><p>编写 <code>feature</code> 文件</p>
+<ul>
+<li><p>创建文件夹 <code>/features</code> ；</p>
+</li>
+<li><p>进入 <code>/features</code> ，新建一个 <code>.feature</code> 文件，命名为 <code>tutorial.feature</code> ，输入以下代码：</p>
+<figure class="highlight feature"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Feature</span>: showing off behave</span><br><span class="line"></span><br><span class="line">  <span class="keyword">Scenario</span>: run a simple test</span><br><span class="line">     <span class="keyword">Given</span> we have behave installed</span><br><span class="line">      <span class="keyword">When</span> we implement a test</span><br><span class="line">      <span class="keyword">Then</span> behave will test it for us!</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>编写 <code>step</code> 文件</p>
+<ul>
+<li><p>在 <code>/features</code> 目录下创建文件夹 <code>/steps</code> ，进入 <code>/steps</code> 文件夹，新建一个测试文件，命名为 <code>tutorial.py</code> ;</p>
+</li>
+<li><p>在 <code>tutorial.py</code> 中分别编写 <code>given</code> 、 <code>when</code> 和 <code>then</code> 测试语句如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> behave <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="meta">@given('we have behave installed')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">step_impl</span><span class="params">(context)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@when('we implement a test')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">step_impl</span><span class="params">(context)</span>:</span></span><br><span class="line">    <span class="keyword">assert</span> <span class="keyword">True</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@then('behave will test it for us!')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">step_impl</span><span class="params">(context)</span>:</span></span><br><span class="line">    <span class="keyword">assert</span> context.failed <span class="keyword">is</span> <span class="keyword">False</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>运行测试框架</p>
+<ul>
+<li><p>调出 <code>Termial</code> ，输入命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">behave</span><br></pre></td></tr></table></figure>
+<p>执行测试框架，即能看到测试结果。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>以上为 <code>Behave</code> 官网的 demo 教程，关于更多使用技巧请移步 <a href="https://behave.readthedocs.io/en/latest/tutorial.html" target="_blank" rel="external">官网</a> 查看。</p>
+<h2 id="🥒-用Behave实现一个api测试用例"><a href="#🥒-用Behave实现一个api测试用例" class="headerlink" title="🥒  用Behave实现一个api测试用例"></a>🥒  用Behave实现一个api测试用例</h2><p>详情请看博客 <a href="https://www.cnblogs.com/helenMemery/p/6496922.html" target="_blank" rel="external">一个基于Behave框架的http接口测试实例</a> 。</p>
+<p><br></p>
+<center>–end–</center>
+
+
+
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/09/16/闭包常见应用场景/" data-toggle="tooltip" data-placement="top"
+                           title="闭包常见应用场景">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/08/12/观察者模式与发布订阅模式对比/" data-toggle="tooltip" data-placement="top"
+                           title="观察者模式与发布订阅模式对比">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#🥒-安装Behave"><span class="toc-text">🥒  安装Behave</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#🥒-基本概念"><span class="toc-text">🥒  基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#目录结构"><span class="toc-text">目录结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#最小目录"><span class="toc-text">最小目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#复杂目录"><span class="toc-text">复杂目录</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是-feature-files"><span class="toc-text">什么是 feature files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于测试代码"><span class="toc-text">关于测试代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#🥒-使用Behave"><span class="toc-text">🥒  使用Behave</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#🥒-用Behave实现一个api测试用例"><span class="toc-text">🥒  用Behave实现一个api测试用例</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#测试"
+                           title="测试">测试</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/GarfunkelZhuang" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://prjadt00w.bkt.clouddn.com/avator.jpg">
+</body>
+
+</html>
