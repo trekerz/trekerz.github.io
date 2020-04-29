@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="trekerz blog github">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        讲讲Axois｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2020/02/26/讲讲Axois/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('http://prjadt00w.bkt.clouddn.com/default-img.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://h1.ioliu.cn/bing/OldTownTallinn_ZH-CN4833535739_1920x1080.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://h1.ioliu.cn/bing/OldTownTallinn_ZH-CN4833535739_1920x1080.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>讲讲Axois</h1>
+                    
+                    <h2 class="subheading">使用说明</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2020-02-26
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            讲讲Axois
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h3 id="一、Http相关"><a href="#一、Http相关" class="headerlink" title="一、Http相关"></a>一、Http相关</h3><ol>
+<li><h5 id="Rest-Api"><a href="#Rest-Api" class="headerlink" title="Rest Api"></a>Rest Api</h5><ul>
+<li>发送请求进行CRUD哪个操作由请求方式来决定</li>
+<li>同一个请求路径可以进行多个操作</li>
+<li>请求方式会用到GET/POST/PUT/DELETE</li>
+</ul>
+</li>
+<li><h5 id="非Rest-Api"><a href="#非Rest-Api" class="headerlink" title="非Rest Api"></a>非Rest Api</h5><ul>
+<li>请求方式不决定请求的CRUD操作</li>
+<li>一个请求路径只对应一个操作</li>
+<li>一般只有GET/POST</li>
+</ul>
+</li>
+</ol>
+<h3 id="二、ajax与一般http请求的区别"><a href="#二、ajax与一般http请求的区别" class="headerlink" title="二、ajax与一般http请求的区别"></a>二、ajax与一般http请求的区别</h3><ol>
+<li><p>ajax请求时一种特别的http请求</p>
+</li>
+<li><p>对服务器端来说没有任何区别，区别在浏览器端</p>
+</li>
+<li><p>浏览器端发请求：只有XHR和fetch发出的才是ajax请求，其它所有的都是非ajax请求</p>
+</li>
+<li><p>浏览器端接收到响应：</p>
+<p>(1) 一般请求：浏览器一般会直接显示响应体数据，也就是刷新 / 跳转</p>
+<p>(2) ajax请求：浏览器不会对界面进行任何更新操作</p>
+</li>
+</ol>
+<h3 id="三、XHR的api"><a href="#三、XHR的api" class="headerlink" title="三、XHR的api"></a>三、XHR的api</h3><ol>
+<li>XMLHttpRequest()</li>
+<li>status：相应状态码，比如200、404</li>
+<li>statusText</li>
+<li>readyState</li>
+<li>onreadystateChange</li>
+<li>responseType：指定响应数据类型，如果是’json’，得到响应后自动解析响应体数据</li>
+<li>response</li>
+<li><strong>timeout：超时</strong></li>
+<li><strong>ontimeout：超时处理</strong></li>
+<li>onerror</li>
+<li>open(method, url[, async])</li>
+<li>send(data)</li>
+<li><strong>abort()：取消请求</strong></li>
+<li>getResponseHeader(name)</li>
+<li>getAllResponseHeaders()</li>
+<li>setRequestHeader(name, value)</li>
+</ol>
+<h3 id="四、封装一个ajax"><a href="#四、封装一个ajax" class="headerlink" title="四、封装一个ajax"></a>四、封装一个ajax</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 简易版ajax</span></span><br><span class="line"><span class="comment">// 未处理的部分细节：header参数、query参数、其它method处理（包括大小写兼容）</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajax</span>(<span class="params">&#123;</span></span></span><br><span class="line"><span class="function"><span class="params">  url,</span></span></span><br><span class="line"><span class="function"><span class="params">  method = <span class="string">'GET'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  params = &#123;&#125;,</span></span></span><br><span class="line"><span class="function"><span class="params">  data = &#123;&#125;</span></span></span><br><span class="line"><span class="function"><span class="params">&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 返回一个Promise对象</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resoove, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 1. 创建</span></span><br><span class="line">    <span class="keyword">const</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2. 连接</span></span><br><span class="line">    xhr.open(method, url, <span class="literal">true</span>) <span class="comment">// 第三个参数标志是否异步</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 3. 发送</span></span><br><span class="line">    <span class="comment">// send参数必须是一个字符串</span></span><br><span class="line">    <span class="keyword">if</span> (method === <span class="string">'GET'</span>) &#123;</span><br><span class="line">      xhr.send()</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (method === <span class="string">'POST'</span>) &#123;</span><br><span class="line">      xhr.setRequestHeader(<span class="string">'Content-Type'</span>, <span class="string">'application/json;charset=utf-8'</span>)</span><br><span class="line">    	xhr.send(<span class="built_in">JSON</span>.stringify(data))</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 4. </span></span><br><span class="line">    xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (xhr.readyState !== <span class="number">4</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">const</span> &#123; status, statusText &#125; = xhr</span><br><span class="line">      <span class="keyword">if</span> (status &gt;= <span class="number">200</span> &amp;&amp; status &lt;= <span class="number">299</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> res = &#123;</span><br><span class="line">          data: <span class="built_in">JSON</span>.parse(xhr.response),</span><br><span class="line">          status,</span><br><span class="line">          statusText</span><br><span class="line">        &#125;</span><br><span class="line">        resolve(res)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'err status is: '</span> + status))</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="五、Axios二次封装要点"><a href="#五、Axios二次封装要点" class="headerlink" title="五、Axios二次封装要点"></a>五、Axios二次封装要点</h3><ol>
+<li><h5 id="axios-create"><a href="#axios-create" class="headerlink" title="axios.create()"></a>axios.create()</h5><p>创建不同配置的请求</p>
+</li>
+<li><h5 id="axios-cancelToken"><a href="#axios-cancelToken" class="headerlink" title="axios.cancelToken"></a>axios.cancelToken</h5><p>取消请求配置</p>
+</li>
+<li><h5 id="美至Adbot中的Axios封装："><a href="#美至Adbot中的Axios封装：" class="headerlink" title="美至Adbot中的Axios封装："></a>美至Adbot中的Axios封装：</h5><p>(1) <code>instance.interceptors.request.use(onResolved, onRejected)</code></p>
+<ul>
+<li>做一些业务上的配置（cancel、token、tenantCode）</li>
+</ul>
+<p>(2) <code>instance.interceptors.response.use(onResolved, onRejected)</code></p>
+<ul>
+<li>做一些错误处理（删除cancel、状态处理（白名单）、错误处理）</li>
+</ul>
+</li>
+</ol>
+<h3 id="六、Axios源码解析"><a href="#六、Axios源码解析" class="headerlink" title="六、Axios源码解析"></a>六、Axios源码解析</h3><ol>
+<li><h5 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h5><ul>
+<li>xhr.js</li>
+<li>Axios.js</li>
+<li>dispatchRequest.js</li>
+<li>interceptorManager.js</li>
+<li>axios.js</li>
+<li>defaults.js</li>
+</ul>
+</li>
+<li><h5 id="axios和Axios的关系"><a href="#axios和Axios的关系" class="headerlink" title="axios和Axios的关系"></a>axios和Axios的关系</h5><ul>
+<li>语法上axios不是Axios的实例</li>
+<li>功能上axios是Axios的实例</li>
+<li>axios是<code>Axios.prototype.request</code>函数bind()返回的函数（即axios函数里面是去执行<code>Axios.prototype.request</code>）</li>
+<li>axios作为对象有Axios原型对象上的所有方法，有Axios对象上的所有属性</li>
+</ul>
+<p><strong>axios本身是一个构造函数，但它也有Axios原型对象上的属性和Axios实例对象上的属性（extend过去的），这样做是为了灵活调用方便。（例：axios和axios.create()都是axios构造函数）</strong></p>
+</li>
+<li><h5 id="Axios流程图"><a href="#Axios流程图" class="headerlink" title="Axios流程图"></a>Axios流程图</h5><p>(1) <code>request(config)</code></p>
+<p>将请求拦截器 / dispatchRequest() / 响应拦截器 通过Promise串联起来，返回Promise</p>
+<p>(2) <code>dispatchRequest(config)</code></p>
+<p>转换请求数据 ==&gt; 调用xhrAdapter()发请求 ==&gt; 请求返回后转换响应的数据</p>
+<p>(3) <code>xhrAdapter(config)</code></p>
+<p>创建XHR对象，根据config进行相应设置，发送请求，接收响应，返回Promise</p>
+<h6 id="整体流程代码："><a href="#整体流程代码：" class="headerlink" title="整体流程代码："></a>整体流程代码：</h6><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *Axios.js</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">// 1. 数组左边放request拦截器，右边放response拦截器</span></span><br><span class="line"><span class="keyword">var</span> chain = [dispatchRequest, <span class="literal">undefined</span>]</span><br><span class="line"><span class="keyword">var</span> promise = <span class="built_in">Promise</span>.resolve(config)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.1 request拦截器：后添加的先执行（unshift）</span></span><br><span class="line"><span class="keyword">this</span>.interceptors.request.forEach(<span class="function"><span class="keyword">function</span> <span class="title">unshiftRequestInterceptors</span>(<span class="params">interceptor</span>) </span>&#123;</span><br><span class="line">  chain.unshift(interceptor.fulfilled, interceptor.rejected)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.2 response拦截器：先添加的先执行（push）</span></span><br><span class="line"><span class="keyword">this</span>.interceptors.response.forEach(<span class="function"><span class="keyword">function</span> <span class="title">pushResponseInterceptors</span>(<span class="params">interceptor</span>) </span>&#123;</span><br><span class="line">  chain.push(interceptor.fulfilled, interceptor.rejected)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 通过promise的then()串联起所有的请求拦截器 + 请求方法 + 响应拦截器</span></span><br><span class="line"><span class="keyword">while</span> (chain.length) &#123;</span><br><span class="line">  <span class="comment">// 把fulfilled和rejected传入promise链节</span></span><br><span class="line">  promise = promise.then(chain.shift(), chain.shift())</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4. 返回promise</span></span><br><span class="line"><span class="keyword">return</span> promise</span><br></pre></td></tr></table></figure>
+</li>
+<li><h5 id="cancelToken"><a href="#cancelToken" class="headerlink" title="cancelToken"></a>cancelToken</h5><p>(1) 当配置了cancelToken对象时，保存<code>cancel()</code>函数</p>
+<ul>
+<li>创建一个用于将来中断请求的cancelPromise</li>
+<li>把cancelPromise的resolve传出来</li>
+<li><code>cancel()</code>函数就是这个resolve</li>
+</ul>
+<p>(2) 调用<code>cancel()</code>取消请求</p>
+<ul>
+<li>执行<code>cancel()</code>函数</li>
+<li>cancelPromise变为成功</li>
+<li>xhrAdapter里面会处理cancelPromise的then，then里面回去调xhr的abort()方法</li>
+</ul>
+</li>
+</ol>
+<p><br></p>
+<center>–end–</center>
+
+
+
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/12/04/理解 React Hooks 的 Capture Value 特性/" data-toggle="tooltip" data-placement="top"
+                           title="理解 React Hooks 的 Capture Value 特性">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、Http相关"><span class="toc-text">一、Http相关</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Rest-Api"><span class="toc-text">Rest Api</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#非Rest-Api"><span class="toc-text">非Rest Api</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、ajax与一般http请求的区别"><span class="toc-text">二、ajax与一般http请求的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、XHR的api"><span class="toc-text">三、XHR的api</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、封装一个ajax"><span class="toc-text">四、封装一个ajax</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、Axios二次封装要点"><span class="toc-text">五、Axios二次封装要点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#axios-create"><span class="toc-text">axios.create()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#axios-cancelToken"><span class="toc-text">axios.cancelToken</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#美至Adbot中的Axios封装："><span class="toc-text">美至Adbot中的Axios封装：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、Axios源码解析"><span class="toc-text">六、Axios源码解析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#项目结构"><span class="toc-text">项目结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#axios和Axios的关系"><span class="toc-text">axios和Axios的关系</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Axios流程图"><span class="toc-text">Axios流程图</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#整体流程代码："><span class="toc-text">整体流程代码：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#cancelToken"><span class="toc-text">cancelToken</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/GarfunkelZhuang" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://prjadt00w.bkt.clouddn.com/avator.jpg">
+</body>
+
+</html>

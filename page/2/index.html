@@ -295,28 +295,87 @@
 
 
 <div class="post-preview "
+     style="background-image: url('https://h1.ioliu.cn/bing/OldTownTallinn_ZH-CN4833535739_1920x1080.jpg')">
+    <a href="/2019/08/12/观察者模式与发布订阅模式对比/">
+        <h2 class="post-title">
+            观察者模式与发布订阅模式对比
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-08-12
+        </p>
+        
+        <h3 class="post-subtitle">
+            易混淆的两个概念
+        </h3>
+        
+        <div class="post-content-preview">
+            <p>
+                观察者模式：
+
+没有一个调度中心，直接由被观察者触发观察者的update方法；
+观察者和被观察者抽象耦合，但观察者只知道被观察者发生了变化，不知道是怎么变化的；
+一个抽象类Observer，两个角色Subject被观察者、Client观察者；
+观察者Client实现Observer的update..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+<div class="post-preview "
+     style="background-image: url('https://h1.ioliu.cn/bing/JasperCub_ZH-CN4314891686_1920x1080.jpg')">
+    <a href="/2017/12/03/dpr-devicePixelRatio-的概念与应用/">
+        <h2 class="post-title">
+            dpr(devicePixelRatio)的概念与应用
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-12-03
+        </p>
+        
+        <h3 class="post-subtitle">
+            对设备像素比的理解
+        </h3>
+        
+        <div class="post-content-preview">
+            <p>
+                一、理清dpr的概念devicePixelRatio，中文名称是设备像素比。这个概念在移动开发的时候会被特别关注，因为它关系到了整个画面的观感、布局甚至是清晰度。在JavaScript BOM中，它是window全局对象下的一个属性，它的定义如下：
+
+dpr = 设备像素 / CSS像素
+
+也有..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+<div class="post-preview "
      style="background-image: url('https://h1.ioliu.cn/bing/NCFireweed_ZH-CN8827671063_1920x1080.jpg')">
-    <a href="/2017/11/12/DOM总结/">
+    <a href="/2017/11/30/一道简单的面试题/">
         <h2 class="post-title">
-            DOM总结
+            一道简单的面试题
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-11-12
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-11-30
         </p>
         
         <h3 class="post-subtitle">
-            DOM知识点
+            记录面试
         </h3>
         
         <div class="post-content-preview">
             <p>
-                一、节点DOM1中的Node接口在JavaScript中是作为Node类型实现的。每个节点都有一个nodeType属性，拥有表明节点的类型。
-注意：Node类型一共有12种，任何节点必居其一：
+                11月29日去面试，遇到了一道比较常见的面试题，当时因为忘了一个知识点而没做出来，想想可能是因为昨晚没睡好，导致一整天都有点魂不守舍。反正回来之后自己整理了一下，一下子就做出来了。以下是题目解答以及扩展。
 
-
-
-Node.ELEMENT_NODE（1）
-Node.PROCESSING_INSTRUCTION..
+题目：这是一个有关航班号和对应价格的嵌套对象，要求按照价格从低到高排序，并输出到DOM中..
             </p>
         </div>
     </a>
@@ -328,26 +387,25 @@ Node.PROCESSING_INSTRUCTION..
 
 
 <div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/WinterGrand_ZH-CN5111542555_1920x1080.jpg')">
-    <a href="/2017/11/06/细谈JS对象的6种继承方式/">
+     style="background-image: url('https://h1.ioliu.cn/bing/BlueCannes_ZH-CN1811852585_1920x1080.jpg')">
+    <a href="/2017/11/28/浏览器js脚本与防止抢购脚本的方案/">
         <h2 class="post-title">
-            细谈JS对象的6种继承方式
+            浏览器js脚本与防止抢购脚本的方案
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-11-06
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-11-28
         </p>
         
         <h3 class="post-subtitle">
-            对象的属性和访问
+            前端防重复点击方案
         </h3>
         
         <div class="post-content-preview">
             <p>
-                ECMA只支持实现继承，不支持接口继承。
-1.原型链(1) 原理让原型对象等于另一个类型的实例。
-
-(2) 搜索属性的顺序实例 –&gt;SubType.prototype –&gt; SuperType.prototype
-注意：连接原型链时不是SubType的原型的constructor属性..
+                JS是作为一种浏览器端脚本诞生的，这个特点使得JS脚本配合浏览器开发者工具可以完成一些特殊的功能。例如：刷抢购按钮。
+这里我写了一个简单的刷抢购demo：
+for (var i=0;i&lt;100;i++)&#123;    btn.click();&#125;
+一般我们可以在浏览器调试工具中..
             </p>
         </div>
     </a>
@@ -359,28 +417,23 @@ Node.PROCESSING_INSTRUCTION..
 
 
 <div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/CumulusCaribbean_ZH-CN4884493707_1920x1080.jpg')">
-    <a href="/2017/11/03/细谈创建JS对象的7种方式/">
+     style="background-image: url('https://h1.ioliu.cn/bing/PineLogSP_ZH-CN1105763820_1920x1080.jpg')">
+    <a href="/2017/11/27/在JS中用for-in-遍历数组的问题与解决/">
         <h2 class="post-title">
-            细谈创建JS对象的7种方式
+            JS中用for...in...遍历数组遇到的坑
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-11-03
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-11-27
         </p>
         
         <h3 class="post-subtitle">
-            JS对象的创建
+            尾部多出函数项
         </h3>
         
         <div class="post-content-preview">
             <p>
-                Object构造函数或对象字面量都是使用同一个接口创建很多对象，会产生大量重复代码。
-1. 工厂模式
-(1) 优点能够根据接收的参数来构建一个对象，可以无数次地调用这个函数。
-(2) 缺点没有解决对象识别的问题（即怎样知道一个对象的类型）。
-2. 构造函数模式
-(1) 较工厂模式的优势
-没有显式..
+                今天在用JS写数组去重算法时候遇到一个跟for...in...有关的问题。函数原本是这么写的：
+Array.prototype.unique = function ()&#123;    var arr = this;    var obj = &#123;&#125;;    var data..
             </p>
         </div>
     </a>
@@ -392,26 +445,23 @@ Node.PROCESSING_INSTRUCTION..
 
 
 <div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/ZaanseSchans_ZH-CN5665496862_1920x1080.jpg')">
-    <a href="/2017/11/02/BOM总结/">
+     style="background-image: url('https://h1.ioliu.cn/bing/SerengetiZebra_ZH-CN9007197602_1920x1080.jpg')">
+    <a href="/2017/11/22/CSS格式化上下文概念解析/">
         <h2 class="post-title">
-            BOM总结
+            CSS格式化上下文概念解析
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-11-02
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-11-22
         </p>
         
         <h3 class="post-subtitle">
-            BOM知识点
+            BFC(详细)、IFC、GFC、FFC
         </h3>
         
         <div class="post-content-preview">
             <p>
-                一、window对象1. 框架中window(1) name属性window的属性，即框架frame的名字。
-(2) top对象指向最外层框架。
-(3) parent对象指向直接上层框架。
-(4) self对象始终指向window。
-2. window的位置(1) screenLeft、scre..
+                前几天在看flex布局的时候遇到了BFC这个概念，于是顺便看了几篇相关的文章，了解了几种上下文布局的基本概念，归结如下。今天在看flex布局的时候遇到了BFC这个概念，于是顺便看了几篇相关的文章，了解了几种上下文布局的基本概念，归结如下。
+FC的全称是：Formatting Contexts（格..
             </p>
         </div>
     </a>
@@ -423,25 +473,23 @@ Node.PROCESSING_INSTRUCTION..
 
 
 <div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/BagpipeOpera_ZH-CN9506207351_1920x1080.jpg')">
-    <a href="/2017/11/02/理解JavaScript对象/">
+     style="background-image: url('https://h1.ioliu.cn/bing/ChannelIslandFox_ZH-CN5568101953_1920x1080.jpg')">
+    <a href="/2017/11/21/CSS处理居中问题总结/">
         <h2 class="post-title">
-            理解JavaScript对象
+            CSS处理居中问题总结
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-11-02
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-11-21
         </p>
         
         <h3 class="post-subtitle">
-            对象的属性和访问
+            水平居中、水平垂直居中
         </h3>
         
         <div class="post-content-preview">
             <p>
-                每个对象都是基于一个引用类型创建的。
-ECMAScript有两种属性类型：数据属性、访问器属性。
-1.数据属性(1) [[Configurable]]能否用delete删除属性、修改属性特性以及修改为访问器属性，默认true；
-(2) [[Enumerable]]能否通过for-in循环返回属性..
+                在HTML的标准盒模型中，居中是一个很常见的问题，不同标签的居中有不同的处理方式，在不同的浏览器中也会有不同的表现，今天就来归纳一下最常遇到的水平居中问题和水平垂直居中问题的处理方式。
+一、水平居中1.使块级标签中的内容居中（包括文字、图片、行内元素）(1) 方法text-align: cent..
             </p>
         </div>
     </a>
@@ -453,82 +501,25 @@ ECMAScript有两种属性类型：数据属性、访问器属性。
 
 
 <div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/BabySloth_ZH-CN8329403615_1920x1080.jpg')">
-    <a href="/2017/10/31/JS引用类型总结/">
+     style="background-image: url('https://h1.ioliu.cn/bing/SkelligMichael_ZH-CN8635121409_1920x1080.jpg')">
+    <a href="/2017/11/20/Flex布局总结与实例/">
         <h2 class="post-title">
-            JS引用类型总结
+            Flex布局总结与实例
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-10-31
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-11-20
         </p>
         
         <h3 class="post-subtitle">
-            JavaScript细节
+            【整理】flex容器项目属性、骰子实例
         </h3>
         
         <div class="post-content-preview">
             <p>
-                一、Object类型1. 作用特点(1) 存储和传输数据
-2. 创建方式(1) new操作符+Object构造函数
-(2) 对象字面量
-此种方法可用来向函数传递可选参数（最佳实践：必需参数用命名参数，可选参数用对象字面量）。
-3. 访问方式(1) 点表示法
-(2) 方括号法
-此种方式可通过变量来..
-            </p>
-        </div>
-    </a>
+                一、Flex 布局网页布局（layout）是 CSS 的一个重点应用：
 
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/AlpineEucalyptBark_ZH-CN2046783535_1920x1080.jpg')">
-    <a href="/2017/10/09/JS设计模式16-享元模式/">
-        <h2 class="post-title">
-            JS设计模式16-享元模式
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-10-09
-        </p>
-        
-        <h3 class="post-subtitle">
-            气泡对象池例子
-        </h3>
-        
-        <div class="post-content-preview">
-            <p>
-                享元模式的基础定义：享元模式Flyweight是一种用于性能优化的模式，如果系统中因为创建了大量类似的对象而导致内存不足或占用过高这种模式就非常有用了。使用场景：第一种是应用在数据层上，主要是应用在内存里大量相似的对象上；第二种是应用在DOM层上，享元可以用在中央事件管理器上用来避免给父容器里的..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/BesenheideBDJ_ZH-CN2139380821_1920x1080.jpg')">
-    <a href="/2017/10/08/JS设计模式15-职责链模式/">
-        <h2 class="post-title">
-            JS设计模式15-职责链模式
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-10-08
-        </p>
-        
-        <h3 class="post-subtitle">
-            交押金预定手机
-        </h3>
-        
-        <div class="post-content-preview">
-            <p>
-                职责链模式的基础定义：职责链模式（Chain of responsibility）是使多个对象都有机会处理请求，从而避免请求的发送者和接受者之间的耦合关系。​    将这个对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理他为止。​    职责链模式的名字非常形象，一系列可能会处理请求的..
+Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。
+它是2009年W3C提出的一种新布局方案，不同于传统的display+position+float+margin布局，Fl..
             </p>
         </div>
     </a>
@@ -638,7 +629,7 @@ ECMAScript有两种属性类型：数据属性、访问器属性。
                     
                     
                     <a href="/TAGS/#笔记" title="笔记"
-                       rel="44">笔记</a>
+                       rel="53">笔记</a>
                     
                     
                     
@@ -653,7 +644,7 @@ ECMAScript有两种属性类型：数据属性、访问器属性。
                     
                     
                     <a href="/TAGS/#前端基础" title="前端基础"
-                       rel="23">前端基础</a>
+                       rel="24">前端基础</a>
                     
                     
                     
@@ -668,7 +659,7 @@ ECMAScript有两种属性类型：数据属性、访问器属性。
                     
                     
                     <a href="/TAGS/#读书笔记" title="读书笔记"
-                       rel="27">读书笔记</a>
+                       rel="36">读书笔记</a>
                     
                     
                     
@@ -704,6 +695,8 @@ ECMAScript有两种属性类型：数据属性、访问器属性。
                     
                     
                     
+                    
+                    
                     <a href="/TAGS/#工具" title="工具"
                        rel="3">工具</a>
                     
@@ -722,14 +715,6 @@ ECMAScript有两种属性类型：数据属性、访问器属性。
                     
                     <a href="/TAGS/#深度学习" title="深度学习"
                        rel="3">深度学习</a>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
                     
                     
                     

@@ -295,26 +295,28 @@
 
 
 <div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/SeptimiusSeverus_ZH-CN0799811992_1920x1080.jpg')">
-    <a href="/2017/03/17/浅谈Google文本计算API/">
+     style="background-image: url('https://h1.ioliu.cn/bing/MischiefCubs_ZH-CN5217361502_1920x1080.jpg')">
+    <a href="/2017/04/24/分类、推荐算法笔记/">
         <h2 class="post-title">
-            浅谈Google文本计算API
+            分类、推荐算法笔记
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-17
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-04-24
         </p>
         
         <h3 class="post-subtitle">
-            【笔记】文档相似度、提取匹配
+            【笔记】算法概念
         </h3>
         
         <div class="post-content-preview">
             <p>
-                一、  概述​    Google+ API以及发送API的请求
-​    词频-逆文档频率（TF-IDF），这一分析文档中单词的基本技术
-​    如何将NLTK（自然语言工具箱）应用到人类语言中
-​    如何将余弦相似度应用到按关键字查询文档等常见问题中
-​    如何通过检测搭配模式从人..
+                问题背景：
+
+对于提出的问题，根据问题分类找到相似问题
+
+​        根据问题分类算法获得问题分类或者问题概要（是问题按照内容来聚类，不是大类），从数据库中找到并推荐相似度前N的问答。
+
+对于缺乏相似问答的问题（从第1步中得出相似度低于哪个值时推荐就不准确，超出这个值，就进入第2步），推荐..
             </p>
         </div>
     </a>
@@ -326,25 +328,25 @@
 
 
 <div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/StMaryFalls_ZH-CN8917284967_1920x1080.jpg')">
-    <a href="/2017/03/16/Django基础2/">
+     style="background-image: url('https://h1.ioliu.cn/bing/PipingPlover_ZH-CN0992806167_1920x1080.jpg')">
+    <a href="/2017/04/22/4月22日推荐算法适用性分析/">
         <h2 class="post-title">
-            Django基础2
+            4月22日推荐算法适用性分析
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-16
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-04-22
         </p>
         
         <h3 class="post-subtitle">
-            【笔记】Django框架基础知识——第2部分
+            【笔记】算法适用性分析
         </h3>
         
         <div class="post-content-preview">
             <p>
-                四、   Django视图层视图层主要工作：衔接HTTP请求、Python程序、HTTP模板等。
-1.    URL映射通过URL dispatcher可以指定用户的每一个访问的后台Python处理函数是什么。
-(1)  普通URL映射django.conf.urls.url
-通过urlpatt..
+                基于内容的推荐内涵：​       计算物品的内容相似度。
+所含部件：​    1.    内容分析器（提取物品内容信息，作为属性学习期和过滤部件的输入）
+​    2.    文件学习器（收集、泛化代表用户偏好的数据，生成用户概要信息）
+​    3.    过滤部件（通过学习用户概要信息，去..
             </p>
         </div>
     </a>
@@ -356,23 +358,22 @@
 
 
 <div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/Cefalu_ZH-CN9108906653_1920x1080.jpg')">
-    <a href="/2017/03/16/用户行为数据的利用4/">
+     style="background-image: url('https://h1.ioliu.cn/bing/LeopardNamibia_ZH-CN9585068449_1920x1080.jpg')">
+    <a href="/2017/03/26/深度学习笔记4/">
         <h2 class="post-title">
-            用户行为数据的利用4
+            深度学习笔记4
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-16
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-26
         </p>
         
         <h3 class="post-subtitle">
-            【笔记】隐语义模型
+            【笔记】限制玻尔兹曼机（RBM）和深信度网络
         </h3>
         
         <div class="post-content-preview">
             <p>
-                六、  基于图的模型​       用户行为很容易用二分图表示。基于邻域的模型可以看做基于图的模型的简单形式，因此很多研究人员把基于邻域的模型也成为基于图的模型。
-1.    用户行为数据的二分图表示​        令G(V,E)表示用户物品二分图，其中V = VU∪VI由用户顶点集合VU和物..
+                一、  限制玻尔兹曼机（RBM）1.    概念​        假设有一个二部图，每一层的节点之间没有链接，一层是可视层，即输入数据层（v)，一层是隐藏层(h)，如果假设所有的节点都是随机二值变量节点（只能取0或者1值），同时假设全概率分布p(v,h)满足Boltzmann 分布，我们称这个模..
             </p>
         </div>
     </a>
@@ -384,24 +385,27 @@
 
 
 <div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/BrittlebushBloom_ZH-CN9198170508_1920x1080.jpg')">
-    <a href="/2017/03/15/用户行为数据的利用3/">
+     style="background-image: url('https://h1.ioliu.cn/bing/EarlyBloomer_ZH-CN1044452089_1920x1080.jpg')">
+    <a href="/2017/03/25/挖掘网页：自然语言处理/">
         <h2 class="post-title">
-            用户行为数据的利用3
+            挖掘网页：自然语言处理
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-15
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-25
         </p>
         
         <h3 class="post-subtitle">
-            【笔记】隐语义模型
+            【笔记】NLP
         </h3>
         
         <div class="post-content-preview">
             <p>
-                五、  隐语义模型LFM（latent factor model），最早在文本挖掘领域被提出，用于找到文本的隐含语义。相关的名词有LSI、pLSA、LDA、Topic Model。
-1.    基础算法核心思想：通过隐含特征（latent factor）联系用户兴趣和物品。
-(1)  一个新的推..
+                一、  概述获取网页并从中提取人类语言数据；
+利用NLTK完成自然语言处理中的基本问题；
+在NLP中使用上下文驱动的方法进行分析；
+使用NLP来解决分析性问题，比如生成文档摘要；
+度量涉及预测分析领域质量的准则。
+二、  抓取、解析、爬取网页（次重点）一个网页抓取的出色工具：基于Java的boi..
             </p>
         </div>
     </a>
@@ -413,26 +417,23 @@
 
 
 <div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/LightHouseNS_ZH-CN9060766128_1920x1080.jpg')">
-    <a href="/2017/03/14/Django基础/">
+     style="background-image: url('https://h1.ioliu.cn/bing/SpainRioTinto_ZH-CN9632593185_1920x1080.jpg')">
+    <a href="/2017/03/24/深度学习笔记3/">
         <h2 class="post-title">
-            Django基础
+            深度学习笔记3
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-14
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-24
         </p>
         
         <h3 class="post-subtitle">
-            【笔记】Django框架基础知识
+            【笔记】稀疏编码
         </h3>
         
         <div class="post-content-preview">
             <p>
-                一、  Django综述1.    Django的特点及结构​    a.    完善的文档
-​    b.    集成数据访问组件（Model层自带数据库ORM组件）
-​    c.    强大的URL映射技术（用正则表达式管理）
-​    d.    后台管理系统自动生成
-​    e.  ..
+                1.    概念如果把“输出必须和输入相等”的限制放松，同时利用基的概念，即O=a1*Φ1+a2*Φ2+…+an*Φn，Φi是基，ai是系数，我们就可以得到这样一个优化问题：Min|I-O|，其中I表示输入，O表示输出。
+通过求解这个最优化式子，可以求得系数和基，这些系数和基就是输入I的另一种近..
             </p>
         </div>
     </a>
@@ -444,25 +445,23 @@
 
 
 <div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/Policewomen_ZH-CN9260416327_1920x1080.jpg')">
-    <a href="/2017/03/14/用户行为数据的利用2/">
+     style="background-image: url('https://h1.ioliu.cn/bing/EarthHourNYC_ZH-CN5111448023_1920x1080.jpg')">
+    <a href="/2017/03/23/利用用户标签数据推荐2/">
         <h2 class="post-title">
-            用户行为数据的利用2
+            利用用户标签数据推荐2
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-14
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-23
         </p>
         
         <h3 class="post-subtitle">
-            【笔记】UserCF和ItemCF
+            【笔记】用户标签
         </h3>
         
         <div class="post-content-preview">
             <p>
-                四、  基于邻域的算法分为两类：基于用户的协同过滤算法UserCF、基于物品的协同过滤算法ItemCF。
-1.    基于用户的协同过滤算法主要两个步骤：
-​    a.    找到和目标用户兴趣相似的用户集合
-​    b.    找到这个集合中的用户喜欢的，且目标用户没有听说过的物品推荐给目..
+                三、  基于标签的推荐系统​         一个用户标签行为的数据集一般由一个三元组的集合表示，其中记录(u, i, b) 表示用户u给物品i打上了标签b。当然，用户的真实标签行为数据远远比三元组表示的要复杂。
+1.       实验设置数据集：Delicious和CiteULike的两个数据..
             </p>
         </div>
     </a>
@@ -474,24 +473,23 @@
 
 
 <div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/SibWrestling_ZH-CN4106007210_1920x1080.jpg')">
-    <a href="/2017/03/13/Python网络框架纵览/">
+     style="background-image: url('https://h1.ioliu.cn/bing/Uranus_ZH-CN9689723562_1920x1080.jpg')">
+    <a href="/2017/03/22/深度学习笔记2/">
         <h2 class="post-title">
-            Python网络框架纵览
+            深度学习笔记2
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-13
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-22
         </p>
         
         <h3 class="post-subtitle">
-            【笔记】Python基础
+            【笔记】DL基础
         </h3>
         
         <div class="post-content-preview">
             <p>
-                一、   网络框架综述1.    网络框架及MVC架构(1)  网络框架一组Python包，能使开发者专注于网站应用业务逻辑的开发，无须处理网络应用底层的协议、线程、进程等方面。
-(2)  MVC架构​    模型：用于封装与应用程序的业务逻辑相关的数据及对数据的处理方法。
-​    视图：负责..
+                五、  深度学习（DL）基本思想​       假设有一个n层的系统，S1、S2、…、Sn，它的输入式I，输出是O，形象地表示为I=&gt;S1=&gt;S2=&gt;…=&gt;Sn=&gt;O。根据信息处理不等式，信息在经过处理之后不可能没有损失，所以I≠O。
+​       假设有一堆I，..
             </p>
         </div>
     </a>
@@ -503,27 +501,27 @@
 
 
 <div class="post-preview "
-     style="background-image: url('https://h1.ioliu.cn/bing/GrapeHarvest_ZH-CN9372743517_1920x1080.jpg')">
-    <a href="/2017/03/13/用户行为数据的利用/">
+     style="background-image: url('https://h1.ioliu.cn/bing/EiffelBelow_ZH-CN5149009072_1920x1080.jpg')">
+    <a href="/2017/03/21/利用用户标签数据推荐/">
         <h2 class="post-title">
-            用户行为数据的利用
+            利用用户标签数据推荐
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-13
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-21
         </p>
         
         <h3 class="post-subtitle">
-            【笔记】基础与实验
+            【笔记】用户标签
         </h3>
         
         <div class="post-content-preview">
             <p>
-                (1)  实现个性化推荐最理想的情况就是在注册时候让用户主动告诉我们他喜欢什么，但这种方法有3个缺点：
-​    a.    自然语言理解技术有限
-​    b.    用户的兴趣会变
-​    c.    用户自己也很难描述
-(2)  用户的行为不是随机的，而是蕴含着很多模式。
-(3)  基于..
+                推荐系统的目的：联系用户兴趣和物品。
+联系用户兴趣和物品的三个办法：
+​    a.    利用用户喜欢过的物品
+​    b.    利用与用户兴趣相似的用户
+​    c.    通过一些特征联系用户和物品（属性集合、隐语义向量、标签）
+标签：一种无层次化结构的、用来描述信息的关键词，可以用..
             </p>
         </div>
     </a>
@@ -633,7 +631,7 @@
                     
                     
                     <a href="/TAGS/#笔记" title="笔记"
-                       rel="44">笔记</a>
+                       rel="53">笔记</a>
                     
                     
                     
@@ -648,7 +646,7 @@
                     
                     
                     <a href="/TAGS/#前端基础" title="前端基础"
-                       rel="23">前端基础</a>
+                       rel="24">前端基础</a>
                     
                     
                     
@@ -663,7 +661,7 @@
                     
                     
                     <a href="/TAGS/#读书笔记" title="读书笔记"
-                       rel="27">读书笔记</a>
+                       rel="36">读书笔记</a>
                     
                     
                     
@@ -699,6 +697,8 @@
                     
                     
                     
+                    
+                    
                     <a href="/TAGS/#工具" title="工具"
                        rel="3">工具</a>
                     
@@ -717,14 +717,6 @@
                     
                     <a href="/TAGS/#深度学习" title="深度学习"
                        rel="3">深度学习</a>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
                     
                     
                     

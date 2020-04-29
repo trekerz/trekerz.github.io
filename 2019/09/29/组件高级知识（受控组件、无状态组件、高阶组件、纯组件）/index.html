@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="庄嘉峰在 Github 上的个人博客">
+    <meta name="keyword" content="trekerz blog github">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Trekerz" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        组件高级知识｜Trekerz&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://trekerz.github.io/2019/09/29/组件高级知识（受控组件、无状态组件、高阶组件、纯组件）/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('http://prjadt00w.bkt.clouddn.com/default-img.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Trekerz
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">ABOUT</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/ARCHIVE/">ARCHIVE</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/TAGS/">TAGS</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://h1.ioliu.cn/bing/OldTownTallinn_ZH-CN4833535739_1920x1080.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://h1.ioliu.cn/bing/OldTownTallinn_ZH-CN4833535739_1920x1080.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>组件高级知识</h1>
+                    
+                    <h2 class="subheading">受控组件、无状态组件、高阶组件、纯组件</h2>
+                    
+                    <span class="meta">
+                         作者 Trekerz
+                        <span>
+                          日期 2019-09-29
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            组件高级知识
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="受控组件（controlled-components）"><a href="#受控组件（controlled-components）" class="headerlink" title="受控组件（controlled components）"></a>受控组件（controlled components）</h2><p>在原生的表单中，input的值是这么设定的。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">value</span>=<span class="string">"mapbar_front"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>并且在这种情况下，我们能够给input中输入任何的值。<br>但是在react中，我们对于input如果给定一个初始值，它是不会随便进行输入进行改变的，它必须同时绑定一个onChange事件。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;input type=&quot;text&quot; value=&#123;this.state.value&#125; onChange=&#123;(e) =&gt; this.setState(&#123;value: e.target.value&#125;)&#125;&gt;</span><br></pre></td></tr></table></figure>
+<p>在原生的表单中，textarea标签的值是由其子元素决定的。例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;textarea value=&quot;mapbar_front&quot; &gt;&lt;/textarea&gt; // 这个值是空的</span><br><span class="line">&lt;textarea&gt;mapbar_front&lt;/textarea&gt; // 这个值是有的mapbar_front</span><br></pre></td></tr></table></figure>
+<p>但是在react中，是由value属性决定的。<br>同样的，这个value属性的改变，也需要使用onChange时间来进行更改value的状态。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;textarea value=&quot;mapbar_front&quot; &gt;&lt;/textarea&gt;</span><br></pre></td></tr></table></figure>
+<p>在react中，上面的value值是存在的，不过你不能改变文本框的值，你必须加上一个onChange事件来进行更改。</p>
+<p>受控组件的意义，就是在react中，把<code>input</code>、<code>textarea</code>这一类的表单元素，使用onChange事件以及value属性，动态跟踪他们的值的改变。</p>
+<h2 id="无状态组件"><a href="#无状态组件" class="headerlink" title="无状态组件"></a>无状态组件</h2><p>特点：</p>
+<ul>
+<li>只是一个render函数，没有生命周期函数带来的消耗；</li>
+<li>没有SCU的限制，所以每次props改变都会重新渲染。</li>
+</ul>
+<p>适用：</p>
+<ul>
+<li>ListView里的renderRow函数；</li>
+</ul>
+<p>无状态组件的意义，在于其良好的性能，它是用一个函数的方式进行表示一个组件的。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line">export default function Hello(props) &#123;</span><br><span class="line">  return (</span><br><span class="line">      &lt;div&gt;hello, &#123;props.name&#125;&lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>无状态组件，之所以由比较高的性能，是因为它自身<strong>少了一个组件的实例化的一个过程</strong>，它本身就是一个函数。</p>
+<p>它自身的<strong>一切只与props相关</strong>，一切需要定义state的地方，你都应该抽离到容器组件上面，或者使用redux之类的东西，进行抽离。</p>
+<p>它自身<strong>没有<code>this</code>的概念</strong>，因为本身就是一个函数，而class类型的组件是要进行实例化的，所以会有this的概念。</p>
+<p>在无状态组件中，<strong>不能使用周期函数</strong>，这就要让我们思考我们的数据结构，怎么样才算是显得更加的高级。</p>
+<p>无状态组件，专注于UI层，它自身不会对业务逻辑进行处理，这就让我们更好的理解component和page的关系问题。有助于我们进行组件分离。</p>
+<h2 id="高阶组件"><a href="#高阶组件" class="headerlink" title="高阶组件"></a>高阶组件</h2><p>高阶组件的本质，是一个函数，只不过这个函数的返回值，是一个class类型的组件。一个高阶组件的基本示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function highComponent(MyComponent) &#123;</span><br><span class="line">  return class A extends Component &#123;</span><br><span class="line">      constructor(props) &#123;</span><br><span class="line">          super(props);</span><br><span class="line">          this.state = &#123;</span><br><span class="line">              isShow: true</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      componentDidMount() &#123;</span><br><span class="line">          this.setState(&#123;</span><br><span class="line">            isShow: false,</span><br><span class="line">          &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">      render() &#123;</span><br><span class="line">          return (</span><br><span class="line">              &lt;MyComponent isShow=&#123;this.state.isShow&#125;&gt;&lt;/MyComponent&gt;</span><br><span class="line">          )</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从上面的示例中可以看到，高阶组件聚焦于业务层，不关心组件的UI层，所以在上面的示例中，我们可以把MyComponent这个传递进来的组件，写成无状态组件。</p>
+<p>链接：<a href="https://www.reactjscn.com/docs/higher-order-components.html" target="_blank" rel="external">React高阶组件文档</a></p>
+<h2 id="pureComponent-和-Component区别"><a href="#pureComponent-和-Component区别" class="headerlink" title="pureComponent 和 Component区别"></a>pureComponent 和 Component区别</h2><p>特点：</p>
+<ul>
+<li>通过控制shouldComponentUpdate，减少render次数多带来的消耗；</li>
+</ul>
+<p>缺陷：</p>
+<ul>
+<li>只是浅比较，即比较props和state的内存地址，内存相同则不渲染；</li>
+</ul>
+<p>首先，pureComponent是和shouldComponentUpdate这个周期函数相关，<strong>正常情况下，这个周期函数默认返回的是true，也就是任何props的改变，或者是任何的setState，都会导致界面的重新render</strong>。</p>
+<p>pureComponent会改变shouldComponentUpdate的行为，它不再是返回一个true，<strong>它会对props和state进行一次浅比较，只有在不相等的情况下，再进行return 一个true，进行触发render操作</strong>。</p>
+<p>这个时候，<strong>如果是数组类型，或者Object类型的数据发生变化，对于pureComponent而言，其实都是一样的，不会触发render</strong>（这时可以用immutable.js）。例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import React, &#123; pureComponent &#125; from &apos;react&apos;</span><br><span class="line">export default class A extends pureComponent&#123;</span><br><span class="line">   constructor(props) &#123;</span><br><span class="line">       super(props);</span><br><span class="line">       this.state = &#123;</span><br><span class="line">           name: &#123;</span><br><span class="line">               value: &apos;mapbar&apos;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       this.click = this.click.bind(this);</span><br><span class="line">   &#125;</span><br><span class="line">   click() &#123;</span><br><span class="line">       this.state.name.value = &apos;mapbar_front&apos;;</span><br><span class="line">      this.setState(&#123;</span><br><span class="line">          name: this.state.name</span><br><span class="line">      &#125;)</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">  render() &#123;</span><br><span class="line">      return (</span><br><span class="line">          &lt;div onClick=&#123;this.click&#125;&gt;&#123;this.state.name&#125;&lt;/div&gt;</span><br><span class="line">      )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上的例子，不会触发render，导致name的值一直是mapbar。</p>
+<p><br></p>
+<center>–end–</center>
+
+
+
+<p><br></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/10/07/关于清除浮动/" data-toggle="tooltip" data-placement="top"
+                           title="关于清除浮动">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/09/23/常用H5页面UI框架对比/" data-toggle="tooltip" data-placement="top"
+                           title="常用H5页面UI框架对比">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#受控组件（controlled-components）"><span class="toc-text">受控组件（controlled components）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无状态组件"><span class="toc-text">无状态组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高阶组件"><span class="toc-text">高阶组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pureComponent-和-Component区别"><span class="toc-text">pureComponent 和 Component区别</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/TAGS/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/TAGS/#笔记"
+                           title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/TAGS/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友链</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://juejin.im">掘金</a></li>
+                        
+                        <li><a href="https://www.oschina.net/project/lang/28/javascript">开源中国</a></li>
+                        
+                        <li><a href="http://www.jianshu.com/">简书</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/GarfunkelZhuang" class="twitter-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/trekerz" class="zhihu-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zjfjz" class="weibo-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/trekerz" class="github-logo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Trekerz 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://trekerz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = 'e3e6f83e945518142f014116fc5aacc7';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://prjadt00w.bkt.clouddn.com/avator.jpg">
+</body>
+
+</html>
