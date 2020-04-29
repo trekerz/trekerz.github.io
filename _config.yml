@@ -12,7 +12,7 @@ timezone:
 # custom Site settings
 # more detail check out docs
 SEOTitle: Trekerz's blog 
-header-img: http://prjadt00w.bkt.clouddn.com/default-img.jpg
+header-img: 
 email: zjf007@qq.com
 description: "庄嘉峰在 Github 上的个人博客"
 keyword: 'trekerz blog github'
@@ -60,7 +60,7 @@ ga_domain:
 
 # Sidebar settings
 sidebar-about-description: "求知若饥 虚心若愚"
-sidebar-avatar: http://prjadt00w.bkt.clouddn.com/avator.jpg
+sidebar-avatar: 
 
 
 # Featured Tags
