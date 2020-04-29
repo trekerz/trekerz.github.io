@@ -37,7 +37,7 @@
 <style>
 
     header.intro-header {
-        background-image: url('http://prjadt00w.bkt.clouddn.com/default-img.jpg')
+        background-image: url('')
     }
 </style>
 <!-- hack iOS CSS :active style -->
@@ -210,10 +210,6 @@
 </li>
 <li><h5 id="Hot-Module-Replacement"><a href="#Hot-Module-Replacement" class="headerlink" title="Hot Module Replacement"></a>Hot Module Replacement</h5><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 需要导入webpack-dev-server</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    contentBase: path.join(__dirname, <span class="string">'dist'</span>),</span><br><span class="line">    compress: <span class="literal">true</span>,</span><br><span class="line">    port: <span class="number">8080</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-<p>参考资料：</p>
-<ol>
-<li><a href="https://www.bilibili.com/video/av58725971" target="_blank" rel="external">webpack教程视频</a></li>
 </ol>
 <h2 id="附：webpack打包优化实践"><a href="#附：webpack打包优化实践" class="headerlink" title="附：webpack打包优化实践"></a>附：webpack打包优化实践</h2><ol>
 <li><h3 id="性能查看工具"><a href="#性能查看工具" class="headerlink" title="性能查看工具"></a>性能查看工具</h3><p>(1) <code>webpack-bundle-analyzer</code>：以图表的形式展示各包的内部情况；</p>
