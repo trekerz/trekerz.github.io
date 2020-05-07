@@ -252,7 +252,7 @@
 <p>再用<code>add-asset-html-webpack-plugin</code>将<code>dll.bundle.js</code>通过<code>script</code>标签插到 <code>index.html</code>，这样你开发时打包的代码只有业务代码，大大减少了打包体积。</p>
 </li>
 <li><p><strong>配置<code>external</code></strong></p>
-<p>所谓<code>external</code>就是告诉<code>webpack</code>哪些模块我会通过<code>script</code>加载的，<strong>在打包的时候不用处理这些依赖</strong>，例如<code>lodash</code>，<code>moment</code>，有条件的公司可以将这些依赖部署到 CDN 上。</p>
+<p>所谓<code>external</code>就是告诉<code>webpack</code>哪些模块我会通过<code>script</code>加载的，<strong>在打包的时候不用处理这些依赖</strong>，例如<code>lodash</code>，<code>moment</code>，有条件的公司可以将这些依赖部署到 CDN 上。最后用<code>add-asset-html-webpack-plugin</code>将这些<code>script</code>打包到<code>html</code>上。</p>
 </li>
 <li><p><strong>利用多线程</strong></p>
 <p>使用<code>babel</code>编译<code>TypeScript</code>，<code>fork-ts-checker-webpack-plugin</code>检查 <code>TypeScript</code>类型，而不是使用<code>ts-loader</code>串行编译和检查类型；</p>
